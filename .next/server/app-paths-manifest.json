@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/analytics/page": "app/analytics/page.js",
+  "/api/daily-goals/route": "app/api/daily-goals/route.js",
+  "/api/trades/[id]/route": "app/api/trades/[id]/route.js",
+  "/api/trades/route": "app/api/trades/route.js",
+  "/calendar/page": "app/calendar/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/insights/page": "app/insights/page.js",
+  "/page": "app/page.js",
+  "/planning/page": "app/planning/page.js",
+  "/review/page": "app/review/page.js"
+}

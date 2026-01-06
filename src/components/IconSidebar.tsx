@@ -17,24 +17,113 @@ export default function IconSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex flex-col gap-3 w-20 p-3 h-screen sticky top-0">
-      <div className="flex items-center justify-center h-12 mb-3">
-        <div className="w-10 h-10 rounded-lg btn-gradient flex items-center justify-center text-white shadow-md">YM</div>
+    <aside
+      style={{
+        display: 'none',
+        flexDirection: 'column',
+        gap: '12px',
+        width: '80px',
+        padding: '12px',
+        height: '100vh',
+        position: 'sticky',
+        top: 0,
+        backgroundColor: 'var(--card-bg)',
+        borderRight: '1px solid var(--card-border)',
+        '@media (min-width: 768px)': {
+          display: 'flex',
+        },
+      } as any}
+      className="hidden md:flex"
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '48px',
+          marginBottom: '12px',
+        }}
+      >
+        <div
+          style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            boxShadow: '0 4px 15px rgba(139, 92, 246, 0.4)',
+          }}
+        >
+          YM
+        </div>
       </div>
 
-      <nav className="flex flex-col gap-2 items-center">
+      <nav style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        alignItems: 'center',
+        flex: 1,
+      }}>
         {items.map((it) => {
           const ActiveIcon = it.icon;
           const isActive = pathname === it.href;
           return (
-            <Link key={it.href} href={it.href} className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${isActive ? 'bg-gradient-to-r from-ym-blue to-ym-purple text-white shadow-lg' : 'glass text-gray-300 hover:bg-slate-800'}`} title={it.label}>
-              <ActiveIcon className="w-5 h-5" />
+            <Link
+              key={it.href}
+              href={it.href}
+              title={it.label}
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s ease',
+                background: isActive
+                  ? 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)'
+                  : 'transparent',
+                color: isActive ? 'white' : 'var(--purple-light)',
+                border: isActive ? 'none' : `1px solid var(--card-border)`,
+                boxShadow: isActive ? '0 4px 15px rgba(139, 92, 246, 0.3)' : 'none',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.borderColor = 'var(--purple-base)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.15)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.borderColor = 'var(--card-border)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }
+              }}
+            >
+              <ActiveIcon style={{ width: '20px', height: '20px' }} />
             </Link>
           );
         })}
       </nav>
 
-      <div className="mt-auto text-xs text-gray-400 text-center">v0.1</div>
+      <div
+        style={{
+          marginTop: 'auto',
+          fontSize: '12px',
+          color: 'var(--neutral-color)',
+          textAlign: 'center',
+          paddingBottom: '12px',
+        }}
+      >
+        v0.1
+      </div>
     </aside>
   );
 }

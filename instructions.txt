@@ -1,0 +1,67 @@
+## **AI Agent Instructions: Build "Young-Money-Fx Journal"**
+
+### **🎯 Core Philosophy & Project Mandate**
+You are building **"Young-Money-Fx Journal,"** a sophisticated **reflective journal and personal analytics dashboard** for a serious forex trader. This is **NOT** a trading platform, charting library, or brokerage connector.
+
+*   **Primary Purpose**: To provide a deeply insightful, visually immersive space for the trader to **record, review, and learn from their past trading decisions.** All data is **self-reported input**, not live market data.
+
+*   **Core Value**: The application's intelligence comes from **structuring manual input** (trade details, notes, emotions, audio) and using **AI (OpenAI API)** to find hidden patterns, generate summaries, and offer personalized coaching suggestions. The sleek, trader-inspired interface is designed to make this reflection engaging and actionable.
+
+*   **Visual Blueprint**: You **must** use the provided `image/picture` file as the exact blueprint for the **visual style, layout, and component design** (colors, sidebar, card layout, chart types). It defines the "look and feel." You will adapt its example metrics (e.g., "Net P&L") to display calculated analytics from the user's *journaled* trades.
+
+### **🚀 Technology Stack (Production-Ready)**
+
+*   **Framework**: Next.js 15 (App Router) with TypeScript.
+
+*   **Backend & API**: Node.js within Next.js API Routes.
+
+*   **Database**: PostgreSQL with Prisma ORM.
+*   **Styling**:
+ Tailwind CSS. Implement the **exact color palette** from `image/picture`.
+*   **Visualizations**: Recharts or Chart.js to build the **radial gauges, area charts, and bar charts** depicted in the image blueprint.
+*   **Interactivity & Animation**: Framer Motion for smooth transitions, card hovers, and micro-interactions.
+*   **AI Engine**: OpenAI API (via official Node.js SDK) for all summary and insight generation.
+*   **Local Development**: Docker & Docker Compose (to containerize Next.js app and Postgres DB).
+*   **Production Path**: Project must be structured for easy deployment on Vercel (Frontend/API) with a connected cloud Postgres service (e.g., Neon, AWS RDS).
+
+### **✨ Key Implementation Principles**
+1.  **Data Source is King**: Every chart, gauge, and metric on the dashboard is a **calculated reflection** of manually journaled trades. The "Performance" chart is the user's *equity curve based on closed trades*. The "Win %" gauges are calculated from their *inputted outcomes*.
+2.  **AI as a Reflective Partner**: The AI's role is to process the **user's own notes, emotional logs, voice transcripts, and trade outcomes** to provide concise summaries and actionable feedback (e.g., "Your notes indicate hesitation on Tuesday; your win rate was 40% higher on days you marked yourself 'Calm'").
+3.  **Interface as a Catalyst**: The professional, data-dense dashboard interface (from the image) is designed to **motivate consistent journaling** and make review sessions feel impactful. It turns raw journal entries into visual stories.
+
+### **🧩 Core Feature Implementation Guide**
+
+#### **A. The Journal & Data Input (The Source of Truth)**
+*   **Trade Entry Form**: Create a detailed form (as a modal/side panel) for logging a trade. Include:
+    *   **Hard Facts**: Pair, Direction, Entry/Exit Price, Date/Time, SL/TP, Risk %, Outcome (Win/Loss/Breakeven).
+    *   **Reflective Fields**: Setup Type (dropdown), Emotional State (Calm/Rushed/Frustrated/etc.), "What I Learned" notes, Mistake Checklist (Overtraded, Broke Rules, etc.), Setup Quality Rating (1-5 Stars).
+    *   **Voice Journal Button**: Integrate browser's `MediaRecorder API` to allow recording quick audio notes. Store audio files and, optionally, use OpenAI's Whisper API to transcribe them for AI analysis.
+*   **Trade Log Table**: A searchable, filterable table of all journaled trades. This is the "raw data" view.
+
+#### **B. The Dashboard (The Reflective Mirror)**
+*   **Recreate the image Layout Faithfully**:
+    *   Build the **sidebar**, **top metrics row**, **middle charts section**, and **yearly calendar** exactly as structurally defined.
+    *   **Populate with Real Journal Data**:
+        *   `card_net_pnl`: Sum of profit/loss from all *closed* trades.
+        *   `card_trade_win`: (Winning Trades / Total Trades) * 100.
+        *   `card_avg_win_loss`: Calculate average profit of wins vs. average loss of losses.
+        *   `performance_chart_container`: Plot cumulative P&L over time (equity curve).
+        *   `yearly_calendar`: Display monthly P&L or trade counts based on the user's journaled dates.
+
+#### **C. The AI Insight Engine (The Analytical Mind)**
+*   **Create API Endpoint**: `POST /api/ai/analyze`
+*   **Functionality**:
+    1.  **Trigger**: User clicks "Generate Weekly Insight" or monthly review.
+    2.  **Data Fetch**: Backend gathers all trades, notes, emotions, and transcripts for the period.
+    3.  **AI Prompt**: Send a structured prompt to OpenAI's API (using `gpt-4o-mini`). Example:
+        > "Act as a trading psychologist. Analyze this data: [structured image of trades, emotions, notes]. Provide a 3-part summary: 1) Observable Pattern (e.g., 'Your highest win rate came from 'Pullback' setups'), 2) Emotional Correlation (e.g., 'Losses often occurred when you noted feeling 'Rushed''), 3) One Practical Suggestion (e.g., 'Consider adding a 5-minute checklist before trades marked 'Rushed' to improve consistency')."
+    4.  **Display**: Present the AI's response in a beautifully formatted card or modal that matches the site's dark theme.
+
+### **📁 Deliverables & Output**
+The AI Agent must produce a fully functional, self-contained Next.js application where:
+1.  A user can **add, edit, and delete** trade journal entries with rich data.
+2.  The **main dashboard** visually updates to reflect the analytics of those entries, matching the `image/picture` design.
+3.  The **AI Insight feature** works, calling the OpenAI API to produce thoughtful, personalized commentary on the user's own journal data.
+4.  The project is **Dockerized** for easy local running and structured for deployment on Vercel.
+
+**You are authorized to make all necessary creative and technical decisions to fulfill this mandate, ensuring the final product is a visually stunning, deeply insightful, and private trading journal.**

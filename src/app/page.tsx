@@ -1,31 +1,75 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTheme } from '@/context/ThemeContext';
-/* Header provided by AppShell */
-import QuickAddTradeForm from '@/components/QuickAddTradeForm';
-import PerformanceOverview from '@/components/PerformanceOverviewV2';
-import TradesList from '@/components/TradesList';
-import ExportButton from '@/components/ExportButton';
-import { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion';
+import StatCardV2 from '@/components/StatCardV2';
+import { FiDollarSign, FiTrendingUp, FiTarget, FiRefreshCw } from 'react-icons/fi';
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import toast, { Toaster } from 'react-hot-toast';
 
-function DashboardContent() {
-  const { theme, toggleTheme } = useTheme();
-  const [trades, setTrades] = useState([]);
+interface Trade {
+  id: string;
+  pair: string;
+  direction: string;
+  entryPrice: number;
+  exitPrice?: number;
+  profitLoss?: number;
+  outcome?: string;
+  emotionalState?: string;
+  strategy?: string;
+  account?: string;
+  entryTime: string;
+  setupQuality?: number;
+}
+
+export default function DashboardPage() {
+  const [trades, setTrades] = useState<Trade[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [metrics, setMetrics] = useState({
+    totalPnL: 0,
+    winRate: 0,
+    totalTrades: 0,
+    closedTrades: 0,
+    avgWin: 0,
+    avgLoss: 0,
+    wins: 0,
+    losses: 0,
+    bestDay: 0,
+    worstDay: 0,
+  });
 
   const fetchTrades = async () => {
     try {
       setIsLoading(true);
       const response = await fetch('/api/trades', {
-        headers: {
-          'x-user-id': 'demo-user',
-        },
+        headers: { 'x-user-id': 'demo-user' },
       });
-      const data = await response.json();
+      const data: Trade[] = await response.json();
       setTrades(data);
+
+      // Calculate metrics
+      const closed = data.filter(t => t.outcome && t.outcome !== 'OPEN');
+      const wins = closed.filter(t => t.outcome === 'WIN').length;
+      const losses = closed.filter(t => t.outcome === 'LOSS').length;
+      const totalPnL = data.reduce((sum, t) => sum + (t.profitLoss || 0), 0);
+      const avgWin = wins > 0 ? data.filter(t => t.outcome === 'WIN' && t.profitLoss).reduce((sum, t) => sum + t.profitLoss!, 0) / wins : 0;
+      const avgLoss = losses > 0 ? Math.abs(data.filter(t => t.outcome === 'LOSS' && t.profitLoss).reduce((sum, t) => sum + t.profitLoss!, 0) / losses) : 0;
+
+      setMetrics({
+        totalPnL: parseFloat(totalPnL.toFixed(2)),
+        winRate: closed.length > 0 ? parseFloat(((wins / closed.length) * 100).toFixed(2)) : 0,
+        totalTrades: data.length,
+        closedTrades: closed.length,
+        avgWin: parseFloat(avgWin.toFixed(2)),
+        avgLoss: parseFloat(avgLoss.toFixed(2)),
+        wins,
+        losses,
+        bestDay: totalPnL,
+        worstDay: -totalPnL,
+      });
     } catch (error) {
       console.error('Error fetching trades:', error);
+      toast.error('Failed to fetch trades');
     } finally {
       setIsLoading(false);
     }
@@ -35,49 +79,398 @@ function DashboardContent() {
     fetchTrades();
   }, []);
 
+  // Prepare chart data
+  const equityCurveData = trades
+    .sort((a, b) => new Date(a.entryTime).getTime() - new Date(b.entryTime).getTime())
+    .reduce((acc, trade, idx) => {
+      const equity = acc.length > 0 ? acc[acc.length - 1].equity + (trade.profitLoss || 0) : (trade.profitLoss || 0);
+      return [...acc, {
+        name: `Trade ${idx + 1}`,
+        equity: parseFloat(equity.toFixed(2)),
+        date: new Date(trade.entryTime).toLocaleDateString(),
+      }];
+    }, [] as any[]);
+
+  const winDistribution = [
+    { name: 'Wins', value: metrics.wins, color: 'var(--win-color)' },
+    { name: 'Losses', value: metrics.losses, color: 'var(--loss-color)' },
+  ];
+
+  const pairPerformance = trades
+    .reduce((acc, trade) => {
+      const existing = acc.find(p => p.pair === trade.pair);
+      if (existing) {
+        existing.pnl += trade.profitLoss || 0;
+      } else {
+        acc.push({ pair: trade.pair, pnl: trade.profitLoss || 0 });
+      }
+      return acc;
+    }, [] as { pair: string; pnl: number }[])
+    .sort((a, b) => b.pnl - a.pnl)
+    .slice(0, 5);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-gray-200">
-      <main id="main-content" className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Export Buttons */}
-        <div className="flex gap-2 mb-6">
-          <ExportButton trades={trades} format="csv" />
-          <ExportButton trades={trades} format="json" />
-        </div>
-
-        {/* Header Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <PerformanceOverview trades={trades} />
-        </div>
-
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Quick Add Form */}
-          <div className="lg:col-span-1">
-            <QuickAddTradeForm onTradeAdded={fetchTrades} />
-          </div>
-
-          {/* Trades List */}
-          <div className="lg:col-span-2">
-            <TradesList trades={trades} isLoading={isLoading} onTradeDeleted={fetchTrades} />
-          </div>
-        </div>
-      </main>
-
+    <div style={{ width: '100%' }}>
       <Toaster position="bottom-right" />
+
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        style={{
+          marginBottom: '32px',
+        }}
+      >
+        <h2
+          style={{
+            fontSize: '28px',
+            fontWeight: 'bold',
+            margin: '0 0 8px 0',
+            color: 'var(--foreground)',
+          }}
+        >
+          Trading Dashboard
+        </h2>
+        <p
+          style={{
+            fontSize: '14px',
+            color: 'var(--neutral-color)',
+            margin: 0,
+          }}
+        >
+          Your complete trading journal and performance analytics
+        </p>
+      </motion.div>
+
+      {/* Refresh Button */}
+      <div style={{ marginBottom: '24px' }}>
+        <button
+          onClick={fetchTrades}
+          disabled={isLoading}
+          style={{
+            background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontWeight: '600',
+            fontSize: '14px',
+            transition: 'all 0.3s ease',
+            opacity: isLoading ? 0.6 : 1,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <FiRefreshCw size={16} style={{ animation: isLoading ? 'spin 1s linear infinite' : 'none' }} />
+          {isLoading ? 'Loading...' : 'Refresh Data'}
+        </button>
+      </div>
+
+      {/* Key Metrics Cards */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '16px',
+          marginBottom: '32px',
+        }}
+      >
+        <StatCardV2
+          title="Total P&L"
+          value={`$${metrics.totalPnL}`}
+          color={metrics.totalPnL >= 0 ? 'green' : 'red'}
+          subtitle={`${metrics.closedTrades} closed trades`}
+          icon={<FiDollarSign size={24} />}
+          trend={{
+            value: 12.5,
+            direction: metrics.totalPnL >= 0 ? 'up' : 'down',
+          }}
+        />
+
+        <StatCardV2
+          title="Win Rate"
+          value={`${metrics.winRate}%`}
+          color="blue"
+          subtitle={`${metrics.wins}W / ${metrics.losses}L`}
+          icon={<FiTrendingUp size={24} />}
+        />
+
+        <StatCardV2
+          title="Avg Win / Loss"
+          value={`$${metrics.avgWin} / $${metrics.avgLoss}`}
+          color="purple"
+          subtitle="Risk-Reward Ratio"
+          icon={<FiTarget size={24} />}
+        />
+
+        <StatCardV2
+          title="Total Trades"
+          value={metrics.totalTrades}
+          color="blue"
+          subtitle={`${metrics.closedTrades} closed`}
+        />
+      </div>
+
+      {/* Charts Section */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+          gap: '24px',
+          marginBottom: '32px',
+        }}
+      >
+        {/* Equity Curve */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '24px',
+          }}
+        >
+          <h3
+            style={{
+              fontSize: '16px',
+              fontWeight: 'bold',
+              marginBottom: '16px',
+              color: 'var(--foreground)',
+            }}
+          >
+            Equity Curve
+          </h3>
+          {equityCurveData.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <AreaChart data={equityCurveData}>
+                <defs>
+                  <linearGradient id="colorEquity" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--purple-base)" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="var(--purple-base)" stopOpacity={0.1} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" />
+                <XAxis dataKey="name" stroke="var(--neutral-color)" />
+                <YAxis stroke="var(--neutral-color)" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'var(--card-bg)',
+                    border: `1px solid var(--card-border)`,
+                    borderRadius: '8px',
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="equity"
+                  stroke="var(--purple-light)"
+                  fillOpacity={1}
+                  fill="url(#colorEquity)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          ) : (
+            <div
+              style={{
+                height: '300px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--neutral-color)',
+              }}
+            >
+              No trades to display
+            </div>
+          )}
+        </motion.div>
+
+        {/* Win Distribution */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '24px',
+          }}
+        >
+          <h3
+            style={{
+              fontSize: '16px',
+              fontWeight: 'bold',
+              marginBottom: '16px',
+              color: 'var(--foreground)',
+            }}
+          >
+            Win Distribution
+          </h3>
+          {winDistribution.some(w => w.value > 0) ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={winDistribution}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={(entry) => `${entry.name}: ${entry.value}`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {winDistribution.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'var(--card-bg)',
+                    border: `1px solid var(--card-border)`,
+                    borderRadius: '8px',
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <div
+              style={{
+                height: '300px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--neutral-color)',
+              }}
+            >
+              No closed trades yet
+            </div>
+          )}
+        </motion.div>
+
+        {/* Pair Performance */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '24px',
+          }}
+        >
+          <h3
+            style={{
+              fontSize: '16px',
+              fontWeight: 'bold',
+              marginBottom: '16px',
+              color: 'var(--foreground)',
+            }}
+          >
+            Top Pairs Performance
+          </h3>
+          {pairPerformance.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={pairPerformance}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" />
+                <XAxis dataKey="pair" stroke="var(--neutral-color)" />
+                <YAxis stroke="var(--neutral-color)" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'var(--card-bg)',
+                    border: `1px solid var(--card-border)`,
+                    borderRadius: '8px',
+                  }}
+                />
+                <Bar
+                  dataKey="pnl"
+                  fill="var(--purple-light)"
+                  radius={[8, 8, 0, 0]}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <div
+              style={{
+                height: '300px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--neutral-color)',
+              }}
+            >
+              No trade data yet
+            </div>
+          )}
+        </motion.div>
+      </div>
+
+      {/* Quick Stats Grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          marginBottom: '32px',
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '16px',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{ color: 'var(--neutral-color)', margin: '0 0 8px 0', fontSize: '12px' }}>
+            Consecutive Wins
+          </p>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: 0, color: 'var(--win-color)' }}>
+            0
+          </p>
+        </div>
+
+        <div
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '16px',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{ color: 'var(--neutral-color)', margin: '0 0 8px 0', fontSize: '12px' }}>
+            Best Day
+          </p>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: 0, color: 'var(--win-color)' }}>
+            ${metrics.bestDay}
+          </p>
+        </div>
+
+        <div
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '16px',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{ color: 'var(--neutral-color)', margin: '0 0 8px 0', fontSize: '12px' }}>
+            Worst Day
+          </p>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: 0, color: 'var(--loss-color)' }}>
+            ${metrics.worstDay}
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
-}
-
-export default function DashboardPage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="min-h-screen bg-white dark:bg-slate-950" />;
-  }
-
-  return <DashboardContent />;
 }

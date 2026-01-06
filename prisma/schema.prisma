@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -26,43 +26,64 @@ model User {
 }
 
 model Trade {
-  id              String     @id @default(cuid())
-  userId          String
-  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                  String     @id @default(cuid())
+  userId              String
+  user                User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  pair            String     // Currency pair (EUR/USD, GBP/USD, etc.)
-  direction       String     // LONG or SHORT
-  entryPrice      Float
-  exitPrice       Float?
-  entryTime       DateTime
-  exitTime        DateTime?
+  // Core Trade Details
+  pair                String     // Currency pair (EUR/USD, GBP/USD, etc.)
+  direction           String     // LONG or SHORT
+  entryPrice          Float
+  exitPrice           Float?
+  entryTime           DateTime
+  exitTime            DateTime?
   
-  quantity        Float
-  profitLoss      Float?     // Manual P&L or calculated
-  profitLossPercent Float?   // P&L as percentage
+  // Position Management
+  volume              Float      // Lot size or quantity
+  stopLoss            Float?
+  takeProfit          Float?
+  riskAmount          Float?     // Amount risked in currency
+  riskPercent         Float?     // Risk as % of account
+  riskRewardRatio     Float?
   
-  outcome         String?    // WIN, LOSS, BREAKEVEN
-  notes           String?
-  strategy        String?    // Strategy tag/type
+  // Account & Broker Info
+  account             String?    // Personal, PropFirm account name, etc.
+  broker              String?    // Broker name
+  accountBalance      Float?     // Balance at time of trade
+  accountEquity       Float?     // Equity at time of trade
   
-  emotionalState  String?    // calm, rushed, frustrated, confident, etc.
-  setupQuality    Int?       // 1-5 star rating
+  // Outcomes & P&L
+  profitLoss          Float?     // Manual P&L or calculated
+  profitLossPercent   Float?     // P&L as percentage
+  outcome             String?    // WIN, LOSS, BREAKEVEN, OPEN
+  status              String     @default("open") // open, closed, cancelled
   
-  whatLearned     String?    // "What I learned" section
-  mistakes        String?    // JSON array of mistake tags
+  // Trading Strategy & Setup
+  strategy            String?    // Strategy type/tag (Pullback, Breakout, etc.)
+  setupType           String?    // Setup classification
   
-  riskRewardRatio Float?
+  // Reflective Fields
+  notes               String?    // Trade notes/observations
+  emotionalState      String?    // calm, rushed, frustrated, confident, focused, etc.
+  setupQuality        Int?       // 1-5 star rating
+  whatLearned         String?    // Lessons learned from this trade
+  mistakes            String?    // JSON array of mistakes made
   
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  // Media & Documentation
+  screenshots         Screenshot[]
+  voiceNotes          VoiceNote[]
   
-  screenshots     Screenshot[]
-  voiceNotes      VoiceNote[]
+  // Timestamps
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
   
   @@index([userId])
   @@index([pair])
   @@index([entryTime])
   @@index([outcome])
+  @@index([status])
+  @@index([account])
+  @@index([strategy])
 }
 
 model Screenshot {
