@@ -64,19 +64,27 @@ export default function PerformanceOverview({ trades }: PerformanceOverviewProps
     unit = '',
     isPositive = true,
   }: any) => (
-    <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 shadow-sm">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-            {label}
-          </p>
-          <p className={`text-2xl font-bold mt-2 ${isPositive && stats.totalPnL >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-            {value} {unit}
-          </p>
-        </div>
-        <div className={`p-3 rounded-lg ${isPositive ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'}`}>
-          <Icon className="w-5 h-5" />
-        </div>
+    <div style={{
+      backgroundColor: 'var(--card-bg)',
+      border: '1px solid var(--card-border)',
+      borderRadius: 'var(--radius-md)',
+      padding: '12px 14px',
+      minWidth: '160px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: '12px',
+    }}>
+      <div>
+        <p style={{fontSize: '11px', fontWeight: 700, color: 'var(--neutral-color)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px'}}>
+          {label}
+        </p>
+        <p style={{fontSize: '18px', fontWeight: 800, margin: 0, color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
+          {value} {unit}
+        </p>
+      </div>
+      <div style={{padding: '8px', borderRadius: '8px', background: isPositive ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
+        <Icon style={{width: '18px', height: '18px'}} />
       </div>
     </div>
   );

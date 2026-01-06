@@ -101,12 +101,14 @@ export default function YearlyHeatmap({ trades, onSelectRange }: { trades: Trade
         </div>
       </div>
 
-      <div className="grid grid-cols-52 gap-1" role="grid" aria-label="Yearly profit/loss heatmap">
+      <div className="grid grid-cols-52 gap-1" role="grid" aria-label="Yearly profit/loss heatmap" style={{gap: '6px'}}>
         {days.map(d => {
           const intensity = Math.min(1, Math.abs(d.pnl) / max);
-          const bg = d.pnl > 0 ? `rgba(34,197,94,${0.15 + intensity * 0.85})` : d.pnl < 0 ? `rgba(236,72,153,${0.15 + intensity * 0.85})` : 'transparent';
+          const bg = d.pnl > 0 ? `rgba(16,185,129,${0.14 + intensity * 0.86})` : d.pnl < 0 ? `rgba(239,68,68,${0.14 + intensity * 0.86})` : 'transparent';
           const selected = isSelected(d.day);
-          const border = selected ? 'outline outline-2 outline-offset-1 outline-indigo-500' : '';
+          const borderStyle = selected ? { boxShadow: '0 0 0 3px rgba(99,102,241,0.12)', outline: 'none' } : {};
+          const showLabel = Math.abs(d.pnl) > (max * 0.25);
+
           return (
             <button
               key={d.day}
@@ -119,9 +121,11 @@ export default function YearlyHeatmap({ trades, onSelectRange }: { trades: Trade
                   handleClick(d.day);
                 }
               }}
-              style={{ background: bg }}
-              className={`w-3 h-6 rounded-sm focus:outline-none ${border}`}
-            />
+              style={{ background: bg, width: '36px', height: '36px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--foreground)', fontSize: '11px', ...borderStyle }}
+              className={`focus:outline-none`}
+            >
+              {showLabel ? (d.pnl > 0 ? `+$${Math.round(d.pnl)}` : `-$${Math.abs(Math.round(d.pnl))}`) : ''}
+            </button>
           );
         })}
       </div>

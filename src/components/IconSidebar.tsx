@@ -21,19 +21,20 @@ export default function IconSidebar() {
       style={{
         display: 'none',
         flexDirection: 'column',
-        gap: '12px',
-        width: '80px',
-        padding: '12px',
+        gap: '10px',
+        width: '64px',
+        padding: '10px',
         height: '100vh',
         position: 'sticky',
         top: 0,
-        backgroundColor: 'var(--card-bg)',
-        borderRight: '1px solid var(--card-border)',
+        backgroundColor: 'var(--background)',
+        borderRight: '1px solid var(--panel-muted)',
         '@media (min-width: 768px)': {
           display: 'flex',
         },
       } as any}
       className="hidden md:flex"
+      aria-label="Main navigation"
     >
       <div
         style={{
@@ -41,22 +42,22 @@ export default function IconSidebar() {
           alignItems: 'center',
           justifyContent: 'center',
           height: '48px',
-          marginBottom: '12px',
+          marginBottom: '8px',
         }}
       >
         <div
           style={{
             width: '40px',
             height: '40px',
-            borderRadius: '8px',
+            borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
             color: 'white',
-            fontWeight: 'bold',
+            fontWeight: '700',
             fontSize: '14px',
-            boxShadow: '0 4px 15px rgba(139, 92, 246, 0.4)',
+            boxShadow: 'var(--shadow-floating)',
           }}
         >
           YM
@@ -66,7 +67,7 @@ export default function IconSidebar() {
       <nav style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
+        gap: '10px',
         alignItems: 'center',
         flex: 1,
       }}>
@@ -78,26 +79,27 @@ export default function IconSidebar() {
               key={it.href}
               href={it.href}
               title={it.label}
+              aria-current={isActive ? 'page' : undefined}
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '8px',
+                width: '44px',
+                height: '44px',
+                borderRadius: '10px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.3s ease',
-                background: isActive
-                  ? 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)'
-                  : 'transparent',
-                color: isActive ? 'white' : 'var(--purple-light)',
+                transition: 'all 0.2s ease',
+                background: isActive ? 'linear-gradient(135deg, var(--purple-base) 0%, rgba(139,92,246,0.12) 100%)' : 'transparent',
+                color: isActive ? 'white' : 'var(--neutral-color)',
                 border: isActive ? 'none' : `1px solid var(--card-border)`,
-                boxShadow: isActive ? '0 4px 15px rgba(139, 92, 246, 0.3)' : 'none',
+                boxShadow: isActive ? '0 6px 18px rgba(139, 92, 246, 0.12)' : 'none',
                 cursor: 'pointer',
+                position: 'relative',
+                overflow: 'visible',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.borderColor = 'var(--purple-base)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
+                  e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
                 }
               }}
               onMouseLeave={(e) => {
@@ -107,7 +109,17 @@ export default function IconSidebar() {
                 }
               }}
             >
-              <ActiveIcon style={{ width: '20px', height: '20px' }} />
+              {isActive && (
+                <span style={{
+                  position: 'absolute',
+                  left: '-8px',
+                  width: '4px',
+                  height: '24px',
+                  borderRadius: '4px',
+                  background: 'linear-gradient(180deg, var(--purple-base), var(--purple-dark))',
+                }} aria-hidden />
+              )}
+              <ActiveIcon style={{ width: '18px', height: '18px' }} />
             </Link>
           );
         })}
@@ -119,7 +131,7 @@ export default function IconSidebar() {
           fontSize: '12px',
           color: 'var(--neutral-color)',
           textAlign: 'center',
-          paddingBottom: '12px',
+          paddingBottom: '8px',
         }}
       >
         v0.1

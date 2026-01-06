@@ -14,111 +14,107 @@ export default function DashboardHeader() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '16px 20px',
+          padding: '10px 16px',
           borderBottom: '1px solid var(--card-border)',
-          backgroundColor: 'var(--card-bg)',
-          backdropFilter: 'blur(10px)',
+          backgroundColor: 'transparent',
+          minHeight: '56px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <h1
             style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              background: 'linear-gradient(135deg, var(--purple-light) 0%, var(--cyan-accent) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              fontSize: '18px',
+              fontWeight: '700',
+              color: 'var(--foreground)',
               margin: 0,
             }}
           >
-            Young Money FX
+            Backtesting Dashboard
           </h1>
+          <span style={{fontSize: '13px', color: 'var(--neutral-color)'}}>
+            Performance & calendar overview
+          </span>
         </div>
 
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: '8px',
           }}
         >
+          {/* Compact utility icons */}
+          <button
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '36px',
+              height: '36px',
+              borderRadius: '8px',
+              border: '1px solid var(--card-border)',
+              backgroundColor: 'transparent',
+              color: 'var(--foreground)',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--card-border)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <FiBell size={16} />
+          </button>
+
+          <button
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '36px',
+              height: '36px',
+              borderRadius: '8px',
+              border: '1px solid var(--card-border)',
+              backgroundColor: 'transparent',
+              color: 'var(--foreground)',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--card-border)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <FiSettings size={16} />
+          </button>
+
+          {/* Small Add fab */}
           <button
             onClick={() => setShowAddTrade(true)}
+            aria-label="Add trade"
             style={{
-              background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
-              color: 'white',
-              padding: '10px 20px',
-              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
               border: 'none',
+              background: 'linear-gradient(135deg, var(--purple-base), var(--purple-dark))',
+              color: 'white',
               cursor: 'pointer',
-              fontWeight: '600',
-              fontSize: '14px',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(139, 92, 246, 0.3)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.3)';
+              boxShadow: '0 6px 18px rgba(139,92,246,0.15)'
             }}
           >
-            + Add Trade
-          </button>
-
-          <button
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              border: '1px solid var(--card-border)',
-              backgroundColor: 'transparent',
-              color: 'var(--foreground)',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--purple-base)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--card-border)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <FiBell size={20} />
-          </button>
-
-          <button
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              border: '1px solid var(--card-border)',
-              backgroundColor: 'transparent',
-              color: 'var(--foreground)',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--purple-base)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--card-border)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <FiSettings size={20} />
+            +
           </button>
         </div>
       </header>

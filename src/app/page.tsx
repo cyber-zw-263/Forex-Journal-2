@@ -217,12 +217,12 @@ export default function DashboardPage() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+          gridTemplateColumns: '2fr 360px',
           gap: '24px',
           marginBottom: '32px',
         }}
       >
-        {/* Equity Curve */}
+        {/* Equity Curve (Main) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -230,14 +230,15 @@ export default function DashboardPage() {
           style={{
             backgroundColor: 'var(--card-bg)',
             border: '1px solid var(--card-border)',
-            borderRadius: '12px',
-            padding: '24px',
+            borderRadius: 'var(--radius-lg)',
+            padding: '20px',
+            minHeight: '360px',
           }}
         >
           <h3
             style={{
               fontSize: '16px',
-              fontWeight: 'bold',
+              fontWeight: '700',
               marginBottom: '16px',
               color: 'var(--foreground)',
             }}
@@ -245,12 +246,12 @@ export default function DashboardPage() {
             Equity Curve
           </h3>
           {equityCurveData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={320}>
               <AreaChart data={equityCurveData}>
                 <defs>
                   <linearGradient id="colorEquity" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--purple-base)" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="var(--purple-base)" stopOpacity={0.1} />
+                    <stop offset="5%" stopColor="var(--purple-base)" stopOpacity={0.9} />
+                    <stop offset="95%" stopColor="var(--purple-base)" stopOpacity={0.08} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" />
@@ -287,125 +288,114 @@ export default function DashboardPage() {
           )}
         </motion.div>
 
-        {/* Win Distribution */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          style={{
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--card-border)',
-            borderRadius: '12px',
-            padding: '24px',
-          }}
-        >
-          <h3
+        {/* Right Column: compact cards */}
+        <div style={{display: 'flex', flexDirection: 'column', gap: '18px'}}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
             style={{
-              fontSize: '16px',
-              fontWeight: 'bold',
-              marginBottom: '16px',
-              color: 'var(--foreground)',
+              backgroundColor: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-md)',
+              padding: '16px',
+              minHeight: '180px',
             }}
           >
-            Win Distribution
-          </h3>
-          {winDistribution.some(w => w.value > 0) ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={winDistribution}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={(entry) => `${entry.name}: ${entry.value}`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {winDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'var(--card-bg)',
-                    border: `1px solid var(--card-border)`,
-                    borderRadius: '8px',
-                  }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          ) : (
-            <div
+            <h3
               style={{
-                height: '300px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--neutral-color)',
+                fontSize: '14px',
+                fontWeight: '700',
+                marginBottom: '12px',
+                color: 'var(--foreground)',
               }}
             >
-              No closed trades yet
-            </div>
-          )}
-        </motion.div>
+              Win Distribution
+            </h3>
+            {winDistribution.some(w => w.value > 0) ? (
+              <ResponsiveContainer width="100%" height={140}>
+                <PieChart>
+                  <Pie
+                    data={winDistribution}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry) => `${entry.name}: ${entry.value}`}
+                    outerRadius={60}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {winDistribution.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <div
+                style={{
+                  height: '140px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--neutral-color)',
+                }}
+              >
+                No closed trades yet
+              </div>
+            )}
+          </motion.div>
 
-        {/* Pair Performance */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          style={{
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--card-border)',
-            borderRadius: '12px',
-            padding: '24px',
-          }}
-        >
-          <h3
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
             style={{
-              fontSize: '16px',
-              fontWeight: 'bold',
-              marginBottom: '16px',
-              color: 'var(--foreground)',
+              backgroundColor: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-md)',
+              padding: '16px',
+              minHeight: '200px',
             }}
           >
-            Top Pairs Performance
-          </h3>
-          {pairPerformance.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={pairPerformance}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" />
-                <XAxis dataKey="pair" stroke="var(--neutral-color)" />
-                <YAxis stroke="var(--neutral-color)" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'var(--card-bg)',
-                    border: `1px solid var(--card-border)`,
-                    borderRadius: '8px',
-                  }}
-                />
-                <Bar
-                  dataKey="pnl"
-                  fill="var(--purple-light)"
-                  radius={[8, 8, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          ) : (
-            <div
+            <h3
               style={{
-                height: '300px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--neutral-color)',
+                fontSize: '14px',
+                fontWeight: '700',
+                marginBottom: '12px',
+                color: 'var(--foreground)',
               }}
             >
-              No trade data yet
-            </div>
-          )}
-        </motion.div>
+              Top Pairs
+            </h3>
+            {pairPerformance.length > 0 ? (
+              <ResponsiveContainer width="100%" height={160}>
+                <BarChart data={pairPerformance}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" />
+                  <XAxis dataKey="pair" stroke="var(--neutral-color)" />
+                  <YAxis stroke="var(--neutral-color)" />
+                  <Bar
+                    dataKey="pnl"
+                    fill="var(--purple-light)"
+                    radius={[6, 6, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div
+                style={{
+                  height: '160px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--neutral-color)',
+                }}
+              >
+                No trade data yet
+              </div>
+            )}
+          </motion.div>
+        </div>
       </div>
 
       {/* Quick Stats Grid */}
