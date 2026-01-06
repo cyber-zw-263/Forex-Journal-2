@@ -1,2 +1,91 @@
-[00:00:01.025] Server  LOG     ✓ Ready in 629ms
-[00:00:14.252] Server  LOG     ○ Compiling / ...
+[00:00:02.700] Server  LOG     ✓ Ready in 2.1s
+[00:00:06.361] Server  LOG     ○ Compiling / ...
+[00:00:13.845] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:14.052] Server  ERROR   Unsupported style property @media (min-width: 768px). Did you mean @media (minWidth: 768px)?
+[00:00:18.385] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal/.next/dev/server/chunks/[root-of-the-server]__79063ac3._.js:82:43
+
+  79     if (startDate) where.entryTime.gte = new Date(startDate);
+  80     if (endDate) where.entryTime.lte = new Date(endDate);
+  81 }
+→ 82 const trades = await prisma.trade.findMany(
+error: Error validating datasource `db`: the URL must start with the protocol `file:`.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "sqlite"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[00:00:20.666] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:20.667] Browser ERROR   Unsupported style property %s. Did you mean %s? @media (min-width: 768px) @media (minWidth: 768px)
+[00:00:20.667] Browser ERROR   Error fetching trades: {}
+[00:00:20.667] Browser ERROR   uncaughtError: TypeError: trades.sort is not a function
+[00:00:30.095] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:32.000] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal/.next/dev/server/chunks/[root-of-the-server]__79063ac3._.js:82:43
+
+  79     if (startDate) where.entryTime.gte = new Date(startDate);
+  80     if (endDate) where.entryTime.lte = new Date(endDate);
+  81 }
+→ 82 const trades = await prisma.trade.findMany(
+error: Error validating datasource `db`: the URL must start with the protocol `file:`.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "sqlite"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[00:00:34.793] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:34.793] Browser ERROR   Unsupported style property %s. Did you mean %s? @media (min-width: 768px) @media (minWidth: 768px)
+[00:00:34.793] Browser ERROR   Error fetching trades: {}
+[00:00:34.793] Browser ERROR   uncaughtError: TypeError: trades.sort is not a function
+[00:01:11.324] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:01:13.162] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal/.next/dev/server/chunks/[root-of-the-server]__79063ac3._.js:82:43
+
+  79     if (startDate) where.entryTime.gte = new Date(startDate);
+  80     if (endDate) where.entryTime.lte = new Date(endDate);
+  81 }
+→ 82 const trades = await prisma.trade.findMany(
+error: Error validating datasource `db`: the URL must start with the protocol `file:`.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "sqlite"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[00:01:15.953] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:15.953] Browser ERROR   Unsupported style property %s. Did you mean %s? @media (min-width: 768px) @media (minWidth: 768px)
+[00:01:15.953] Browser ERROR   Error fetching trades: {}
+[00:01:15.953] Browser ERROR   uncaughtError: TypeError: trades.sort is not a function
+[00:06:09.761] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:06:12.655] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:13.744] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal/.next/dev/server/chunks/[root-of-the-server]__79063ac3._.js:82:43
+
+  79     if (startDate) where.entryTime.gte = new Date(startDate);
+  80     if (endDate) where.entryTime.lte = new Date(endDate);
+  81 }
+→ 82 const trades = await prisma.trade.findMany(
+error: Error validating datasource `db`: the URL must start with the protocol `file:`.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "sqlite"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[00:06:14.248] Browser ERROR   Unsupported style property %s. Did you mean %s? @media (min-width: 768px) @media (minWidth: 768px)
+[00:06:14.248] Browser ERROR   Error fetching trades: {}
+[00:06:14.248] Browser ERROR   uncaughtError: TypeError: trades.sort is not a function
