@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  
+  trades        Trade[]
+  dailyGoals    DailyGoal[]
+  weeklyFocus   WeeklyFocus[]
+  voiceNotes    VoiceNote[]
+  screenshots   Screenshot[]
+}
+
+model Trade {
+  id              String     @id @default(cuid())
+  userId          String
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  pair            String     // Currency pair (EUR/USD, GBP/USD, etc.)
+  direction       String     // LONG or SHORT
+  entryPrice      Float
+  exitPrice       Float?
+  entryTime       DateTime
+  exitTime        DateTime?
+  
+  quantity        Float
+  profitLoss      Float?     // Manual P&L or calculated
+  profitLossPercent Float?   // P&L as percentage
+  
+  outcome         String?    // WIN, LOSS, BREAKEVEN
+  notes           String?
+  strategy        String?    // Strategy tag/type
+  
+  emotionalState  String?    // calm, rushed, frustrated, confident, etc.
+  setupQuality    Int?       // 1-5 star rating
+  
+  whatLearned     String?    // "What I learned" section
+  mistakes        String?    // JSON array of mistake tags
+  
+  riskRewardRatio Float?
+  
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  
+  screenshots     Screenshot[]
+  voiceNotes      VoiceNote[]
+  
+  @@index([userId])
+  @@index([pair])
+  @@index([entryTime])
+  @@index([outcome])
+}
+
+model Screenshot {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tradeId   String?
+  trade     Trade?   @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  
+  url       String   // Cloud storage URL or base64
+  caption   String?
+  uploadedAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([tradeId])
+}
+
+model VoiceNote {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tradeId   String?
+  trade     Trade?   @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  
+  url       String   // Cloud storage URL or base64
+  duration  Int      // Duration in seconds
+  transcript String? // AI transcription if available
+  recordedAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([tradeId])
+}
+
+model DailyGoal {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  date      DateTime
+  goals     String?   // JSON array of daily trading goals
+  notes     String?
+  completed Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model WeeklyFocus {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  weekStart DateTime
+  focusArea String   // e.g., "patience", "discipline", "risk management"
+  notes     String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([userId, weekStart])
+  @@index([userId])
+}
+
+model AIInsight {
+  id        String   @id @default(cuid())
+  userId    String?
+  
+  type      String   // "weekly_summary", "monthly_summary", "pattern_detection", "improvement_tips"
+  content   String   // JSON string with insight data
+  period    String   // "week", "month", "custom"
+  startDate DateTime
+  endDate   DateTime
+  
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
+}

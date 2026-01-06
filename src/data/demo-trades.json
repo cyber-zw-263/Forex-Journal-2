@@ -1,0 +1,50 @@
+[
+  {
+    "pair": "EUR/USD",
+    "direction": "LONG",
+    "entryPrice": 1.1234,
+    "exitPrice": 1.1280,
+    "profitLoss": 46,
+    "outcome": "WIN",
+    "entryTime": "2025-12-01T09:15:00.000Z",
+    "strategy": "Breakout",
+    "emotionalState": "confident",
+    "setupQuality": 4
+  },
+  {
+    "pair": "GBP/USD",
+    "direction": "SHORT",
+    "entryPrice": 1.3000,
+    "exitPrice": 1.3055,
+    "profitLoss": -55,
+    "outcome": "LOSS",
+    "entryTime": "2025-12-02T13:45:00.000Z",
+    "strategy": "Reversal",
+    "emotionalState": "rushed",
+    "setupQuality": 2
+  },
+  {
+    "pair": "USD/JPY",
+    "direction": "LONG",
+    "entryPrice": 110.5,
+    "exitPrice": 111.3,
+    "profitLoss": 80,
+    "outcome": "WIN",
+    "entryTime": "2025-12-03T01:30:00.000Z",
+    "strategy": "Trend",
+    "emotionalState": "calm",
+    "setupQuality": 5
+  },
+  {
+    "pair": "EUR/GBP",
+    "direction": "SHORT",
+    "entryPrice": 0.8500,
+    "exitPrice": 0.8470,
+    "profitLoss": 30,
+    "outcome": "WIN",
+    "entryTime": "2025-11-27T08:15:00.000Z",
+    "strategy": "Pullback",
+    "emotionalState": "focused",
+    "setupQuality": 4
+  }
+]

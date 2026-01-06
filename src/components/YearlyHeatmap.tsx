@@ -1,0 +1,131 @@
+'use client';
+
+import { useMemo, useState, useEffect } from 'react';
+
+interface Trade { entryTime: string; profitLoss?: number }
+
+export default function YearlyHeatmap({ trades, onSelectRange }: { trades: Trade[]; onSelectRange?: (range: { start: string | null; end: string | null }) => void }) {
+  const days = useMemo(() => {
+    const map: Record<string, number> = {};
+    const now = new Date();
+    for (let i = 0; i < 365; i++) {
+      const d = new Date(now);
+      d.setDate(now.getDate() - i);
+      map[d.toISOString().slice(0, 10)] = 0;
+    }
+
+    trades.forEach(t => {
+      const key = new Date(t.entryTime).toISOString().slice(0, 10);
+      map[key] = (map[key] || 0) + (t.profitLoss || 0);
+    });
+
+    return Object.entries(map).map(([day, pnl]) => ({ day, pnl }));
+  }, [trades]);
+
+  const max = Math.max(...days.map(d => Math.abs(d.pnl)), 1);
+
+  const [start, setStart] = useState<string | null>(null);
+  const [end, setEnd] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (onSelectRange) onSelectRange({ start, end });
+  }, [start, end, onSelectRange]);
+
+  const [monthZoom, setMonthZoom] = useState(false);
+
+  function handleClick(day: string) {
+    if (monthZoom) {
+      // Zoom to month of the clicked day
+      const d = new Date(day);
+      const startOfMonth = new Date(d.getFullYear(), d.getMonth(), 1).toISOString().slice(0,10);
+      const endOfMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).toISOString().slice(0,10);
+      setStart(startOfMonth);
+      setEnd(endOfMonth);
+      return;
+    }
+
+    // If no start, set start
+    if (!start) {
+      setStart(day);
+      setEnd(null);
+      return;
+    }
+
+    // If start exists and no end: set end (ensure proper order)
+    if (start && !end) {
+      if (day === start) {
+        // toggle off
+        setStart(null);
+        setEnd(null);
+        return;
+      }
+      // ensure chronological order
+      const s = new Date(start);
+      const d = new Date(day);
+      if (d < s) {
+        setStart(day);
+        setEnd(s.toISOString().slice(0, 10));
+      } else {
+        setEnd(day);
+      }
+      return;
+    }
+
+    // If both set, start new selection at clicked day
+    setStart(day);
+    setEnd(null);
+  }
+
+  function isSelected(day: string) {
+    if (!start) return false;
+    if (start && !end) return day === start;
+    // range
+    const s = new Date(start);
+    const e = new Date(end as string);
+    const d = new Date(day);
+    return d >= s && d <= e;
+  }
+
+  return (
+    <div className="card-glass p-4 rounded-lg">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-bold text-gray-200 mb-4">Yearly P&L Heatmap</h3>
+        <div className="flex items-center gap-3">
+          <div className="text-xs text-gray-400">
+            {start && <span>From <strong>{start}</strong></span>} {end && <span> to <strong>{end}</strong></span>}
+            {(start || end) && <button className="ml-3 text-sm text-blue-400" onClick={() => { setStart(null); setEnd(null); if (onSelectRange) onSelectRange({ start: null, end: null }); }}>Clear</button>}
+          </div>
+          <button type="button" aria-pressed={monthZoom} aria-label="Toggle month zoom" className={`px-2 py-1 rounded ${monthZoom ? 'bg-indigo-600 text-white' : 'bg-transparent text-gray-300 border border-gray-700'}`} onClick={() => setMonthZoom(s => !s)}>
+            {monthZoom ? 'Month Zoom: ON' : 'Month Zoom: OFF'}
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-52 gap-1" role="grid" aria-label="Yearly profit/loss heatmap">
+        {days.map(d => {
+          const intensity = Math.min(1, Math.abs(d.pnl) / max);
+          const bg = d.pnl > 0 ? `rgba(34,197,94,${0.15 + intensity * 0.85})` : d.pnl < 0 ? `rgba(236,72,153,${0.15 + intensity * 0.85})` : 'transparent';
+          const selected = isSelected(d.day);
+          const border = selected ? 'outline outline-2 outline-offset-1 outline-indigo-500' : '';
+          return (
+            <button
+              key={d.day}
+              title={`${d.day}: ${d.pnl}`}
+              aria-pressed={selected}
+              onClick={() => handleClick(d.day)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleClick(d.day);
+                }
+              }}
+              style={{ background: bg }}
+              className={`w-3 h-6 rounded-sm focus:outline-none ${border}`}
+            />
+          );
+        })}
+      </div>
+      <div className="text-xs text-gray-400 mt-2">Green = Profit, Pink = Loss. Click a day to set start, click another to set end. Toggle Month Zoom to select whole month on click. Clear to reset selection.</div>
+    </div>
+  );
+}
