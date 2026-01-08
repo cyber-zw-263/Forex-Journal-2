@@ -58,34 +58,36 @@ export async function PUT(
     }
 
     const data = validation.data;
+    const updateData: Record<string, unknown> = {};
+    
+    if (data.pair) updateData.pair = data.pair;
+    if (data.direction) updateData.direction = data.direction;
+    if (data.entryPrice !== undefined) updateData.entryPrice = data.entryPrice;
+    if (data.exitPrice !== undefined) updateData.exitPrice = data.exitPrice;
+    if (data.entryTime) updateData.entryTime = new Date(data.entryTime);
+    if (data.exitTime) updateData.exitTime = new Date(data.exitTime);
+    if (data.volume !== undefined) updateData.volume = data.volume;
+    if (data.stopLoss !== undefined) updateData.stopLoss = data.stopLoss;
+    if (data.takeProfit !== undefined) updateData.takeProfit = data.takeProfit;
+    if (data.riskAmount !== undefined) updateData.riskAmount = data.riskAmount;
+    if (data.riskPercent !== undefined) updateData.riskPercent = data.riskPercent;
+    if (data.riskRewardRatio !== undefined) updateData.riskRewardRatio = data.riskRewardRatio;
+    if (data.account) updateData.account = data.account;
+    if (data.broker) updateData.broker = data.broker;
+    if (data.accountBalance !== undefined) updateData.accountBalance = data.accountBalance;
+    if (data.accountEquity !== undefined) updateData.accountEquity = data.accountEquity;
+    if (data.profitLoss !== undefined) updateData.profitLoss = data.profitLoss;
+    if (data.profitLossPercent !== undefined) updateData.profitLossPercent = data.profitLossPercent;
+    if (data.outcome) updateData.outcome = data.outcome;
+    if (data.strategy) updateData.strategy = data.strategy;
+    if (data.emotionalState) updateData.emotionalState = data.emotionalState;
+    if (data.setupQuality !== undefined) updateData.setupQuality = data.setupQuality;
+    if (data.notes) updateData.notes = data.notes;
+    if (data.whatLearned) updateData.whatLearned = data.whatLearned;
+
     const updatedTrade = await prisma.trade.update({
       where: { id },
-      data: {
-        ...(data.pair && { pair: data.pair }),
-        ...(data.direction && { direction: data.direction }),
-        ...(data.entryPrice !== undefined && { entryPrice: data.entryPrice }),
-        ...(data.exitPrice !== undefined && { exitPrice: data.exitPrice }),
-        ...(data.entryTime && { entryTime: new Date(data.entryTime) }),
-        ...(data.exitTime && { exitTime: new Date(data.exitTime) }),
-        ...(data.volume !== undefined && { volume: data.volume }),
-        ...(data.stopLoss !== undefined && { stopLoss: data.stopLoss }),
-        ...(data.takeProfit !== undefined && { takeProfit: data.takeProfit }),
-        ...(data.riskAmount !== undefined && { riskAmount: data.riskAmount }),
-        ...(data.riskPercent !== undefined && { riskPercent: data.riskPercent }),
-        ...(data.riskRewardRatio !== undefined && { riskRewardRatio: data.riskRewardRatio }),
-        ...(data.account && { account: data.account }),
-        ...(data.broker && { broker: data.broker }),
-        ...(data.accountBalance !== undefined && { accountBalance: data.accountBalance }),
-        ...(data.accountEquity !== undefined && { accountEquity: data.accountEquity }),
-        ...(data.profitLoss !== undefined && { profitLoss: data.profitLoss }),
-        ...(data.profitLossPercent !== undefined && { profitLossPercent: data.profitLossPercent }),
-        ...(data.outcome && { outcome: data.outcome }),
-        ...(data.strategy && { strategy: data.strategy }),
-        ...(data.emotionalState && { emotionalState: data.emotionalState }),
-        ...(data.setupQuality !== undefined && { setupQuality: data.setupQuality }),
-        ...(data.notes && { notes: data.notes }),
-        ...(data.whatLearned && { whatLearned: data.whatLearned }),
-      },
+      data: updateData as Parameters<typeof prisma.trade.update>[0]['data'],
       include: {
         screenshots: true,
         voiceNotes: true,

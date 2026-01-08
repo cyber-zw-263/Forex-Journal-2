@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { apiResponse } from '@/lib/api-response';
 import { readFileSync } from 'fs';
 import path from 'path';
 
@@ -79,25 +80,9 @@ export async function GET(request: NextRequest) {
     // CSV Format
     if (format === 'csv') {
       const csvHeaders = [
-        'Date',
-        'Pair',
-        'Direction',
-        'Entry Price',
-        'Exit Price',
-        'SL',
-        'TP',
-        'Volume',
-        'Outcome',
-        'P&L',
-        'P&L %',
-        'Risk %',
-        'RRR',
-        'Account',
-        'Broker',
-        'Strategy',
-        'Emotional State',
-        'Setup Quality',
-        'Notes',
+        'Date', 'Pair', 'Direction', 'Entry Price', 'Exit Price', 'SL', 'TP', 'Volume',
+        'Outcome', 'P&L', 'P&L %', 'Risk %', 'RRR', 'Account', 'Broker', 'Strategy',
+        'Emotional State', 'Setup Quality', 'Notes',
       ];
 
       const csvRows = trades.map((trade) => {
@@ -128,12 +113,7 @@ export async function GET(request: NextRequest) {
       const csv = [
         csvHeaders.map((h) => `"${h}"`).join(','),
         ...csvRows.map((row) =>
-          row.map((cell) => {
-            if (typeof cell === 'string') {
-              return `"${cell}"`;
-            }
-            return cell;
-          }).join(',')
+          row.map((cell) => (typeof cell === 'string' ? `"${cell}"` : cell)).join(',')
         ),
       ].join('\n');
 
@@ -149,12 +129,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Invalid format. Use csv or json.' },
-      { status: 400 }
-    );
+    return apiResponse.validationError({ format: 'Invalid format. Use csv or json.' });
   } catch (error) {
     console.error('Error exporting trades:', error);
-    return NextResponse.json({ error: 'Failed to export trades' }, { status: 500 });
+    return apiResponse.serverError('Failed to export trades');
   }
 }

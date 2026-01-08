@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { prisma } from '@/lib/prisma';
+import { apiResponse } from '@/lib/api-response';
 import { readFileSync } from 'fs';
 import path from 'path';
 
@@ -39,23 +40,14 @@ function loadDemoTrades(): DemoTrade[] {
   return [];
 }
 
-interface AnalysisRequest {
-  period: 'daily' | 'weekly' | 'monthly';
-  startDate?: string;
-  endDate?: string;
-}
-
 export async function POST(request: NextRequest) {
   try {
     if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
-        { status: 400 }
-      );
+      return apiResponse.validationError({ apiKey: 'OpenAI API key not configured' });
     }
 
     const userId = request.headers.get('x-user-id') || 'demo-user';
-    const body: AnalysisRequest = await request.json();
+    const body = await request.json();
 
     // Calculate date range
     const now = new Date();
@@ -77,7 +69,6 @@ export async function POST(request: NextRequest) {
     let trades: DemoTrade[] = [];
 
     if (!prisma) {
-      console.warn('Prisma not available in AI analyze; falling back to demo trades');
       trades = loadDemoTrades().filter((t: DemoTrade) => {
         const d = new Date(t.entryTime);
         return d >= startDate && d <= endDate;
@@ -100,8 +91,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (trades.length === 0) {
-      return NextResponse.json({
-        success: true,
+      return apiResponse.success({
         period: body.period,
         message: 'No trades found for this period',
         summary: 'No trades were journaled during this period. Keep trading and journaling!',
@@ -139,18 +129,12 @@ export async function POST(request: NextRequest) {
     const losses = closedTrades.filter((t) => t.outcome === 'LOSS').length;
     const breakeven = closedTrades.filter((t) => t.outcome === 'BREAKEVEN').length;
     const totalPnL = trades.reduce((sum, t) => sum + (t.profitLoss || 0), 0);
-    const avgWin =
-      wins > 0
-        ? trades
-            .filter((t) => t.outcome === 'WIN' && t.profitLoss)
-            .reduce((sum, t) => sum + t.profitLoss!, 0) / wins
-        : 0;
-    const avgLoss =
-      losses > 0
-        ? trades
-            .filter((t) => t.outcome === 'LOSS' && t.profitLoss)
-            .reduce((sum, t) => sum + Math.abs(t.profitLoss!), 0) / losses
-        : 0;
+    const avgWin = wins > 0 
+      ? trades.filter((t) => t.outcome === 'WIN' && t.profitLoss).reduce((sum, t) => sum + t.profitLoss!, 0) / wins
+      : 0;
+    const avgLoss = losses > 0
+      ? trades.filter((t) => t.outcome === 'LOSS' && t.profitLoss).reduce((sum, t) => sum + Math.abs(t.profitLoss!), 0) / losses
+      : 0;
     const winRate = closedTrades.length > 0 ? (wins / closedTrades.length) * 100 : 0;
 
     // Create the AI prompt
@@ -194,12 +178,7 @@ Keep the analysis encouraging yet brutally honest. Reference their own journal e
     // Call OpenAI API
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
-      messages: [
-        {
-          role: 'user',
-          content: analysisPrompt,
-        },
-      ],
+      messages: [{ role: 'user', content: analysisPrompt }],
       temperature: 0.7,
       max_tokens: 2000,
     });
@@ -222,9 +201,7 @@ Keep the analysis encouraging yet brutally honest. Reference their own journal e
             metrics: {
               totalTrades: trades.length,
               closedTrades: closedTrades.length,
-              wins,
-              losses,
-              breakeven,
+              wins, losses, breakeven,
               winRate,
               totalPnL,
               avgWin,
@@ -235,12 +212,9 @@ Keep the analysis encouraging yet brutally honest. Reference their own journal e
         },
       });
       insightId = insight.id;
-    } else {
-      console.warn('Prisma not available; skipping insight persistence');
     }
 
-    return NextResponse.json({
-      success: true,
+    return apiResponse.success({
       period: body.period,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
@@ -261,18 +235,10 @@ Keep the analysis encouraging yet brutally honest. Reference their own journal e
   } catch (error) {
     console.error('Error generating AI analysis:', error);
 
-    if (error instanceof Error) {
-      if (error.message.includes('API key')) {
-        return NextResponse.json(
-          { error: 'OpenAI API key is invalid or not configured' },
-          { status: 400 }
-        );
-      }
+    if (error instanceof Error && error.message.includes('API key')) {
+      return apiResponse.validationError({ apiKey: 'OpenAI API key is invalid or not configured' });
     }
 
-    return NextResponse.json(
-      { error: 'Failed to generate analysis. Please try again.' },
-      { status: 500 }
-    );
+    return apiResponse.serverError('Failed to generate analysis. Please try again.');
   }
 }

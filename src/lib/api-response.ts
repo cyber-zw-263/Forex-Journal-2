@@ -17,7 +17,7 @@ export interface ApiResponse<T = unknown> {
 }
 
 export const apiResponse = {
-  success: <T,>(data: T, pagination?: { page: number; limit: number; total: number }) => {
+  success: <T,>(data: T, pagination?: { page: number; limit: number; total: number }, status = 200) => {
     const response: ApiResponse<T> = { success: true, data };
     if (pagination) {
       response.pagination = {
@@ -25,7 +25,7 @@ export const apiResponse = {
         totalPages: Math.ceil(pagination.total / pagination.limit),
       };
     }
-    return NextResponse.json(response);
+    return NextResponse.json(response, { status });
   },
 
   error: (code: string, message: string, details?: Record<string, unknown>, status = 400) => {
@@ -40,8 +40,8 @@ export const apiResponse = {
     return apiResponse.error('VALIDATION_ERROR', 'Invalid input', details, 400);
   },
 
-  notFound: () => {
-    return apiResponse.error('NOT_FOUND', 'Resource not found', undefined, 404);
+  notFound: (message = 'Resource not found') => {
+    return apiResponse.error('NOT_FOUND', message, undefined, 404);
   },
 
   unauthorized: () => {
