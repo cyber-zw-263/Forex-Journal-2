@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { readFileSync } from 'fs';
 import path from 'path';
+import { apiResponse } from '@/lib/api-response';
+import { TradeInputSchema, TradeUpdateSchema, PaginationSchema } from '@/lib/validation';
 
 let prisma: PrismaClient | null = null;
 try {
@@ -18,8 +20,8 @@ interface DemoTrade {
   direction: string;
   entryPrice: number;
   exitPrice?: number | null;
-  profitLoss?: number;
-  outcome?: string;
+  profitLoss?: number | null;
+  outcome?: string | null;
   entryTime: string | Date;
   [key: string]: unknown;
 }
@@ -35,7 +37,7 @@ function loadDemoTrades(): DemoTrade[] {
     try {
       const raw = readFileSync(p, 'utf-8');
       return JSON.parse(raw);
-    } catch (e) {
+    } catch (_e) {
       // try next
     }
   }
@@ -49,21 +51,33 @@ export async function GET(request: NextRequest) {
 
   try {
     const { searchParams } = new URL(request.url);
+    
+    // Pagination
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '50');
+    const skip = (page - 1) * limit;
+
     const pair = searchParams.get('pair');
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
     const outcome = searchParams.get('outcome');
-    const status = searchParams.get('status');
     const account = searchParams.get('account');
     const strategy = searchParams.get('strategy');
+    const search = searchParams.get('search');
 
     const where: Record<string, unknown> = { userId };
 
     if (pair) where.pair = pair;
     if (outcome) where.outcome = outcome;
-    if (status) where.status = status;
     if (account) where.account = account;
     if (strategy) where.strategy = strategy;
+    if (search) {
+      where.OR = [
+        { pair: { contains: search, mode: 'insensitive' } },
+        { notes: { contains: search, mode: 'insensitive' } },
+        { strategy: { contains: search, mode: 'insensitive' } },
+      ];
+    }
     if (startDate || endDate) {
       const dateRange: Record<string, Date> = {};
       if (startDate) dateRange.gte = new Date(startDate);
@@ -72,29 +86,31 @@ export async function GET(request: NextRequest) {
     }
 
     if (!prisma) {
-      console.warn('Prisma not available, returning demo trades');
-      // Optionally, apply filters on demo data
       const demoAll = loadDemoTrades();
-      const demo = demoAll.filter((t: DemoTrade) => t.userId === userId || !t.userId).slice(0, 100);
-      return NextResponse.json(demo);
+      const filtered = demoAll.filter((t: DemoTrade) => t.userId === userId || !t.userId);
+      const total = filtered.length;
+      const demo = filtered.slice(skip, skip + limit);
+      return apiResponse.success(demo, { page, limit, total });
     }
 
-    const trades = await prisma.trade.findMany({
-      where,
-      orderBy: { entryTime: 'desc' },
-      include: {
-        screenshots: true,
-        voiceNotes: true,
-      },
-    });
+    const [trades, total] = await Promise.all([
+      prisma.trade.findMany({
+        where,
+        orderBy: { entryTime: 'desc' },
+        skip,
+        take: limit,
+        include: {
+          screenshots: true,
+          voiceNotes: true,
+        },
+      }),
+      prisma.trade.count({ where }),
+    ]);
 
-    return NextResponse.json(trades);
+    return apiResponse.success(trades, { page, limit, total });
   } catch (error) {
     console.error('Error fetching trades:', error);
-    // On error, fall back to demo data so the frontend remains usable
-    const demoAll = loadDemoTrades();
-    const demo = demoAll.filter((t: DemoTrade) => t.userId === userId || !t.userId).slice(0, 100);
-    return NextResponse.json(demo);
+    return apiResponse.serverError('Failed to fetch trades');
   }
 }
 
@@ -102,50 +118,48 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
-    // Basic server-side validation
-    const required = ['pair', 'entryPrice'];
-    const errors: Record<string, string> = {};
-    for (const k of required) {
-      if (!body[k]) errors[k] = 'Required';
-    }
-    if (Object.keys(errors).length) {
-      return NextResponse.json({ errors }, { status: 400 });
+
+    // Validate input with Zod
+    const validation = TradeInputSchema.safeParse(body);
+    if (!validation.success) {
+      const errors = validation.error.flatten().fieldErrors;
+      return apiResponse.validationError(errors);
     }
 
+    const data = validation.data;
+
     if (!prisma) {
-      return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
+      return apiResponse.unavailable();
     }
 
     const trade = await prisma.trade.create({
       data: {
         userId,
-        pair: body.pair,
-        direction: body.direction,
-        entryPrice: parseFloat(body.entryPrice),
-        exitPrice: body.exitPrice ? parseFloat(body.exitPrice) : null,
-        entryTime: new Date(body.entryTime),
-        exitTime: body.exitTime ? new Date(body.exitTime) : null,
-        volume: parseFloat(body.volume || 0),
-        stopLoss: body.stopLoss ? parseFloat(body.stopLoss) : null,
-        takeProfit: body.takeProfit ? parseFloat(body.takeProfit) : null,
-        riskAmount: body.riskAmount ? parseFloat(body.riskAmount) : null,
-        riskPercent: body.riskPercent ? parseFloat(body.riskPercent) : null,
-        riskRewardRatio: body.riskRewardRatio ? parseFloat(body.riskRewardRatio) : null,
-        account: body.account,
-        broker: body.broker,
-        accountBalance: body.accountBalance ? parseFloat(body.accountBalance) : null,
-        accountEquity: body.accountEquity ? parseFloat(body.accountEquity) : null,
-        profitLoss: body.profitLoss ? parseFloat(body.profitLoss) : null,
-        profitLossPercent: body.profitLossPercent ? parseFloat(body.profitLossPercent) : null,
-        outcome: body.outcome,
-        status: body.status || 'open',
-        strategy: body.strategy,
-        setupType: body.setupType,
-        notes: body.notes,
-        emotionalState: body.emotionalState,
-        setupQuality: body.setupQuality ? parseInt(body.setupQuality) : null,
-        whatLearned: body.whatLearned,
-        mistakes: body.mistakes ? JSON.stringify(body.mistakes) : null,
+        pair: data.pair,
+        direction: data.direction,
+        entryPrice: data.entryPrice,
+        exitPrice: data.exitPrice || null,
+        entryTime: new Date(data.entryTime),
+        exitTime: data.exitTime ? new Date(data.exitTime) : null,
+        volume: data.volume || null,
+        stopLoss: data.stopLoss || null,
+        takeProfit: data.takeProfit || null,
+        riskAmount: data.riskAmount || null,
+        riskPercent: data.riskPercent || null,
+        riskRewardRatio: data.riskRewardRatio || null,
+        account: data.account || null,
+        broker: data.broker || null,
+        accountBalance: data.accountBalance || null,
+        accountEquity: data.accountEquity || null,
+        profitLoss: data.profitLoss || null,
+        profitLossPercent: data.profitLossPercent || null,
+        outcome: data.outcome || 'OPEN',
+        strategy: data.strategy || null,
+        notes: data.notes || null,
+        emotionalState: data.emotionalState || null,
+        setupQuality: data.setupQuality || null,
+        whatLearned: data.whatLearned || null,
+        mistakes: data.mistakes || null,
       },
       include: {
         screenshots: true,
@@ -153,9 +167,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(trade, { status: 201 });
+    return apiResponse.success(trade, undefined, 201);
   } catch (error) {
     console.error('Error creating trade:', error);
-    return NextResponse.json({ error: 'Failed to create trade' }, { status: 500 });
+    return apiResponse.serverError('Failed to create trade');
   }
 }

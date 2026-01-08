@@ -10,14 +10,10 @@ import { Toaster } from 'react-hot-toast';
 import AnimatedCard from '@/components/AnimatedCard';
 
 export default function AnalyticsPage() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [trades, setTrades] = useState<any[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined');
   const [dateRange, setDateRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!mounted) return;

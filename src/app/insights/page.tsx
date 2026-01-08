@@ -30,13 +30,9 @@ interface Insight {
 
 export default function InsightsPage() {
   const { theme, toggleTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined');
   const [trades, setTrades] = useState<Trade[]>([]);
   const [insights, setInsights] = useState<Insight[]>([]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!mounted) return;

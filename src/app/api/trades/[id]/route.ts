@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { apiResponse } from '@/lib/api-response';
+import { TradeUpdateSchema } from '@/lib/validation';
 
 export async function GET(
   request: NextRequest,
@@ -10,7 +12,7 @@ export async function GET(
     const userId = request.headers.get('x-user-id') || 'demo-user';
 
     if (!prisma) {
-      return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
+      return apiResponse.unavailable();
     }
 
     const trade = await prisma.trade.findUnique({
@@ -22,12 +24,12 @@ export async function GET(
     });
 
     if (!trade || trade.userId !== userId) {
-      return NextResponse.json({ error: 'Trade not found' }, { status: 404 });
+      return apiResponse.notFound('Trade not found');
     }
 
-    return NextResponse.json(trade);
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch trade' }, { status: 500 });
+    return apiResponse.success(trade);
+  } catch (_error) {
+    return apiResponse.serverError('Failed to fetch trade');
   }
 }
 
@@ -40,73 +42,49 @@ export async function PUT(
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
 
-    // Basic validation for allowed fields
-    if (body.entryPrice !== undefined && body.entryPrice !== null && isNaN(Number(body.entryPrice))) {
-      return NextResponse.json({ error: 'entryPrice must be a number' }, { status: 400 });
+    const validation = TradeUpdateSchema.safeParse(body);
+    if (!validation.success) {
+      const errors = validation.error.flatten().fieldErrors;
+      return apiResponse.validationError(errors);
     }
 
     if (!prisma) {
-      return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
+      return apiResponse.unavailable();
     }
 
-    const trade = await prisma.trade.findUnique({
-      where: { id },
-    });
-
+    const trade = await prisma.trade.findUnique({ where: { id } });
     if (!trade || trade.userId !== userId) {
-      return NextResponse.json({ error: 'Trade not found' }, { status: 404 });
+      return apiResponse.notFound('Trade not found');
     }
 
-    const t = trade as unknown as Record<string, unknown>;
-
-    const parseNumber = (v: unknown) => {
-      if (v === undefined || v === null || v === '') return undefined;
-      const n = parseFloat(String(v));
-      return isNaN(n) ? undefined : n;
-    };
-
-    const parseInteger = (v: unknown) => {
-      if (v === undefined || v === null || v === '') return undefined;
-      const n = parseInt(String(v), 10);
-      return isNaN(n) ? undefined : n;
-    };
-
-    const parseDate = (v: unknown) => {
-      if (!v) return undefined;
-      const d = new Date(String(v));
-      return isNaN(d.getTime()) ? undefined : d;
-    };
-
+    const data = validation.data;
     const updatedTrade = await prisma.trade.update({
       where: { id },
       data: {
-        pair: body.pair ?? (t.pair as string | undefined),
-        direction: body.direction ?? (t.direction as string | undefined),
-        entryPrice: parseNumber(body.entryPrice) ?? (t.entryPrice as number | undefined),
-        exitPrice: parseNumber(body.exitPrice) ?? (t.exitPrice as number | null | undefined),
-        entryTime: parseDate(body.entryTime) ?? (t.entryTime as Date | string | undefined),
-        exitTime: parseDate(body.exitTime) ?? (t.exitTime as Date | string | null | undefined),
-        volume: parseNumber(body.volume) ?? (t.volume as number | undefined),
-        stopLoss: parseNumber(body.stopLoss) ?? (t.stopLoss as number | null | undefined),
-        takeProfit: parseNumber(body.takeProfit) ?? (t.takeProfit as number | null | undefined),
-        riskAmount: parseNumber(body.riskAmount) ?? (t.riskAmount as number | null | undefined),
-        riskPercent: parseNumber(body.riskPercent) ?? (t.riskPercent as number | null | undefined),
-        riskRewardRatio: parseNumber(body.riskRewardRatio) ?? (t.riskRewardRatio as number | null | undefined),
-        account: body.account ?? (t.account as string | undefined),
-        broker: body.broker ?? (t.broker as string | undefined),
-        accountBalance: parseNumber(body.accountBalance) ?? (t.accountBalance as number | null | undefined),
-        accountEquity: parseNumber(body.accountEquity) ?? (t.accountEquity as number | null | undefined),
-        profitLoss: (body.profitLoss !== undefined && body.profitLoss !== null) ? parseNumber(body.profitLoss) ?? (t.profitLoss as number | null | undefined) : (t.profitLoss as number | null | undefined),
-        profitLossPercent: parseNumber(body.profitLossPercent) ?? (t.profitLossPercent as number | null | undefined),
-        outcome: body.outcome ?? (t.outcome as string | undefined),
-        status: body.status ?? (t.status as string | undefined),
-        strategy: body.strategy ?? (t.strategy as string | undefined),
-        setupType: body.setupType ?? (t.setupType as string | undefined),
-        notes: body.notes ?? (t.notes as string | undefined),
-        emotionalState: body.emotionalState ?? (t.emotionalState as string | undefined),
-        setupQuality: parseInteger(body.setupQuality) ?? (t.setupQuality as number | null | undefined),
-        whatLearned: body.whatLearned ?? (t.whatLearned as string | undefined),
-        mistakes: body.mistakes ? JSON.stringify(body.mistakes) : (t.mistakes as string | null | undefined),
+        ...(data.pair && { pair: data.pair }),
+        ...(data.direction && { direction: data.direction }),
+        ...(data.entryPrice !== undefined && { entryPrice: data.entryPrice }),
+        ...(data.exitPrice !== undefined && { exitPrice: data.exitPrice }),
+        ...(data.entryTime && { entryTime: new Date(data.entryTime) }),
+        ...(data.exitTime && { exitTime: new Date(data.exitTime) }),
+        ...(data.volume !== undefined && { volume: data.volume }),
+        ...(data.stopLoss !== undefined && { stopLoss: data.stopLoss }),
+        ...(data.takeProfit !== undefined && { takeProfit: data.takeProfit }),
+        ...(data.riskAmount !== undefined && { riskAmount: data.riskAmount }),
+        ...(data.riskPercent !== undefined && { riskPercent: data.riskPercent }),
+        ...(data.riskRewardRatio !== undefined && { riskRewardRatio: data.riskRewardRatio }),
+        ...(data.account && { account: data.account }),
+        ...(data.broker && { broker: data.broker }),
+        ...(data.accountBalance !== undefined && { accountBalance: data.accountBalance }),
+        ...(data.accountEquity !== undefined && { accountEquity: data.accountEquity }),
+        ...(data.profitLoss !== undefined && { profitLoss: data.profitLoss }),
+        ...(data.profitLossPercent !== undefined && { profitLossPercent: data.profitLossPercent }),
+        ...(data.outcome && { outcome: data.outcome }),
+        ...(data.strategy && { strategy: data.strategy }),
+        ...(data.emotionalState && { emotionalState: data.emotionalState }),
+        ...(data.setupQuality !== undefined && { setupQuality: data.setupQuality }),
+        ...(data.notes && { notes: data.notes }),
+        ...(data.whatLearned && { whatLearned: data.whatLearned }),
       },
       include: {
         screenshots: true,
@@ -114,9 +92,9 @@ export async function PUT(
       },
     });
 
-    return NextResponse.json(updatedTrade);
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to update trade' }, { status: 500 });
+    return apiResponse.success(updatedTrade);
+  } catch (_error) {
+    return apiResponse.serverError('Failed to update trade');
   }
 }
 
@@ -129,23 +107,17 @@ export async function DELETE(
     const userId = request.headers.get('x-user-id') || 'demo-user';
 
     if (!prisma) {
-      return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
+      return apiResponse.unavailable();
     }
 
-    const trade = await prisma.trade.findUnique({
-      where: { id },
-    });
-
+    const trade = await prisma.trade.findUnique({ where: { id } });
     if (!trade || trade.userId !== userId) {
-      return NextResponse.json({ error: 'Trade not found' }, { status: 404 });
+      return apiResponse.notFound('Trade not found');
     }
 
-    await prisma.trade.delete({
-      where: { id },
-    });
-
-    return NextResponse.json({ message: 'Trade deleted' });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to delete trade' }, { status: 500 });
+    await prisma.trade.delete({ where: { id } });
+    return apiResponse.success({ message: 'Trade deleted' });
+  } catch (_error) {
+    return apiResponse.serverError('Failed to delete trade');
   }
 }

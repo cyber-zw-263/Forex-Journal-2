@@ -11,7 +11,7 @@ import AnimatedCard from '@/components/AnimatedCard';
 
 export default function TradeReviewPage() {
   const { theme, toggleTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(() => typeof window !== 'undefined');
   const [selectedTradeId, setSelectedTradeId] = useState<string | null>(null);
   const [trades, setTrades] = useState<any[]>([]);
   const [reviewData, setReviewData] = useState({
@@ -21,10 +21,6 @@ export default function TradeReviewPage() {
     setupQuality: 3,
   });
   const [currentMistake, setCurrentMistake] = useState('');
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!mounted) return;

@@ -15,8 +15,8 @@ interface DemoTrade {
   direction: string;
   entryPrice: number;
   exitPrice?: number | null;
-  profitLoss?: number;
-  outcome?: string;
+  profitLoss?: number | null;
+  outcome?: string | null;
   entryTime: string | Date;
   [key: string]: unknown;
 }
@@ -32,7 +32,7 @@ function loadDemoTrades(): DemoTrade[] {
     try {
       const raw = readFileSync(p, 'utf-8');
       return JSON.parse(raw);
-    } catch (e) {
+    } catch (_e) {
       // try next
     }
   }

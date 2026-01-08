@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { Readable } from 'stream';
+import { apiResponse } from '@/lib/api-response';
+import { VoiceNoteSchema } from '@/lib/validation';
 
 const prisma = new PrismaClient();
 const openai = new OpenAI({
@@ -18,19 +19,14 @@ export async function POST(request: NextRequest) {
     const transcribe = formData.get('transcribe') === 'true';
 
     if (!audioBlob) {
-      return NextResponse.json(
-        { error: 'No audio file provided' },
-        { status: 400 }
-      );
+      return apiResponse.validationError({ audio: 'No audio file provided' });
     }
 
-    // Convert Blob to Buffer
     const buffer = Buffer.from(await audioBlob.arrayBuffer());
-    const duration = Math.floor((audioBlob.size / 128000) * 8); // Rough estimate
+    const duration = Math.floor((audioBlob.size / 128000) * 8);
 
     let transcript = null;
 
-    // Transcribe if requested and API key available
     if (transcribe && process.env.OPENAI_API_KEY) {
       try {
         const file = new File([buffer], 'audio.webm', { type: 'audio/webm' });
@@ -42,11 +38,9 @@ export async function POST(request: NextRequest) {
         transcript = response.text;
       } catch (transcribeError) {
         console.error('Transcription error:', transcribeError);
-        // Continue without transcript
       }
     }
 
-    // Store voice note in database
     const voiceNote = await prisma.voiceNote.create({
       data: {
         userId,
@@ -57,13 +51,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(voiceNote, { status: 201 });
+    return apiResponse.success(voiceNote, undefined, 201);
   } catch (error) {
     console.error('Error saving voice note:', error);
-    return NextResponse.json(
-      { error: 'Failed to save voice note' },
-      { status: 500 }
-    );
+    return apiResponse.serverError('Failed to save voice note');
   }
 }
 
@@ -81,12 +72,9 @@ export async function GET(request: NextRequest) {
       orderBy: { recordedAt: 'desc' },
     });
 
-    return NextResponse.json(voiceNotes);
+    return apiResponse.success(voiceNotes);
   } catch (error) {
     console.error('Error fetching voice notes:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch voice notes' },
-      { status: 500 }
-    );
+    return apiResponse.serverError('Failed to fetch voice notes');
   }
 }

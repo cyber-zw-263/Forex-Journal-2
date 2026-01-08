@@ -22,11 +22,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return 'dark';
     }
   });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined');
 
   useEffect(() => {
     if (!mounted) return;

@@ -37,8 +37,6 @@ const { injectAxe, checkA11y } = require('@axe-core/playwright');
       }
     }
     if (!connected) {
-      console.error('Unable to reach page
-    if (!connected) {
       console.error('Unable to reach page', p);
       continue;
     }

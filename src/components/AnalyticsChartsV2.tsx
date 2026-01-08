@@ -33,6 +33,7 @@ interface Trade {
   profitLoss?: number;
   outcome?: string;
   entryTime: string;
+  [key: string]: unknown;
 }
 
 interface AnalyticsChartsProps {

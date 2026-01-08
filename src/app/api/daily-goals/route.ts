@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { apiResponse } from '@/lib/api-response';
+import { DailyGoalSchema } from '@/lib/validation';
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,8 +21,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (!prisma) {
-      console.warn('Prisma not available for daily goals; returning empty list');
-      return NextResponse.json([]);
+      return apiResponse.success([]);
     }
 
     const goals = await prisma.dailyGoal.findMany({
@@ -28,10 +29,10 @@ export async function GET(request: NextRequest) {
       orderBy: { date: 'desc' },
     });
 
-    return NextResponse.json(goals);
+    return apiResponse.success(goals);
   } catch (error) {
     console.error('Error fetching daily goals:', error);
-    return NextResponse.json({ error: 'Failed to fetch goals' }, { status: 500 });
+    return apiResponse.serverError('Failed to fetch goals');
   }
 }
 
@@ -40,33 +41,37 @@ export async function POST(request: NextRequest) {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
 
+    const validation = DailyGoalSchema.safeParse(body);
+    if (!validation.success) {
+      return apiResponse.validationError(validation.error.flatten().fieldErrors);
+    }
+
     if (!prisma) {
-      console.warn('Prisma not available for daily goals; returning posted goal without persisting');
-      return NextResponse.json({ ...body, userId }, { status: 201 });
+      return apiResponse.success({ ...validation.data, userId }, undefined, 201);
     }
 
     const goal = await prisma.dailyGoal.upsert({
       where: {
         userId_date: {
           userId,
-          date: new Date(body.date),
+          date: new Date(validation.data.date),
         },
       },
       update: {
-        goals: body.goals ? JSON.stringify(body.goals) : undefined,
-        notes: body.notes,
+        goals: validation.data.goals ? JSON.stringify(validation.data.goals) : undefined,
+        notes: validation.data.notes,
       },
       create: {
         userId,
-        date: new Date(body.date),
-        goals: body.goals ? JSON.stringify(body.goals) : '[]',
-        notes: body.notes || '',
+        date: new Date(validation.data.date),
+        goals: validation.data.goals ? JSON.stringify(validation.data.goals) : '[]',
+        notes: validation.data.notes || '',
       },
     });
 
-    return NextResponse.json(goal, { status: 201 });
+    return apiResponse.success(goal, undefined, 201);
   } catch (error) {
     console.error('Error creating daily goal:', error);
-    return NextResponse.json({ error: 'Failed to create goal' }, { status: 500 });
+    return apiResponse.serverError('Failed to create goal');
   }
 }

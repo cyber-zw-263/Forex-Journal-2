@@ -16,7 +16,7 @@ interface DailyGoal {
 
 export default function PlanningPage() {
   const { theme, toggleTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(() => typeof window !== 'undefined');
   const [today] = useState(new Date().toISOString().split('T')[0]);
   const [dailyGoal, setDailyGoal] = useState<DailyGoal>({
     date: today,
@@ -27,10 +27,6 @@ export default function PlanningPage() {
   const [weeklyFocus, setWeeklyFocus] = useState('');
   const [preMarketNotes, setPreMarketNotes] = useState('');
   const [postSessionNotes, setPostSessionNotes] = useState('');
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const addGoal = () => {
     if (!currentGoal.trim()) return;
