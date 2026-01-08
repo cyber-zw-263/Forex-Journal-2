@@ -140,7 +140,7 @@ self.__SERVER_FILES_MANIFEST={
       "isExperimentalCompile": false
     }
   },
-  "appDir": "/workspaces/Forex-Journal",
+  "appDir": "/workspaces/Forex-Journal-2",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
