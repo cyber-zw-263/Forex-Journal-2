@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import StatCardV2 from '@/components/StatCardV2';
+import QuickAddTradeForm from '@/components/QuickAddTradeForm';
+import TradesList from '@/components/TradesList';
 import { FiDollarSign, FiTrendingUp, FiTarget, FiRefreshCw } from 'react-icons/fi';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import toast, { Toaster } from 'react-hot-toast';
@@ -47,7 +49,7 @@ export default function DashboardPage() {
 
       if (!response.ok) {
         // If the API returned an error, try to parse the body for details, but don't assume it's an array
-        let errBody: any = null;
+        let errBody: unknown = null;
         try { errBody = await response.json(); } catch (e) { errBody = await response.text(); }
         console.error('Failed to fetch trades:', response.status, errBody);
         toast.error('Failed to fetch trades');
@@ -122,6 +124,20 @@ export default function DashboardPage() {
     fetchTrades();
   }, []);
 
+  // Modal state for adding/editing trades
+  const [showTradeModal, setShowTradeModal] = useState(false);
+  const [editingTrade, setEditingTrade] = useState<Trade | null>(null);
+
+  const handleOpenNew = () => {
+    setEditingTrade(null);
+    setShowTradeModal(true);
+  };
+
+  const handleEdit = (trade: Trade) => {
+    setEditingTrade(trade);
+    setShowTradeModal(true);
+  };
+
   // Prepare chart data
   const equityCurveData = trades
     .sort((a, b) => new Date(a.entryTime).getTime() - new Date(b.entryTime).getTime())
@@ -132,7 +148,7 @@ export default function DashboardPage() {
         equity: parseFloat(equity.toFixed(2)),
         date: new Date(trade.entryTime).toLocaleDateString(),
       }];
-    }, [] as any[]);
+    }, [] as { name: string; equity: number; date: string }[]);
 
   const winDistribution = [
     { name: 'Wins', value: metrics.wins, color: 'var(--win-color)' },
@@ -209,6 +225,22 @@ export default function DashboardPage() {
           <FiRefreshCw size={16} style={{ animation: isLoading ? 'spin 1s linear infinite' : 'none' }} />
           {isLoading ? 'Loading...' : 'Refresh Data'}
         </button>
+        <button
+          onClick={handleOpenNew}
+          style={{
+            marginLeft: '12px',
+            background: 'transparent',
+            color: 'var(--foreground)',
+            padding: '10px 16px',
+            borderRadius: '8px',
+            border: '1px solid var(--card-border)',
+            cursor: 'pointer',
+            fontWeight: '600',
+            fontSize: '14px',
+          }}
+        >
+          + Add Trade
+        </button>
       </div>
 
       {/* Key Metrics Cards */}
@@ -255,6 +287,19 @@ export default function DashboardPage() {
           subtitle={`${metrics.closedTrades} closed`}
         />
       </div>
+
+      {/* Trades List */}
+      <div style={{ marginBottom: '32px' }}>
+        <TradesList trades={trades} isLoading={isLoading} onTradeDeleted={fetchTrades} onEdit={handleEdit} />
+      </div>
+
+      {showTradeModal && (
+        <QuickAddTradeForm
+          onClose={() => setShowTradeModal(false)}
+          onTradeAdded={() => { setShowTradeModal(false); fetchTrades(); }}
+          initialData={editingTrade || undefined}
+        />
+      )}
 
       {/* Charts Section */}
       <div

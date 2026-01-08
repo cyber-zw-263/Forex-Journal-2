@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
 
-    const where: any = { userId };
+    const where: Record<string, unknown> = { userId };
     if (date) {
       const targetDate = new Date(date);
       const nextDate = new Date(targetDate);

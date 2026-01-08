@@ -3,7 +3,19 @@
 import { useState } from 'react';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 
-export default function PdfReport({ trades, chartSelector }: { trades: any[]; chartSelector?: string }) {
+interface Trade {
+  id: string;
+  pair?: string;
+  direction?: string;
+  entryPrice?: number;
+  exitPrice?: number;
+  profitLoss?: number;
+  outcome?: string;
+  entryTime: string;
+  [key: string]: unknown;
+}
+
+export default function PdfReport({ trades, chartSelector }: { trades: Trade[]; chartSelector?: string }) {
   const [chartDataUrl, setChartDataUrl] = useState<string | null>(null);
 
   async function captureChart() {
@@ -12,7 +24,7 @@ export default function PdfReport({ trades, chartSelector }: { trades: any[]; ch
     if (!el) return null;
     const svg = el.querySelector('svg') as SVGElement | null;
     if (!svg) return null;
-    const s = new XMLSerializer().serializeToString(svg as any);
+    const s = new XMLSerializer().serializeToString(svg as Node);
     const data = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
     return data;
   }

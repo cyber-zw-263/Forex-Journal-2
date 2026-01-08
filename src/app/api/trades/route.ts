@@ -11,7 +11,20 @@ try {
   prisma = null;
 }
 
-function loadDemoTrades() {
+interface DemoTrade {
+  id: string;
+  userId?: string;
+  pair: string;
+  direction: string;
+  entryPrice: number;
+  exitPrice?: number | null;
+  profitLoss?: number;
+  outcome?: string;
+  entryTime: string | Date;
+  [key: string]: unknown;
+}
+
+function loadDemoTrades(): DemoTrade[] {
   const possible = [
     path.join(process.cwd(), 'data', 'demo-trades.json'),
     path.join(process.cwd(), 'src', 'data', 'demo-trades.json'),
@@ -44,7 +57,7 @@ export async function GET(request: NextRequest) {
     const account = searchParams.get('account');
     const strategy = searchParams.get('strategy');
 
-    const where: any = { userId };
+    const where: Record<string, unknown> = { userId };
 
     if (pair) where.pair = pair;
     if (outcome) where.outcome = outcome;
@@ -52,18 +65,17 @@ export async function GET(request: NextRequest) {
     if (account) where.account = account;
     if (strategy) where.strategy = strategy;
     if (startDate || endDate) {
-      where.entryTime = {};
-      if (startDate) where.entryTime.gte = new Date(startDate);
-      if (endDate) where.entryTime.lte = new Date(endDate);
+      const dateRange: Record<string, Date> = {};
+      if (startDate) dateRange.gte = new Date(startDate);
+      if (endDate) dateRange.lte = new Date(endDate);
+      where.entryTime = dateRange;
     }
 
     if (!prisma) {
       console.warn('Prisma not available, returning demo trades');
       // Optionally, apply filters on demo data
       const demoAll = loadDemoTrades();
-      const demo = (demoAll as any[])
-        .filter((t: any) => t.userId === userId || !t.userId)
-        .slice(0, 100);
+      const demo = demoAll.filter((t: DemoTrade) => t.userId === userId || !t.userId).slice(0, 100);
       return NextResponse.json(demo);
     }
 
@@ -81,9 +93,7 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching trades:', error);
     // On error, fall back to demo data so the frontend remains usable
     const demoAll = loadDemoTrades();
-    const demo = (demoAll as any[])
-      .filter((t: any) => t.userId === userId || !t.userId)
-      .slice(0, 100);
+    const demo = demoAll.filter((t: DemoTrade) => t.userId === userId || !t.userId).slice(0, 100);
     return NextResponse.json(demo);
   }
 }
@@ -92,6 +102,15 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
+    // Basic server-side validation
+    const required = ['pair', 'entryPrice'];
+    const errors: Record<string, string> = {};
+    for (const k of required) {
+      if (!body[k]) errors[k] = 'Required';
+    }
+    if (Object.keys(errors).length) {
+      return NextResponse.json({ errors }, { status: 400 });
+    }
 
     if (!prisma) {
       return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
@@ -127,7 +146,7 @@ export async function POST(request: NextRequest) {
         setupQuality: body.setupQuality ? parseInt(body.setupQuality) : null,
         whatLearned: body.whatLearned,
         mistakes: body.mistakes ? JSON.stringify(body.mistakes) : null,
-      } as any,
+      },
       include: {
         screenshots: true,
         voiceNotes: true,

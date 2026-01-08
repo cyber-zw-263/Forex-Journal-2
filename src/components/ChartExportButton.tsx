@@ -12,7 +12,7 @@ export default function ChartExportButton({ selector, filename = 'chart.png' }: 
     const svg = el.querySelector('svg');
     if (svg) {
       const serializer = new XMLSerializer();
-      const svgString = serializer.serializeToString(svg as any);
+      const svgString = serializer.serializeToString(svg as Node);
       const svgData = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
       const img = new Image();
       img.onload = () => {

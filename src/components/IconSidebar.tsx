@@ -30,6 +30,7 @@ export default function IconSidebar() {
         borderRight: '1px solid var(--panel-muted)',
       }}
       className="hidden md:flex"
+      role="navigation"
       aria-label="Main navigation"
     >
       <div

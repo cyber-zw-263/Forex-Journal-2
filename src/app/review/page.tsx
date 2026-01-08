@@ -38,7 +38,7 @@ export default function TradeReviewPage() {
         });
 
         if (!response.ok) {
-          let errBody: any = null;
+          let errBody: unknown = null;
           try { errBody = await response.json(); } catch (e) { errBody = await response.text(); }
           console.error('Failed to fetch trades:', response.status, errBody);
           setTrades([]);

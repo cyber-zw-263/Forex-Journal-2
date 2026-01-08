@@ -8,7 +8,20 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-function loadDemoTrades() {
+interface DemoTrade {
+  id: string;
+  userId?: string;
+  pair: string;
+  direction: string;
+  entryPrice: number;
+  exitPrice?: number | null;
+  profitLoss?: number;
+  outcome?: string;
+  entryTime: string | Date;
+  [key: string]: unknown;
+}
+
+function loadDemoTrades(): DemoTrade[] {
   const possible = [
     path.join(process.cwd(), 'data', 'demo-trades.json'),
     path.join(process.cwd(), 'src', 'data', 'demo-trades.json'),
@@ -61,11 +74,11 @@ export async function POST(request: NextRequest) {
     if (body.endDate) endDate = new Date(body.endDate);
 
     // Fetch trades for the period
-    let trades: any[] = [];
+    let trades: DemoTrade[] = [];
 
     if (!prisma) {
       console.warn('Prisma not available in AI analyze; falling back to demo trades');
-      trades = loadDemoTrades().filter((t: any) => {
+      trades = loadDemoTrades().filter((t: DemoTrade) => {
         const d = new Date(t.entryTime);
         return d >= startDate && d <= endDate;
       });
@@ -97,26 +110,26 @@ export async function POST(request: NextRequest) {
 
     // Prepare data for AI analysis
     const tradesSummary = trades.map((trade) => {
-      const t: any = trade;
+      const t = trade as Record<string, unknown>;
       return {
-        pair: t.pair,
-        direction: t.direction,
-        entryPrice: t.entryPrice,
-        exitPrice: t.exitPrice,
+        pair: t.pair || '',
+        direction: t.direction || '',
+        entryPrice: t.entryPrice || 0,
+        exitPrice: t.exitPrice || null,
         outcome: t.outcome || 'open',
-        profitLoss: t.profitLoss,
-        profitLossPercent: t.profitLossPercent,
-        emotionalState: t.emotionalState,
-        setupQuality: t.setupQuality,
-        strategy: t.strategy,
-        notes: t.notes,
-        whatLearned: t.whatLearned,
-        mistakes: t.mistakes ? JSON.parse(t.mistakes) : [],
-        account: t.account,
-        riskPercent: t.riskPercent,
-        riskRewardRatio: t.riskRewardRatio,
-        voiceNotesCount: t.voiceNotes.length,
-        screenshotsCount: t.screenshots.length,
+        profitLoss: t.profitLoss || 0,
+        profitLossPercent: t.profitLossPercent || 0,
+        emotionalState: t.emotionalState || '',
+        setupQuality: t.setupQuality || '',
+        strategy: t.strategy || '',
+        notes: t.notes || '',
+        whatLearned: t.whatLearned || '',
+        mistakes: t.mistakes ? JSON.parse(String(t.mistakes)) : [],
+        account: t.account || '',
+        riskPercent: t.riskPercent || 0,
+        riskRewardRatio: t.riskRewardRatio || 0,
+        voiceNotesCount: (Array.isArray(t.voiceNotes) ? t.voiceNotes : []).length,
+        screenshotsCount: (Array.isArray(t.screenshots) ? t.screenshots : []).length,
       };
     });
 

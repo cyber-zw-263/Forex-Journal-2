@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import { useState } from 'react';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
@@ -21,26 +22,33 @@ interface TradesListProps {
   trades: Trade[];
   isLoading: boolean;
   onTradeDeleted: () => void;
+  onEdit?: (trade: Trade) => void;
 }
 
-export default function TradesList({ trades, isLoading, onTradeDeleted }: TradesListProps) {
-  const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this trade?')) {
-      try {
-        const response = await fetch(`/api/trades/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'x-user-id': 'demo-user',
-          },
-        });
+export default function TradesList({ trades, isLoading, onTradeDeleted, onEdit }: TradesListProps) {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
-        if (response.ok) {
-          toast.success('Trade deleted');
-          onTradeDeleted();
-        }
-      } catch (error) {
+  const confirmDelete = (id: string) => setDeletingId(id);
+
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch(`/api/trades/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'x-user-id': 'demo-user',
+        },
+      });
+
+      if (response.ok) {
+        toast.success('Trade deleted');
+        setDeletingId(null);
+        onTradeDeleted();
+      } else {
         toast.error('Failed to delete trade');
       }
+    } catch (error) {
+      toast.error('Failed to delete trade');
+      setDeletingId(null);
     }
   };
 
@@ -144,9 +152,18 @@ export default function TradesList({ trades, isLoading, onTradeDeleted }: Trades
 
               <div className="flex gap-2 ml-4">
                 <button
+                  onClick={() => typeof onEdit === 'function' ? onEdit(trade) : null}
+                  className="p-2 rounded-lg text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-700/30 transition-colors"
+                  title="Edit trade"
+                  aria-label={`Edit ${trade.pair} trade`}
+                >
+                  <FiEdit className="w-5 h-5" />
+                </button>
+                <button
                   onClick={() => handleDelete(trade.id)}
                   className="p-2 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
                   title="Delete trade"
+                  aria-label={`Delete ${trade.pair} trade`}
                 >
                   <FiTrash2 className="w-5 h-5" />
                 </button>
@@ -155,6 +172,21 @@ export default function TradesList({ trades, isLoading, onTradeDeleted }: Trades
           </div>
         ))}
       </div>
+
+      {/* Delete confirmation modal */}
+      {deletingId && (
+        <div role="dialog" aria-modal="true" aria-label="Confirm delete" className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-50" onClick={() => setDeletingId(null)} />
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 z-10 border border-gray-200 dark:border-slate-700" style={{ width: '100%', maxWidth: 420 }}>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Delete trade?</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">This action cannot be undone. Are you sure you want to delete this trade?</p>
+            <div className="flex justify-end gap-3 mt-4">
+              <button onClick={() => setDeletingId(null)} className="px-4 py-2 rounded bg-transparent border border-gray-300">Cancel</button>
+              <button onClick={() => handleDelete(deletingId)} className="px-4 py-2 rounded bg-red-600 text-white">Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

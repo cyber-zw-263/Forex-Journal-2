@@ -18,7 +18,9 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
     url: string;
     duration: number;
     timestamp: Date;
+    uploaded?: boolean;
   }>>([]);
+  
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,16 +44,51 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
       };
 
       mediaRecorder.current.onstop = () => {
-        const audioBlob = new Blob(audioChunks.current, { type: 'audio/webm' });
-        const url = URL.createObjectURL(audioBlob);
-        const recording = {
-          id: Date.now().toString(),
-          url,
-          duration: recordingTime,
-          timestamp: new Date(),
-        };
-        setRecordings(prev => [recording, ...prev]);
-        onRecordingSaved?.(url);
+        (async () => {
+          const audioBlob = new Blob(audioChunks.current, { type: 'audio/webm' });
+          const url = URL.createObjectURL(audioBlob);
+          const recording = {
+            id: Date.now().toString(),
+            url,
+            duration: recordingTime,
+            timestamp: new Date(),
+            uploaded: false,
+          };
+
+          // Optimistically add local recording
+          setRecordings(prev => [recording, ...prev]);
+          onRecordingSaved?.(url);
+
+          // Try uploading to server
+          try {
+            const fd = new FormData();
+            fd.append('file', audioBlob, `voice-${Date.now()}.webm`);
+
+            const res = await fetch('/api/voice-notes', {
+              method: 'POST',
+              body: fd,
+              headers: {
+                'x-user-id': 'demo-user',
+              },
+            });
+
+            if (res.ok) {
+              const data = await res.json();
+              // If API returns stored URL, replace local URL
+              if (data?.url) {
+                setRecordings(prev => prev.map(r => r.id === recording.id ? { ...r, url: data.url, uploaded: true } : r));
+              } else {
+                setRecordings(prev => prev.map(r => r.id === recording.id ? { ...r, uploaded: true } : r));
+              }
+              toast.success('Voice note uploaded');
+            } else {
+              toast('Saved locally (upload failed)', { icon: '⚠️' });
+            }
+          } catch (err) {
+            console.error('Voice upload failed', err);
+            toast('Saved locally (upload failed)', { icon: '⚠️' });
+          }
+        })();
       };
 
       mediaRecorder.current.start();

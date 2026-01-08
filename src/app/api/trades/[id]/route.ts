@@ -40,6 +40,11 @@ export async function PUT(
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
 
+    // Basic validation for allowed fields
+    if (body.entryPrice !== undefined && body.entryPrice !== null && isNaN(Number(body.entryPrice))) {
+      return NextResponse.json({ error: 'entryPrice must be a number' }, { status: 400 });
+    }
+
     if (!prisma) {
       return NextResponse.json({ error: 'Prisma not available' }, { status: 503 });
     }
@@ -52,57 +57,57 @@ export async function PUT(
       return NextResponse.json({ error: 'Trade not found' }, { status: 404 });
     }
 
-    const t: any = trade;
+    const t = trade as unknown as Record<string, unknown>;
 
-    const parseNumber = (v: any) => {
+    const parseNumber = (v: unknown) => {
       if (v === undefined || v === null || v === '') return undefined;
-      const n = parseFloat(v as any);
+      const n = parseFloat(String(v));
       return isNaN(n) ? undefined : n;
     };
 
-    const parseInteger = (v: any) => {
+    const parseInteger = (v: unknown) => {
       if (v === undefined || v === null || v === '') return undefined;
-      const n = parseInt(v as any);
+      const n = parseInt(String(v), 10);
       return isNaN(n) ? undefined : n;
     };
 
-    const parseDate = (v: any) => {
+    const parseDate = (v: unknown) => {
       if (!v) return undefined;
-      const d = new Date(v);
+      const d = new Date(String(v));
       return isNaN(d.getTime()) ? undefined : d;
     };
 
     const updatedTrade = await prisma.trade.update({
       where: { id },
       data: {
-        pair: body.pair || t.pair,
-        direction: body.direction || t.direction,
-        entryPrice: parseNumber(body.entryPrice) ?? t.entryPrice,
-        exitPrice: parseNumber(body.exitPrice) ?? t.exitPrice,
-        entryTime: parseDate(body.entryTime) ?? t.entryTime,
-        exitTime: parseDate(body.exitTime) ?? t.exitTime,
-        volume: parseNumber(body.volume) ?? t.volume,
-        stopLoss: parseNumber(body.stopLoss) ?? t.stopLoss,
-        takeProfit: parseNumber(body.takeProfit) ?? t.takeProfit,
-        riskAmount: parseNumber(body.riskAmount) ?? t.riskAmount,
-        riskPercent: parseNumber(body.riskPercent) ?? t.riskPercent,
-        riskRewardRatio: parseNumber(body.riskRewardRatio) ?? t.riskRewardRatio,
-        account: body.account || t.account,
-        broker: body.broker || t.broker,
-        accountBalance: parseNumber(body.accountBalance) ?? t.accountBalance,
-        accountEquity: parseNumber(body.accountEquity) ?? t.accountEquity,
-        profitLoss: (body.profitLoss !== undefined && body.profitLoss !== null) ? parseNumber(body.profitLoss) ?? t.profitLoss : t.profitLoss,
-        profitLossPercent: parseNumber(body.profitLossPercent) ?? t.profitLossPercent,
-        outcome: body.outcome || t.outcome,
-        status: body.status || t.status,
-        strategy: body.strategy || t.strategy,
-        setupType: body.setupType || t.setupType,
-        notes: body.notes || t.notes,
-        emotionalState: body.emotionalState || t.emotionalState,
-        setupQuality: parseInteger(body.setupQuality) ?? t.setupQuality,
-        whatLearned: body.whatLearned || t.whatLearned,
-        mistakes: body.mistakes ? JSON.stringify(body.mistakes) : t.mistakes,
-      } as any,
+        pair: body.pair ?? (t.pair as string | undefined),
+        direction: body.direction ?? (t.direction as string | undefined),
+        entryPrice: parseNumber(body.entryPrice) ?? (t.entryPrice as number | undefined),
+        exitPrice: parseNumber(body.exitPrice) ?? (t.exitPrice as number | null | undefined),
+        entryTime: parseDate(body.entryTime) ?? (t.entryTime as Date | string | undefined),
+        exitTime: parseDate(body.exitTime) ?? (t.exitTime as Date | string | null | undefined),
+        volume: parseNumber(body.volume) ?? (t.volume as number | undefined),
+        stopLoss: parseNumber(body.stopLoss) ?? (t.stopLoss as number | null | undefined),
+        takeProfit: parseNumber(body.takeProfit) ?? (t.takeProfit as number | null | undefined),
+        riskAmount: parseNumber(body.riskAmount) ?? (t.riskAmount as number | null | undefined),
+        riskPercent: parseNumber(body.riskPercent) ?? (t.riskPercent as number | null | undefined),
+        riskRewardRatio: parseNumber(body.riskRewardRatio) ?? (t.riskRewardRatio as number | null | undefined),
+        account: body.account ?? (t.account as string | undefined),
+        broker: body.broker ?? (t.broker as string | undefined),
+        accountBalance: parseNumber(body.accountBalance) ?? (t.accountBalance as number | null | undefined),
+        accountEquity: parseNumber(body.accountEquity) ?? (t.accountEquity as number | null | undefined),
+        profitLoss: (body.profitLoss !== undefined && body.profitLoss !== null) ? parseNumber(body.profitLoss) ?? (t.profitLoss as number | null | undefined) : (t.profitLoss as number | null | undefined),
+        profitLossPercent: parseNumber(body.profitLossPercent) ?? (t.profitLossPercent as number | null | undefined),
+        outcome: body.outcome ?? (t.outcome as string | undefined),
+        status: body.status ?? (t.status as string | undefined),
+        strategy: body.strategy ?? (t.strategy as string | undefined),
+        setupType: body.setupType ?? (t.setupType as string | undefined),
+        notes: body.notes ?? (t.notes as string | undefined),
+        emotionalState: body.emotionalState ?? (t.emotionalState as string | undefined),
+        setupQuality: parseInteger(body.setupQuality) ?? (t.setupQuality as number | null | undefined),
+        whatLearned: body.whatLearned ?? (t.whatLearned as string | undefined),
+        mistakes: body.mistakes ? JSON.stringify(body.mistakes) : (t.mistakes as string | null | undefined),
+      },
       include: {
         screenshots: true,
         voiceNotes: true,

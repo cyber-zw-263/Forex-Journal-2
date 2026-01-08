@@ -19,6 +19,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import dynamic from 'next/dynamic';
+import { CustomTooltip } from './CustomTooltip';
+
 const ChartExportButton = dynamic(() => import('./ChartExportButton'), { ssr: false });
 const PdfReport = dynamic(() => import('./PdfReport'), { ssr: false });
 
@@ -37,8 +39,15 @@ interface AnalyticsChartsProps {
   trades: Trade[];
 }
 
+interface EquityPoint { date: string; equity: number; drawdown: number }
+interface PairPerf { pair: string; wins: number; losses: number; pnl: number }
+interface DirectionPerf { direction: string; value: number; name: string; [key: string]: number | string }
+
+interface ChartData { dailyPnL: { date: string; pnl: number }[]; pairPerformance: PairPerf[]; directionPerformance: DirectionPerf[]; equity: EquityPoint[] }
+
+
 export default function AnalyticsChartsV2({ trades, startDate, endDate }: AnalyticsChartsProps & { startDate?: string | null; endDate?: string | null }) {
-  const [chartData, setChartData] = useState<any>({ dailyPnL: [], pairPerformance: [], directionPerformance: [], equity: [] });
+  const [chartData, setChartData] = useState<ChartData>({ dailyPnL: [], pairPerformance: [], directionPerformance: [], equity: [] });
 
   useEffect(() => {
     if (!trades.length) return;
@@ -100,30 +109,19 @@ export default function AnalyticsChartsV2({ trades, startDate, endDate }: Analyt
     });
 
     // compute annotations (min drawdown, max equity)
-    const minDrawdown = equityData.reduce((acc: number, cur: any) => Math.max(acc, cur.drawdown), 0);
-    const maxPoint = equityData.length ? equityData.reduce((acc: any, cur: any) => (cur.equity > acc.equity ? cur : acc), equityData[0]) : null;
-    const minPoint = equityData.length ? equityData.reduce((acc: any, cur: any) => (cur.equity < acc.equity ? cur : acc), equityData[0]) : null;
+    const minDrawdown = equityData.reduce((acc: number, cur: EquityPoint) => Math.max(acc, cur.drawdown), 0);
+    const maxPoint = equityData.length ? equityData.reduce((acc: EquityPoint, cur: EquityPoint) => (cur.equity > acc.equity ? cur : acc), equityData[0]) : null;
+    const minPoint = equityData.length ? equityData.reduce((acc: EquityPoint, cur: EquityPoint) => (cur.equity < acc.equity ? cur : acc), equityData[0]) : null;
 
     setChartData({ dailyPnL, pairPerformance, directionPerformance, equity: equityData });
     // optionally set annotations into state if needed for external UI later
     // setAnnotations({ minDrawdown, maxEquity: maxPoint ? maxPoint.equity : null });
   }, [trades]);
 
-  function CustomTooltip({ active, payload, label }: any) {
-    if (!active || !payload || !payload.length) return null;
-    const equityItem = payload.find((p: any) => p.dataKey === 'equity') || payload[0];
-    const drawdownItem = payload.find((p: any) => p.dataKey === 'drawdown');
-    return (
-      <div className="bg-gray-900 p-2 rounded text-sm text-white">
-        <div className="font-bold">{label}</div>
-        {equityItem && <div>Equity: <span className="font-mono">{equityItem.value}</span></div>}
-        {drawdownItem && <div>Drawdown: <span className="font-mono">{drawdownItem.value}</span></div>}
-      </div>
-    );
-  }
+  
 
-  const maxPoint = chartData.equity.length ? chartData.equity.reduce((acc: any, cur: any) => (cur.equity > acc.equity ? cur : acc), chartData.equity[0]) : null;
-  const minPoint = chartData.equity.length ? chartData.equity.reduce((acc: any, cur: any) => (cur.equity < acc.equity ? cur : acc), chartData.equity[0]) : null;
+  const maxPoint = chartData.equity.length ? chartData.equity.reduce((acc: EquityPoint, cur: EquityPoint) => (cur.equity > acc.equity ? cur : acc), chartData.equity[0]) : null;
+  const minPoint = chartData.equity.length ? chartData.equity.reduce((acc: EquityPoint, cur: EquityPoint) => (cur.equity < acc.equity ? cur : acc), chartData.equity[0]) : null;
 
   const COLORS = ['#10b981', '#ef4444'];
 
@@ -210,7 +208,7 @@ export default function AnalyticsChartsV2({ trades, startDate, endDate }: Analyt
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie data={chartData.directionPerformance} cx="50%" cy="50%" labelLine={false} label={({ name }) => name} outerRadius={80} fill="#8884d8" dataKey="value">
-                {chartData.directionPerformance.map((entry: any, index: number) => (
+                {chartData.directionPerformance.map((entry: Record<string, number | string>, index: number) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

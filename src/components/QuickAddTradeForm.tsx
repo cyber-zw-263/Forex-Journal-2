@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
@@ -8,10 +8,11 @@ import { FiX } from 'react-icons/fi';
 interface QuickAddTradeFormProps {
   onClose: () => void;
   onTradeAdded?: () => void;
+  initialData?: unknown;
 }
 
-export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTradeFormProps) {
-  const [formData, setFormData] = useState({
+export default function QuickAddTradeForm({ onClose, onTradeAdded, initialData }: QuickAddTradeFormProps) {
+  const [formData, setFormData] = useState(() => ({
     pair: 'EUR/USD',
     direction: 'LONG',
     entryPrice: '',
@@ -33,9 +34,26 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
     notes: '',
     whatLearned: '',
     mistakes: [],
-  });
+  }));
+
+  // If initialData is provided, merge into state (edit mode)
+  useEffect(() => {
+    if (initialData && Object.keys(initialData).length) {
+      setFormData(prev => ({ ...prev, ...initialData }));
+    }
+     
+  }, [initialData]);
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const entryRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    // focus the entry price input when the form mounts
+    setTimeout(() => entryRef.current?.focus(), 50);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -48,22 +66,36 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.entryPrice || !formData.pair) {
-      toast.error('Please fill in pair and entry price');
+    // Basic validation
+    const newErrors: Record<string, string> = {};
+    if (!formData.pair) newErrors.pair = 'Currency pair is required';
+    if (!formData.entryPrice || Number.isNaN(Number(formData.entryPrice))) newErrors.entryPrice = 'Valid entry price required';
+    if (formData.volume && parseFloat(String(formData.volume)) <= 0) newErrors.volume = 'Volume must be greater than 0';
+    if (formData.riskPercent && (isNaN(Number(formData.riskPercent)) || Number(formData.riskPercent) < 0)) newErrors.riskPercent = 'Risk % must be a valid number';
+
+    if (Object.keys(newErrors).length) {
+      setErrors(newErrors);
+      toast.error('Please fix validation errors');
       return;
     }
+    setErrors({});
 
     try {
       setIsLoading(true);
 
       const profitLoss =
         formData.exitPrice && formData.volume
-          ? (parseFloat(formData.exitPrice) - parseFloat(formData.entryPrice)) *
-            parseFloat(formData.volume) * 100000
+          ? (parseFloat(String(formData.exitPrice)) - parseFloat(String(formData.entryPrice))) *
+            parseFloat(String(formData.volume)) * 100000
           : undefined;
 
-      const response = await fetch('/api/trades', {
-        method: 'POST',
+      const editId = initialData && (initialData as { id?: string }).id;
+      const isEdit = Boolean(editId);
+      const url = isEdit ? `/api/trades/${editId}` : '/api/trades';
+      const method = isEdit ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
           'x-user-id': 'demo-user',
@@ -109,7 +141,7 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
         onClose();
         onTradeAdded?.();
       } else {
-        toast.error('Failed to add trade');
+        toast.error('Failed to save trade');
       }
     } catch (error) {
       toast.error('Error adding trade');
@@ -122,6 +154,9 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
   return (
     <AnimatePresence>
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={initialData ? 'Edit trade' : 'Add new trade'}
         style={{
           position: 'fixed',
           top: 0,
@@ -197,10 +232,11 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
               {/* Pair */}
               <div>
-                <label style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
+                <label htmlFor="pair" style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
                   Currency Pair
                 </label>
                 <select
+                  id="pair"
                   name="pair"
                   value={formData.pair}
                   onChange={handleChange}
@@ -227,10 +263,11 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
 
               {/* Direction */}
               <div>
-                <label style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
+                <label htmlFor="direction" style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
                   Direction
                 </label>
                 <select
+                  id="direction"
                   name="direction"
                   value={formData.direction}
                   onChange={handleChange}
@@ -250,10 +287,12 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
 
               {/* Entry Price */}
               <div>
-                <label style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
+                <label htmlFor="entryPrice" style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
                   Entry Price
                 </label>
                 <input
+                  ref={entryRef}
+                  id="entryPrice"
                   type="number"
                   name="entryPrice"
                   step="0.00001"
@@ -261,6 +300,7 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
                   value={formData.entryPrice}
                   onChange={handleChange}
                   required
+                  aria-invalid={errors.entryPrice ? 'true' : 'false'}
                   style={{
                     width: '100%',
                     padding: '10px 12px',
@@ -270,6 +310,7 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
                     color: 'var(--foreground)',
                   }}
                 />
+                {errors.entryPrice && <div role="alert" style={{ color: 'var(--loss-color)', fontSize: '12px', marginTop: '6px' }}>{errors.entryPrice}</div>}
               </div>
 
               {/* Stop Loss */}
@@ -320,16 +361,18 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
 
               {/* Volume */}
               <div>
-                <label style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
+                <label htmlFor="volume" style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>
                   Volume (Lots)
                 </label>
                 <input
+                  id="volume"
                   type="number"
                   name="volume"
                   step="0.01"
                   placeholder="0.1"
                   value={formData.volume}
                   onChange={handleChange}
+                  aria-invalid={errors.volume ? 'true' : 'false'}
                   style={{
                     width: '100%',
                     padding: '10px 12px',
@@ -339,6 +382,7 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded }: QuickAddTra
                     color: 'var(--foreground)',
                   }}
                 />
+                {errors.volume && <div role="alert" style={{ color: 'var(--loss-color)', fontSize: '12px', marginTop: '6px' }}>{errors.volume}</div>}
               </div>
 
               {/* Risk % */}

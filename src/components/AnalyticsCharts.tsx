@@ -159,7 +159,7 @@ export default function AnalyticsCharts({ trades }: AnalyticsChartsProps) {
                 fill="#8884d8"
                 dataKey="value"
               >
-                {chartData.directionPerformance.map((entry: any, index: number) => (
+                {chartData.directionPerformance.map((entry: Record<string, number | string>, index: number) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

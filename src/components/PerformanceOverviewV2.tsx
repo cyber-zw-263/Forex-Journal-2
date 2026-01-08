@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FiTrendingUp, FiTrendingDown, FiActivity, FiTarget } from 'react-icons/fi';
+import { WinGauge } from './WinGauge';
 
 interface Trade {
   id: string;
@@ -15,25 +16,31 @@ interface PerformanceOverviewProps {
   trades: Trade[];
 }
 
-function WinGauge({ value = 0 }: { value: number }) {
-  const radius = 36;
-  const circumference = 2 * Math.PI * radius;
-  const dash = (value / 100) * circumference;
+interface StatCardV2Props {
+  icon: React.ElementType;
+  label: string;
+  value: string | number;
+  unit?: string;
+  isPositive?: boolean;
+  children?: React.ReactNode;
+}
+
+function StatCardV2({ icon: Icon, label, value, unit = '', isPositive = true, children }: StatCardV2Props) {
   return (
-    <svg width="84" height="84" viewBox="0 0 84 84">
-      <defs>
-        <linearGradient id="g1" x1="0%" x2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#7c3aed" />
-        </linearGradient>
-      </defs>
-      <g transform="translate(42,42)">
-        <circle r={radius} stroke="#1f2937" strokeWidth="12" fill="none" opacity="0.2" />
-        <circle r={radius} stroke="url(#g1)" strokeWidth="12" strokeLinecap="round" fill="none"
-          strokeDasharray={`${dash} ${circumference - dash}`} transform="rotate(-90)" />
-        <text x="0" y="6" fill="#e6e6e6" fontSize="16" fontWeight="700" textAnchor="middle">{value}%</text>
-      </g>
-    </svg>
+    <div className="card-glass p-4 rounded-lg hover:shadow-lg transition-shadow">
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{label}</p>
+          <p className={`text-2xl font-bold mt-2 ${label === 'Total P&L' ? 'grad-text' : 'text-gray-200'}`}>
+            {value} {unit}
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${isPositive ? 'bg-green-900/20 text-green-300' : 'bg-red-900/20 text-red-300'}`}>
+          <Icon className="w-5 h-5" />
+        </div>
+      </div>
+      {children}
+    </div>
   );
 }
 
@@ -85,34 +92,11 @@ export default function PerformanceOverviewV2({ trades }: PerformanceOverviewPro
     };
   }, [trades]);
 
-  const StatCard = ({
-    icon: Icon,
-    label,
-    value,
-    unit = '',
-    isPositive = true,
-    children,
-  }: any) => (
-    <div className="card-glass p-4 rounded-lg hover:shadow-lg transition-shadow">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{label}</p>
-          <p className={`text-2xl font-bold mt-2 ${label === 'Total P&L' ? 'grad-text' : 'text-gray-200'}`}>
-            {value} {unit}
-          </p>
-        </div>
-        <div className={`p-3 rounded-lg ${isPositive ? 'bg-green-900/20 text-green-300' : 'bg-red-900/20 text-red-300'}`}>
-          <Icon className="w-5 h-5" />
-        </div>
-      </div>
-      {children}
-    </div>
-  );
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={FiTrendingUp} label="Total P&L" value={stats.totalPnL.toFixed(2)} unit="USD" isPositive={stats.totalPnL >= 0} />
+        <StatCardV2 icon={FiTrendingUp} label="Total P&L" value={stats.totalPnL.toFixed(2)} unit="USD" isPositive={stats.totalPnL >= 0} />
 
         <div className="lg:col-span-1">
           <div className="card-glass p-4 rounded-lg flex items-center gap-4">
@@ -129,9 +113,9 @@ export default function PerformanceOverviewV2({ trades }: PerformanceOverviewPro
           </div>
         </div>
 
-        <StatCard icon={FiActivity} label="Avg Win / Loss" value={`+${stats.avgWin} / ${stats.avgLoss}`} isPositive={stats.avgWin > stats.avgLoss} />
+        <StatCardV2 icon={FiActivity} label="Avg Win / Loss" value={`+${stats.avgWin} / ${stats.avgLoss}`} isPositive={stats.avgWin > stats.avgLoss} />
 
-        <StatCard icon={FiTrendingDown} label="Profit Factor" value={stats.profitFactor === Infinity ? '∞' : stats.profitFactor} isPositive={stats.profitFactor >= 1} />
+        <StatCardV2 icon={FiTrendingDown} label="Profit Factor" value={stats.profitFactor === Infinity ? '∞' : stats.profitFactor} isPositive={stats.profitFactor >= 1} />
       </div>
     </>
   );

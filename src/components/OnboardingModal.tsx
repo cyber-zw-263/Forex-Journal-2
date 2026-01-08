@@ -7,12 +7,14 @@ import toast from 'react-hot-toast';
 const Modal = dynamic(() => import('./Modal'), { ssr: false });
 
 export default function OnboardingModal() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const dismissed = localStorage.getItem('onboardingDismissed');
-    if (!dismissed) setOpen(true);
-  }, []);
+  const [open, setOpen] = useState(() => {
+    try {
+      const dismissed = typeof window !== 'undefined' ? localStorage.getItem('onboardingDismissed') : null;
+      return !dismissed;
+    } catch (e) {
+      return false;
+    }
+  });
 
   async function loadDemoData() {
     try {

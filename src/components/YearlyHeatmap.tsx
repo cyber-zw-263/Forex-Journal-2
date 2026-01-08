@@ -14,7 +14,7 @@ export default function YearlyHeatmap({ trades, onSelectRange }: { trades: Trade
       map[d.toISOString().slice(0, 10)] = 0;
     }
 
-    function safeDateKey(value: any): string | null {
+    function safeDateKey(value: unknown): string | null {
       if (!value) return null;
       // Try to parse common formats and timestamps
       const parsed = typeof value === 'number' ? new Date(value) : new Date(String(value));
@@ -23,7 +23,7 @@ export default function YearlyHeatmap({ trades, onSelectRange }: { trades: Trade
     }
 
     trades.forEach(t => {
-      const key = safeDateKey((t as any).entryTime);
+      const key = safeDateKey(t.entryTime);
       if (!key) return; // skip invalid dates
       // only include within the last 365 days (map already initialized for those keys)
       if (typeof map[key] === 'undefined') {

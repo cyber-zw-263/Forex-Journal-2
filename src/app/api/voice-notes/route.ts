@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const tradeId = searchParams.get('tradeId');
 
-    const where: any = { userId };
+    const where: Record<string, unknown> = { userId };
     if (tradeId) where.tradeId = tradeId;
 
     const voiceNotes = await prisma.voiceNote.findMany({

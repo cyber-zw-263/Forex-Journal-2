@@ -3,7 +3,20 @@ import { prisma } from '@/lib/prisma';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-function loadDemoTrades() {
+interface DemoTrade {
+  id: string;
+  userId?: string;
+  pair: string;
+  direction: string;
+  entryPrice: number;
+  exitPrice?: number | null;
+  profitLoss?: number;
+  outcome?: string;
+  entryTime: string | Date;
+  [key: string]: unknown;
+}
+
+function loadDemoTrades(): DemoTrade[] {
   const possible = [
     path.join(process.cwd(), 'data', 'demo-trades.json'),
     path.join(process.cwd(), 'src', 'data', 'demo-trades.json'),
@@ -29,18 +42,19 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
 
-    const where: any = { userId };
+    const where: Record<string, unknown> = { userId };
     if (startDate || endDate) {
-      where.entryTime = {};
-      if (startDate) where.entryTime.gte = new Date(startDate);
-      if (endDate) where.entryTime.lte = new Date(endDate);
+      const dateRange: Record<string, Date> = {};
+      if (startDate) dateRange.gte = new Date(startDate);
+      if (endDate) dateRange.lte = new Date(endDate);
+      where.entryTime = dateRange;
     }
 
-    let trades: any[] = [];
+    let trades: DemoTrade[] = [];
 
     if (!prisma) {
       console.warn('Prisma not available in export route; falling back to demo data');
-      trades = loadDemoTrades().filter((t: any) => t.userId === userId || !t.userId);
+      trades = loadDemoTrades().filter((t: DemoTrade) => t.userId === userId || !t.userId);
     } else {
       trades = await prisma.trade.findMany({
         where,
@@ -87,16 +101,16 @@ export async function GET(request: NextRequest) {
       ];
 
       const csvRows = trades.map((trade) => {
-        const t: any = trade;
+        const t = trade as Record<string, unknown>;
         return [
-          t.entryTime.toISOString().split('T')[0],
-          t.pair,
-          t.direction,
-          t.entryPrice,
+          (t.entryTime instanceof Date ? t.entryTime.toISOString() : String(t.entryTime)).split('T')[0],
+          t.pair || '',
+          t.direction || '',
+          t.entryPrice || '',
           t.exitPrice || '',
           t.stopLoss || '',
           t.takeProfit || '',
-          t.volume,
+          t.volume || '',
           t.outcome || 'OPEN',
           t.profitLoss || '',
           t.profitLossPercent || '',
@@ -107,7 +121,7 @@ export async function GET(request: NextRequest) {
           t.strategy || '',
           t.emotionalState || '',
           t.setupQuality || '',
-          (t.notes || '').replace(/"/g, '""'),
+          (String(t.notes) || '').replace(/"/g, '""'),
         ];
       });
 

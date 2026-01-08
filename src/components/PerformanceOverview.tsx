@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FiTrendingUp, FiTrendingDown, FiActivity, FiTarget } from 'react-icons/fi';
 
 interface Trade {
@@ -14,6 +14,40 @@ interface Trade {
 interface PerformanceOverviewProps {
   trades: Trade[];
 }
+
+interface StatCardProps {
+  icon: React.ElementType;
+  label: string;
+  value: string | number;
+  unit?: string;
+  isPositive?: boolean;
+}
+
+const StatCard = ({ icon: Icon, label, value, unit = '', isPositive = true }: StatCardProps) => (
+  <div style={{
+    backgroundColor: 'var(--card-bg)',
+    border: '1px solid var(--card-border)',
+    borderRadius: 'var(--radius-md)',
+    padding: '12px 14px',
+    minWidth: '160px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '12px',
+  }}>
+    <div>
+      <p style={{fontSize: '11px', fontWeight: 700, color: 'var(--neutral-color)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px'}}>
+        {label}
+      </p>
+      <p style={{fontSize: '18px', fontWeight: 800, margin: 0, color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
+        {value} {unit}
+      </p>
+    </div>
+    <div style={{padding: '8px', borderRadius: '8px', background: isPositive ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
+      <Icon style={{width: '18px', height: '18px'}} />
+    </div>
+  </div>
+);
 
 export default function PerformanceOverview({ trades }: PerformanceOverviewProps) {
   const stats = useMemo(() => {
@@ -57,37 +91,6 @@ export default function PerformanceOverview({ trades }: PerformanceOverviewProps
     };
   }, [trades]);
 
-  const StatCard = ({
-    icon: Icon,
-    label,
-    value,
-    unit = '',
-    isPositive = true,
-  }: any) => (
-    <div style={{
-      backgroundColor: 'var(--card-bg)',
-      border: '1px solid var(--card-border)',
-      borderRadius: 'var(--radius-md)',
-      padding: '12px 14px',
-      minWidth: '160px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: '12px',
-    }}>
-      <div>
-        <p style={{fontSize: '11px', fontWeight: 700, color: 'var(--neutral-color)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px'}}>
-          {label}
-        </p>
-        <p style={{fontSize: '18px', fontWeight: 800, margin: 0, color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
-          {value} {unit}
-        </p>
-      </div>
-      <div style={{padding: '8px', borderRadius: '8px', background: isPositive ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', color: isPositive ? 'var(--win-color)' : 'var(--loss-color)'}}>
-        <Icon style={{width: '18px', height: '18px'}} />
-      </div>
-    </div>
-  );
 
   return (
     <>
