@@ -301,21 +301,63 @@ function VoiceRecorder({ onRecordingSaved }) {
                 audioChunks.current.push(event.data);
             };
             mediaRecorder.current.onstop = ()=>{
-                const audioBlob = new Blob(audioChunks.current, {
-                    type: 'audio/webm'
-                });
-                const url = URL.createObjectURL(audioBlob);
-                const recording = {
-                    id: Date.now().toString(),
-                    url,
-                    duration: recordingTime,
-                    timestamp: new Date()
-                };
-                setRecordings((prev)=>[
-                        recording,
-                        ...prev
-                    ]);
-                onRecordingSaved?.(url);
+                (async ()=>{
+                    const audioBlob = new Blob(audioChunks.current, {
+                        type: 'audio/webm'
+                    });
+                    const url = URL.createObjectURL(audioBlob);
+                    const recording = {
+                        id: Date.now().toString(),
+                        url,
+                        duration: recordingTime,
+                        timestamp: new Date(),
+                        uploaded: false
+                    };
+                    // Optimistically add local recording
+                    setRecordings((prev)=>[
+                            recording,
+                            ...prev
+                        ]);
+                    onRecordingSaved?.(url);
+                    // Try uploading to server
+                    try {
+                        const fd = new FormData();
+                        fd.append('file', audioBlob, `voice-${Date.now()}.webm`);
+                        const res = await fetch('/api/voice-notes', {
+                            method: 'POST',
+                            body: fd,
+                            headers: {
+                                'x-user-id': 'demo-user'
+                            }
+                        });
+                        if (res.ok) {
+                            const data = await res.json();
+                            // If API returns stored URL, replace local URL
+                            if (data?.url) {
+                                setRecordings((prev)=>prev.map((r)=>r.id === recording.id ? {
+                                            ...r,
+                                            url: data.url,
+                                            uploaded: true
+                                        } : r));
+                            } else {
+                                setRecordings((prev)=>prev.map((r)=>r.id === recording.id ? {
+                                            ...r,
+                                            uploaded: true
+                                        } : r));
+                            }
+                            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].success('Voice note uploaded');
+                        } else {
+                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])('Saved locally (upload failed)', {
+                                icon: '⚠️'
+                            });
+                        }
+                    } catch (err) {
+                        console.error('Voice upload failed', err);
+                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])('Saved locally (upload failed)', {
+                            icon: '⚠️'
+                        });
+                    }
+                })();
             };
             mediaRecorder.current.start();
             setIsRecording(true);
@@ -351,58 +393,65 @@ function VoiceRecorder({ onRecordingSaved }) {
                         children: "Voice Notes"
                     }, void 0, false, {
                         fileName: "[project]/src/components/VoiceRecorder.tsx",
-                        lineNumber: 88,
+                        lineNumber: 125,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-4 mb-4",
+                        className: "flex items-center gap-4 mb-4 flex-wrap",
                         children: !isRecording ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: startRecording,
                             className: "flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors",
+                            "aria-label": "Start recording voice note",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiMic"], {
                                     className: "w-5 h-5"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                    lineNumber: 97,
+                                    lineNumber: 135,
                                     columnNumber: 15
                                 }, this),
                                 "Start Recording"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                            lineNumber: 93,
+                            lineNumber: 130,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: stopRecording,
                                     className: "flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors",
+                                    "aria-label": "Stop recording",
+                                    "aria-live": "polite",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiStopCircle"], {
                                             className: "w-5 h-5"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                            lineNumber: 106,
+                                            lineNumber: 146,
                                             columnNumber: 17
                                         }, this),
                                         "Stop"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                    lineNumber: 102,
+                                    lineNumber: 140,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-lg font-bold text-red-600 dark:text-red-400",
-                                    children: formatTime(recordingTime)
-                                }, void 0, false, {
+                                    "aria-live": "polite",
+                                    children: [
+                                        "Recording: ",
+                                        formatTime(recordingTime)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                    lineNumber: 109,
+                                    lineNumber: 149,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex-1 h-1 bg-red-300 dark:bg-red-900 rounded-full relative overflow-hidden",
+                                    className: "flex-1 h-1 bg-red-300 dark:bg-red-900 rounded-full relative overflow-hidden min-w-[100px]",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "h-full bg-red-600 animate-pulse",
                                         style: {
@@ -410,19 +459,19 @@ function VoiceRecorder({ onRecordingSaved }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                        lineNumber: 113,
+                                        lineNumber: 153,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                    lineNumber: 112,
+                                    lineNumber: 152,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true)
                     }, void 0, false, {
                         fileName: "[project]/src/components/VoiceRecorder.tsx",
-                        lineNumber: 91,
+                        lineNumber: 128,
                         columnNumber: 9
                     }, this),
                     recordings.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -430,10 +479,14 @@ function VoiceRecorder({ onRecordingSaved }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                                 className: "text-sm font-semibold text-gray-700 dark:text-gray-300",
-                                children: "Recordings"
-                            }, void 0, false, {
+                                children: [
+                                    "Recordings (",
+                                    recordings.length,
+                                    ")"
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                lineNumber: 122,
+                                lineNumber: 162,
                                 columnNumber: 13
                             }, this),
                             recordings.map((recording)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -445,16 +498,17 @@ function VoiceRecorder({ onRecordingSaved }) {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: ()=>setPlayingId(playingId === recording.id ? null : recording.id),
                                                     className: "p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors",
+                                                    "aria-label": playingId === recording.id ? 'Pause recording' : 'Play recording',
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiPlay"], {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                        lineNumber: 133,
+                                                        lineNumber: 174,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                    lineNumber: 129,
+                                                    lineNumber: 169,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -465,60 +519,80 @@ function VoiceRecorder({ onRecordingSaved }) {
                                                             children: recording.timestamp.toLocaleTimeString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                            lineNumber: 136,
+                                                            lineNumber: 177,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             className: "text-xs text-gray-500 dark:text-gray-400",
-                                                            children: formatTime(recording.duration)
-                                                        }, void 0, false, {
+                                                            children: [
+                                                                "Duration: ",
+                                                                formatTime(recording.duration),
+                                                                recording.uploaded && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: "ml-2",
+                                                                    children: "✓ Uploaded"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/VoiceRecorder.tsx",
+                                                                    lineNumber: 182,
+                                                                    columnNumber: 46
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
                                                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                            lineNumber: 139,
+                                                            lineNumber: 180,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 176,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                            lineNumber: 128,
+                                            lineNumber: 168,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             onClick: ()=>deleteRecording(recording.id),
                                             className: "p-2 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors",
+                                            "aria-label": `Delete recording from ${recording.timestamp.toLocaleTimeString()}`,
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTrash2"], {
                                                 className: "w-4 h-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                                lineNumber: 148,
+                                                lineNumber: 191,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                            lineNumber: 144,
+                                            lineNumber: 186,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, recording.id, true, {
                                     fileName: "[project]/src/components/VoiceRecorder.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 164,
                                     columnNumber: 15
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/VoiceRecorder.tsx",
-                        lineNumber: 121,
+                        lineNumber: 161,
+                        columnNumber: 11
+                    }, this),
+                    recordings.length === 0 && !isRecording && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-sm text-gray-600 dark:text-gray-400 text-center py-6",
+                        children: "No recordings yet. Start recording to add voice notes to your trades."
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/VoiceRecorder.tsx",
+                        lineNumber: 199,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/VoiceRecorder.tsx",
-                lineNumber: 87,
+                lineNumber: 124,
                 columnNumber: 7
             }, this),
             playingId && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
@@ -528,13 +602,13 @@ function VoiceRecorder({ onRecordingSaved }) {
                 className: "w-full"
             }, playingId, false, {
                 fileName: "[project]/src/components/VoiceRecorder.tsx",
-                lineNumber: 158,
+                lineNumber: 207,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/VoiceRecorder.tsx",
-        lineNumber: 85,
+        lineNumber: 122,
         columnNumber: 5
     }, this);
 }
@@ -632,15 +706,16 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                     lineNumber: 77,
                     columnNumber: 9
                 }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                     onClick: ()=>fileInputRef.current?.click(),
-                    className: "border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors",
+                    className: "w-full border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors",
+                    "aria-label": "Upload screenshot by clicking or dragging files",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiUpload"], {
                             className: "w-8 h-8 mx-auto mb-2 text-gray-600 dark:text-gray-400"
                         }, void 0, false, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 84,
+                            lineNumber: 85,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -648,7 +723,7 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                             children: "Click to upload or drag & drop"
                         }, void 0, false, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 85,
+                            lineNumber: 86,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -656,7 +731,7 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                             children: "PNG, JPG, GIF up to 10MB"
                         }, void 0, false, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 86,
+                            lineNumber: 87,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -665,10 +740,11 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                             multiple: true,
                             accept: "image/*",
                             onChange: handleFileSelect,
-                            className: "hidden"
+                            className: "hidden",
+                            "aria-label": "File input for screenshots"
                         }, void 0, false, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 87,
+                            lineNumber: 88,
                             columnNumber: 11
                         }, this)
                     ]
@@ -682,10 +758,14 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                             className: "text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4",
-                            children: "Uploads"
-                        }, void 0, false, {
+                            children: [
+                                "Uploads (",
+                                screenshots.length,
+                                ")"
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 100,
+                            lineNumber: 102,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -699,7 +779,7 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                                             className: "w-full h-40 object-cover"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                            lineNumber: 108,
+                                            lineNumber: 110,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -713,12 +793,12 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                        lineNumber: 121,
+                                                        lineNumber: 123,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                    lineNumber: 116,
+                                                    lineNumber: 118,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -729,18 +809,18 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                        lineNumber: 128,
+                                                        lineNumber: 130,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                    lineNumber: 123,
+                                                    lineNumber: 125,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                            lineNumber: 115,
+                                            lineNumber: 117,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -760,7 +840,7 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                                                 className: "w-full px-2 py-1 border border-gray-300 dark:border-slate-600 rounded bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 outline-none"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                lineNumber: 135,
+                                                lineNumber: 137,
                                                 columnNumber: 23
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 onClick: ()=>{
@@ -771,29 +851,29 @@ function ScreenshotUploader({ onScreenshotAdded }) {
                                                 children: screenshot.caption || 'Click to add caption...'
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                                lineNumber: 150,
+                                                lineNumber: 152,
                                                 columnNumber: 23
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                            lineNumber: 133,
+                                            lineNumber: 135,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, screenshot.id, true, {
                                     fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                                    lineNumber: 103,
+                                    lineNumber: 105,
                                     columnNumber: 17
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                            lineNumber: 101,
+                            lineNumber: 103,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ScreenshotUploader.tsx",
-                    lineNumber: 99,
+                    lineNumber: 101,
                     columnNumber: 11
                 }, this)
             ]
@@ -900,7 +980,9 @@ var _s = __turbopack_context__.k.signature();
 function TradeReviewPage() {
     _s();
     const { theme, toggleTheme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
-    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [mounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "TradeReviewPage.useState": ()=>("TURBOPACK compile-time value", "object") !== 'undefined'
+    }["TradeReviewPage.useState"]);
     const [selectedTradeId, setSelectedTradeId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [trades, setTrades] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [reviewData, setReviewData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -910,11 +992,6 @@ function TradeReviewPage() {
         setupQuality: 3
     });
     const [currentMistake, setCurrentMistake] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "TradeReviewPage.useEffect": ()=>{
-            setMounted(true);
-        }
-    }["TradeReviewPage.useEffect"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "TradeReviewPage.useEffect": ()=>{
             if (!mounted) return;
@@ -1004,7 +1081,7 @@ function TradeReviewPage() {
             className: "min-h-screen bg-white dark:bg-slate-950"
         }, void 0, false, {
             fileName: "[project]/src/app/review/page.tsx",
-            lineNumber: 115,
+            lineNumber: 111,
             columnNumber: 12
         }, this);
     }
@@ -1016,7 +1093,7 @@ function TradeReviewPage() {
                 currentTheme: theme
             }, void 0, false, {
                 fileName: "[project]/src/app/review/page.tsx",
-                lineNumber: 120,
+                lineNumber: 116,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -1030,7 +1107,7 @@ function TradeReviewPage() {
                                 children: "Trade Reviews"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 124,
+                                lineNumber: 120,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1038,13 +1115,13 @@ function TradeReviewPage() {
                                 children: "Deep dive into your trades and learn from them"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 125,
+                                lineNumber: 121,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/review/page.tsx",
-                        lineNumber: 123,
+                        lineNumber: 119,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1058,7 +1135,7 @@ function TradeReviewPage() {
                                         children: "Recent Trades"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/review/page.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 127,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1080,7 +1157,7 @@ function TradeReviewPage() {
                                                         children: trade.pair
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 152,
+                                                        lineNumber: 148,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1088,31 +1165,31 @@ function TradeReviewPage() {
                                                         children: new Date(trade.entryTime).toLocaleDateString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 153,
+                                                        lineNumber: 149,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, trade.id, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 135,
+                                                lineNumber: 131,
                                                 columnNumber: 19
                                             }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "text-sm text-gray-500 dark:text-gray-400 text-center py-4",
                                             children: "No trades yet"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 159,
+                                            lineNumber: 155,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/review/page.tsx",
-                                        lineNumber: 132,
+                                        lineNumber: 128,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 130,
+                                lineNumber: 126,
                                 columnNumber: 11
                             }, this),
                             selectedTrade ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1130,7 +1207,7 @@ function TradeReviewPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 171,
+                                                lineNumber: 167,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1143,7 +1220,7 @@ function TradeReviewPage() {
                                                                 children: "Entry"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 176,
+                                                                lineNumber: 172,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1151,13 +1228,13 @@ function TradeReviewPage() {
                                                                 children: selectedTrade.entryPrice.toFixed(5)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 177,
+                                                                lineNumber: 173,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 175,
+                                                        lineNumber: 171,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1167,7 +1244,7 @@ function TradeReviewPage() {
                                                                 children: "Exit"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 182,
+                                                                lineNumber: 178,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1175,13 +1252,13 @@ function TradeReviewPage() {
                                                                 children: selectedTrade.exitPrice?.toFixed(5) || 'Open'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 183,
+                                                                lineNumber: 179,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 181,
+                                                        lineNumber: 177,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1191,7 +1268,7 @@ function TradeReviewPage() {
                                                                 children: "P&L"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 188,
+                                                                lineNumber: 184,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1199,13 +1276,13 @@ function TradeReviewPage() {
                                                                 children: selectedTrade.profitLoss?.toFixed(2) || 'N/A'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 189,
+                                                                lineNumber: 185,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 187,
+                                                        lineNumber: 183,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1215,7 +1292,7 @@ function TradeReviewPage() {
                                                                 children: "Outcome"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 194,
+                                                                lineNumber: 190,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1223,25 +1300,25 @@ function TradeReviewPage() {
                                                                 children: selectedTrade.outcome || 'Open'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 195,
+                                                                lineNumber: 191,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 193,
+                                                        lineNumber: 189,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 170,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/review/page.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 166,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1252,7 +1329,7 @@ function TradeReviewPage() {
                                                 children: "Review Details"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 204,
+                                                lineNumber: 200,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1263,7 +1340,7 @@ function TradeReviewPage() {
                                                         children: "What I Learned"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 208,
+                                                        lineNumber: 204,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1276,13 +1353,13 @@ function TradeReviewPage() {
                                                         className: "w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 211,
+                                                        lineNumber: 207,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 207,
+                                                lineNumber: 203,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1293,7 +1370,7 @@ function TradeReviewPage() {
                                                         children: "Emotional State"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 223,
+                                                        lineNumber: 219,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1308,47 +1385,47 @@ function TradeReviewPage() {
                                                                 children: "calm"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 233,
+                                                                lineNumber: 229,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 children: "rushed"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 234,
+                                                                lineNumber: 230,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 children: "frustrated"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 235,
+                                                                lineNumber: 231,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 children: "confident"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 236,
+                                                                lineNumber: 232,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 children: "fearful"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 237,
+                                                                lineNumber: 233,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 226,
+                                                        lineNumber: 222,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 222,
+                                                lineNumber: 218,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1359,7 +1436,7 @@ function TradeReviewPage() {
                                                         children: "Setup Quality Rating"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 243,
+                                                        lineNumber: 239,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1375,7 +1452,7 @@ function TradeReviewPage() {
                                                                 children: "⭐ Poor"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 253,
+                                                                lineNumber: 249,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1383,7 +1460,7 @@ function TradeReviewPage() {
                                                                 children: "⭐⭐ Below Average"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 254,
+                                                                lineNumber: 250,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1391,7 +1468,7 @@ function TradeReviewPage() {
                                                                 children: "⭐⭐⭐ Average"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 255,
+                                                                lineNumber: 251,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1399,7 +1476,7 @@ function TradeReviewPage() {
                                                                 children: "⭐⭐⭐⭐ Good"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 256,
+                                                                lineNumber: 252,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1407,19 +1484,19 @@ function TradeReviewPage() {
                                                                 children: "⭐⭐⭐⭐⭐ Excellent"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 257,
+                                                                lineNumber: 253,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 246,
+                                                        lineNumber: 242,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 242,
+                                                lineNumber: 238,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1429,7 +1506,7 @@ function TradeReviewPage() {
                                                         children: "Mistakes Made"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 263,
+                                                        lineNumber: 259,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1444,7 +1521,7 @@ function TradeReviewPage() {
                                                                         className: "w-4 h-4 rounded border-gray-300 dark:border-slate-600"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                                        lineNumber: 269,
+                                                                        lineNumber: 265,
                                                                         columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1452,30 +1529,30 @@ function TradeReviewPage() {
                                                                         children: mistake
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                                        lineNumber: 275,
+                                                                        lineNumber: 271,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, mistake, true, {
                                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 268,
+                                                                lineNumber: 264,
                                                                 columnNumber: 23
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 266,
+                                                        lineNumber: 262,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 262,
+                                                lineNumber: 258,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/review/page.tsx",
-                                        lineNumber: 203,
+                                        lineNumber: 199,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1484,13 +1561,13 @@ function TradeReviewPage() {
                                         children: "Save Review"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/review/page.tsx",
-                                        lineNumber: 282,
+                                        lineNumber: 278,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 168,
+                                lineNumber: 164,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 className: "lg:col-span-2 bg-white dark:bg-slate-800 p-12 text-center border border-gray-200 dark:border-slate-700",
@@ -1499,18 +1576,18 @@ function TradeReviewPage() {
                                     children: "Select a trade to review"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 291,
+                                    lineNumber: 287,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 290,
+                                lineNumber: 286,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/review/page.tsx",
-                        lineNumber: 128,
+                        lineNumber: 124,
                         columnNumber: 9
                     }, this),
                     selectedTrade && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1520,53 +1597,53 @@ function TradeReviewPage() {
                                 className: "p-6",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$VoiceRecorder$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                     fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 299,
+                                    lineNumber: 295,
                                     columnNumber: 43
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 299,
+                                lineNumber: 295,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 className: "p-6",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ScreenshotUploader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                     fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 300,
+                                    lineNumber: 296,
                                     columnNumber: 43
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 300,
+                                lineNumber: 296,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/review/page.tsx",
-                        lineNumber: 298,
+                        lineNumber: 294,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/review/page.tsx",
-                lineNumber: 122,
+                lineNumber: 118,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {
                 position: "bottom-right"
             }, void 0, false, {
                 fileName: "[project]/src/app/review/page.tsx",
-                lineNumber: 305,
+                lineNumber: 301,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/review/page.tsx",
-        lineNumber: 119,
+        lineNumber: 115,
         columnNumber: 5
     }, this);
 }
-_s(TradeReviewPage, "M0WkrD+updbxpK1EtUEm95RGUIE=", false, function() {
+_s(TradeReviewPage, "mHYAGh4e7bI7/xmAPr9e0Wo2b8k=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];

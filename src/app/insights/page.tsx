@@ -33,12 +33,16 @@ export default function InsightsPage() {
   const [mounted, setMounted] = useState(() => typeof window !== 'undefined');
   const [trades, setTrades] = useState<Trade[]>([]);
   const [insights, setInsights] = useState<Insight[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!mounted) return;
 
     const fetchTrades = async () => {
       try {
+        setIsLoading(true);
+        setError(null);
         const response = await fetch('/api/trades', {
           headers: {
             'x-user-id': 'demo-user',
@@ -49,6 +53,7 @@ export default function InsightsPage() {
           let errBody: unknown = null;
           try { errBody = await response.json(); } catch (e) { errBody = await response.text(); }
           console.error('Failed to fetch trades:', response.status, errBody);
+          setError('Failed to load trades data');
           setTrades([]);
           return;
         }
@@ -56,6 +61,7 @@ export default function InsightsPage() {
         const data = await response.json();
         if (!Array.isArray(data)) {
           console.warn('Unexpected trades payload in insights page', data);
+          setError('Invalid trades data format');
           setTrades([]);
           return;
         }
@@ -63,6 +69,9 @@ export default function InsightsPage() {
         setTrades(data);
       } catch (error) {
         console.error('Error fetching trades:', error);
+        setError('An error occurred while loading trades');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -190,90 +199,195 @@ export default function InsightsPage() {
   }, [trades]);
 
   if (!mounted) {
-    return <div className="min-h-screen bg-white dark:bg-slate-950" />;
+    return <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }} />;
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
-      <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
-
-      <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">AI-Powered Insights</h1>
-          <p className="text-gray-600 dark:text-gray-400">Get personalized trading improvements based on your data</p>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
+      <main style={{ maxWidth: '1000px', margin: '0 auto', padding: '32px 16px' }}>
+        {/* Header */}
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>
+            AI-Powered Insights
+          </h1>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+            Get personalized trading improvements based on your data
+          </p>
         </div>
 
-        {insights.length > 0 ? (
-          <div className="space-y-4">
-            {insights.map((insight, idx) => {
-              const Icon = insight.icon;
-              const bgColor = insight.type === 'warning'
-                ? 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-700'
-                : insight.type === 'strength'
-                ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700'
-                : insight.type === 'improvement'
-                ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700'
-                : 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-700';
+        {/* Error State */}
+        {error && (
+          <div
+            style={{
+              marginBottom: '24px',
+              padding: '16px',
+              backgroundColor: 'rgba(220, 38, 38, 0.1)',
+              border: '1px solid rgba(220, 38, 38, 0.3)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              color: 'var(--loss-color)',
+            }}
+            role="alert"
+          >
+            <FiAlertCircle size={20} />
+            <span style={{ fontSize: '14px' }}>{error}</span>
+          </div>
+        )}
 
-              return (
-                <AnimatedCard key={idx} className={`${bgColor} border p-6`}>
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg ${insight.color} bg-white dark:bg-slate-800`}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+        {/* Loading State */}
+        {isLoading ? (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--text-secondary)' }}>
+            <div style={{ fontSize: '14px', marginBottom: '16px' }}>Analyzing your trading data...</div>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              border: '2px solid var(--purple-base)',
+              borderTop: '2px solid transparent',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              margin: '0 auto',
+            }} />
+          </div>
+        ) : insights.length > 0 ? (
+          <>
+            {/* Insights Grid */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '16px',
+              marginBottom: '32px',
+            }}>
+              {insights.map((insight, idx) => {
+                const Icon = insight.icon;
+                const getBgColor = () => {
+                  switch(insight.type) {
+                    case 'warning':
+                      return { bg: 'rgba(217, 119, 6, 0.1)', border: 'rgba(217, 119, 6, 0.3)' };
+                    case 'strength':
+                      return { bg: 'rgba(34, 197, 94, 0.1)', border: 'rgba(34, 197, 94, 0.3)' };
+                    case 'improvement':
+                      return { bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)' };
+                    default:
+                      return { bg: 'rgba(139, 92, 246, 0.1)', border: 'rgba(139, 92, 246, 0.3)' };
+                  }
+                };
+
+                const colors = getBgColor();
+                const getIconColor = () => {
+                  switch(insight.type) {
+                    case 'warning': return '#d97706';
+                    case 'strength': return '#22c55e';
+                    case 'improvement': return '#3b82f6';
+                    default: return '#a855f7';
+                  }
+                };
+
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      backgroundColor: colors.bg,
+                      border: `1px solid ${colors.border}`,
+                      borderRadius: '12px',
+                      padding: '20px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '12px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <div style={{
+                        backgroundColor: 'var(--card-bg)',
+                        padding: '8px',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}>
+                        <Icon size={20} style={{ color: getIconColor() }} />
+                      </div>
+                      <h3 style={{ fontSize: '15px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                         {insight.title}
                       </h3>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {insight.description}
-                      </p>
                     </div>
+                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                      {insight.description}
+                    </p>
                   </div>
-                </AnimatedCard>
-              );
-            })}
+                );
+              })}
+            </div>
+          </>
+        ) : trades.length === 0 ? (
+          <div style={{
+            textAlign: 'center',
+            padding: '60px 20px',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            color: 'var(--text-secondary)',
+          }}>
+            <p style={{ fontSize: '16px', marginBottom: '8px', margin: 0 }}>No trades available</p>
+            <p style={{ fontSize: '13px', margin: 0 }}>Add some trades to your journal to get AI-powered insights</p>
           </div>
         ) : (
-          <AnimatedCard className="bg-white dark:bg-slate-800 p-12 text-center border border-gray-200 dark:border-slate-700">
-            <p className="text-gray-600 dark:text-gray-400 mb-2">Add more trades to get AI-powered insights</p>
-            <p className="text-sm text-gray-500 dark:text-gray-500">The more data you have, the better insights we can provide</p>
-          </AnimatedCard>
+          <div style={{
+            textAlign: 'center',
+            padding: '60px 20px',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            color: 'var(--text-secondary)',
+          }}>
+            <p style={{ fontSize: '16px', margin: 0 }}>Not enough data for insights yet</p>
+          </div>
         )}
 
         {/* Weekly Summary */}
-        {trades.length > 0 && (
-          <AnimatedCard className="mt-8 bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">This Week's Summary</h2>
+        {trades.length > 0 && insights.length > 0 && (
+          <div style={{
+            marginTop: '32px',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '12px',
+            padding: '24px',
+          }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '20px', margin: 0 }}>
+              Trading Summary
+            </h2>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Total Trades</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{trades.length}</p>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: '16px',
+            }}>
+              <div style={{ backgroundColor: 'var(--panel-muted)', padding: '16px', borderRadius: '8px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px', margin: 0 }}>Total Trades</p>
+                <p style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', margin: 0 }}>{trades.length}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Win Rate</p>
-                <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+              <div style={{ backgroundColor: 'var(--panel-muted)', padding: '16px', borderRadius: '8px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px', margin: 0 }}>Win Rate</p>
+                <p style={{ fontSize: '24px', fontWeight: '700', color: '#22c55e', margin: 0 }}>
                   {trades.length > 0
-                    ? Math.round(
-                        ((trades.filter(t => t.outcome === 'WIN').length / trades.length) * 100)
-                      )
+                    ? Math.round(((trades.filter(t => t.outcome === 'WIN').length / trades.length) * 100))
                     : 0}%
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Total P&L</p>
-                <p className={`text-2xl font-bold ${
-                  trades.reduce((sum, t) => sum + (t.profitLoss || 0), 0) >= 0
-                    ? 'text-green-600 dark:text-green-400'
-                    : 'text-red-600 dark:text-red-400'
-                }`}>
+              <div style={{ backgroundColor: 'var(--panel-muted)', padding: '16px', borderRadius: '8px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px', margin: 0 }}>Total P&L</p>
+                <p style={{
+                  fontSize: '24px',
+                  fontWeight: '700',
+                  color: trades.reduce((sum, t) => sum + (t.profitLoss || 0), 0) >= 0 ? '#22c55e' : '#ef4444',
+                  margin: 0,
+                }}>
                   {(trades.reduce((sum, t) => sum + (t.profitLoss || 0), 0) || 0).toFixed(2)}
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Avg Quality</p>
-                <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+              <div style={{ backgroundColor: 'var(--panel-muted)', padding: '16px', borderRadius: '8px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px', margin: 0 }}>Avg Quality</p>
+                <p style={{ fontSize: '24px', fontWeight: '700', color: '#fbbf24', margin: 0 }}>
                   {trades.filter(t => t.setupQuality).length > 0
                     ? (
                         trades
@@ -285,7 +399,7 @@ export default function InsightsPage() {
                 </p>
               </div>
             </div>
-          </AnimatedCard>
+          </div>
         )}
       </main>
 

@@ -1,13 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import DashboardHeader from '@/components/DashboardHeader';
 import VoiceRecorder from '@/components/VoiceRecorder';
 import ScreenshotUploader from '@/components/ScreenshotUploader';
 import { useTheme } from '@/context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
-import AnimatedCard from '@/components/AnimatedCard';
 
 export default function TradeReviewPage() {
   const { theme, toggleTheme } = useTheme();
@@ -108,24 +106,24 @@ export default function TradeReviewPage() {
   };
 
   if (!mounted) {
-    return <div className="min-h-screen bg-white dark:bg-slate-950" />;
+    return <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }} />;
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
-      <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
-
-      <main className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Trade Reviews</h1>
-          <p className="text-gray-600 dark:text-gray-400">Deep dive into your trades and learn from them</p>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
+            Trade Reviews
+          </h1>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>Deep dive into your trades and learn from them</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           {/* Trades List */}
-          <AnimatedCard className="bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Recent Trades</h2>
-            <div className="space-y-2 max-h-96 overflow-y-auto">
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>Recent Trades</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px', overflowY: 'auto' }}>
               {trades.length > 0 ? (
                 trades.map(trade => (
                   <button
@@ -139,69 +137,64 @@ export default function TradeReviewPage() {
                         setupQuality: trade.setupQuality || 3,
                       });
                     }}
-                    className={`w-full text-left p-3 rounded-lg transition-colors ${
-                      selectedTradeId === trade.id
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-600'
-                    }`}
-                  >
-                    <div className="font-semibold text-sm">{trade.pair}</div>
-                    <div className="text-xs opacity-75">
-                      {new Date(trade.entryTime).toLocaleDateString()}
-                    </div>
-                  </button>
-                ))
-              ) : (
-                <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
-                  No trades yet
-                </p>
-              )}
-            </div>
-            </AnimatedCard>
+                    style={{
+                      width: '100%',
+                      textAlign: 'left',
+                      padding: '12px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      backgroundColor: selectedTradeId === trade.id ? 'var(--purple-base)' : 'var(--panel-muted)',
+                      color: selectedTradeId === trade.id ? 'white' : 'var(--text-primary)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      fontSize: '13px',
+                    }}
+                    onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+                    <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
 
           {/* Review Form */}
           {selectedTrade ? (
-            <div className="lg:col-span-2 space-y-6">
+            <div style={{ gridColumn: 'auto / span 2', display: 'flex', flexDirection: 'column', gap: '24px' }}>
               {/* Trade Summary */}
-              <AnimatedCard className="bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700">
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+                <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>
                   {selectedTrade.pair} - {selectedTrade.direction}
                 </h2>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', fontSize: '13px' }}>
                   <div>
-                    <p className="text-gray-600 dark:text-gray-400">Entry</p>
-                    <p className="font-semibold text-gray-900 dark:text-white">
+                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Entry</p>
+                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                       {selectedTrade.entryPrice.toFixed(5)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600 dark:text-gray-400">Exit</p>
-                    <p className="font-semibold text-gray-900 dark:text-white">
+                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Exit</p>
+                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                       {selectedTrade.exitPrice?.toFixed(5) || 'Open'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600 dark:text-gray-400">P&L</p>
-                    <p className={`font-semibold ${selectedTrade.profitLoss >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>P&L</p>
+                    <p style={{ fontWeight: '600', color: selectedTrade.profitLoss >= 0 ? 'var(--win-color)' : 'var(--loss-color)', margin: 0 }}>
                       {selectedTrade.profitLoss?.toFixed(2) || 'N/A'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600 dark:text-gray-400">Outcome</p>
-                    <p className="font-semibold text-gray-900 dark:text-white">
+                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Outcome</p>
+                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                       {selectedTrade.outcome || 'Open'}
                     </p>
                   </div>
                 </div>
-              </AnimatedCard>
+              </div>
 
               {/* Review Fields */}
-              <AnimatedCard className="bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Review Details</h3>
+              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>Review Details</h3>
 
                 {/* What I Learned */}
-                <div className="mb-4">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
                     What I Learned
                   </label>
                   <textarea
@@ -210,13 +203,27 @@ export default function TradeReviewPage() {
                       setReviewData(prev => ({ ...prev, whatLearned: e.target.value }))
                     }
                     placeholder="What did this trade teach you?"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none h-20"
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      border: '1px solid var(--card-border)',
+                      borderRadius: '6px',
+                      backgroundColor: 'var(--panel-muted)',
+                      color: 'var(--text-primary)',
+                      fontSize: '13px',
+                      outline: 'none',
+                      resize: 'vertical',
+                      minHeight: '80px',
+                      fontFamily: 'inherit',
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
                   />
                 </div>
 
                 {/* Emotional State */}
-                <div className="mb-4">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
                     Emotional State
                   </label>
                   <select
@@ -224,7 +231,18 @@ export default function TradeReviewPage() {
                     onChange={(e) =>
                       setReviewData(prev => ({ ...prev, emotionalState: e.target.value }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      border: '1px solid var(--card-border)',
+                      borderRadius: '6px',
+                      backgroundColor: 'var(--panel-muted)',
+                      color: 'var(--text-primary)',
+                      fontSize: '13px',
+                      outline: 'none',
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
                   >
                     <option>calm</option>
                     <option>rushed</option>
@@ -235,8 +253,8 @@ export default function TradeReviewPage() {
                 </div>
 
                 {/* Setup Quality */}
-                <div className="mb-4">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
                     Setup Quality Rating
                   </label>
                   <select
@@ -244,7 +262,18 @@ export default function TradeReviewPage() {
                     onChange={(e) =>
                       setReviewData(prev => ({ ...prev, setupQuality: parseInt(e.target.value) }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      border: '1px solid var(--card-border)',
+                      borderRadius: '6px',
+                      backgroundColor: 'var(--panel-muted)',
+                      color: 'var(--text-primary)',
+                      fontSize: '13px',
+                      outline: 'none',
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
                   >
                     <option value="1">⭐ Poor</option>
                     <option value="2">⭐⭐ Below Average</option>
@@ -256,44 +285,74 @@ export default function TradeReviewPage() {
 
                 {/* Mistakes */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px' }}>
                     Mistakes Made
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
                     {mistakeOptions.map(mistake => (
-                      <label key={mistake} className="flex items-center gap-2 cursor-pointer">
+                      <label key={mistake} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                         <input
                           type="checkbox"
                           checked={reviewData.mistakes.includes(mistake)}
                           onChange={() => toggleMistake(mistake)}
-                          className="w-4 h-4 rounded border-gray-300 dark:border-slate-600"
+                          style={{
+                            width: '16px',
+                            height: '16px',
+                            borderRadius: '4px',
+                            border: '1px solid var(--card-border)',
+                            cursor: 'pointer',
+                            accentColor: 'var(--purple-base)',
+                          }}
                         />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{mistake}</span>
+                        <span style={{ fontSize: '13px', color: 'var(--text-primary)' }}>{mistake}</span>
                       </label>
                     ))}
                   </div>
                 </div>
-              </AnimatedCard>
+              </div>
 
               <button
                 onClick={saveReview}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                  color: 'white',
+                  fontWeight: '600',
+                  fontSize: '14px',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 8px 16px rgba(168, 85, 247, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
                 Save Review
               </button>
             </div>
           ) : (
-            <AnimatedCard className="lg:col-span-2 bg-white dark:bg-slate-800 p-12 text-center border border-gray-200 dark:border-slate-700">
-              <p className="text-gray-600 dark:text-gray-400">Select a trade to review</p>
-            </AnimatedCard>
+            <div style={{ gridColumn: 'auto / span 2', backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '48px 20px', textAlign: 'center' }}>
+              <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '14px' }}>Select a trade to review</p>
+            </div>
           )}
         </div>
 
         {/* Media Uploads */}
         {selectedTrade && (
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <AnimatedCard className="p-6"><VoiceRecorder /></AnimatedCard>
-            <AnimatedCard className="p-6"><ScreenshotUploader /></AnimatedCard>
+          <div style={{ marginTop: '32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <VoiceRecorder />
+            </div>
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <ScreenshotUploader />
+            </div>
           </div>
         )}
       </main>

@@ -1,16 +1,433 @@
-[00:00:01.176] Server  LOG     ✓ Ready in 886ms
-[00:00:09.983] Server  LOG     ○ Compiling / ...
-[00:00:13.151] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+[00:00:01.703] Server  LOG     ✓ Ready in 1112ms
+[00:00:35.725] Server  LOG     ○ Compiling / ...
+[00:00:37.390] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:16.122] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:17.436] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+[00:00:45.371] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:47.086] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
 Invalid `prisma.trade.findMany()` invocation in
-/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__f759096b._.js:128:43
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
 
-  125     const demo = demoAll.filter((t)=>t.userId === userId || !t.userId).slice(0, 100);
-  126     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(demo);
-  127 }
-→ 128 const trades = await prisma.trade.findMany(
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
 Can't reach database server at `localhost:5432`
 
 Please make sure your database server is running at `localhost:5432`.
+[00:00:47.584] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
+
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
+Can't reach database server at `localhost:5432`
+
+Please make sure your database server is running at `localhost:5432`.
+[00:00:48.165] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:00:48.165] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:01:00.026] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /calendar. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:01:01.060] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
+
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
+Can't reach database server at `localhost:5432`
+
+Please make sure your database server is running at `localhost:5432`.
+[00:01:01.535] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
+
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
+Can't reach database server at `localhost:5432`
+
+Please make sure your database server is running at `localhost:5432`.
+[00:01:01.561] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:01:01.989] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:01:07.217] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /planning. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:01:11.997] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /insights. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:01:12.958] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
+
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
+Can't reach database server at `localhost:5432`
+
+Please make sure your database server is running at `localhost:5432`.
+[00:01:13.453] Server  ERROR   Error fetching trades: PrismaClientInitializationError: 
+Invalid `prisma.trade.findMany()` invocation in
+/workspaces/Forex-Journal-2/.next/dev/server/chunks/[root-of-the-server]__8cd1a7f8._.js:294:26
+
+  291     });
+  292 }
+  293 const [trades, total] = await Promise.all([
+→ 294     prisma.trade.findMany(
+Can't reach database server at `localhost:5432`
+
+Please make sure your database server is running at `localhost:5432`.
+[00:01:13.456] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:01:13.923] Browser ERROR   Failed to fetch trades: 500 {"error":{"code":"SERVER_ERROR","message":"Failed to fetch trades"},"success":false}
+[00:01:14.645] Server  ERROR   ⨯ ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:01:15.312] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:01:16.730] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:01:17.463] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:01:17.870] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:01:17.985] Server  ERROR   ⨯ ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:01:22.320] Browser ERROR   uncaughtError: Error: ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:01:23.155] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:01:23.155] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:06:39.171] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:06:43.182] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:06:57.163] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:07:10.104] Server  LOG     ✓ Compiled in 164ms
+[00:07:10.357] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:07:11.163] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:07:12.386] Server  ERROR   ⨯ ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:07:20.089] Browser ERROR   uncaughtError: Error: ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:07:21.188] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:07:21.188] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:51.158] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:53.144] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:53.745] Server  LOG     ✓ Compiled in 187ms
+[00:08:54.006] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:55.166] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:57.168] Browser ERROR   ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+[00:08:57.990] Server  ERROR   ⨯ ./src/app/review/page.tsx:152:44
+Parsing ecmascript source code failed
+  150 |                       fontSize: '13px',
+  151 |                     }}
+> 152 |                     onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+      |                                            ^
+  153 |                     <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+  154 |
+  155 |           {/* Review Form */}
+
+Expected '</', got 'n'
+
+
+[00:09:04.902] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:04.924] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:04.943] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:04.953] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:11.314] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:11.507] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:11.538] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:11.555] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:11.564] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:16.028] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:17.802] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:20.141] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:21.696] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:21.727] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:21.740] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:21.755] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:39.837] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:45.447] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:45.623] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:45.654] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:45.669] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:45.678] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:48.793] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:51.859] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:52.094] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:52.134] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:52.146] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:52.162] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:54.532] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:09:56.357] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:00.712] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:00.944] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:00.973] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:00.986] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:00.997] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:09.579] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:09.848] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:09.928] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:09.977] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:10.002] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:29.880] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:30.158] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:30.174] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:30.185] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:30.194] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:43.032] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:44.173] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:44.203] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:44.219] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:10:44.232] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:03.305] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:04.208] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:05.327] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:05.359] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:07.037] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:07.062] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:07.328] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:09.375] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:09.745] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:10.084] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:10.107] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:10.118] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:10.131] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:12.991] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:27.288] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:31.084] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:31.382] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:31.405] Server  ERROR   Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:31.415] Server  ERROR   ⨯ "unhandledRejection:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:31.423] Server  ERROR   ⨯ "unhandledRejection: " Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:34.870] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').
+[00:15:49.432] Server  WARN    ⚠ "Failed to reload dynamic routes:" Error: You cannot use different slug names for the same dynamic path ('id' !== 'strategyId').

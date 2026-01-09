@@ -77,9 +77,10 @@ export default function ScreenshotUploader({ onScreenshotAdded }: ScreenshotUplo
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Trade Setup Screenshots</h3>
 
         {/* Upload Area */}
-        <div
+        <button
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+          className="w-full border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+          aria-label="Upload screenshot by clicking or dragging files"
         >
           <FiUpload className="w-8 h-8 mx-auto mb-2 text-gray-600 dark:text-gray-400" />
           <p className="text-sm font-medium text-gray-900 dark:text-white">Click to upload or drag & drop</p>
@@ -91,13 +92,14 @@ export default function ScreenshotUploader({ onScreenshotAdded }: ScreenshotUplo
             accept="image/*"
             onChange={handleFileSelect}
             className="hidden"
+            aria-label="File input for screenshots"
           />
-        </div>
+        </button>
 
         {/* Screenshots Grid */}
         {screenshots.length > 0 && (
           <div className="mt-6">
-            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Uploads</h4>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Uploads ({screenshots.length})</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {screenshots.map(screenshot => (
                 <div

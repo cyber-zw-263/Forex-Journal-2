@@ -28,13 +28,16 @@ const Modal = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2
 _c = Modal;
 function OnboardingModal() {
     _s();
-    const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "OnboardingModal.useEffect": ()=>{
-            const dismissed = localStorage.getItem('onboardingDismissed');
-            if (!dismissed) setOpen(true);
+    const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "OnboardingModal.useState": ()=>{
+            try {
+                const dismissed = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem('onboardingDismissed') : "TURBOPACK unreachable";
+                return !dismissed;
+            } catch (e) {
+                return false;
+            }
         }
-    }["OnboardingModal.useEffect"], []);
+    }["OnboardingModal.useState"]);
     async function loadDemoData() {
         try {
             const res = await fetch('/data/demo-trades.json');
@@ -72,7 +75,7 @@ function OnboardingModal() {
                 children: "This app is a private trading journal. You can load a short demo dataset to explore features like analytics, heatmaps, and exports. No real trades are uploaded."
             }, void 0, false, {
                 fileName: "[project]/src/components/OnboardingModal.tsx",
-                lineNumber: 45,
+                lineNumber: 47,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -85,7 +88,7 @@ function OnboardingModal() {
                         children: "Load demo data"
                     }, void 0, false, {
                         fileName: "[project]/src/components/OnboardingModal.tsx",
-                        lineNumber: 47,
+                        lineNumber: 49,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -95,23 +98,23 @@ function OnboardingModal() {
                         children: "Dismiss"
                     }, void 0, false, {
                         fileName: "[project]/src/components/OnboardingModal.tsx",
-                        lineNumber: 48,
+                        lineNumber: 50,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/OnboardingModal.tsx",
-                lineNumber: 46,
+                lineNumber: 48,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/OnboardingModal.tsx",
-        lineNumber: 44,
+        lineNumber: 46,
         columnNumber: 5
     }, this);
 }
-_s(OnboardingModal, "e27cRtNMdAs0U0o1oHlS6A8OEBo=");
+_s(OnboardingModal, "Z4pm/fj1bzN0ZgPeMOkuspmgw5w=");
 _c1 = OnboardingModal;
 var _c, _c1;
 __turbopack_context__.k.register(_c, "Modal");

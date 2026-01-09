@@ -125,11 +125,12 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Voice Notes</h3>
 
         {/* Recording Interface */}
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-4 mb-4 flex-wrap">
           {!isRecording ? (
             <button
               onClick={startRecording}
               className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+              aria-label="Start recording voice note"
             >
               <FiMic className="w-5 h-5" />
               Start Recording
@@ -139,14 +140,16 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
               <button
                 onClick={stopRecording}
                 className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                aria-label="Stop recording"
+                aria-live="polite"
               >
                 <FiStopCircle className="w-5 h-5" />
                 Stop
               </button>
-              <div className="text-lg font-bold text-red-600 dark:text-red-400">
-                {formatTime(recordingTime)}
+              <div className="text-lg font-bold text-red-600 dark:text-red-400" aria-live="polite">
+                Recording: {formatTime(recordingTime)}
               </div>
-              <div className="flex-1 h-1 bg-red-300 dark:bg-red-900 rounded-full relative overflow-hidden">
+              <div className="flex-1 h-1 bg-red-300 dark:bg-red-900 rounded-full relative overflow-hidden min-w-[100px]">
                 <div className="h-full bg-red-600 animate-pulse" style={{width: '30%'}} />
               </div>
             </>
@@ -156,7 +159,7 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
         {/* Recorded Clips */}
         {recordings.length > 0 && (
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Recordings</h4>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Recordings ({recordings.length})</h4>
             {recordings.map(recording => (
               <div
                 key={recording.id}
@@ -166,6 +169,7 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
                   <button
                     onClick={() => setPlayingId(playingId === recording.id ? null : recording.id)}
                     className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                    aria-label={playingId === recording.id ? 'Pause recording' : 'Play recording'}
                   >
                     <FiPlay className="w-4 h-4" />
                   </button>
@@ -174,19 +178,27 @@ export default function VoiceRecorder({ onRecordingSaved }: VoiceRecorderProps) 
                       {recording.timestamp.toLocaleTimeString()}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {formatTime(recording.duration)}
+                      Duration: {formatTime(recording.duration)}
+                      {recording.uploaded && <span className="ml-2">✓ Uploaded</span>}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => deleteRecording(recording.id)}
                   className="p-2 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
+                  aria-label={`Delete recording from ${recording.timestamp.toLocaleTimeString()}`}
                 >
                   <FiTrash2 className="w-4 h-4" />
                 </button>
               </div>
             ))}
           </div>
+        )}
+
+        {recordings.length === 0 && !isRecording && (
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center py-6">
+            No recordings yet. Start recording to add voice notes to your trades.
+          </p>
         )}
       </div>
 

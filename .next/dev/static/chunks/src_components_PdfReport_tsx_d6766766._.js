@@ -42,7 +42,7 @@ function PdfReport({ trades, chartSelector }) {
                         children: "Trading Report"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PdfReport.tsx",
-                        lineNumber: 28,
+                        lineNumber: 40,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$react$2d$pdf$2f$primitives$2f$lib$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -53,7 +53,7 @@ function PdfReport({ trades, chartSelector }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PdfReport.tsx",
-                        lineNumber: 29,
+                        lineNumber: 41,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$react$2d$pdf$2f$primitives$2f$lib$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -63,7 +63,7 @@ function PdfReport({ trades, chartSelector }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PdfReport.tsx",
-                        lineNumber: 30,
+                        lineNumber: 42,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$react$2d$pdf$2f$primitives$2f$lib$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -75,7 +75,7 @@ function PdfReport({ trades, chartSelector }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PdfReport.tsx",
-                        lineNumber: 31,
+                        lineNumber: 43,
                         columnNumber: 11
                     }, this),
                     chartDataUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$react$2d$pdf$2f$primitives$2f$lib$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Image"], {
@@ -83,23 +83,23 @@ function PdfReport({ trades, chartSelector }) {
                         src: chartDataUrl
                     }, void 0, false, {
                         fileName: "[project]/src/components/PdfReport.tsx",
-                        lineNumber: 32,
+                        lineNumber: 44,
                         columnNumber: 28
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PdfReport.tsx",
-                lineNumber: 27,
+                lineNumber: 39,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/PdfReport.tsx",
-            lineNumber: 26,
+            lineNumber: 38,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/PdfReport.tsx",
-        lineNumber: 25,
+        lineNumber: 37,
         columnNumber: 5
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -116,7 +116,7 @@ function PdfReport({ trades, chartSelector }) {
                 children: "Capture Chart"
             }, void 0, false, {
                 fileName: "[project]/src/components/PdfReport.tsx",
-                lineNumber: 40,
+                lineNumber: 52,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$react$2d$pdf$2f$renderer$2f$lib$2f$react$2d$pdf$2e$browser$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["PDFDownloadLink"], {
@@ -127,13 +127,13 @@ function PdfReport({ trades, chartSelector }) {
                 children: "Download PDF"
             }, void 0, false, {
                 fileName: "[project]/src/components/PdfReport.tsx",
-                lineNumber: 41,
+                lineNumber: 53,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/PdfReport.tsx",
-        lineNumber: 39,
+        lineNumber: 51,
         columnNumber: 5
     }, this);
 }

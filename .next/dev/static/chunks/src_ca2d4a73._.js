@@ -325,15 +325,12 @@ var _s = __turbopack_context__.k.signature();
 function CalendarPage() {
     _s();
     const { theme, toggleTheme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
-    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "CalendarPage.useState": ()=>("TURBOPACK compile-time value", "object") !== 'undefined'
+    }["CalendarPage.useState"]);
     const [trades, setTrades] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [currentMonth, setCurrentMonth] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(new Date());
     const [selectedDate, setSelectedDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CalendarPage.useEffect": ()=>{
-            setMounted(true);
-        }
-    }["CalendarPage.useEffect"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CalendarPage.useEffect": ()=>{
             if (!mounted) return;
@@ -422,7 +419,7 @@ function CalendarPage() {
             className: "min-h-screen bg-white dark:bg-slate-950"
         }, void 0, false, {
             fileName: "[project]/src/app/calendar/page.tsx",
-            lineNumber: 99,
+            lineNumber: 95,
             columnNumber: 12
         }, this);
     }
@@ -434,7 +431,7 @@ function CalendarPage() {
                 currentTheme: theme
             }, void 0, false, {
                 fileName: "[project]/src/app/calendar/page.tsx",
-                lineNumber: 104,
+                lineNumber: 100,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -448,7 +445,7 @@ function CalendarPage() {
                                 children: "Trading Calendar"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                lineNumber: 108,
+                                lineNumber: 104,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -456,13 +453,13 @@ function CalendarPage() {
                                 children: "View your trades by day"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                lineNumber: 109,
+                                lineNumber: 105,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/calendar/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -482,7 +479,7 @@ function CalendarPage() {
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 116,
+                                                lineNumber: 112,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -494,7 +491,7 @@ function CalendarPage() {
                                                         children: "← Prev"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 120,
+                                                        lineNumber: 116,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -503,7 +500,7 @@ function CalendarPage() {
                                                         children: "Today"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 126,
+                                                        lineNumber: 122,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -512,19 +509,19 @@ function CalendarPage() {
                                                         children: "Next →"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 132,
+                                                        lineNumber: 128,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 119,
+                                                lineNumber: 115,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 115,
+                                        lineNumber: 111,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -542,12 +539,12 @@ function CalendarPage() {
                                                 children: day
                                             }, day, false, {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 144,
+                                                lineNumber: 140,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 138,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -558,7 +555,7 @@ function CalendarPage() {
                                                     className: "aspect-square"
                                                 }, `empty-${idx}`, false, {
                                                     fileName: "[project]/src/app/calendar/page.tsx",
-                                                    lineNumber: 154,
+                                                    lineNumber: 150,
                                                     columnNumber: 26
                                                 }, this);
                                             }
@@ -573,7 +570,7 @@ function CalendarPage() {
                                                         children: day
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 175,
+                                                        lineNumber: 171,
                                                         columnNumber: 21
                                                     }, this),
                                                     stats.count > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -584,19 +581,19 @@ function CalendarPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 177,
+                                                        lineNumber: 173,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, day, true, {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 162,
+                                                lineNumber: 158,
                                                 columnNumber: 19
                                             }, this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 151,
+                                        lineNumber: 147,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -609,12 +606,36 @@ function CalendarPage() {
                                                         className: "w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded border-2 border-green-300 dark:border-green-700"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 189,
+                                                        lineNumber: 185,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "text-gray-700 dark:text-gray-300",
                                                         children: "Winning Day"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/calendar/page.tsx",
+                                                        lineNumber: 186,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/calendar/page.tsx",
+                                                lineNumber: 184,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center gap-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "w-4 h-4 bg-red-100 dark:bg-red-900/30 rounded border-2 border-red-300 dark:border-red-700"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/calendar/page.tsx",
+                                                        lineNumber: 189,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-gray-700 dark:text-gray-300",
+                                                        children: "Losing Day"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
                                                         lineNumber: 190,
@@ -630,7 +651,7 @@ function CalendarPage() {
                                                 className: "flex items-center gap-2",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "w-4 h-4 bg-red-100 dark:bg-red-900/30 rounded border-2 border-red-300 dark:border-red-700"
+                                                        className: "w-4 h-4 bg-gray-100 dark:bg-slate-700 rounded border-2 border-gray-300 dark:border-slate-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
                                                         lineNumber: 193,
@@ -638,7 +659,7 @@ function CalendarPage() {
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "text-gray-700 dark:text-gray-300",
-                                                        children: "Losing Day"
+                                                        children: "No Trades"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
                                                         lineNumber: 194,
@@ -649,41 +670,17 @@ function CalendarPage() {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
                                                 lineNumber: 192,
                                                 columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex items-center gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "w-4 h-4 bg-gray-100 dark:bg-slate-700 rounded border-2 border-gray-300 dark:border-slate-600"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 197,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-gray-700 dark:text-gray-300",
-                                                        children: "No Trades"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 198,
-                                                        columnNumber: 17
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 196,
-                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 187,
+                                        lineNumber: 183,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                lineNumber: 114,
+                                lineNumber: 110,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -694,7 +691,7 @@ function CalendarPage() {
                                         children: selectedDate ? new Date(selectedDate + 'T00:00:00').toLocaleDateString() : 'Select a date'
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 205,
+                                        lineNumber: 201,
                                         columnNumber: 13
                                     }, this),
                                     selectedDateTrades.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -710,7 +707,7 @@ function CalendarPage() {
                                                                 children: trade.pair
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                                lineNumber: 214,
+                                                                lineNumber: 210,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -718,13 +715,13 @@ function CalendarPage() {
                                                                 children: trade.outcome || 'Open'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                                lineNumber: 215,
+                                                                lineNumber: 211,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 213,
+                                                        lineNumber: 209,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -735,7 +732,7 @@ function CalendarPage() {
                                                                 children: trade.direction
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                                lineNumber: 224,
+                                                                lineNumber: 220,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -743,66 +740,66 @@ function CalendarPage() {
                                                                 children: trade.profitLoss !== undefined ? `${trade.profitLoss >= 0 ? '+' : ''}${trade.profitLoss.toFixed(2)}` : 'N/A'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                                lineNumber: 225,
+                                                                lineNumber: 221,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                                        lineNumber: 223,
+                                                        lineNumber: 219,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, trade.id, true, {
                                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                                lineNumber: 212,
+                                                lineNumber: 208,
                                                 columnNumber: 19
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 210,
+                                        lineNumber: 206,
                                         columnNumber: 15
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm text-gray-500 dark:text-gray-400",
                                         children: selectedDate ? 'No trades on this date' : 'Select a date to view trades'
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/calendar/page.tsx",
-                                        lineNumber: 233,
+                                        lineNumber: 229,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/calendar/page.tsx",
-                                lineNumber: 204,
+                                lineNumber: 200,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/calendar/page.tsx",
-                        lineNumber: 112,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/calendar/page.tsx",
-                lineNumber: 106,
+                lineNumber: 102,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {
                 position: "bottom-right"
             }, void 0, false, {
                 fileName: "[project]/src/app/calendar/page.tsx",
-                lineNumber: 241,
+                lineNumber: 237,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/calendar/page.tsx",
-        lineNumber: 103,
+        lineNumber: 99,
         columnNumber: 5
     }, this);
 }
-_s(CalendarPage, "dsZ73nLLOcHPXMJBO4Z6atk40l8=", false, function() {
+_s(CalendarPage, "rWpzaWAjjyfWAv1xYGgC+jaZZyY=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];

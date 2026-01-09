@@ -228,8 +228,31 @@ export default function QuickAddTradeForm({ onClose, onTradeAdded, initialData }
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} style={{ padding: '24px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+          <form onSubmit={handleSubmit} style={{ padding: '24px' }} noValidate>
+            {/* Validation Error Banner */}
+            {Object.keys(errors).length > 0 && (
+              <div
+                role="alert"
+                style={{
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  border: '1px solid var(--loss-color)',
+                  borderRadius: '8px',
+                  padding: '12px 16px',
+                  marginBottom: '20px',
+                  color: 'var(--loss-color)',
+                  fontSize: '13px',
+                }}
+              >
+                <strong>Please fix the following errors:</strong>
+                <ul style={{ marginTop: '8px', paddingLeft: '20px', margin: '8px 0 0 0' }}>
+                  {Object.entries(errors).map(([field, message]) => (
+                    <li key={field}>{message}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '16px' }}>
               {/* Pair */}
               <div>
                 <label htmlFor="pair" style={{ fontSize: '12px', color: 'var(--neutral-color)', marginBottom: '8px', display: 'block', fontWeight: '600' }}>

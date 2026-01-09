@@ -5,9 +5,13 @@ import { motion } from 'framer-motion';
 import StatCardV2 from '@/components/StatCardV2';
 import QuickAddTradeForm from '@/components/QuickAddTradeForm';
 import TradesList from '@/components/TradesList';
-import { FiDollarSign, FiTrendingUp, FiTarget, FiRefreshCw } from 'react-icons/fi';
+import TradeSearch from '@/components/TradeSearch';
+import Pagination from '@/components/Pagination';
+import { usePagination } from '@/lib/usePagination';
+import { FiDollarSign, FiTrendingUp, FiTarget, FiRefreshCw, FiDownload } from 'react-icons/fi';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import toast, { Toaster } from 'react-hot-toast';
+import { StatCardSkeleton, ChartSkeleton } from '@/components/SkeletonLoader';
+import toast from 'react-hot-toast';
 
 interface Trade {
   id: string;
@@ -26,7 +30,9 @@ interface Trade {
 
 export default function DashboardPage() {
   const [trades, setTrades] = useState<Trade[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchResults, setSearchResults] = useState<Trade[]>([]);
   const [metrics, setMetrics] = useState({
     totalPnL: 0,
     winRate: 0,
@@ -40,9 +46,18 @@ export default function DashboardPage() {
     worstDay: 0,
   });
 
+  // Filter trades based on search
+  const filteredTrades = searchResults.length > 0 ? searchResults : trades;
+  
+  // Pagination
+  const itemsPerPage = 10;
+  const pagination = usePagination(filteredTrades, { pageSize: itemsPerPage });
+  const paginatedTrades = pagination.paginatedItems;
+
   const fetchTrades = async () => {
     try {
       setIsLoading(true);
+      setError(null);
       const response = await fetch('/api/trades', {
         headers: { 'x-user-id': 'demo-user' },
       });
@@ -52,7 +67,7 @@ export default function DashboardPage() {
         let errBody: unknown = null;
         try { errBody = await response.json(); } catch (e) { errBody = await response.text(); }
         console.error('Failed to fetch trades:', response.status, errBody);
-        toast.error('Failed to fetch trades');
+        setError('Failed to fetch trades. Please try again.');
         setTrades([]);
         setMetrics({
           totalPnL: 0,
@@ -72,7 +87,7 @@ export default function DashboardPage() {
       const data: unknown = await response.json();
       if (!Array.isArray(data)) {
         console.warn('Unexpected trades payload, expected array but got:', data);
-        toast.error('Unexpected trades format');
+        setError('Unexpected data format received');
         setTrades([]);
         setMetrics({
           totalPnL: 0,
@@ -114,7 +129,7 @@ export default function DashboardPage() {
       });
     } catch (error) {
       console.error('Error fetching trades:', error);
-      toast.error('Failed to fetch trades');
+      setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -136,6 +151,44 @@ export default function DashboardPage() {
   const handleEdit = (trade: Trade) => {
     setEditingTrade(trade);
     setShowTradeModal(true);
+  };
+
+  const handleExport = async () => {
+    try {
+      const toastId = toast.loading('Exporting trades...');
+      
+      const response = await fetch('/api/export', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-id': 'demo-user',
+        },
+        body: JSON.stringify({
+          format: 'csv', // or 'pdf'
+          trades,
+          metrics,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Export failed');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `trades-export-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success('Trades exported successfully!', { id: toastId });
+    } catch (err) {
+      console.error('Export error:', err);
+      toast.error('Failed to export trades');
+    }
   };
 
   // Prepare chart data
@@ -170,8 +223,6 @@ export default function DashboardPage() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Toaster position="bottom-right" />
-
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -201,6 +252,42 @@ export default function DashboardPage() {
         </p>
       </motion.div>
 
+      {/* Error Message */}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          role="alert"
+          style={{
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            border: '1px solid var(--loss-color)',
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '20px',
+            color: 'var(--loss-color)',
+            fontSize: '14px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span>{error}</span>
+          <button
+            onClick={() => setError(null)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--loss-color)',
+              cursor: 'pointer',
+              fontSize: '18px',
+              padding: '4px 8px',
+            }}
+          >
+            ✕
+          </button>
+        </motion.div>
+      )}
+
       {/* Refresh Button */}
       <div style={{ marginBottom: '24px' }}>
         <button
@@ -221,9 +308,44 @@ export default function DashboardPage() {
             alignItems: 'center',
             gap: '8px',
           }}
+          aria-label={isLoading ? 'Loading trades' : 'Refresh trades data'}
         >
           <FiRefreshCw size={16} style={{ animation: isLoading ? 'spin 1s linear infinite' : 'none' }} />
           {isLoading ? 'Loading...' : 'Refresh Data'}
+        </button>
+        <button
+          onClick={handleExport}
+          disabled={trades.length === 0}
+          style={{
+            marginLeft: '12px',
+            background: 'transparent',
+            color: 'var(--foreground)',
+            padding: '10px 16px',
+            borderRadius: '8px',
+            border: '1px solid var(--card-border)',
+            cursor: trades.length === 0 ? 'not-allowed' : 'pointer',
+            fontWeight: '600',
+            fontSize: '14px',
+            transition: 'all 0.2s ease',
+            opacity: trades.length === 0 ? 0.5 : 1,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+          onMouseEnter={(e) => {
+            if (trades.length > 0) {
+              e.currentTarget.style.borderColor = 'var(--purple-base)';
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 92, 246, 0.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--card-border)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+          aria-label="Export trades as CSV"
+        >
+          <FiDownload size={16} />
+          Export
         </button>
         <button
           onClick={handleOpenNew}
@@ -237,21 +359,45 @@ export default function DashboardPage() {
             cursor: 'pointer',
             fontWeight: '600',
             fontSize: '14px',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--purple-base)';
+            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 92, 246, 0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--card-border)';
+            e.currentTarget.style.boxShadow = 'none';
           }}
         >
           + Add Trade
         </button>
       </div>
 
-      {/* Key Metrics Cards */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '16px',
-          marginBottom: '32px',
-        }}
-      >
+      {/* Loading State */}
+      {isLoading && trades.length === 0 ? (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '16px',
+            marginBottom: '32px',
+          }}
+        >
+          {[1, 2, 3, 4].map((i) => (
+            <StatCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        /* Key Metrics Cards */
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '16px',
+            marginBottom: '32px',
+          }}
+        >
         <StatCardV2
           title="Total P&L"
           value={`$${metrics.totalPnL}`}
@@ -287,10 +433,51 @@ export default function DashboardPage() {
           subtitle={`${metrics.closedTrades} closed`}
         />
       </div>
+      )}
 
       {/* Trades List */}
       <div style={{ marginBottom: '32px' }}>
-        <TradesList trades={trades} isLoading={isLoading} onTradeDeleted={fetchTrades} onEdit={handleEdit} />
+        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '16px', color: 'var(--text-primary)' }}>
+          Recent Trades {filteredTrades.length > 0 && `(${filteredTrades.length})`}
+        </h2>
+        
+        {/* Search Component */}
+        <TradeSearch onSearch={(results) => setSearchResults(results)} trades={trades} />
+        
+        {/* Trades List */}
+        <TradesList trades={paginatedTrades} isLoading={isLoading} onTradeDeleted={fetchTrades} onEdit={handleEdit} />
+        
+        {/* Pagination */}
+        {filteredTrades.length > itemsPerPage && (
+          <div style={{ marginTop: '24px' }}>
+            <Pagination
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={pagination.goToPage}
+              hasNextPage={pagination.hasNextPage}
+              hasPrevPage={pagination.hasPrevPage}
+              totalItems={pagination.totalItems}
+              pageSize={pagination.pageSize}
+            />
+          </div>
+        )}
+        
+        {/* No results message */}
+        {filteredTrades.length === 0 && !isLoading && (
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '40px 20px',
+              color: 'var(--text-secondary)',
+              backgroundColor: 'var(--card-bg)',
+              borderRadius: '12px',
+              border: '1px solid var(--card-border)',
+              marginTop: '16px',
+            }}
+          >
+            <p style={{ fontSize: '16px' }}>No trades found. Start by adding your first trade!</p>
+          </div>
+        )}
       </div>
 
       {showTradeModal && (

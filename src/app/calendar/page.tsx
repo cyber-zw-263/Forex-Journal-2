@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import DashboardHeader from '@/components/DashboardHeader';
 import { useTheme } from '@/context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
-import AnimatedCard from '@/components/AnimatedCard';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface Trade {
   id: string;
@@ -92,86 +91,134 @@ export default function CalendarPage() {
   };
 
   if (!mounted) {
-    return <div className="min-h-screen bg-white dark:bg-slate-950" />;
+    return <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }} />;
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
-      <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
-
-      <main className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Trading Calendar</h1>
-          <p className="text-gray-600 dark:text-gray-400">View your trades by day</p>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
+            Trading Calendar
+          </h1>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>View your trades by day</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Calendar */}
-          <AnimatedCard className="lg:col-span-2 bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          {/* Calendar Card */}
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', gap: '12px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                 {currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}
               </h2>
-              <div className="flex gap-2">
+              <div style={{ display: 'flex', gap: '8px' }}>
                 <button
                   onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
-                  className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '6px', border: '1px solid var(--card-border)', backgroundColor: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', transition: 'all 0.2s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(139, 92, 246, 0.1)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  aria-label="Previous month"
                 >
-                  ← Prev
+                  <FiChevronLeft size={16} />
                 </button>
                 <button
                   onClick={() => setCurrentMonth(new Date())}
-                  className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors text-sm font-semibold"
+                  style={{ background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)', color: 'white', padding: '6px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '12px', transition: 'all 0.2s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
                   Today
                 </button>
                 <button
                   onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
-                  className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '6px', border: '1px solid var(--card-border)', backgroundColor: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', transition: 'all 0.2s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(139, 92, 246, 0.1)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  aria-label="Next month"
                 >
-                  Next →
+                  <FiChevronRight size={16} />
                 </button>
               </div>
             </div>
 
             {/* Day Headers */}
-            <div className="grid grid-cols-7 gap-2 mb-2">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', marginBottom: '12px' }}>
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center font-semibold text-gray-700 dark:text-gray-300 text-xs p-2">
+                <div key={day} style={{ textAlign: 'center', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '11px', padding: '6px' }}>
                   {day}
                 </div>
               ))}
             </div>
 
-            {/* Days */}
-            <div className="grid grid-cols-7 gap-2">
+            {/* Calendar Days */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
               {calendarDays.map((day, idx) => {
                 if (day === null) {
-                  return <div key={`empty-${idx}`} className="aspect-square" />;
+                  return <div key={`empty-${idx}`} />;
                 }
 
                 const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day).toISOString().split('T')[0];
                 const stats = getDayStats(day);
                 const isSelected = selectedDate === date;
 
+                let bgColor = 'transparent';
+                let textColor = 'var(--text-secondary)';
+                let borderColor = 'var(--card-border)';
+
+                if (isSelected) {
+                  bgColor = 'var(--purple-base)';
+                  textColor = 'white';
+                  borderColor = 'var(--purple-base)';
+                } else if (stats.count > 0) {
+                  if (stats.pnl >= 0) {
+                    bgColor = 'rgba(34, 197, 94, 0.1)';
+                    textColor = '#22c55e';
+                    borderColor = 'rgba(34, 197, 94, 0.3)';
+                  } else {
+                    bgColor = 'rgba(239, 68, 68, 0.1)';
+                    textColor = '#ef4444';
+                    borderColor = 'rgba(239, 68, 68, 0.3)';
+                  }
+                } else {
+                  bgColor = 'var(--panel-muted)';
+                  textColor = 'var(--text-secondary)';
+                  borderColor = 'transparent';
+                }
+
                 return (
                   <button
                     key={day}
                     onClick={() => setSelectedDate(isSelected ? null : date)}
-                    className={`aspect-square p-2 rounded-lg border-2 transition-colors text-xs font-semibold ${
-                      isSelected
-                        ? 'bg-blue-600 border-blue-600 text-white dark:bg-blue-700 dark:border-blue-700'
-                        : stats.count > 0
-                        ? stats.pnl >= 0
-                          ? 'bg-green-100 border-green-300 dark:bg-green-900/30 dark:border-green-700 text-green-900 dark:text-green-100'
-                          : 'bg-red-100 border-red-300 dark:bg-red-900/30 dark:border-red-700 text-red-900 dark:text-red-100'
-                        : 'bg-gray-100 border-gray-300 dark:bg-slate-700 dark:border-slate-600 text-gray-600 dark:text-gray-400'
-                    }`}
+                    style={{
+                      aspectRatio: '1',
+                      padding: '6px',
+                      borderRadius: '6px',
+                      border: `1px solid ${borderColor}`,
+                      backgroundColor: bgColor,
+                      color: textColor,
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: '600',
+                      transition: 'all 0.2s ease',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minHeight: '48px',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSelected && stats.count === 0) {
+                        e.currentTarget.style.borderColor = 'var(--purple-base)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = borderColor;
+                    }}
                   >
                     <div>{day}</div>
                     {stats.count > 0 && (
-                      <div className="text-[10px]">
-                        {stats.count}T
+                      <div style={{ fontSize: '9px', marginTop: '2px' }}>
+                        {stats.count} {stats.count === 1 ? 'T' : 'Ts'}
                       </div>
                     )}
                   </button>
@@ -180,45 +227,57 @@ export default function CalendarPage() {
             </div>
 
             {/* Legend */}
-            <div className="mt-6 flex flex-wrap gap-4 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded border-2 border-green-300 dark:border-green-700" />
-                <span className="text-gray-700 dark:text-gray-300">Winning Day</span>
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--card-border)', display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '12px', height: '12px', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.4)', borderRadius: '4px' }} />
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Winning Day</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-red-100 dark:bg-red-900/30 rounded border-2 border-red-300 dark:border-red-700" />
-                <span className="text-gray-700 dark:text-gray-300">Losing Day</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '12px', height: '12px', backgroundColor: 'rgba(239, 68, 68, 0.2)', border: '1px solid rgba(239, 68, 68, 0.4)', borderRadius: '4px' }} />
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Losing Day</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-gray-100 dark:bg-slate-700 rounded border-2 border-gray-300 dark:border-slate-600" />
-                <span className="text-gray-700 dark:text-gray-300">No Trades</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '12px', height: '12px', backgroundColor: 'var(--panel-muted)', border: '1px solid var(--card-border)', borderRadius: '4px' }} />
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>No Trades</span>
               </div>
             </div>
-          </AnimatedCard>
-
+          </div>
           {/* Selected Date Trades */}
-          <AnimatedCard className="bg-white dark:bg-slate-800 p-6 border border-gray-200 dark:border-slate-700 h-fit">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', maxHeight: 'fit-content' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>
               {selectedDate ? new Date(selectedDate + 'T00:00:00').toLocaleDateString() : 'Select a date'}
             </h2>
 
             {selectedDateTrades.length > 0 ? (
-              <div className="space-y-3">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {selectedDateTrades.map(trade => (
-                  <div key={trade.id} className="bg-gray-50 dark:bg-slate-700 p-3 rounded-lg">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-gray-900 dark:text-white text-sm">{trade.pair}</span>
-                      <span className={`text-xs font-semibold px-2 py-1 rounded ${
-                        trade.outcome === 'WIN'
-                          ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
-                          : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
-                      }`}>
+                  <div
+                    key={trade.id}
+                    style={{
+                      backgroundColor: 'var(--panel-muted)',
+                      padding: '12px',
+                      borderRadius: '8px',
+                      borderLeft: `3px solid ${trade.profitLoss && trade.profitLoss >= 0 ? '#22c55e' : '#ef4444'}`,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '13px' }}>{trade.pair}</span>
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: '600',
+                          padding: '3px 8px',
+                          borderRadius: '4px',
+                          backgroundColor: trade.outcome === 'WIN' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                          color: trade.outcome === 'WIN' ? '#22c55e' : '#ef4444',
+                        }}
+                      >
                         {trade.outcome || 'Open'}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-gray-600 dark:text-gray-400">{trade.direction}</span>
-                      <span className={trade.profitLoss && trade.profitLoss >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      <span>{trade.direction}</span>
+                      <span style={{ color: trade.profitLoss && trade.profitLoss >= 0 ? '#22c55e' : '#ef4444', fontWeight: '600' }}>
                         {trade.profitLoss !== undefined ? `${trade.profitLoss >= 0 ? '+' : ''}${trade.profitLoss.toFixed(2)}` : 'N/A'}
                       </span>
                     </div>
@@ -226,11 +285,11 @@ export default function CalendarPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
                 {selectedDate ? 'No trades on this date' : 'Select a date to view trades'}
               </p>
             )}
-          </AnimatedCard>
+          </div>
         </div>
       </main>
 

@@ -23,12 +23,23 @@ model User {
   weeklyFocus   WeeklyFocus[]
   voiceNotes    VoiceNote[]
   screenshots   Screenshot[]
+  
+  strategies    Strategy[]    @relation("UserStrategies")
+  journalEntries JournalEntry[] @relation("UserJournal")
 }
 
 model Trade {
   id                  String     @id @default(cuid())
   userId              String
   user                User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Strategy & Setup References
+  strategyId          String?
+  strategy            Strategy?  @relation("StrategyTrades", fields: [strategyId], references: [id], onDelete: SetNull)
+  entryModelId        String?
+  entryModel          EntryModel? @relation("EntryModelTrades", fields: [entryModelId], references: [id], onDelete: SetNull)
+  timeframeSequenceId String?
+  timeframeSequence   TimeframeSequence? @relation("SequenceTrades", fields: [timeframeSequenceId], references: [id], onDelete: SetNull)
   
   // Core Trade Details
   pair                String     // Currency pair (EUR/USD, GBP/USD, etc.)
@@ -58,9 +69,9 @@ model Trade {
   outcome             String?    // WIN, LOSS, BREAKEVEN, OPEN
   status              String     @default("open") // open, closed, cancelled
   
-  // Trading Strategy & Setup
-  strategy            String?    // Strategy type/tag (Pullback, Breakout, etc.)
-  setupType           String?    // Setup classification
+  // Trading Context
+  session             String?    // Trading session (asia, london, ny, etc.)
+  marketCondition     String?    // Trend/range/choppy/etc.
   
   // Reflective Fields
   notes               String?    // Trade notes/observations
@@ -68,6 +79,12 @@ model Trade {
   setupQuality        Int?       // 1-5 star rating
   whatLearned         String?    // Lessons learned from this trade
   mistakes            String?    // JSON array of mistakes made
+  
+  // Lifecycle & Updates
+  tradeState          TradeState?
+  updates             TradeUpdate[] @relation("TradeUpdates")
+  reflection          TradeReflection?
+  ruleViolations      RuleViolation[] @relation("TradeRuleViolations")
   
   // Media & Documentation
   screenshots         Screenshot[]
@@ -78,12 +95,13 @@ model Trade {
   updatedAt           DateTime   @updatedAt
   
   @@index([userId])
+  @@index([strategyId])
+  @@index([entryModelId])
   @@index([pair])
   @@index([entryTime])
   @@index([outcome])
   @@index([status])
   @@index([account])
-  @@index([strategy])
 }
 
 model Screenshot {
@@ -163,4 +181,256 @@ model AIInsight {
   createdAt DateTime @default(now())
   
   @@index([userId])
+}
+
+// ============ STRATEGY SYSTEM ============
+model Strategy {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserStrategies", fields: [userId], references: [id], onDelete: Cascade)
+  
+  name              String
+  description       String?
+  marketType        String     // "trend" | "range" | "mixed"
+  preferredSessions String?    // JSON array: ["asian", "london", "ny"]
+  riskPhilosophy    String?    // Risk philosophy description
+  status            String     @default("active") // "active" | "paused" | "archived"
+  
+  entryModels       EntryModel[]
+  timeframeSequences TimeframeSequence[]
+  trades            Trade[]    @relation("StrategyTrades")
+  rules             StrategyRule[]
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([userId])
+  @@index([status])
+}
+
+// ============ ENTRY MODELS ============
+model EntryModel {
+  id                String     @id @default(cuid())
+  strategyId        String
+  strategy          Strategy   @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  
+  name              String
+  entryLogic        String?    // Description of entry logic
+  confirmationStyle String?    // How entry is confirmed
+  riskStyle         String     // "aggressive" | "balanced" | "conservative"
+  notes             String?
+  
+  trades            Trade[]    @relation("EntryModelTrades")
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([strategyId])
+}
+
+// ============ MULTI-TIMEFRAME SEQUENCE ENGINE ============
+model TimeframeSequence {
+  id                String     @id @default(cuid())
+  strategyId        String
+  strategy          Strategy   @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  
+  name              String     // e.g., "Weekly-Daily-H4-H1-M15"
+  description       String?
+  
+  steps             TimeframeStep[]
+  trades            Trade[]    @relation("SequenceTrades")
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([strategyId])
+}
+
+model TimeframeStep {
+  id                String     @id @default(cuid())
+  sequenceId        String
+  sequence          TimeframeSequence @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  
+  orderIndex        Int        // Order in sequence (1, 2, 3...)
+  timeframe         String     // "W1" | "D1" | "H4" | "H1" | "M15" | "M5" | "M1"
+  role              String     // "HTF Bias" | "Structure" | "POI" | "Confirmation" | "Entry" | "Execution"
+  description       String?
+  
+  @@unique([sequenceId, orderIndex])
+  @@index([sequenceId])
+}
+
+// ============ EXTENDED TRADE LIFECYCLE ============
+// Extend Trade model with references to strategy, entry model, and sequence
+// (See Trade model updates below)
+
+model TradeState {
+  id                String     @id @default(cuid())
+  tradeId           String     @unique
+  trade             Trade      @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  
+  state             String     @default("planned") // "planned" | "active" | "closed" | "backtested" | "hypothetical"
+  
+  // Pre-trade checklist
+  htfBiasAligned    Boolean    @default(false)
+  poiIdentified     Boolean    @default(false)
+  entryRulesMet     Boolean    @default(false)
+  sessionRespected  Boolean    @default(false)
+  riskRuleRespected Boolean    @default(false)
+  noEmotionalPressure Boolean  @default(false)
+  
+  checklist         String?    // JSON array of all checklist items
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([tradeId])
+}
+
+// ============ ACTIVE TRADE UPDATE SYSTEM ============
+model TradeUpdate {
+  id                String     @id @default(cuid())
+  tradeId           String
+  trade             Trade      @relation("TradeUpdates", fields: [tradeId], references: [id], onDelete: Cascade)
+  
+  timestamp         DateTime   @default(now())
+  
+  // Action taken
+  action            String     // "none" | "sl_moved" | "tp_adjusted" | "partial_close" | "manual_close"
+  reason            String?    // "followed_plan" | "market_structure" | "emotional" | "fear" | "greed" | "uncertainty" | "distraction"
+  
+  // Emotional state at update
+  emotionalState    String?    // "calm" | "confident" | "anxious" | "hesitant" | "overconfident" | "fearful" | "impulsive" | "detached"
+  
+  // In-trade behavior flags
+  behavior          String?    // JSON array of behavior checkboxes
+  
+  notes             String?
+  
+  @@index([tradeId])
+  @@index([timestamp])
+}
+
+// ============ POST-TRADE REFLECTION ============
+model TradeReflection {
+  id                String     @id @default(cuid())
+  tradeId           String     @unique
+  trade             Trade      @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  
+  // Execution quality
+  followedPlan      String?    // "yes" | "mostly" | "no"
+  rulesRespected    String?    // "yes" | "partially" | "no"
+  
+  // Emotional summary
+  emotionalSummary  String?    // JSON array of emotional flags
+  
+  // Behavioral outcomes
+  behavioralOutcomes String?   // JSON array of behavior outcomes
+  
+  // Self-assessment
+  whatWentRight     String?
+  whatWentWrong     String?
+  lessonLearned     String?
+  ruleToReinforce   String?
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([tradeId])
+}
+
+// ============ RULE & DISCIPLINE ENGINE ============
+model StrategyRule {
+  id                String     @id @default(cuid())
+  strategyId        String
+  strategy          Strategy   @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  
+  ruleName          String
+  description       String?
+  isMandatory       Boolean    @default(true)
+  weight            Int        @default(1) // Importance weight
+  
+  ruleViolations    RuleViolation[]
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@index([strategyId])
+}
+
+model RuleViolation {
+  id                String     @id @default(cuid())
+  tradeId           String
+  trade             Trade      @relation("TradeRuleViolations", fields: [tradeId], references: [id], onDelete: Cascade)
+  ruleId            String
+  rule              StrategyRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+  
+  violated          Boolean    @default(true)
+  reason            String?    // "emotional" | "technical" | "oversight"
+  impact            Float?     // Estimated impact on P&L
+  
+  createdAt         DateTime   @default(now())
+  
+  @@index([tradeId])
+  @@index([ruleId])
+}
+
+// ============ JOURNAL & TRADING PHASES ============
+model JournalEntry {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserJournal", fields: [userId], references: [id], onDelete: Cascade)
+  
+  date              DateTime
+  
+  // Mental state
+  mentalState       String?    // Free text
+  focus             String?    // Low, Medium, High
+  confidence        Int?       // 1-10 scale
+  externalStressors String?    // JSON array
+  
+  // Trading phase
+  phase             String?    // "learning" | "discipline" | "consistency" | "optimization"
+  phaseNotes        String?
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+// ============ TIME-BASED ANALYSIS SUMMARIES ============
+model PeriodSummary {
+  id                String     @id @default(cuid())
+  userId            String
+  
+  period            String     // "daily" | "weekly" | "monthly" | "quarterly" | "half_year" | "yearly"
+  startDate         DateTime
+  endDate           DateTime
+  
+  // Summary metrics
+  totalTrades       Int
+  winCount          Int
+  lossCount         Int
+  winRate           Float
+  expectancy        Float
+  
+  // Strategy performance
+  bestStrategy      String?
+  worstStrategy     String?
+  bestEntryModel    String?
+  
+  // Behavioral insights
+  emotionalPatterns String? // JSON
+  behavioralTrends  String? // JSON
+  improvementsNeeded String? // JSON array
+  
+  content           String? // Full summary (for AI or template-based)
+  
+  createdAt         DateTime   @default(now())
+  
+  @@unique([userId, period, startDate])
+  @@index([userId])
+  @@index([startDate])
 }

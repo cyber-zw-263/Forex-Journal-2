@@ -17,17 +17,21 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 const ThemeContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
 function ThemeProvider({ children }) {
     _s();
-    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('dark');
-    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ThemeProvider.useEffect": ()=>{
-            // Get theme from localStorage or system preference
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
-            setMounted(true);
+    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "ThemeProvider.useState": ()=>{
+            try {
+                const savedTheme = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem('theme') : "TURBOPACK unreachable";
+                if (savedTheme) return savedTheme;
+                const prefersDark = ("TURBOPACK compile-time truthy", 1) ? window.matchMedia('(prefers-color-scheme: dark)').matches : "TURBOPACK unreachable";
+                return prefersDark ? 'dark' : 'light';
+            } catch (e) {
+                return 'dark';
+            }
         }
-    }["ThemeProvider.useEffect"], []);
+    }["ThemeProvider.useState"]);
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "ThemeProvider.useState": ()=>("TURBOPACK compile-time value", "object") !== 'undefined'
+    }["ThemeProvider.useState"]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ThemeProvider.useEffect": ()=>{
             if (!mounted) return;
@@ -58,7 +62,7 @@ function ThemeProvider({ children }) {
         columnNumber: 5
     }, this);
 }
-_s(ThemeProvider, "TYAL0cX8zabvZV1Dr1hQyVjLqVw=");
+_s(ThemeProvider, "xv+6C5d5/oX8UUt8C0eWOJd1L3U=");
 _c = ThemeProvider;
 function useTheme() {
     _s1();
@@ -95,32 +99,59 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function QuickAddTradeForm({ onClose, onTradeAdded }) {
+function QuickAddTradeForm({ onClose, onTradeAdded, initialData }) {
     _s();
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
-        pair: 'EUR/USD',
-        direction: 'LONG',
-        entryPrice: '',
-        exitPrice: '',
-        stopLoss: '',
-        takeProfit: '',
-        volume: '',
-        riskPercent: '2',
-        entryTime: new Date().toISOString().slice(0, 16),
-        exitTime: '',
-        outcome: 'OPEN',
-        status: 'open',
-        strategy: '',
-        setupType: 'Breakout',
-        emotionalState: 'calm',
-        setupQuality: '3',
-        account: 'Personal',
-        broker: '',
-        notes: '',
-        whatLearned: '',
-        mistakes: []
-    });
+        "QuickAddTradeForm.useState": ()=>({
+                pair: 'EUR/USD',
+                direction: 'LONG',
+                entryPrice: '',
+                exitPrice: '',
+                stopLoss: '',
+                takeProfit: '',
+                volume: '',
+                riskPercent: '2',
+                entryTime: new Date().toISOString().slice(0, 16),
+                exitTime: '',
+                outcome: 'OPEN',
+                status: 'open',
+                strategy: '',
+                setupType: 'Breakout',
+                emotionalState: 'calm',
+                setupQuality: '3',
+                account: 'Personal',
+                broker: '',
+                notes: '',
+                whatLearned: '',
+                mistakes: []
+            })
+    }["QuickAddTradeForm.useState"]);
+    // If initialData is provided, merge into state (edit mode)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "QuickAddTradeForm.useEffect": ()=>{
+            if (initialData && Object.keys(initialData).length) {
+                setFormData({
+                    "QuickAddTradeForm.useEffect": (prev)=>({
+                            ...prev,
+                            ...initialData
+                        })
+                }["QuickAddTradeForm.useEffect"]);
+            }
+        }
+    }["QuickAddTradeForm.useEffect"], [
+        initialData
+    ]);
+    const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const entryRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "QuickAddTradeForm.useEffect": ()=>{
+            // focus the entry price input when the form mounts
+            setTimeout({
+                "QuickAddTradeForm.useEffect": ()=>entryRef.current?.focus()
+            }["QuickAddTradeForm.useEffect"], 50);
+        }
+    }["QuickAddTradeForm.useEffect"], []);
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
@@ -130,15 +161,27 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        if (!formData.entryPrice || !formData.pair) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].error('Please fill in pair and entry price');
+        // Basic validation
+        const newErrors = {};
+        if (!formData.pair) newErrors.pair = 'Currency pair is required';
+        if (!formData.entryPrice || Number.isNaN(Number(formData.entryPrice))) newErrors.entryPrice = 'Valid entry price required';
+        if (formData.volume && parseFloat(String(formData.volume)) <= 0) newErrors.volume = 'Volume must be greater than 0';
+        if (formData.riskPercent && (isNaN(Number(formData.riskPercent)) || Number(formData.riskPercent) < 0)) newErrors.riskPercent = 'Risk % must be a valid number';
+        if (Object.keys(newErrors).length) {
+            setErrors(newErrors);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].error('Please fix validation errors');
             return;
         }
+        setErrors({});
         try {
             setIsLoading(true);
-            const profitLoss = formData.exitPrice && formData.volume ? (parseFloat(formData.exitPrice) - parseFloat(formData.entryPrice)) * parseFloat(formData.volume) * 100000 : undefined;
-            const response = await fetch('/api/trades', {
-                method: 'POST',
+            const profitLoss = formData.exitPrice && formData.volume ? (parseFloat(String(formData.exitPrice)) - parseFloat(String(formData.entryPrice))) * parseFloat(String(formData.volume)) * 100000 : undefined;
+            const editId = initialData && initialData.id;
+            const isEdit = Boolean(editId);
+            const url = isEdit ? `/api/trades/${editId}` : '/api/trades';
+            const method = isEdit ? 'PUT' : 'POST';
+            const response = await fetch(url, {
+                method,
                 headers: {
                     'Content-Type': 'application/json',
                     'x-user-id': 'demo-user'
@@ -183,7 +226,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                 onClose();
                 onTradeAdded?.();
             } else {
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].error('Failed to add trade');
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].error('Failed to save trade');
             }
         } catch (error) {
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].error('Error adding trade');
@@ -194,6 +237,9 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            role: "dialog",
+            "aria-modal": "true",
+            "aria-label": initialData ? 'Edit trade' : 'Add new trade',
             style: {
                 position: 'fixed',
                 top: 0,
@@ -254,7 +300,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                 children: "Add New Trade"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                lineNumber: 168,
+                                lineNumber: 203,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -273,18 +319,18 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                     size: 24
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                    lineNumber: 191,
+                                    lineNumber: 226,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                lineNumber: 178,
+                                lineNumber: 213,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                        lineNumber: 156,
+                        lineNumber: 191,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -292,11 +338,55 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                         style: {
                             padding: '24px'
                         },
+                        noValidate: true,
                         children: [
+                            Object.keys(errors).length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                role: "alert",
+                                style: {
+                                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                    border: '1px solid var(--loss-color)',
+                                    borderRadius: '8px',
+                                    padding: '12px 16px',
+                                    marginBottom: '20px',
+                                    color: 'var(--loss-color)',
+                                    fontSize: '13px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                        children: "Please fix the following errors:"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                        lineNumber: 246,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                        style: {
+                                            marginTop: '8px',
+                                            paddingLeft: '20px',
+                                            margin: '8px 0 0 0'
+                                        },
+                                        children: Object.entries(errors).map(([field, message])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                children: message
+                                            }, field, false, {
+                                                fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                                lineNumber: 249,
+                                                columnNumber: 21
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                        lineNumber: 247,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                lineNumber: 234,
+                                columnNumber: 15
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
                                     display: 'grid',
-                                    gridTemplateColumns: '1fr 1fr',
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                                     gap: '16px',
                                     marginBottom: '16px'
                                 },
@@ -304,6 +394,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "pair",
                                                 style: {
                                                     fontSize: '12px',
                                                     color: 'var(--neutral-color)',
@@ -314,10 +405,11 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Currency Pair"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 200,
+                                                lineNumber: 258,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                id: "pair",
                                                 name: "pair",
                                                 value: formData.pair,
                                                 onChange: handleChange,
@@ -334,80 +426,81 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "EUR/USD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 216,
+                                                        lineNumber: 275,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "GBP/USD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 217,
+                                                        lineNumber: 276,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "USD/JPY"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 218,
+                                                        lineNumber: 277,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "AUD/USD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 219,
+                                                        lineNumber: 278,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "USD/CAD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 220,
+                                                        lineNumber: 279,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "NZD/USD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 221,
+                                                        lineNumber: 280,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "USD/CHF"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 222,
+                                                        lineNumber: 281,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "GOLD"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 223,
+                                                        lineNumber: 282,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "SP500"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 224,
+                                                        lineNumber: 283,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 203,
+                                                lineNumber: 261,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 199,
+                                        lineNumber: 257,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "direction",
                                                 style: {
                                                     fontSize: '12px',
                                                     color: 'var(--neutral-color)',
@@ -418,10 +511,11 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Direction"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 230,
+                                                lineNumber: 289,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                id: "direction",
                                                 name: "direction",
                                                 value: formData.direction,
                                                 onChange: handleChange,
@@ -439,7 +533,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "LONG 📈"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 246,
+                                                        lineNumber: 306,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -447,24 +541,25 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "SHORT 📉"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 247,
+                                                        lineNumber: 307,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 233,
+                                                lineNumber: 292,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 288,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "entryPrice",
                                                 style: {
                                                     fontSize: '12px',
                                                     color: 'var(--neutral-color)',
@@ -475,10 +570,12 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Entry Price"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 253,
+                                                lineNumber: 313,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                ref: entryRef,
+                                                id: "entryPrice",
                                                 type: "number",
                                                 name: "entryPrice",
                                                 step: "0.00001",
@@ -486,6 +583,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 value: formData.entryPrice,
                                                 onChange: handleChange,
                                                 required: true,
+                                                "aria-invalid": errors.entryPrice ? 'true' : 'false',
                                                 style: {
                                                     width: '100%',
                                                     padding: '10px 12px',
@@ -496,13 +594,26 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 256,
+                                                lineNumber: 316,
                                                 columnNumber: 17
+                                            }, this),
+                                            errors.entryPrice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                role: "alert",
+                                                style: {
+                                                    color: 'var(--loss-color)',
+                                                    fontSize: '12px',
+                                                    marginTop: '6px'
+                                                },
+                                                children: errors.entryPrice
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                                lineNumber: 336,
+                                                columnNumber: 39
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 252,
+                                        lineNumber: 312,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -518,7 +629,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Stop Loss"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 277,
+                                                lineNumber: 341,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -538,13 +649,13 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 280,
+                                                lineNumber: 344,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 276,
+                                        lineNumber: 340,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -560,7 +671,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Take Profit"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 300,
+                                                lineNumber: 364,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -580,18 +691,19 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 303,
+                                                lineNumber: 367,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 299,
+                                        lineNumber: 363,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "volume",
                                                 style: {
                                                     fontSize: '12px',
                                                     color: 'var(--neutral-color)',
@@ -602,16 +714,18 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Volume (Lots)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 323,
+                                                lineNumber: 387,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                id: "volume",
                                                 type: "number",
                                                 name: "volume",
                                                 step: "0.01",
                                                 placeholder: "0.1",
                                                 value: formData.volume,
                                                 onChange: handleChange,
+                                                "aria-invalid": errors.volume ? 'true' : 'false',
                                                 style: {
                                                     width: '100%',
                                                     padding: '10px 12px',
@@ -622,13 +736,26 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 326,
+                                                lineNumber: 390,
                                                 columnNumber: 17
+                                            }, this),
+                                            errors.volume && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                role: "alert",
+                                                style: {
+                                                    color: 'var(--loss-color)',
+                                                    fontSize: '12px',
+                                                    marginTop: '6px'
+                                                },
+                                                children: errors.volume
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/QuickAddTradeForm.tsx",
+                                                lineNumber: 408,
+                                                columnNumber: 35
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 322,
+                                        lineNumber: 386,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -644,7 +771,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Risk %"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 346,
+                                                lineNumber: 413,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -664,13 +791,13 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 349,
+                                                lineNumber: 416,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 345,
+                                        lineNumber: 412,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -686,7 +813,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Account"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 369,
+                                                lineNumber: 436,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -706,33 +833,33 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "Personal"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 385,
+                                                        lineNumber: 452,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "PropFirm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 386,
+                                                        lineNumber: 453,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "Demo"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 387,
+                                                        lineNumber: 454,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 372,
+                                                lineNumber: 439,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 368,
+                                        lineNumber: 435,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -748,7 +875,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Setup Type"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 393,
+                                                lineNumber: 460,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -768,54 +895,54 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "Breakout"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 409,
+                                                        lineNumber: 476,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "Pullback"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 410,
+                                                        lineNumber: 477,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "Reversal"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 411,
+                                                        lineNumber: 478,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "Scalp"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 412,
+                                                        lineNumber: 479,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "Swing"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 413,
+                                                        lineNumber: 480,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         children: "News"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 414,
+                                                        lineNumber: 481,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 396,
+                                                lineNumber: 463,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 392,
+                                        lineNumber: 459,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -831,7 +958,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Emotional State"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 420,
+                                                lineNumber: 487,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -852,7 +979,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "😌 Calm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 436,
+                                                        lineNumber: 503,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -860,7 +987,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "🎯 Focused"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 437,
+                                                        lineNumber: 504,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -868,7 +995,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "💪 Confident"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 438,
+                                                        lineNumber: 505,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -876,7 +1003,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⚡ Rushed"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 439,
+                                                        lineNumber: 506,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -884,7 +1011,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "😤 Frustrated"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 440,
+                                                        lineNumber: 507,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -892,19 +1019,19 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "😰 Anxious"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 441,
+                                                        lineNumber: 508,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 423,
+                                                lineNumber: 490,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 419,
+                                        lineNumber: 486,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -920,7 +1047,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                 children: "Setup Quality"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 447,
+                                                lineNumber: 514,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -941,7 +1068,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⭐ 1"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 463,
+                                                        lineNumber: 530,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -949,7 +1076,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⭐⭐ 2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 464,
+                                                        lineNumber: 531,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -957,7 +1084,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⭐⭐⭐ 3"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 465,
+                                                        lineNumber: 532,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -965,7 +1092,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⭐⭐⭐⭐ 4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 466,
+                                                        lineNumber: 533,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -973,25 +1100,25 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                                         children: "⭐⭐⭐⭐⭐ 5"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                        lineNumber: 467,
+                                                        lineNumber: 534,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                                lineNumber: 450,
+                                                lineNumber: 517,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 446,
+                                        lineNumber: 513,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                lineNumber: 197,
+                                lineNumber: 255,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1010,7 +1137,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                         children: "Trade Notes"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 474,
+                                        lineNumber: 541,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1031,13 +1158,13 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 477,
+                                        lineNumber: 544,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                lineNumber: 473,
+                                lineNumber: 540,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1065,7 +1192,7 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                         children: isLoading ? 'Adding...' : 'Add Trade'
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 498,
+                                        lineNumber: 565,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1085,39 +1212,39 @@ function QuickAddTradeForm({ onClose, onTradeAdded }) {
                                         children: "Cancel"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                        lineNumber: 516,
+                                        lineNumber: 583,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                                lineNumber: 497,
+                                lineNumber: 564,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                        lineNumber: 196,
+                        lineNumber: 231,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-                lineNumber: 140,
+                lineNumber: 175,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-            lineNumber: 124,
+            lineNumber: 156,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/QuickAddTradeForm.tsx",
-        lineNumber: 123,
+        lineNumber: 155,
         columnNumber: 5
     }, this);
 }
-_s(QuickAddTradeForm, "nECp8HRI+TnzMhqAZefa3U0V790=");
+_s(QuickAddTradeForm, "WTQjDJoyAcT++TVhaTocweUjADE=");
 _c = QuickAddTradeForm;
 var _c;
 __turbopack_context__.k.register(_c, "QuickAddTradeForm");
@@ -1130,11 +1257,12 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 __turbopack_context__.s([
     "default",
-    ()=>DashboardHeader
+    ()=>DashboardHeaderV3
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-icons/fi/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/ThemeContext.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickAddTradeForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/QuickAddTradeForm.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
@@ -1142,9 +1270,11 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function DashboardHeader() {
+;
+function DashboardHeaderV3() {
     _s();
     const [showAddTrade, setShowAddTrade] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const { theme, toggleTheme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
@@ -1155,8 +1285,12 @@ function DashboardHeader() {
                     padding: '10px 16px',
                     borderBottom: '1px solid var(--card-border)',
                     backgroundColor: 'transparent',
-                    minHeight: '56px'
+                    minHeight: '56px',
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 100
                 },
+                role: "banner",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
@@ -1172,10 +1306,10 @@ function DashboardHeader() {
                                     color: 'var(--foreground)',
                                     margin: 0
                                 },
-                                children: "Backtesting Dashboard"
+                                children: "Young Money FX"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                lineNumber: 24,
+                                lineNumber: 30,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1183,16 +1317,16 @@ function DashboardHeader() {
                                     fontSize: '13px',
                                     color: 'var(--neutral-color)'
                                 },
-                                children: "Performance & calendar overview"
+                                children: "Trading Journal"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                lineNumber: 34,
+                                lineNumber: 40,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                        lineNumber: 23,
+                        lineNumber: 29,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1224,16 +1358,17 @@ function DashboardHeader() {
                                     e.currentTarget.style.borderColor = 'var(--card-border)';
                                     e.currentTarget.style.boxShadow = 'none';
                                 },
+                                "aria-label": "Notifications",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBell"], {
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                    lineNumber: 70,
+                                    lineNumber: 76,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                lineNumber: 47,
+                                lineNumber: 52,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1258,66 +1393,120 @@ function DashboardHeader() {
                                     e.currentTarget.style.borderColor = 'var(--card-border)';
                                     e.currentTarget.style.boxShadow = 'none';
                                 },
+                                "aria-label": "Settings",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSettings"], {
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                    lineNumber: 96,
+                                    lineNumber: 103,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                lineNumber: 73,
+                                lineNumber: 79,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>setShowAddTrade(true),
-                                "aria-label": "Add trade",
+                                onClick: toggleTheme,
                                 style: {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '40px',
-                                    height: '40px',
-                                    borderRadius: '10px',
-                                    border: 'none',
-                                    background: 'linear-gradient(135deg, var(--purple-base), var(--purple-dark))',
-                                    color: 'white',
+                                    width: '36px',
+                                    height: '36px',
+                                    borderRadius: '8px',
+                                    border: '1px solid var(--card-border)',
+                                    backgroundColor: 'transparent',
+                                    color: 'var(--foreground)',
                                     cursor: 'pointer',
-                                    boxShadow: '0 6px 18px rgba(139,92,246,0.15)'
+                                    transition: 'all 0.2s ease'
                                 },
-                                children: "+"
+                                onMouseEnter: (e)=>{
+                                    e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
+                                    e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
+                                },
+                                onMouseLeave: (e)=>{
+                                    e.currentTarget.style.borderColor = 'var(--card-border)';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                },
+                                "aria-label": `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`,
+                                children: theme === 'dark' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSun"], {
+                                    size: 16
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/DashboardHeaderV3.tsx",
+                                    lineNumber: 131,
+                                    columnNumber: 33
+                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiMoon"], {
+                                    size: 16
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/DashboardHeaderV3.tsx",
+                                    lineNumber: 131,
+                                    columnNumber: 55
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                                lineNumber: 100,
+                                lineNumber: 106,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>setShowAddTrade(true),
+                                style: {
+                                    background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                    color: 'white',
+                                    padding: '8px 16px',
+                                    borderRadius: '8px',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '13px',
+                                    transition: 'all 0.2s ease',
+                                    whiteSpace: 'nowrap'
+                                },
+                                onMouseEnter: (e)=>{
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.4)';
+                                },
+                                onMouseLeave: (e)=>{
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                },
+                                children: "+ Add Trade"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/DashboardHeaderV3.tsx",
+                                lineNumber: 134,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                        lineNumber: 39,
+                        lineNumber: 45,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                lineNumber: 12,
+                lineNumber: 14,
                 columnNumber: 7
             }, this),
             showAddTrade && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickAddTradeForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                onClose: ()=>setShowAddTrade(false)
+                onClose: ()=>setShowAddTrade(false),
+                onTradeAdded: ()=>setShowAddTrade(false)
             }, void 0, false, {
                 fileName: "[project]/src/components/DashboardHeaderV3.tsx",
-                lineNumber: 123,
+                lineNumber: 163,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true);
 }
-_s(DashboardHeader, "9+VhkZiCcGPQMX33fUrow0q2gVk=");
-_c = DashboardHeader;
+_s(DashboardHeaderV3, "GF2kHXx9IX/iUexirEGcxKk63ws=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
+    ];
+});
+_c = DashboardHeaderV3;
 var _c;
-__turbopack_context__.k.register(_c, "DashboardHeader");
+__turbopack_context__.k.register(_c, "DashboardHeaderV3");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -1333,9 +1522,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-icons/fi/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
+;
 ;
 ;
 ;
@@ -1374,157 +1565,346 @@ const items = [
 function IconSidebar() {
     _s();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
-        style: {
-            flexDirection: 'column',
-            gap: '10px',
-            width: '64px',
-            padding: '10px',
-            height: '100vh',
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'var(--background)',
-            borderRight: '1px solid var(--panel-muted)'
-        },
-        className: "hidden md:flex",
-        "aria-label": "Main navigation",
+    const [isMobileOpen, setIsMobileOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
                 style: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '48px',
-                    marginBottom: '8px'
-                },
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    style: {
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
-                        color: 'white',
-                        fontWeight: '700',
-                        fontSize: '14px',
-                        boxShadow: 'var(--shadow-floating)'
-                    },
-                    children: "YM"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/IconSidebar.tsx",
-                    lineNumber: 44,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 35,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                style: {
-                    display: 'flex',
                     flexDirection: 'column',
                     gap: '10px',
-                    alignItems: 'center',
-                    flex: 1
+                    width: '64px',
+                    padding: '10px',
+                    height: '100vh',
+                    position: 'sticky',
+                    top: 0,
+                    backgroundColor: 'var(--background)',
+                    borderRight: '1px solid var(--panel-muted)'
                 },
-                children: items.map((it)=>{
-                    const ActiveIcon = it.icon;
-                    const isActive = pathname === it.href;
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        href: it.href,
-                        title: it.label,
-                        "aria-current": isActive ? 'page' : undefined,
+                className: "hidden md:flex",
+                role: "navigation",
+                "aria-label": "Main navigation",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            width: '44px',
-                            height: '44px',
-                            borderRadius: '10px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            transition: 'all 0.2s ease',
-                            background: isActive ? 'linear-gradient(135deg, var(--purple-base) 0%, rgba(139,92,246,0.12) 100%)' : 'transparent',
-                            color: isActive ? 'white' : 'var(--neutral-color)',
-                            border: isActive ? 'none' : `1px solid var(--card-border)`,
-                            boxShadow: isActive ? '0 6px 18px rgba(139, 92, 246, 0.12)' : 'none',
-                            cursor: 'pointer',
-                            position: 'relative',
-                            overflow: 'visible'
+                            height: '48px',
+                            marginBottom: '8px'
                         },
-                        onMouseEnter: (e)=>{
-                            if (!isActive) {
-                                e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
-                                e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
-                            }
-                        },
-                        onMouseLeave: (e)=>{
-                            if (!isActive) {
-                                e.currentTarget.style.borderColor = 'var(--card-border)';
-                                e.currentTarget.style.boxShadow = 'none';
-                            }
-                        },
-                        children: [
-                            isActive && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                style: {
-                                    position: 'absolute',
-                                    left: '-8px',
-                                    width: '4px',
-                                    height: '24px',
-                                    borderRadius: '4px',
-                                    background: 'linear-gradient(180deg, var(--purple-base), var(--purple-dark))'
-                                },
-                                "aria-hidden": true
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/IconSidebar.tsx",
-                                lineNumber: 109,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveIcon, {
-                                style: {
-                                    width: '18px',
-                                    height: '18px'
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/IconSidebar.tsx",
-                                lineNumber: 118,
-                                columnNumber: 15
-                            }, this)
-                        ]
-                    }, it.href, true, {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                color: 'white',
+                                fontWeight: '700',
+                                fontSize: '14px',
+                                boxShadow: 'var(--shadow-floating)'
+                            },
+                            children: "YM"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/IconSidebar.tsx",
+                            lineNumber: 49,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 74,
-                        columnNumber: 13
-                    }, this);
-                })
-            }, void 0, false, {
+                        lineNumber: 40,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                        style: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '10px',
+                            alignItems: 'center',
+                            flex: 1
+                        },
+                        children: items.map((it)=>{
+                            const ActiveIcon = it.icon;
+                            const isActive = pathname === it.href;
+                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: it.href,
+                                title: it.label,
+                                "aria-current": isActive ? 'page' : undefined,
+                                style: {
+                                    width: '44px',
+                                    height: '44px',
+                                    borderRadius: '10px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    transition: 'all 0.2s ease',
+                                    background: isActive ? 'linear-gradient(135deg, var(--purple-base) 0%, rgba(139,92,246,0.12) 100%)' : 'transparent',
+                                    color: isActive ? 'white' : 'var(--neutral-color)',
+                                    border: isActive ? 'none' : `1px solid var(--card-border)`,
+                                    boxShadow: isActive ? '0 6px 18px rgba(139, 92, 246, 0.12)' : 'none',
+                                    cursor: 'pointer',
+                                    position: 'relative',
+                                    overflow: 'visible'
+                                },
+                                onMouseEnter: (e)=>{
+                                    if (!isActive) {
+                                        e.currentTarget.style.borderColor = 'rgba(139,92,246,0.12)';
+                                        e.currentTarget.style.boxShadow = '0 6px 18px rgba(139,92,246,0.06)';
+                                    }
+                                },
+                                onMouseLeave: (e)=>{
+                                    if (!isActive) {
+                                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }
+                                },
+                                children: [
+                                    isActive && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            position: 'absolute',
+                                            left: '-8px',
+                                            width: '4px',
+                                            height: '24px',
+                                            borderRadius: '4px',
+                                            background: 'linear-gradient(180deg, var(--purple-base), var(--purple-dark))'
+                                        },
+                                        "aria-hidden": true
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/IconSidebar.tsx",
+                                        lineNumber: 114,
+                                        columnNumber: 19
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveIcon, {
+                                        style: {
+                                            width: '18px',
+                                            height: '18px'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/IconSidebar.tsx",
+                                        lineNumber: 123,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, it.href, true, {
+                                fileName: "[project]/src/components/IconSidebar.tsx",
+                                lineNumber: 79,
+                                columnNumber: 15
+                            }, this);
+                        })
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/IconSidebar.tsx",
+                        lineNumber: 68,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            marginTop: 'auto',
+                            fontSize: '12px',
+                            color: 'var(--neutral-color)',
+                            textAlign: 'center',
+                            paddingBottom: '8px'
+                        },
+                        children: "v0.1"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/IconSidebar.tsx",
+                        lineNumber: 129,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 63,
+                lineNumber: 24,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: "md:hidden",
+                onClick: ()=>setIsMobileOpen(!isMobileOpen),
                 style: {
-                    marginTop: 'auto',
-                    fontSize: '12px',
-                    color: 'var(--neutral-color)',
-                    textAlign: 'center',
-                    paddingBottom: '8px'
+                    position: 'fixed',
+                    bottom: '20px',
+                    left: '20px',
+                    zIndex: 40,
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '12px',
+                    backgroundColor: 'var(--purple-base)',
+                    border: 'none',
+                    color: 'white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 'var(--shadow-floating)'
                 },
-                children: "v0.1"
+                "aria-label": isMobileOpen ? 'Close navigation' : 'Open navigation',
+                children: isMobileOpen ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
+                    size: 24
+                }, void 0, false, {
+                    fileName: "[project]/src/components/IconSidebar.tsx",
+                    lineNumber: 165,
+                    columnNumber: 25
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiMenu"], {
+                    size: 24
+                }, void 0, false, {
+                    fileName: "[project]/src/components/IconSidebar.tsx",
+                    lineNumber: 165,
+                    columnNumber: 45
+                }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 124,
+                lineNumber: 143,
+                columnNumber: 7
+            }, this),
+            isMobileOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    zIndex: 30
+                },
+                onClick: ()=>setIsMobileOpen(false)
+            }, void 0, false, {
+                fileName: "[project]/src/components/IconSidebar.tsx",
+                lineNumber: 170,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
+                style: {
+                    position: 'fixed',
+                    left: 0,
+                    top: 0,
+                    width: '280px',
+                    height: '100%',
+                    backgroundColor: 'var(--background)',
+                    borderRight: '1px solid var(--panel-muted)',
+                    transform: isMobileOpen ? 'translateX(0)' : 'translateX(-100%)',
+                    transition: 'transform 0.3s ease',
+                    zIndex: 35,
+                    padding: '20px',
+                    overflowY: 'auto'
+                },
+                role: "navigation",
+                "aria-label": "Mobile navigation",
+                "aria-hidden": !isMobileOpen,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            marginBottom: '30px'
+                        },
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                color: 'white',
+                                fontWeight: '700',
+                                fontSize: '14px'
+                            },
+                            children: "YM"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/IconSidebar.tsx",
+                            lineNumber: 204,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/IconSidebar.tsx",
+                        lineNumber: 203,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                        style: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '12px'
+                        },
+                        children: items.map((it)=>{
+                            const ActiveIcon = it.icon;
+                            const isActive = pathname === it.href;
+                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: it.href,
+                                onClick: ()=>setIsMobileOpen(false),
+                                "aria-current": isActive ? 'page' : undefined,
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '12px',
+                                    padding: '12px 16px',
+                                    borderRadius: '10px',
+                                    backgroundColor: isActive ? 'linear-gradient(135deg, var(--purple-base) 0%, rgba(139,92,246,0.12) 100%)' : 'transparent',
+                                    color: isActive ? 'white' : 'var(--neutral-color)',
+                                    border: isActive ? 'none' : `1px solid var(--card-border)`,
+                                    textDecoration: 'none',
+                                    transition: 'all 0.2s ease',
+                                    cursor: 'pointer'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveIcon, {
+                                        style: {
+                                            width: '20px',
+                                            height: '20px'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/IconSidebar.tsx",
+                                        lineNumber: 246,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontSize: '16px',
+                                            fontWeight: '500'
+                                        },
+                                        children: it.label
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/IconSidebar.tsx",
+                                        lineNumber: 247,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, it.href, true, {
+                                fileName: "[project]/src/components/IconSidebar.tsx",
+                                lineNumber: 227,
+                                columnNumber: 15
+                            }, this);
+                        })
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/IconSidebar.tsx",
+                        lineNumber: 222,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            marginTop: 'auto',
+                            paddingTop: '30px',
+                            borderTop: '1px solid var(--card-border)',
+                            fontSize: '12px',
+                            color: 'var(--neutral-color)',
+                            textAlign: 'center'
+                        },
+                        children: "Young Money FX v0.1"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/IconSidebar.tsx",
+                        lineNumber: 253,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/IconSidebar.tsx",
+                lineNumber: 184,
                 columnNumber: 7
             }, this)
         ]
-    }, void 0, true, {
-        fileName: "[project]/src/components/IconSidebar.tsx",
-        lineNumber: 20,
-        columnNumber: 5
-    }, this);
+    }, void 0, true);
 }
-_s(IconSidebar, "xbyQPtUVMO7MNj7WjJlpdWqRcTo=", false, function() {
+_s(IconSidebar, "5RQ/a78m6atKe8RJe4tURYhWe3c=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"]
     ];
@@ -1544,10 +1924,12 @@ __turbopack_context__.s([
     ()=>AppShell
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$DashboardHeaderV3$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/DashboardHeaderV3.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$IconSidebar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/IconSidebar.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/ThemeContext.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/shared/lib/app-dynamic.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hot-toast/dist/index.mjs [app-client] (ecmascript)");
 ;
 ;
 var _s = __turbopack_context__.k.signature();
@@ -1556,9 +1938,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
+;
 function AppShell({ children }) {
     _s();
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const OnboardingModal = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(()=>__turbopack_context__.A("[project]/src/components/OnboardingModal.tsx [app-client] (ecmascript, next/dynamic entry, async loader)"), {
         loadableGenerated: {
             modules: [
@@ -1567,6 +1952,14 @@ function AppShell({ children }) {
         },
         ssr: false
     });
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "AppShell.useEffect": ()=>{
+            setMounted(true);
+        }
+    }["AppShell.useEffect"], []);
+    if (!mounted) {
+        return null;
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
             display: 'flex',
@@ -1577,17 +1970,17 @@ function AppShell({ children }) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                 href: "#main-content",
-                className: "sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-indigo-600 text-white px-3 py-1 rounded",
+                className: "sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-indigo-600 text-white px-3 py-1 rounded z-50",
                 "aria-label": "Skip to main content",
                 children: "Skip to content"
             }, void 0, false, {
                 fileName: "[project]/src/components/AppShell.tsx",
-                lineNumber: 20,
+                lineNumber: 30,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$IconSidebar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/src/components/AppShell.tsx",
-                lineNumber: 28,
+                lineNumber: 38,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1595,12 +1988,13 @@ function AppShell({ children }) {
                     display: 'flex',
                     flexDirection: 'column',
                     flex: 1,
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    width: '100%'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$DashboardHeaderV3$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                         fileName: "[project]/src/components/AppShell.tsx",
-                        lineNumber: 36,
+                        lineNumber: 47,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -1608,36 +2002,56 @@ function AppShell({ children }) {
                         style: {
                             flex: 1,
                             overflowY: 'auto',
+                            overflowX: 'hidden',
                             padding: '20px',
                             maxWidth: '1400px',
                             margin: '0 auto',
                             width: '100%'
                         },
+                        role: "main",
                         children: children
                     }, void 0, false, {
                         fileName: "[project]/src/components/AppShell.tsx",
-                        lineNumber: 38,
+                        lineNumber: 49,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(OnboardingModal, {}, void 0, false, {
                         fileName: "[project]/src/components/AppShell.tsx",
-                        lineNumber: 52,
+                        lineNumber: 65,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/AppShell.tsx",
-                lineNumber: 30,
+                lineNumber: 40,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {
+                position: "bottom-right",
+                reverseOrder: false,
+                gutter: 8,
+                toastOptions: {
+                    duration: 4000,
+                    style: {
+                        background: 'var(--card-bg)',
+                        color: 'var(--foreground)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: '8px'
+                    }
+                }
+            }, void 0, false, {
+                fileName: "[project]/src/components/AppShell.tsx",
+                lineNumber: 68,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/AppShell.tsx",
-        lineNumber: 14,
+        lineNumber: 24,
         columnNumber: 5
     }, this);
 }
-_s(AppShell, "JkSxfi8+JQlqgIgDOc3wQN+nVIw=", false, function() {
+_s(AppShell, "oSt1G6qmSQxWcV8OIqjpLRFbJ0c=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$ThemeContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];
