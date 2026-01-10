@@ -1,382 +1,273 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FiBookOpen, FiCheckCircle, FiClock, FiTrendingUp } from 'react-icons/fi';
+import DashboardHeader from '@/components/DashboardHeader';
+import AnimatedCard from '@/components/AnimatedCard';
+import PreTradeChecklist from '@/components/PreTradeChecklist';
+import TradeUpdatesList from '@/components/TradeUpdatesList';
+import PostTradeReflection from '@/components/PostTradeReflection';
 import VoiceRecorder from '@/components/VoiceRecorder';
 import ScreenshotUploader from '@/components/ScreenshotUploader';
 import { useTheme } from '@/context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 
+interface Trade {
+  id: string;
+  pair: string;
+  direction: string;
+  entryPrice: number;
+  exitPrice?: number;
+  entryTime: string;
+  exitTime?: string;
+  outcome?: string;
+  profitLoss?: number;
+  emotionalState?: string;
+  strategy?: string;
+  status: string;
+}
+
 export default function TradeReviewPage() {
   const { theme, toggleTheme } = useTheme();
   const [mounted] = useState(() => typeof window !== 'undefined');
   const [selectedTradeId, setSelectedTradeId] = useState<string | null>(null);
-  const [trades, setTrades] = useState<any[]>([]);
-  const [reviewData, setReviewData] = useState({
-    whatLearned: '',
-    mistakes: [] as string[],
-    emotionalState: 'calm',
-    setupQuality: 3,
-  });
-  const [currentMistake, setCurrentMistake] = useState('');
+  const [trades, setTrades] = useState<Trade[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'checklist' | 'updates' | 'reflection' | 'media'>('checklist');
 
   useEffect(() => {
     if (!mounted) return;
-
-    const fetchTrades = async () => {
-      try {
-        const response = await fetch('/api/trades', {
-          headers: {
-            'x-user-id': 'demo-user',
-          },
-        });
-
-        if (!response.ok) {
-          let errBody: unknown = null;
-          try { errBody = await response.json(); } catch (e) { errBody = await response.text(); }
-          console.error('Failed to fetch trades:', response.status, errBody);
-          setTrades([]);
-          return;
-        }
-
-        const data = await response.json();
-        if (!Array.isArray(data)) {
-          console.warn('Unexpected trades payload in review page', data);
-          setTrades([]);
-          return;
-        }
-
-        setTrades(data);
-      } catch (error) {
-        console.error('Error fetching trades:', error);
-      }
-    };
-
-    fetchTrades();
+    loadTrades();
   }, [mounted]);
 
-  const selectedTrade = trades.find(t => t.id === selectedTradeId);
-
-  const mistakeOptions = [
-    'Overtraded',
-    'Broke rules',
-    'Wrong entry point',
-    'Hesitated on trade',
-    'Exited too early',
-    'Exited too late',
-    'Ignored analysis',
-    'Bad position sizing',
-    'Emotion-driven',
-  ];
-
-  const toggleMistake = (mistake: string) => {
-    setReviewData(prev => ({
-      ...prev,
-      mistakes: prev.mistakes.includes(mistake)
-        ? prev.mistakes.filter(m => m !== mistake)
-        : [...prev.mistakes, mistake],
-    }));
-  };
-
-  const saveReview = async () => {
-    if (!selectedTrade) return;
-
+  const loadTrades = async () => {
     try {
-      const response = await fetch(`/api/trades/${selectedTrade.id}`, {
-        method: 'PUT',
+      setIsLoading(true);
+      const response = await fetch('/api/trades', {
         headers: {
-          'Content-Type': 'application/json',
           'x-user-id': 'demo-user',
         },
-        body: JSON.stringify({
-          whatLearned: reviewData.whatLearned,
-          mistakes: JSON.stringify(reviewData.mistakes),
-          emotionalState: reviewData.emotionalState,
-          setupQuality: reviewData.setupQuality,
-        }),
       });
 
-      if (response.ok) {
-        toast.success('Review saved');
-        setSelectedTradeId(null);
+      if (!response.ok) {
+        throw new Error('Failed to load trades');
       }
+
+      const data = await response.json();
+      setTrades(data);
     } catch (error) {
-      toast.error('Failed to save review');
+      console.error('Error loading trades:', error);
+      toast.error('Failed to load trades');
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const selectedTrade = trades.find(t => t.id === selectedTradeId);
+
+  const tabs = [
+    { id: 'checklist' as const, label: 'Pre-Trade Checklist', icon: FiCheckCircle },
+    { id: 'updates' as const, label: 'Trade Updates', icon: FiClock },
+    { id: 'reflection' as const, label: 'Post-Trade Reflection', icon: FiBookOpen },
+    { id: 'media' as const, label: 'Media & Notes', icon: FiTrendingUp }
+  ];
+
   if (!mounted) {
-    return <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }} />;
+    return <div className="min-h-screen bg-gray-50 dark:bg-gray-900" />;
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
-        <div style={{ marginBottom: '32px' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
-            Trade Reviews
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Trade Lifecycle Review
           </h1>
-          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>Deep dive into your trades and learn from them</p>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
+            Complete pre-trade preparation, track in-trade decisions, and reflect on outcomes
+          </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-          {/* Trades List */}
-          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
-            <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>Recent Trades</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px', overflowY: 'auto' }}>
-              {trades.length > 0 ? (
-                trades.map(trade => (
-                  <button
-                    key={trade.id}
-                    onClick={() => {
-                      setSelectedTradeId(trade.id);
-                      setReviewData({
-                        whatLearned: trade.whatLearned || '',
-                        mistakes: trade.mistakes ? JSON.parse(trade.mistakes) : [],
-                        emotionalState: trade.emotionalState || 'calm',
-                        setupQuality: trade.setupQuality || 3,
-                      });
-                    }}
-                    style={{
-                      width: '100%',
-                      textAlign: 'left',
-                      padding: '12px',
-                      borderRadius: '8px',
-                      border: 'none',
-                      backgroundColor: selectedTradeId === trade.id ? 'var(--purple-base)' : 'var(--panel-muted)',
-                      color: selectedTradeId === trade.id ? 'white' : 'var(--text-primary)',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      fontSize: '13px',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (selectedTradeId !== trade.id) {
-                        e.currentTarget.style.backgroundColor = 'var(--card-border)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (selectedTradeId !== trade.id) {
-                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
-                      }
-                    }}
-                  >
-                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
-                    <div style={{ fontSize: '11px', opacity: 0.75 }}>
-                      {new Date(trade.entryTime).toLocaleDateString()}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Trades List Sidebar */}
+          <div className="lg:col-span-1">
+            <AnimatedCard className="p-6">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Recent Trades
+              </h2>
+
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {isLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                  </div>
+                ) : trades.length > 0 ? (
+                  trades.map((trade) => (
+                    <button
+                      key={trade.id}
+                      onClick={() => setSelectedTradeId(trade.id)}
+                      className={`w-full text-left p-3 rounded-lg transition-all ${
+                        selectedTradeId === trade.id
+                          ? 'bg-blue-100 dark:bg-blue-900 border-blue-500'
+                          : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      } border`}
+                    >
+                      <div className="font-medium text-gray-900 dark:text-white">
+                        {trade.pair} {trade.direction}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                        {new Date(trade.entryTime).toLocaleDateString()}
+                      </div>
+                      <div className={`text-sm font-medium ${
+                        trade.outcome === 'WIN' ? 'text-green-600' :
+                        trade.outcome === 'LOSS' ? 'text-red-600' :
+                        'text-gray-600'
+                      }`}>
+                        {trade.outcome || 'Open'}
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-gray-500 dark:text-gray-400 text-center py-4">
+                    No trades yet
+                  </p>
+                )}
+              </div>
+            </AnimatedCard>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="lg:col-span-3">
+            {selectedTrade ? (
+              <div className="space-y-6">
+                {/* Trade Summary Card */}
+                <AnimatedCard className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                      {selectedTrade.pair} - {selectedTrade.direction}
+                    </h2>
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      selectedTrade.status === 'closed' ? 'bg-green-100 text-green-800' :
+                      selectedTrade.status === 'open' ? 'bg-blue-100 text-blue-800' :
+                      'bg-gray-100 text-gray-800'
+                    }`}>
+                      {selectedTrade.status}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Entry Price</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {selectedTrade.entryPrice.toFixed(5)}
+                      </p>
                     </div>
-                  </button>
-                ))
-              ) : (
-                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>
-                  No trades yet
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Exit Price</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {selectedTrade.exitPrice?.toFixed(5) || 'Open'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">P&L</p>
+                      <p className={`font-semibold ${
+                        (selectedTrade.profitLoss || 0) >= 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {selectedTrade.profitLoss?.toFixed(2) || 'N/A'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Outcome</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {selectedTrade.outcome || 'Open'}
+                      </p>
+                    </div>
+                  </div>
+                </AnimatedCard>
+
+                {/* Tab Navigation */}
+                <AnimatedCard className="p-1">
+                  <div className="flex space-x-1">
+                    {tabs.map((tab) => {
+                      const Icon = tab.icon;
+                      return (
+                        <button
+                          key={tab.id}
+                          onClick={() => setActiveTab(tab.id)}
+                          className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                            activeTab === tab.id
+                              ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4" />
+                          <span>{tab.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </AnimatedCard>
+
+                {/* Tab Content */}
+                <div className="min-h-96">
+                  {activeTab === 'checklist' && (
+                    <PreTradeChecklist
+                      tradeId={selectedTrade.id}
+                      onChecklistComplete={(completedItems) => {
+                        toast.success('Pre-trade checklist completed!');
+                      }}
+                    />
+                  )}
+
+                  {activeTab === 'updates' && (
+                    <TradeUpdatesList tradeId={selectedTrade.id} />
+                  )}
+
+                  {activeTab === 'reflection' && (
+                    <PostTradeReflection
+                      tradeId={selectedTrade.id}
+                      onReflectionComplete={(reflection) => {
+                        toast.success('Post-trade reflection saved!');
+                      }}
+                    />
+                  )}
+
+                  {activeTab === 'media' && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <AnimatedCard className="p-6">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                          Voice Notes
+                        </h3>
+                        <VoiceRecorder />
+                      </AnimatedCard>
+
+                      <AnimatedCard className="p-6">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                          Screenshots
+                        </h3>
+                        <ScreenshotUploader />
+                      </AnimatedCard>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <AnimatedCard className="p-12 text-center">
+                <FiBookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  Select a Trade to Review
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Choose a trade from the sidebar to access the complete lifecycle review
                 </p>
-              )}
-            </div>
+              </AnimatedCard>
+            )}
           </div>
-
-          {/* Review Form */}
-          {selectedTrade ? (
-            <div style={{ gridColumn: 'auto / span 2', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              {/* Trade Summary */}
-              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
-                <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>
-                  {selectedTrade.pair} - {selectedTrade.direction}
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', fontSize: '13px' }}>
-                  <div>
-                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Entry</p>
-                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-                      {selectedTrade.entryPrice.toFixed(5)}
-                    </p>
-                  </div>
-                  <div>
-                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Exit</p>
-                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-                      {selectedTrade.exitPrice?.toFixed(5) || 'Open'}
-                    </p>
-                  </div>
-                  <div>
-                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>P&L</p>
-                    <p style={{ fontWeight: '600', color: selectedTrade.profitLoss >= 0 ? 'var(--win-color)' : 'var(--loss-color)', margin: 0 }}>
-                      {selectedTrade.profitLoss?.toFixed(2) || 'N/A'}
-                    </p>
-                  </div>
-                  <div>
-                    <p style={{ color: 'var(--text-secondary)', margin: 0, marginBottom: '4px' }}>Outcome</p>
-                    <p style={{ fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-                      {selectedTrade.outcome || 'Open'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Review Fields */}
-              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px', margin: 0 }}>Review Details</h3>
-
-                {/* What I Learned */}
-                <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
-                    What I Learned
-                  </label>
-                  <textarea
-                    value={reviewData.whatLearned}
-                    onChange={(e) =>
-                      setReviewData(prev => ({ ...prev, whatLearned: e.target.value }))
-                    }
-                    placeholder="What did this trade teach you?"
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      border: '1px solid var(--card-border)',
-                      borderRadius: '6px',
-                      backgroundColor: 'var(--panel-muted)',
-                      color: 'var(--text-primary)',
-                      fontSize: '13px',
-                      outline: 'none',
-                      resize: 'vertical',
-                      minHeight: '80px',
-                      fontFamily: 'inherit',
-                    }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
-                  />
-                </div>
-
-                {/* Emotional State */}
-                <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
-                    Emotional State
-                  </label>
-                  <select
-                    value={reviewData.emotionalState}
-                    onChange={(e) =>
-                      setReviewData(prev => ({ ...prev, emotionalState: e.target.value }))
-                    }
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      border: '1px solid var(--card-border)',
-                      borderRadius: '6px',
-                      backgroundColor: 'var(--panel-muted)',
-                      color: 'var(--text-primary)',
-                      fontSize: '13px',
-                      outline: 'none',
-                    }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
-                  >
-                    <option>calm</option>
-                    <option>rushed</option>
-                    <option>frustrated</option>
-                    <option>confident</option>
-                    <option>fearful</option>
-                  </select>
-                </div>
-
-                {/* Setup Quality */}
-                <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
-                    Setup Quality Rating
-                  </label>
-                  <select
-                    value={reviewData.setupQuality}
-                    onChange={(e) =>
-                      setReviewData(prev => ({ ...prev, setupQuality: parseInt(e.target.value) }))
-                    }
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      border: '1px solid var(--card-border)',
-                      borderRadius: '6px',
-                      backgroundColor: 'var(--panel-muted)',
-                      color: 'var(--text-primary)',
-                      fontSize: '13px',
-                      outline: 'none',
-                    }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--purple-base)'; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; }}
-                  >
-                    <option value="1">⭐ Poor</option>
-                    <option value="2">⭐⭐ Below Average</option>
-                    <option value="3">⭐⭐⭐ Average</option>
-                    <option value="4">⭐⭐⭐⭐ Good</option>
-                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                  </select>
-                </div>
-
-                {/* Mistakes */}
-                <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px' }}>
-                    Mistakes Made
-                  </label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-                    {mistakeOptions.map(mistake => (
-                      <label key={mistake} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                        <input
-                          type="checkbox"
-                          checked={reviewData.mistakes.includes(mistake)}
-                          onChange={() => toggleMistake(mistake)}
-                          style={{
-                            width: '16px',
-                            height: '16px',
-                            borderRadius: '4px',
-                            border: '1px solid var(--card-border)',
-                            cursor: 'pointer',
-                            accentColor: 'var(--purple-base)',
-                          }}
-                        />
-                        <span style={{ fontSize: '13px', color: 'var(--text-primary)' }}>{mistake}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={saveReview}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
-                  color: 'white',
-                  fontWeight: '600',
-                  fontSize: '14px',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-1px)';
-                  e.currentTarget.style.boxShadow = '0 8px 16px rgba(168, 85, 247, 0.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                Save Review
-              </button>
-            </div>
-          ) : (
-            <div style={{ gridColumn: 'auto / span 2', backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '48px 20px', textAlign: 'center' }}>
-              <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '14px' }}>Select a trade to review</p>
-            </div>
-          )}
         </div>
-
-        {/* Media Uploads */}
-        {selectedTrade && (
-          <div style={{ marginTop: '32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
-              <VoiceRecorder />
-            </div>
-            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
-              <ScreenshotUploader />
-            </div>
-          </div>
-        )}
       </main>
 
       <Toaster position="bottom-right" />

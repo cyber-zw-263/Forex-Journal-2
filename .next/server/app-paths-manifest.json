@@ -16,6 +16,8 @@
   "/api/strategies/[id]/sequences/[sequenceId]/route": "app/api/strategies/[id]/sequences/[sequenceId]/route.js",
   "/api/strategies/[id]/sequences/route": "app/api/strategies/[id]/sequences/route.js",
   "/api/strategies/route": "app/api/strategies/route.js",
+  "/api/trades/[id]/checklist/route": "app/api/trades/[id]/checklist/route.js",
+  "/api/trades/[id]/reflection/route": "app/api/trades/[id]/reflection/route.js",
   "/api/trades/[id]/route": "app/api/trades/[id]/route.js",
   "/api/trades/[id]/updates/route": "app/api/trades/[id]/updates/route.js",
   "/api/trades/route": "app/api/trades/route.js",
@@ -23,7 +25,9 @@
   "/calendar/page": "app/calendar/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/insights/page": "app/insights/page.js",
+  "/journal/page": "app/journal/page.js",
   "/page": "app/page.js",
   "/planning/page": "app/planning/page.js",
-  "/review/page": "app/review/page.js"
+  "/review/page": "app/review/page.js",
+  "/strategies/page": "app/strategies/page.js"
 }

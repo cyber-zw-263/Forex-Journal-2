@@ -1,0 +1,3 @@
+{
+  "/api/trades/[id]/reflection/route": "app/api/trades/[id]/reflection/route.js"
+}

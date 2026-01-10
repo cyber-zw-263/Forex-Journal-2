@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
         profitLoss: data.profitLoss ?? null,
         profitLossPercent: data.profitLossPercent ?? null,
         outcome: data.outcome || 'OPEN',
-        strategy: data.strategy ?? null,
+        strategyId: data.strategy ?? null,
         notes: data.notes ?? null,
         emotionalState: data.emotionalState ?? null,
         setupQuality: data.setupQuality ?? null,

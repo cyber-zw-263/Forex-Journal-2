@@ -11,6 +11,9 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const formData = await request.formData();
 
@@ -60,6 +63,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const { searchParams } = new URL(request.url);
     const tradeId = searchParams.get('tradeId');

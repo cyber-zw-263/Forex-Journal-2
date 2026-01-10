@@ -8,6 +8,9 @@ export async function GET(
 ) {
   const { id } = await params;
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
 
     // Verify trade belongs to user
@@ -38,6 +41,9 @@ export async function POST(
 ) {
   const { id } = await params;
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
 
@@ -60,7 +66,7 @@ export async function POST(
 
     const update = await prisma.tradeUpdate.create({
       data: {
-        id,
+        tradeId: id,
         action: action || 'none',
         reason: reason || null,
         emotionalState: emotionalState || null,

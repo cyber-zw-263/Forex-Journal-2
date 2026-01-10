@@ -8,6 +8,9 @@ export async function PATCH(
 ) {
   const { id, sequenceId } = await params;
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
 
@@ -80,6 +83,9 @@ export async function DELETE(
 ) {
   const { id, sequenceId } = await params;
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
     const userId = request.headers.get('x-user-id') || 'demo-user';
 
     // Verify strategy belongs to user

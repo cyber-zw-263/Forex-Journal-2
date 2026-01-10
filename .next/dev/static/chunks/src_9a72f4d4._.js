@@ -1537,6 +1537,11 @@ const items = [
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiHome"]
     },
     {
+        href: '/strategies',
+        label: 'Strategies',
+        icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTarget"]
+    },
+    {
         href: '/analytics',
         label: 'Analytics',
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBarChart2"]
@@ -1560,6 +1565,11 @@ const items = [
         href: '/review',
         label: 'Review',
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBookOpen"]
+    },
+    {
+        href: '/journal',
+        label: 'Journal',
+        icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiEdit"]
     }
 ];
 function IconSidebar() {
@@ -1609,12 +1619,12 @@ function IconSidebar() {
                             children: "YM"
                         }, void 0, false, {
                             fileName: "[project]/src/components/IconSidebar.tsx",
-                            lineNumber: 49,
+                            lineNumber: 51,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 40,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1673,7 +1683,7 @@ function IconSidebar() {
                                         "aria-hidden": true
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/IconSidebar.tsx",
-                                        lineNumber: 114,
+                                        lineNumber: 116,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveIcon, {
@@ -1683,19 +1693,19 @@ function IconSidebar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/IconSidebar.tsx",
-                                        lineNumber: 123,
+                                        lineNumber: 125,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, it.href, true, {
                                 fileName: "[project]/src/components/IconSidebar.tsx",
-                                lineNumber: 79,
+                                lineNumber: 81,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 68,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1709,13 +1719,13 @@ function IconSidebar() {
                         children: "v0.1"
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 129,
+                        lineNumber: 131,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 24,
+                lineNumber: 26,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1743,18 +1753,18 @@ function IconSidebar() {
                     size: 24
                 }, void 0, false, {
                     fileName: "[project]/src/components/IconSidebar.tsx",
-                    lineNumber: 165,
+                    lineNumber: 167,
                     columnNumber: 25
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiMenu"], {
                     size: 24
                 }, void 0, false, {
                     fileName: "[project]/src/components/IconSidebar.tsx",
-                    lineNumber: 165,
+                    lineNumber: 167,
                     columnNumber: 45
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 143,
+                lineNumber: 145,
                 columnNumber: 7
             }, this),
             isMobileOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1770,7 +1780,7 @@ function IconSidebar() {
                 onClick: ()=>setIsMobileOpen(false)
             }, void 0, false, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 170,
+                lineNumber: 172,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
@@ -1812,12 +1822,12 @@ function IconSidebar() {
                             children: "YM"
                         }, void 0, false, {
                             fileName: "[project]/src/components/IconSidebar.tsx",
-                            lineNumber: 204,
+                            lineNumber: 206,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 203,
+                        lineNumber: 205,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1854,7 +1864,7 @@ function IconSidebar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/IconSidebar.tsx",
-                                        lineNumber: 246,
+                                        lineNumber: 248,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1865,19 +1875,19 @@ function IconSidebar() {
                                         children: it.label
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/IconSidebar.tsx",
-                                        lineNumber: 247,
+                                        lineNumber: 249,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, it.href, true, {
                                 fileName: "[project]/src/components/IconSidebar.tsx",
-                                lineNumber: 227,
+                                lineNumber: 229,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 222,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1892,13 +1902,13 @@ function IconSidebar() {
                         children: "Young Money FX v0.1"
                     }, void 0, false, {
                         fileName: "[project]/src/components/IconSidebar.tsx",
-                        lineNumber: 253,
+                        lineNumber: 255,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/IconSidebar.tsx",
-                lineNumber: 184,
+                lineNumber: 186,
                 columnNumber: 7
             }, this)
         ]
