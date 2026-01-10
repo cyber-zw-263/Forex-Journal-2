@@ -1,15 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 // PATCH update journal entry
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
-    const { id } = params;
     const body = await request.json();
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const entry = await prisma.journalEntry.findFirst({
       where: { id, userId }
@@ -41,11 +45,15 @@ export async function PATCH(
 // DELETE journal entry
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
-    const { id } = params;
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const entry = await prisma.journalEntry.findFirst({
       where: { id, userId }

@@ -1,3 +1,0 @@
-{
-  "/api/strategies/[strategyId]/rules/route": "app/api/strategies/[strategyId]/rules/route.js"
-}

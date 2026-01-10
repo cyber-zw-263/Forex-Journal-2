@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 // GET all updates for a trade
 export async function GET(
   request: NextRequest,
-  { params }: { params: { tradeId: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
-    const { tradeId } = params;
 
     // Verify trade belongs to user
     const trade = await prisma.trade.findFirst({
-      where: { id: tradeId, userId }
+      where: { id, userId }
     });
 
     if (!trade) {
@@ -20,7 +20,7 @@ export async function GET(
     }
 
     const updates = await prisma.tradeUpdate.findMany({
-      where: { tradeId },
+      where: { id },
       orderBy: { timestamp: 'asc' }
     });
 
@@ -34,16 +34,16 @@ export async function GET(
 // POST create new trade update
 export async function POST(
   request: NextRequest,
-  { params }: { params: { tradeId: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
-    const { tradeId } = params;
     const body = await request.json();
 
     // Verify trade belongs to user
     const trade = await prisma.trade.findFirst({
-      where: { id: tradeId, userId }
+      where: { id, userId }
     });
 
     if (!trade) {
@@ -60,7 +60,7 @@ export async function POST(
 
     const update = await prisma.tradeUpdate.create({
       data: {
-        tradeId,
+        id,
         action: action || 'none',
         reason: reason || null,
         emotionalState: emotionalState || null,

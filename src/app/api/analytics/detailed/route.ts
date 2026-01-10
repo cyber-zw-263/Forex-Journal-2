@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 interface AnalysisOptions {
   startDate?: Date;
@@ -66,6 +66,10 @@ export async function GET(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const searchParams = request.nextUrl.searchParams;
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const options: AnalysisOptions = {};
     if (searchParams.get('startDate')) options.startDate = new Date(searchParams.get('startDate')!);

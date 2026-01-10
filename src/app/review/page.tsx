@@ -149,8 +149,30 @@ export default function TradeReviewPage() {
                       transition: 'all 0.2s ease',
                       fontSize: '13px',
                     }}
-                    onMouseEnter={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--card-border)';\n                      }\n                    }}\n                    onMouseLeave={(e) => {\n                      if (selectedTradeId !== trade.id) {\n                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';\n                      }\n                    }}\n                  >\n                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
-                    <div style={{ fontSize: '11px', opacity: 0.75 }}>\n                      {new Date(trade.entryTime).toLocaleDateString()}\n                    </div>\n                  </button>\n                ))\n              ) : (\n                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>\n                  No trades yet\n                </p>\n              )}\n            </div>\n          </div>
+                    onMouseEnter={(e) => {
+                      if (selectedTradeId !== trade.id) {
+                        e.currentTarget.style.backgroundColor = 'var(--card-border)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (selectedTradeId !== trade.id) {
+                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                      }
+                    }}
+                  >
+                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{trade.pair}</div>
+                    <div style={{ fontSize: '11px', opacity: 0.75 }}>
+                      {new Date(trade.entryTime).toLocaleDateString()}
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', padding: '16px', margin: 0 }}>
+                  No trades yet
+                </p>
+              )}
+            </div>
+          </div>
 
           {/* Review Form */}
           {selectedTrade ? (

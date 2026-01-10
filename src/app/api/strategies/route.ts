@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 // GET all strategies for a user
 export async function GET(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const strategies = await prisma.strategy.findMany({
       where: { userId },
@@ -34,6 +38,10 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const {
       name,

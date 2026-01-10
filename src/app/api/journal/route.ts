@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 // GET journal entries
 export async function GET(request: NextRequest) {
@@ -9,6 +9,10 @@ export async function GET(request: NextRequest) {
     
     const startDate = searchParams.get('startDate') ? new Date(searchParams.get('startDate')!) : undefined;
     const endDate = searchParams.get('endDate') ? new Date(searchParams.get('endDate')!) : undefined;
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const entries = await prisma.journalEntry.findMany({
       where: {
@@ -35,6 +39,10 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id') || 'demo-user';
     const body = await request.json();
+
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+    }
 
     const {
       date,
