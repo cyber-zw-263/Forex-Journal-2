@@ -146,12 +146,30 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
   };
 
   return (
-    <AnimatedCard className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+    <div style={{
+      backgroundColor: 'var(--card-bg)',
+      border: '1px solid var(--card-border)',
+      borderRadius: '12px',
+      padding: '20px',
+    }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '20px',
+      }}>
+        <h2 style={{
+          fontSize: '18px',
+          fontWeight: '600',
+          color: 'var(--text-primary)',
+          margin: 0,
+        }}>
           {existingEntry ? 'Edit' : 'Create'} Journal Entry
         </h2>
-        <div className="text-sm text-gray-500 dark:text-gray-400">
+        <div style={{
+          fontSize: '12px',
+          color: 'var(--text-secondary)',
+        }}>
           {new Date(date).toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
@@ -161,27 +179,47 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div style={{ display: 'grid', gap: '20px' }}>
         {/* Mental State */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+          }}>
             How are you feeling today?
           </label>
-          <div className="grid grid-cols-5 gap-2">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            gap: '8px',
+          }}>
             {mentalStates.map((state) => {
               const Icon = state.icon;
               return (
                 <button
                   key={state.value}
                   onClick={() => setMentalState(state.value)}
-                  className={`flex flex-col items-center p-3 rounded-lg border-2 transition-all ${
-                    mentalState === state.value
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: '12px',
+                    borderRadius: '6px',
+                    border: `2px solid ${mentalState === state.value ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                    backgroundColor: mentalState === state.value ? 'var(--panel-muted)' : 'transparent',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
                 >
-                  <Icon className={`w-6 h-6 mb-1 ${state.color}`} />
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  <Icon size={24} style={{ marginBottom: '4px', color: state.color }} />
+                  <span style={{
+                    fontSize: '12px',
+                    fontWeight: '500',
+                    color: 'var(--text-primary)',
+                  }}>
                     {state.label}
                   </span>
                 </button>
@@ -192,24 +230,44 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
 
         {/* Focus Level */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+          }}>
             Focus Level
           </label>
-          <div className="grid grid-cols-3 gap-2">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '8px',
+          }}>
             {focusLevels.map((level) => {
               const Icon = level.icon;
               return (
                 <button
                   key={level.value}
                   onClick={() => setFocus(level.value)}
-                  className={`flex flex-col items-center p-3 rounded-lg border-2 transition-all ${
-                    focus === level.value
-                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: '12px',
+                    borderRadius: '6px',
+                    border: `2px solid ${focus === level.value ? 'var(--green-base)' : 'var(--card-border)'}`,
+                    backgroundColor: focus === level.value ? 'var(--panel-muted)' : 'transparent',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
                 >
-                  <Icon className={`w-6 h-6 mb-1 ${level.color}`} />
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  <Icon size={24} style={{ marginBottom: '4px', color: level.color }} />
+                  <span style={{
+                    fontSize: '12px',
+                    fontWeight: '500',
+                    color: 'var(--text-primary)',
+                  }}>
                     {level.label}
                   </span>
                 </button>
@@ -220,21 +278,48 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
 
         {/* Confidence Level */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+          }}>
             Confidence Level (1-10)
           </label>
-          <div className="flex items-center space-x-4">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+          }}>
             <input
               type="range"
               min="1"
               max="10"
               value={confidence}
               onChange={(e) => setConfidence(Number(e.target.value))}
-              className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+              style={{
+                flex: 1,
+                height: '6px',
+                borderRadius: '3px',
+                backgroundColor: 'var(--panel-muted)',
+                outline: 'none',
+                cursor: 'pointer',
+              }}
             />
-            <div className="flex items-center space-x-2">
-              <FiTrendingUp className="w-4 h-4 text-gray-500" />
-              <span className="text-lg font-semibold text-gray-900 dark:text-white min-w-[2rem]">
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}>
+              <FiTrendingUp size={16} style={{ color: 'var(--text-secondary)' }} />
+              <span style={{
+                fontSize: '18px',
+                fontWeight: '700',
+                color: 'var(--text-primary)',
+                minWidth: '32px',
+                textAlign: 'center',
+              }}>
                 {confidence}
               </span>
             </div>
@@ -243,19 +328,35 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
 
         {/* External Stressors */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+          }}>
             External Stressors (select all that apply)
           </label>
-          <div className="grid grid-cols-2 gap-2">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '8px',
+          }}>
             {commonStressors.map((stressor) => (
               <button
                 key={stressor}
                 onClick={() => handleStressorToggle(stressor)}
-                className={`p-2 text-left rounded-lg border transition-all ${
-                  externalStressors.includes(stressor)
-                    ? 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-300'
-                }`}
+                style={{
+                  padding: '8px 12px',
+                  textAlign: 'left',
+                  borderRadius: '6px',
+                  border: `1px solid ${externalStressors.includes(stressor) ? '#ef4444' : 'var(--card-border)'}`,
+                  backgroundColor: externalStressors.includes(stressor) ? 'var(--panel-muted)' : 'transparent',
+                  color: externalStressors.includes(stressor) ? '#ef4444' : 'var(--text-primary)',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  transition: 'all 0.2s ease',
+                }}
               >
                 {stressor}
               </button>
@@ -265,10 +366,20 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
 
         {/* Trading Phase */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+          }}>
             Current Trading Phase
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '12px',
+          }}>
             {tradingPhases.map((phaseOption) => (
               <button
                 key={phaseOption.value}
@@ -276,16 +387,28 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
                   setPhase(phaseOption.value);
                   applyTemplate(phaseOption.value);
                 }}
-                className={`p-4 rounded-lg border-2 text-left transition-all ${
-                  phase === phaseOption.value
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                }`}
+                style={{
+                  padding: '16px',
+                  borderRadius: '6px',
+                  border: `2px solid ${phase === phaseOption.value ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                  backgroundColor: phase === phaseOption.value ? 'var(--panel-muted)' : 'transparent',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all 0.2s ease',
+                }}
               >
-                <div className="font-medium text-gray-900 dark:text-white mb-1">
+                <div style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: 'var(--text-primary)',
+                  marginBottom: '4px',
+                }}>
                   {phaseOption.label}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div style={{
+                  fontSize: '12px',
+                  color: 'var(--text-secondary)',
+                }}>
                   {phaseOption.description}
                 </div>
               </button>
@@ -295,7 +418,13 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
 
         {/* Phase Notes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          <label style={{
+            display: 'block',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: 'var(--text-primary)',
+            marginBottom: '8px',
+          }}>
             Phase Notes & Reflections
           </label>
           <textarea
@@ -303,33 +432,102 @@ const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
             onChange={(e) => setPhaseNotes(e.target.value)}
             placeholder="Write your thoughts, reflections, and notes about your trading day..."
             rows={8}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical"
+            style={{
+              width: '100%',
+              padding: '12px',
+              borderRadius: '6px',
+              border: '1px solid var(--card-border)',
+              backgroundColor: 'var(--panel-muted)',
+              color: 'var(--text-primary)',
+              fontSize: '14px',
+              outline: 'none',
+              resize: 'vertical',
+              transition: 'border-color 0.2s ease',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--purple-base)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'var(--card-border)';
+            }}
           />
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '12px',
+          paddingTop: '16px',
+          borderTop: '1px solid var(--card-border)',
+        }}>
           <button
             onClick={onCancel}
-            className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              backgroundColor: 'transparent',
+              color: 'var(--text-secondary)',
+              cursor: 'pointer',
+              fontSize: '14px',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+              color: 'white',
+              cursor: isSaving ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+              fontWeight: '600',
+              transition: 'all 0.3s ease',
+              opacity: isSaving ? 0.6 : 1,
+            }}
+            onMouseEnter={(e) => {
+              if (!isSaving) {
+                e.currentTarget.style.transform = 'translateY(-1px)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             {isSaving ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              <div style={{
+                width: '16px',
+                height: '16px',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                borderTop: '2px solid white',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+              }}></div>
             ) : (
-              <FiSave className="w-4 h-4" />
+              <FiSave size={16} />
             )}
             <span>{isSaving ? 'Saving...' : 'Save Entry'}</span>
           </button>
         </div>
       </div>
-    </AnimatedCard>
+    </div>
   );
 };
 

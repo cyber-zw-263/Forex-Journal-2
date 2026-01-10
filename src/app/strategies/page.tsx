@@ -71,160 +71,142 @@ export default function StrategiesPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
             Trading Strategies
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
             Manage your trading strategies, entry models, and rules
           </p>
         </div>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setShowCreateModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg"
-        >
-          <FiPlus className="w-4 h-4" />
-          New Strategy
-        </motion.button>
-      </div>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <FiTarget className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+        {/* Stats Overview */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', textAlign: 'center' }}>
+            <div style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '4px' }}>
+              {strategies.length}
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Total Strategies</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{strategies.length}</p>
-            </div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Total Strategies</div>
           </div>
-        </motion.div>
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', textAlign: 'center' }}>
+            <div style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '4px' }}>
+              {strategies.filter(s => s.marketType === 'forex').length}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Forex Strategies</div>
+          </div>
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', textAlign: 'center' }}>
+            <div style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '4px' }}>
+              {strategies.filter(s => s.marketType === 'crypto').length}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Crypto Strategies</div>
+          </div>
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', textAlign: 'center' }}>
+            <div style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '4px' }}>
+              {strategies.reduce((sum, s) => sum + (s.entryModels?.length || 0), 0)}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Entry Models</div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-              <FiTrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Active Models</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {strategies.reduce((sum, s) => sum + s.entryModels.length, 0)}
-              </p>
-            </div>
+        {/* Header with Create Button */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+          <div>
+            <h2 style={{ fontSize: '20px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
+              Your Strategies
+            </h2>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: '4px 0 0 0' }}>
+              Create and manage your trading strategies
+            </p>
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-              <FiSettings className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Sequences</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {strategies.reduce((sum, s) => sum + s.timeframeSequences.length, 0)}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
-              <FiBookOpen className="w-5 h-5 text-red-600 dark:text-red-400" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Rules</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {strategies.reduce((sum, s) => sum + s.rules.length, 0)}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Strategies Grid */}
-      {strategies.length === 0 ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center py-12"
-        >
-          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FiTarget className="w-8 h-8 text-gray-400" />
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-            No strategies yet
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Create your first trading strategy to get started with structured trading.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => setShowCreateModal(true)}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 20px',
+              background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '14px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            Create Your First Strategy
-          </motion.button>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {strategies.map((strategy, index) => (
-            <motion.div
-              key={strategy.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+            <FiPlus size={16} />
+            New Strategy
+          </button>
+        </div>
+
+        {/* Strategies Grid */}
+        {isLoading ? (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
+            {[...Array(6)].map((_, i) => (
+              <div key={i} style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', height: '200px' }}>
+                <div style={{ height: '20px', backgroundColor: 'var(--panel-muted)', borderRadius: '4px', marginBottom: '12px', animation: 'pulse 2s infinite' }} />
+                <div style={{ height: '16px', backgroundColor: 'var(--panel-muted)', borderRadius: '4px', width: '80%', marginBottom: '8px', animation: 'pulse 2s infinite' }} />
+                <div style={{ height: '16px', backgroundColor: 'var(--panel-muted)', borderRadius: '4px', width: '60%', animation: 'pulse 2s infinite' }} />
+              </div>
+            ))}
+          </div>
+        ) : strategies.length === 0 ? (
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '48px', textAlign: 'center' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📊</div>
+            <h3 style={{ fontSize: '18px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
+              No Strategies Yet
+            </h3>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '20px' }}>
+              Create your first trading strategy to get started
+            </p>
+            <button
+              onClick={() => setShowCreateModal(true)}
+              style={{
+                padding: '12px 24px',
+                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                fontSize: '14px',
+              }}
             >
+              Create Your First Strategy
+            </button>
+          </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '20px' }}>
+            {strategies.map((strategy) => (
               <StrategyCard
+                key={strategy.id}
                 strategy={strategy}
                 onDelete={handleStrategyDeleted}
                 onUpdate={fetchStrategies}
               />
-            </motion.div>
-          ))}
-        </motion.div>
-      )}
+            ))}
+          </div>
+        )}
 
-      {/* Create Strategy Modal */}
-      {showCreateModal && (
-        <CreateStrategyModal
-          onClose={() => setShowCreateModal(false)}
-          onSuccess={handleStrategyCreated}
-        />
-      )}
+        {/* Create Strategy Modal */}
+        {showCreateModal && (
+          <CreateStrategyModal
+            onClose={() => setShowCreateModal(false)}
+            onSuccess={handleStrategyCreated}
+          />
+        )}
+      </main>
     </div>
   );
 }

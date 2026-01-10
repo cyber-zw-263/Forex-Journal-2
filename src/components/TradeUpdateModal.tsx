@@ -158,47 +158,101 @@ export default function TradeUpdateModal({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+        style={{
+          background: 'var(--background)',
+          borderRadius: '12px',
+          boxShadow: 'var(--shadow-lg)',
+          maxWidth: '800px',
+          width: '100%',
+          margin: '0 16px',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-              <FiClock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '24px',
+          borderBottom: '1px solid var(--border)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: 'var(--accent-bg)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <FiClock style={{ width: '20px', height: '20px', color: 'var(--accent-color)' }} />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 style={{
+                fontSize: '20px',
+                fontWeight: '600',
+                color: 'var(--text-primary)',
+                margin: '0'
+              }}>
                 Add Trade Update
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p style={{
+                fontSize: '14px',
+                color: 'var(--text-secondary)',
+                margin: '4px 0 0 0'
+              }}>
                 Record changes and observations during the trade
               </p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            style={{
+              padding: '8px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
           >
-            <FiX className="w-5 h-5" />
+            <FiX style={{ width: '20px', height: '20px' }} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Action Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               What action did you take?
             </label>
-            <div className="grid grid-cols-1 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
               {actionOptions.map((action) => (
                 <label
                   key={action.value}
-                  className={`flex items-start space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    update.action === action.value
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    padding: '16px',
+                    borderRadius: '8px',
+                    border: update.action === action.value ? '2px solid var(--accent-color)' : '2px solid var(--border)',
+                    background: update.action === action.value ? 'var(--accent-bg)' : 'var(--card-bg)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
                 >
                   <input
                     type="radio"
@@ -206,13 +260,20 @@ export default function TradeUpdateModal({
                     value={action.value}
                     checked={update.action === action.value}
                     onChange={(e) => setUpdate(prev => ({ ...prev, action: e.target.value }))}
-                    className="mt-0.5"
+                    style={{ marginTop: '2px' }}
                   />
-                  <div className="flex-1">
-                    <div className="font-medium text-gray-900 dark:text-white">
+                  <div style={{ flex: 1 }}>
+                    <div style={{
+                      fontWeight: '500',
+                      color: 'var(--text-primary)',
+                      marginBottom: '4px'
+                    }}>
                       {action.label}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div style={{
+                      fontSize: '14px',
+                      color: 'var(--text-secondary)'
+                    }}>
                       {action.description}
                     </div>
                   </div>
@@ -223,18 +284,30 @@ export default function TradeUpdateModal({
 
           {/* Reason Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               Why did you take this action?
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
               {reasonOptions.map((reason) => (
                 <label
                   key={reason.value}
-                  className={`flex items-start space-x-2 p-3 rounded-lg border cursor-pointer transition-all ${
-                    update.reason === reason.value
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '8px',
+                    padding: '16px',
+                    borderRadius: '8px',
+                    border: update.reason === reason.value ? '2px solid var(--accent-color)' : '2px solid var(--border)',
+                    background: update.reason === reason.value ? 'var(--accent-bg)' : 'var(--card-bg)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
                 >
                   <input
                     type="radio"
@@ -242,10 +315,13 @@ export default function TradeUpdateModal({
                     value={reason.value}
                     checked={update.reason === reason.value}
                     onChange={(e) => setUpdate(prev => ({ ...prev, reason: e.target.value }))}
-                    className="mt-0.5"
+                    style={{ marginTop: '2px' }}
                   />
-                  <div className="text-xs">
-                    <div className="font-medium text-gray-900 dark:text-white">
+                  <div style={{ fontSize: '12px' }}>
+                    <div style={{
+                      fontWeight: '500',
+                      color: 'var(--text-primary)'
+                    }}>
                       {reason.label}
                     </div>
                   </div>
@@ -256,10 +332,16 @@ export default function TradeUpdateModal({
 
           {/* Emotional State */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               How were you feeling?
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {emotionalStates.map((state) => (
                 <button
                   key={state.value}
@@ -268,11 +350,18 @@ export default function TradeUpdateModal({
                     ...prev,
                     emotionalState: prev.emotionalState === state.value ? '' : state.value
                   }))}
-                  className={`px-3 py-2 rounded-full text-sm font-medium transition-all ${
-                    update.emotionalState === state.value
-                      ? state.color + ' ring-2 ring-offset-2 ring-blue-500'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '20px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    background: update.emotionalState === state.value ? state.color : 'var(--card-bg)',
+                    color: update.emotionalState === state.value ? 'white' : 'var(--text-primary)',
+                    boxShadow: update.emotionalState === state.value ? '0 0 0 2px var(--accent-color)' : 'none'
+                  }}
                 >
                   {state.label}
                 </button>
@@ -282,30 +371,49 @@ export default function TradeUpdateModal({
 
           {/* Behavior Flags */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               How did you behave during this update?
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
               {behaviorOptions.map((behavior) => (
                 <label
                   key={behavior.value}
-                  className={`flex items-start space-x-2 p-3 rounded-lg border cursor-pointer transition-all ${
-                    update.behavior?.includes(behavior.value)
-                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '8px',
+                    padding: '16px',
+                    borderRadius: '8px',
+                    border: update.behavior?.includes(behavior.value) ? '2px solid var(--success-color)' : '2px solid var(--border)',
+                    background: update.behavior?.includes(behavior.value) ? 'var(--success-bg)' : 'var(--card-bg)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
                 >
                   <input
                     type="checkbox"
                     checked={update.behavior?.includes(behavior.value) || false}
                     onChange={() => toggleBehavior(behavior.value)}
-                    className="mt-0.5"
+                    style={{ marginTop: '2px' }}
                   />
-                  <div className="text-xs">
-                    <div className="font-medium text-gray-900 dark:text-white">
+                  <div style={{ fontSize: '12px', flex: 1 }}>
+                    <div style={{
+                      fontWeight: '500',
+                      color: 'var(--text-primary)',
+                      marginBottom: '4px'
+                    }}>
                       {behavior.label}
                     </div>
-                    <div className="text-gray-600 dark:text-gray-400">
+                    <div style={{
+                      color: 'var(--text-secondary)',
+                      lineHeight: '1.4'
+                    }}>
                       {behavior.description}
                     </div>
                   </div>
@@ -316,7 +424,13 @@ export default function TradeUpdateModal({
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Additional Notes
             </label>
             <textarea
@@ -324,32 +438,88 @@ export default function TradeUpdateModal({
               onChange={(e) => setUpdate(prev => ({ ...prev, notes: e.target.value }))}
               placeholder="Any additional observations or thoughts..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                resize: 'vertical',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'var(--accent-color)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
             />
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--border)'
+          }}>
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontSize: '14px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center space-x-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 24px',
+                background: isSubmitting ? 'var(--disabled-bg)' : 'var(--accent-color)',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'white',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-hover)';
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-color)';
+              }}
             >
               {isSubmitting ? (
                 <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <div style={{
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid transparent',
+                    borderTop: '2px solid white',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                  }} />
                   <span>Saving...</span>
                 </>
               ) : (
                 <>
-                  <FiSave className="w-4 h-4" />
+                  <FiSave style={{ width: '16px', height: '16px' }} />
                   <span>Add Update</span>
                 </>
               )}

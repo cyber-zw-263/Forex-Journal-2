@@ -179,75 +179,135 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                 opacity: 0,
                 scale: 0.95
             },
-            className: "bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto",
+            style: {
+                background: 'var(--background)',
+                borderRadius: '12px',
+                boxShadow: 'var(--shadow-lg)',
+                maxWidth: '800px',
+                width: '100%',
+                margin: '0 16px',
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            },
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700",
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '24px',
+                        borderBottom: '1px solid var(--border)'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center",
+                                    style: {
+                                        width: '40px',
+                                        height: '40px',
+                                        background: 'var(--accent-bg)',
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTarget"], {
-                                        className: "w-5 h-5 text-white"
+                                        style: {
+                                            width: '20px',
+                                            height: '20px',
+                                            color: 'var(--accent-color)'
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                        lineNumber: 79,
+                                        lineNumber: 102,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 78,
+                                    lineNumber: 93,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                    style: {
+                                        fontSize: '20px',
+                                        fontWeight: '600',
+                                        color: 'var(--text-primary)',
+                                        margin: '0'
+                                    },
                                     children: "Create Entry Model"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 81,
+                                    lineNumber: 104,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 77,
+                            lineNumber: 92,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                            style: {
+                                padding: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                color: 'var(--text-secondary)',
+                                transition: 'background 0.2s'
+                            },
+                            onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
-                                className: "w-5 h-5 text-gray-500"
+                                style: {
+                                    width: '20px',
+                                    height: '20px'
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                lineNumber: 89,
+                                lineNumber: 127,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 85,
+                            lineNumber: 113,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                    lineNumber: 76,
+                    lineNumber: 85,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit,
-                    className: "p-6 space-y-6",
+                    style: {
+                        padding: '24px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '24px'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Model Name *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 97,
+                                    lineNumber: 135,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -257,28 +317,46 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 name: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = 'var(--accent-color)',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     placeholder: "e.g., Breakout Entry with Volume Confirmation",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 100,
+                                    lineNumber: 144,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 96,
+                            lineNumber: 134,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Entry Logic *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 112,
+                                    lineNumber: 168,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -287,43 +365,72 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 entryLogic: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        resize: 'none',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = 'var(--accent-color)',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     rows: 4,
                                     placeholder: "Describe the specific conditions and logic for entering trades...",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 177,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '4px'
+                                    },
                                     children: "Be specific about price action, indicators, volume requirements, etc."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 123,
+                                    lineNumber: 198,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 111,
+                            lineNumber: 167,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Confirmation Style"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 209,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
+                                    style: {
+                                        display: 'flex',
+                                        gap: '12px'
+                                    },
                                     children: CONFIRMATION_STYLES.map((style)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -334,73 +441,105 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                                                 ...prev,
                                                                 confirmationStyle: e.target.value
                                                             })),
-                                                    className: "sr-only"
+                                                    style: {
+                                                        position: 'absolute',
+                                                        opacity: 0,
+                                                        pointerEvents: 'none'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                                    lineNumber: 136,
+                                                    lineNumber: 221,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `px-4 py-2 rounded-lg border cursor-pointer transition-all capitalize ${formData.confirmationStyle === style ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'}`,
+                                                    style: {
+                                                        padding: '8px 16px',
+                                                        borderRadius: '6px',
+                                                        border: '1px solid var(--border)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s',
+                                                        textTransform: 'capitalize',
+                                                        background: formData.confirmationStyle === style ? 'var(--accent-color)' : 'var(--card-bg)',
+                                                        color: formData.confirmationStyle === style ? 'white' : 'var(--text-primary)',
+                                                        fontSize: '14px',
+                                                        fontWeight: '500'
+                                                    },
                                                     children: style
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                                    lineNumber: 144,
+                                                    lineNumber: 229,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, style, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 135,
+                                            lineNumber: 220,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 133,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '4px',
+                                        lineHeight: '1.4'
+                                    },
                                     children: [
                                         "Conservative: Multiple confirmations required",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 155,
+                                            lineNumber: 252,
                                             columnNumber: 60
                                         }, this),
                                         "Moderate: Standard confirmation signals",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 156,
+                                            lineNumber: 253,
                                             columnNumber: 54
                                         }, this),
                                         "Aggressive: Quick entries with minimal confirmation"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 154,
+                                    lineNumber: 246,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 129,
+                            lineNumber: 208,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Risk Style"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 260,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
+                                    style: {
+                                        display: 'flex',
+                                        gap: '12px'
+                                    },
                                     children: RISK_STYLES.map((style)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -411,67 +550,93 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                                                 ...prev,
                                                                 riskStyle: e.target.value
                                                             })),
-                                                    className: "sr-only"
+                                                    style: {
+                                                        position: 'absolute',
+                                                        opacity: 0,
+                                                        pointerEvents: 'none'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                                    lineNumber: 169,
+                                                    lineNumber: 272,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `px-4 py-2 rounded-lg border cursor-pointer transition-all capitalize ${formData.riskStyle === style ? 'bg-orange-600 text-white border-orange-600' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-orange-400'}`,
+                                                    style: {
+                                                        padding: '8px 16px',
+                                                        borderRadius: '6px',
+                                                        border: '1px solid var(--border)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s',
+                                                        textTransform: 'capitalize',
+                                                        background: formData.riskStyle === style ? '#ea580c' : 'var(--card-bg)',
+                                                        color: formData.riskStyle === style ? 'white' : 'var(--text-primary)',
+                                                        fontSize: '14px',
+                                                        fontWeight: '500'
+                                                    },
                                                     children: style
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                                    lineNumber: 177,
+                                                    lineNumber: 280,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, style, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 168,
+                                            lineNumber: 271,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 166,
+                                    lineNumber: 269,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '4px',
+                                        lineHeight: '1.4'
+                                    },
                                     children: [
                                         "Low: Conservative position sizing",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 188,
+                                            lineNumber: 303,
                                             columnNumber: 48
                                         }, this),
                                         "Medium: Balanced risk-reward approach",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 189,
+                                            lineNumber: 304,
                                             columnNumber: 52
                                         }, this),
                                         "High: Aggressive position sizing for higher potential returns"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 187,
+                                    lineNumber: 297,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 162,
+                            lineNumber: 259,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Additional Notes"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 196,
+                                    lineNumber: 311,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -480,32 +645,62 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 notes: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        resize: 'none',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = 'var(--accent-color)',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     rows: 3,
                                     placeholder: "Any additional notes or considerations..."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 320,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 195,
+                            lineNumber: 310,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700",
+                            style: {
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                gap: '12px',
+                                paddingTop: '16px',
+                                borderTop: '1px solid var(--border)'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: onClose,
-                                    className: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                                    style: {
+                                        padding: '8px 16px',
+                                        background: 'transparent',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        transition: 'background 0.2s'
+                                    },
+                                    onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                                    onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                     disabled: isSubmitting,
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 210,
+                                    lineNumber: 350,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -517,32 +712,55 @@ function CreateEntryModelModal({ strategyId, onClose, onSuccess }) {
                                     whileTap: {
                                         scale: 0.98
                                     },
-                                    className: "flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '8px 24px',
+                                        background: isSubmitting ? 'var(--disabled-bg)' : 'var(--accent-color)',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'white',
+                                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'background 0.2s',
+                                        boxShadow: 'var(--shadow-md)'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-hover)';
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-color)';
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSave"], {
-                                            className: "w-4 h-4"
+                                            style: {
+                                                width: '16px',
+                                                height: '16px'
+                                            }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                            lineNumber: 225,
+                                            lineNumber: 396,
                                             columnNumber: 15
                                         }, this),
                                         isSubmitting ? 'Creating...' : 'Create Model'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                                    lineNumber: 218,
+                                    lineNumber: 369,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                            lineNumber: 209,
+                            lineNumber: 343,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateEntryModelModal.tsx",
-                    lineNumber: 94,
+                    lineNumber: 132,
                     columnNumber: 9
                 }, this)
             ]
@@ -1224,75 +1442,135 @@ function CreateSequenceModal({ strategyId, onClose, onSuccess }) {
                 opacity: 0,
                 scale: 0.95
             },
-            className: "bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto",
+            style: {
+                background: 'var(--background)',
+                borderRadius: '12px',
+                boxShadow: 'var(--shadow-lg)',
+                maxWidth: '1000px',
+                width: '100%',
+                margin: '0 16px',
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            },
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700",
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '24px',
+                        borderBottom: '1px solid var(--border)'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-10 h-10 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg flex items-center justify-center",
+                                    style: {
+                                        width: '40px',
+                                        height: '40px',
+                                        background: '#ea580c',
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSettings"], {
-                                        className: "w-5 h-5 text-white"
+                                        style: {
+                                            width: '20px',
+                                            height: '20px',
+                                            color: 'white'
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                        lineNumber: 122,
+                                        lineNumber: 145,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 121,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                    style: {
+                                        fontSize: '20px',
+                                        fontWeight: '600',
+                                        color: 'var(--text-primary)',
+                                        margin: '0'
+                                    },
                                     children: "Create Timeframe Sequence"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 147,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 120,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                            style: {
+                                padding: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                color: 'var(--text-secondary)',
+                                transition: 'background 0.2s'
+                            },
+                            onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
-                                className: "w-5 h-5 text-gray-500"
+                                style: {
+                                    width: '20px',
+                                    height: '20px'
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                lineNumber: 132,
+                                lineNumber: 170,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 128,
+                            lineNumber: 156,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                    lineNumber: 119,
+                    lineNumber: 128,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit,
-                    className: "p-6 space-y-6",
+                    style: {
+                        padding: '24px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '24px'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Sequence Name *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 140,
+                                    lineNumber: 178,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1302,28 +1580,46 @@ function CreateSequenceModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 name: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#ea580c',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     placeholder: "e.g., London Breakout Analysis Sequence",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 143,
+                                    lineNumber: 187,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 139,
+                            lineNumber: 177,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Description"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 155,
+                                    lineNumber: 211,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1332,60 +1628,104 @@ function CreateSequenceModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 description: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        resize: 'none',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#ea580c',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     rows: 3,
                                     placeholder: "Describe the purpose and methodology of this sequence..."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 154,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center justify-between mb-4",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        marginBottom: '16px'
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block text-sm font-medium text-gray-700 dark:text-gray-300",
+                                            style: {
+                                                display: 'block',
+                                                fontSize: '14px',
+                                                fontWeight: '500',
+                                                color: 'var(--text-primary)'
+                                            },
                                             children: "Analysis Steps *"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                            lineNumber: 170,
+                                            lineNumber: 250,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: addStep,
-                                            className: "flex items-center gap-2 px-3 py-1.5 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-lg hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-colors text-sm",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '8px',
+                                                padding: '6px 12px',
+                                                background: '#fed7aa',
+                                                border: 'none',
+                                                borderRadius: '6px',
+                                                color: '#9a3412',
+                                                cursor: 'pointer',
+                                                fontSize: '14px',
+                                                transition: 'background 0.2s'
+                                            },
+                                            onMouseEnter: (e)=>e.currentTarget.style.background = '#fdba74',
+                                            onMouseLeave: (e)=>e.currentTarget.style.background = '#fed7aa',
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiPlus"], {
-                                                    className: "w-3 h-3"
+                                                    style: {
+                                                        width: '12px',
+                                                        height: '12px'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                    lineNumber: 178,
+                                                    lineNumber: 277,
                                                     columnNumber: 17
                                                 }, this),
                                                 "Add Step"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                            lineNumber: 173,
+                                            lineNumber: 258,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-3",
+                                    style: {
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '12px'
+                                    },
                                     children: steps.map((step, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                                             initial: {
                                                 opacity: 0,
@@ -1399,180 +1739,310 @@ function CreateSequenceModal({ strategyId, onClose, onSuccess }) {
                                                 opacity: 0,
                                                 x: 20
                                             },
-                                            className: "flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '12px',
+                                                padding: '16px',
+                                                background: 'var(--card-bg)',
+                                                borderRadius: '8px'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center gap-2",
+                                                    style: {
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px'
+                                                    },
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "flex items-center justify-center w-8 h-8 bg-orange-600 text-white text-sm font-bold rounded-full",
+                                                        style: {
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            width: '32px',
+                                                            height: '32px',
+                                                            background: '#ea580c',
+                                                            color: 'white',
+                                                            fontSize: '14px',
+                                                            fontWeight: 'bold',
+                                                            borderRadius: '50%'
+                                                        },
                                                         children: index + 1
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                        lineNumber: 193,
+                                                        lineNumber: 299,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                    lineNumber: 192,
+                                                    lineNumber: 298,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex-1 grid grid-cols-1 md:grid-cols-2 gap-3",
+                                                    style: {
+                                                        flex: 1,
+                                                        display: 'grid',
+                                                        gridTemplateColumns: '1fr 1fr',
+                                                        gap: '12px'
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                                    className: "block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1",
+                                                                    style: {
+                                                                        display: 'block',
+                                                                        fontSize: '12px',
+                                                                        fontWeight: '500',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "Timeframe"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                    lineNumber: 200,
+                                                                    lineNumber: 322,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                                     value: step.timeframe,
                                                                     onChange: (e)=>updateStep(index, 'timeframe', e.target.value),
-                                                                    className: "w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-1 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white",
+                                                                    style: {
+                                                                        width: '100%',
+                                                                        padding: '6px 8px',
+                                                                        border: '1px solid var(--border)',
+                                                                        borderRadius: '4px',
+                                                                        background: 'var(--card-bg)',
+                                                                        color: 'var(--text-primary)',
+                                                                        fontSize: '14px',
+                                                                        outline: 'none',
+                                                                        transition: 'border-color 0.2s'
+                                                                    },
+                                                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#ea580c',
+                                                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                                                     children: COMMON_TIMEFRAMES.map((tf)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                             value: tf,
                                                                             children: tf
                                                                         }, tf, false, {
                                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                            lineNumber: 209,
+                                                                            lineNumber: 349,
                                                                             columnNumber: 27
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                    lineNumber: 203,
+                                                                    lineNumber: 331,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                            lineNumber: 199,
+                                                            lineNumber: 321,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                                    className: "block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1",
+                                                                    style: {
+                                                                        display: 'block',
+                                                                        fontSize: '12px',
+                                                                        fontWeight: '500',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "Description"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                    lineNumber: 215,
+                                                                    lineNumber: 355,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                     type: "text",
                                                                     value: step.description,
                                                                     onChange: (e)=>updateStep(index, 'description', e.target.value),
-                                                                    className: "w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-1 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white",
+                                                                    style: {
+                                                                        width: '100%',
+                                                                        padding: '6px 8px',
+                                                                        border: '1px solid var(--border)',
+                                                                        borderRadius: '4px',
+                                                                        background: 'var(--card-bg)',
+                                                                        color: 'var(--text-primary)',
+                                                                        fontSize: '14px',
+                                                                        outline: 'none',
+                                                                        transition: 'border-color 0.2s'
+                                                                    },
+                                                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#ea580c',
+                                                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                                                     placeholder: "What to analyze at this timeframe"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                    lineNumber: 218,
+                                                                    lineNumber: 364,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                            lineNumber: 214,
+                                                            lineNumber: 354,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                    lineNumber: 198,
+                                                    lineNumber: 315,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center gap-1",
+                                                    style: {
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '4px'
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
                                                             onClick: ()=>moveStep(index, 'up'),
                                                             disabled: index === 0,
-                                                            className: "p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded disabled:opacity-50 disabled:cursor-not-allowed",
+                                                            style: {
+                                                                padding: '4px',
+                                                                background: 'transparent',
+                                                                border: 'none',
+                                                                borderRadius: '4px',
+                                                                cursor: index === 0 ? 'not-allowed' : 'pointer',
+                                                                color: 'var(--text-secondary)',
+                                                                opacity: index === 0 ? 0.5 : 1,
+                                                                transition: 'background 0.2s'
+                                                            },
+                                                            onMouseEnter: (e)=>{
+                                                                if (index !== 0) e.currentTarget.style.background = 'var(--hover-bg)';
+                                                            },
+                                                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                                             title: "Move up",
                                                             children: "↑"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                            lineNumber: 229,
+                                                            lineNumber: 387,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
                                                             onClick: ()=>moveStep(index, 'down'),
                                                             disabled: index === steps.length - 1,
-                                                            className: "p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded disabled:opacity-50 disabled:cursor-not-allowed",
+                                                            style: {
+                                                                padding: '4px',
+                                                                background: 'transparent',
+                                                                border: 'none',
+                                                                borderRadius: '4px',
+                                                                cursor: index === steps.length - 1 ? 'not-allowed' : 'pointer',
+                                                                color: 'var(--text-secondary)',
+                                                                opacity: index === steps.length - 1 ? 0.5 : 1,
+                                                                transition: 'background 0.2s'
+                                                            },
+                                                            onMouseEnter: (e)=>{
+                                                                if (index !== steps.length - 1) e.currentTarget.style.background = 'var(--hover-bg)';
+                                                            },
+                                                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                                             title: "Move down",
                                                             children: "↓"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                            lineNumber: 238,
+                                                            lineNumber: 409,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
                                                             onClick: ()=>removeStep(index),
                                                             disabled: steps.length === 1,
-                                                            className: "p-1 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-600 rounded disabled:opacity-50 disabled:cursor-not-allowed",
+                                                            style: {
+                                                                padding: '4px',
+                                                                background: 'transparent',
+                                                                border: 'none',
+                                                                borderRadius: '4px',
+                                                                cursor: steps.length === 1 ? 'not-allowed' : 'pointer',
+                                                                color: '#dc2626',
+                                                                opacity: steps.length === 1 ? 0.5 : 1,
+                                                                transition: 'background 0.2s'
+                                                            },
+                                                            onMouseEnter: (e)=>{
+                                                                if (steps.length !== 1) e.currentTarget.style.background = '#fef2f2';
+                                                            },
+                                                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                                             title: "Remove step",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTrash2"], {
-                                                                className: "w-3 h-3"
+                                                                style: {
+                                                                    width: '12px',
+                                                                    height: '12px'
+                                                                }
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                                lineNumber: 254,
+                                                                lineNumber: 451,
                                                                 columnNumber: 23
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                            lineNumber: 247,
+                                                            lineNumber: 431,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                                    lineNumber: 228,
+                                                    lineNumber: 386,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, index, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                            lineNumber: 185,
+                                            lineNumber: 284,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 183,
+                                    lineNumber: 282,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-2",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '8px'
+                                    },
                                     children: "Define the order of timeframes you analyze, from highest to lowest timeframe. Start with broader context and move to precise entry timing."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 261,
+                                    lineNumber: 458,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 168,
+                            lineNumber: 243,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700",
+                            style: {
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                gap: '12px',
+                                paddingTop: '16px',
+                                borderTop: '1px solid var(--border)'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: onClose,
-                                    className: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                                    style: {
+                                        padding: '8px 16px',
+                                        background: 'transparent',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        transition: 'background 0.2s'
+                                    },
+                                    onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                                    onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                     disabled: isSubmitting,
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 269,
+                                    lineNumber: 476,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -1584,32 +2054,55 @@ function CreateSequenceModal({ strategyId, onClose, onSuccess }) {
                                     whileTap: {
                                         scale: 0.98
                                     },
-                                    className: "flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '8px 24px',
+                                        background: isSubmitting ? 'var(--disabled-bg)' : '#ea580c',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'white',
+                                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'background 0.2s',
+                                        boxShadow: 'var(--shadow-md)'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = '#c2410c';
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = '#ea580c';
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSave"], {
-                                            className: "w-4 h-4"
+                                            style: {
+                                                width: '16px',
+                                                height: '16px'
+                                            }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                            lineNumber: 284,
+                                            lineNumber: 522,
                                             columnNumber: 15
                                         }, this),
                                         isSubmitting ? 'Creating...' : 'Create Sequence'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                                    lineNumber: 277,
+                                    lineNumber: 495,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                            lineNumber: 268,
+                            lineNumber: 469,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateSequenceModal.tsx",
-                    lineNumber: 137,
+                    lineNumber: 175,
                     columnNumber: 9
                 }, this)
             ]
@@ -2229,75 +2722,135 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                 opacity: 0,
                 scale: 0.95
             },
-            className: "bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto",
+            style: {
+                background: 'var(--background)',
+                borderRadius: '12px',
+                boxShadow: 'var(--shadow-lg)',
+                maxWidth: '800px',
+                width: '100%',
+                margin: '0 16px',
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            },
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700",
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '24px',
+                        borderBottom: '1px solid var(--border)'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-lg flex items-center justify-center",
+                                    style: {
+                                        width: '40px',
+                                        height: '40px',
+                                        background: '#dc2626',
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBookOpen"], {
-                                        className: "w-5 h-5 text-white"
+                                        style: {
+                                            width: '20px',
+                                            height: '20px',
+                                            color: 'white'
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                        lineNumber: 99,
+                                        lineNumber: 122,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 98,
+                                    lineNumber: 113,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                    style: {
+                                        fontSize: '20px',
+                                        fontWeight: '600',
+                                        color: 'var(--text-primary)',
+                                        margin: '0'
+                                    },
                                     children: "Create Strategy Rule"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 101,
+                                    lineNumber: 124,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 97,
+                            lineNumber: 112,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                            style: {
+                                padding: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                color: 'var(--text-secondary)',
+                                transition: 'background 0.2s'
+                            },
+                            onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
-                                className: "w-5 h-5 text-gray-500"
+                                style: {
+                                    width: '20px',
+                                    height: '20px'
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                lineNumber: 109,
+                                lineNumber: 147,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 105,
+                            lineNumber: 133,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                    lineNumber: 96,
+                    lineNumber: 105,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit,
-                    className: "p-6 space-y-6",
+                    style: {
+                        padding: '24px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '24px'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Rule Name *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 117,
+                                    lineNumber: 155,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2307,28 +2860,46 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 name: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#dc2626',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     placeholder: "e.g., Never risk more than 2% per trade",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 120,
+                                    lineNumber: 164,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 116,
+                            lineNumber: 154,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Rule Description *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 188,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2337,43 +2908,73 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                                 ...prev,
                                                 description: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        resize: 'none',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = '#dc2626',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)',
                                     rows: 4,
                                     placeholder: "Describe the rule in detail and explain why it's important...",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 135,
+                                    lineNumber: 197,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '4px'
+                                    },
                                     children: "Be specific about what the rule requires and the consequences of breaking it."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 143,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 131,
+                            lineNumber: 187,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Category"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 150,
+                                    lineNumber: 229,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-3",
+                                    style: {
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(2, 1fr)',
+                                        gap: '12px'
+                                    },
                                     children: CATEGORIES.map((category)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -2384,68 +2985,101 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                                                 ...prev,
                                                                 category: e.target.value
                                                             })),
-                                                    className: "sr-only"
+                                                    style: {
+                                                        position: 'absolute',
+                                                        opacity: 0,
+                                                        pointerEvents: 'none'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                    lineNumber: 156,
+                                                    lineNumber: 241,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `flex-1 px-4 py-3 rounded-lg border cursor-pointer transition-all ${formData.category === category ? 'bg-red-600 text-white border-red-600' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-red-400'}`,
+                                                    style: {
+                                                        flex: 1,
+                                                        padding: '16px',
+                                                        borderRadius: '8px',
+                                                        border: formData.category === category ? '2px solid #dc2626' : '2px solid var(--border)',
+                                                        background: formData.category === category ? '#dc2626' : 'var(--card-bg)',
+                                                        color: formData.category === category ? 'white' : 'var(--text-primary)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s'
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "font-medium capitalize",
+                                                            style: {
+                                                                fontWeight: '500',
+                                                                textTransform: 'capitalize',
+                                                                marginBottom: '4px'
+                                                            },
                                                             children: category
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                            lineNumber: 169,
+                                                            lineNumber: 259,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "text-xs opacity-80 mt-1",
+                                                            style: {
+                                                                fontSize: '12px',
+                                                                opacity: formData.category === category ? 0.9 : 0.7
+                                                            },
                                                             children: getCategoryDescription(category)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                            lineNumber: 170,
+                                                            lineNumber: 266,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                    lineNumber: 164,
+                                                    lineNumber: 249,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, category, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                            lineNumber: 155,
+                                            lineNumber: 240,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 238,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 149,
+                            lineNumber: 228,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Severity Level"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 181,
+                                    lineNumber: 280,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-2",
+                                    style: {
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '8px'
+                                    },
                                     children: SEVERITIES.map((severity)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -2456,80 +3090,116 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                                                 ...prev,
                                                                 severity: e.target.value
                                                             })),
-                                                    className: "sr-only"
+                                                    style: {
+                                                        position: 'absolute',
+                                                        opacity: 0,
+                                                        pointerEvents: 'none'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                    lineNumber: 187,
+                                                    lineNumber: 292,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `flex-1 px-4 py-3 rounded-lg border cursor-pointer transition-all ${formData.severity === severity ? 'bg-red-600 text-white border-red-600' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-red-400'}`,
+                                                    style: {
+                                                        flex: 1,
+                                                        padding: '16px',
+                                                        borderRadius: '8px',
+                                                        border: formData.severity === severity ? '2px solid #dc2626' : '2px solid var(--border)',
+                                                        background: formData.severity === severity ? '#dc2626' : 'var(--card-bg)',
+                                                        color: formData.severity === severity ? 'white' : 'var(--text-primary)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s'
+                                                    },
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "flex items-center justify-between",
+                                                        style: {
+                                                            display: 'flex',
+                                                            alignItems: 'space-between',
+                                                            width: '100%'
+                                                        },
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                style: {
+                                                                    flex: 1
+                                                                },
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "font-medium capitalize",
+                                                                        style: {
+                                                                            fontWeight: '500',
+                                                                            textTransform: 'capitalize',
+                                                                            marginBottom: '4px'
+                                                                        },
                                                                         children: severity
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                                        lineNumber: 202,
+                                                                        lineNumber: 312,
                                                                         columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "text-xs opacity-80 mt-1",
+                                                                        style: {
+                                                                            fontSize: '12px',
+                                                                            opacity: formData.severity === severity ? 0.9 : 0.7
+                                                                        },
                                                                         children: getSeverityDescription(severity)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                                        lineNumber: 203,
+                                                                        lineNumber: 319,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                                lineNumber: 201,
+                                                                lineNumber: 311,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: `w-3 h-3 rounded-full ${severity === 'critical' ? 'bg-red-400' : severity === 'high' ? 'bg-orange-400' : severity === 'medium' ? 'bg-yellow-400' : 'bg-green-400'}`
+                                                                style: {
+                                                                    width: '12px',
+                                                                    height: '12px',
+                                                                    borderRadius: '50%',
+                                                                    background: severity === 'critical' ? '#f87171' : severity === 'high' ? '#fb923c' : severity === 'medium' ? '#fbbf24' : '#4ade80',
+                                                                    marginLeft: '12px'
+                                                                }
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                                lineNumber: 207,
+                                                                lineNumber: 326,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                        lineNumber: 200,
+                                                        lineNumber: 310,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                                    lineNumber: 195,
+                                                    lineNumber: 300,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, severity, true, {
                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                            lineNumber: 186,
+                                            lineNumber: 291,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 184,
+                                    lineNumber: 289,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 180,
+                            lineNumber: 279,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "flex items-center",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "checkbox",
@@ -2538,52 +3208,80 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                                         ...prev,
                                                         isActive: e.target.checked
                                                     })),
-                                            className: "rounded border-gray-300 dark:border-gray-600 text-red-600 focus:ring-red-500"
+                                            style: {
+                                                marginRight: '8px',
+                                                accentColor: '#dc2626'
+                                            }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                            lineNumber: 223,
+                                            lineNumber: 346,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "ml-2 text-sm text-gray-700 dark:text-gray-300",
+                                            style: {
+                                                fontSize: '14px',
+                                                color: 'var(--text-primary)'
+                                            },
                                             children: "Rule is active and should be enforced"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                            lineNumber: 229,
+                                            lineNumber: 355,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 222,
+                                    lineNumber: 345,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs text-gray-500 dark:text-gray-400 mt-1 ml-6",
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)',
+                                        marginTop: '4px',
+                                        marginLeft: '24px'
+                                    },
                                     children: "Inactive rules are kept for reference but won't trigger violations."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 233,
+                                    lineNumber: 362,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 221,
+                            lineNumber: 344,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700",
+                            style: {
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                gap: '12px',
+                                paddingTop: '16px',
+                                borderTop: '1px solid var(--border)'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: onClose,
-                                    className: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                                    style: {
+                                        padding: '8px 16px',
+                                        background: 'transparent',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        transition: 'background 0.2s'
+                                    },
+                                    onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                                    onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                     disabled: isSubmitting,
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 240,
+                                    lineNumber: 380,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -2595,32 +3293,55 @@ function CreateRuleModal({ strategyId, onClose, onSuccess }) {
                                     whileTap: {
                                         scale: 0.98
                                     },
-                                    className: "flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '8px 24px',
+                                        background: isSubmitting ? 'var(--disabled-bg)' : '#dc2626',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'white',
+                                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'background 0.2s',
+                                        boxShadow: 'var(--shadow-md)'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = '#b91c1c';
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = '#dc2626';
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSave"], {
-                                            className: "w-4 h-4"
+                                            style: {
+                                                width: '16px',
+                                                height: '16px'
+                                            }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                            lineNumber: 255,
+                                            lineNumber: 426,
                                             columnNumber: 15
                                         }, this),
                                         isSubmitting ? 'Creating...' : 'Create Rule'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                                    lineNumber: 248,
+                                    lineNumber: 399,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                            lineNumber: 239,
+                            lineNumber: 373,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/strategies/components/CreateRuleModal.tsx",
-                    lineNumber: 114,
+                    lineNumber: 152,
                     columnNumber: 9
                 }, this)
             ]
@@ -4437,52 +5158,96 @@ function CreateStrategyModal({ onClose, onSuccess }) {
                 opacity: 0,
                 scale: 0.95
             },
-            className: "bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto",
+            style: {
+                backgroundColor: 'var(--card-bg)',
+                borderRadius: '12px',
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                maxWidth: '512px',
+                width: '100%',
+                margin: '0 16px',
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            },
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700",
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '20px',
+                        borderBottom: '1px solid var(--card-border)'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-xl font-semibold text-gray-900 dark:text-white",
+                            style: {
+                                fontSize: '18px',
+                                fontWeight: '600',
+                                color: 'var(--text-primary)',
+                                margin: 0
+                            },
                             children: "Create New Strategy"
                         }, void 0, false, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 85,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                            style: {
+                                padding: '8px',
+                                borderRadius: '6px',
+                                border: 'none',
+                                backgroundColor: 'transparent',
+                                cursor: 'pointer',
+                                color: 'var(--text-secondary)',
+                                transition: 'all 0.2s ease'
+                            },
+                            onMouseEnter: (e)=>{
+                                e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                            },
+                            onMouseLeave: (e)=>{
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                            },
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
-                                className: "w-5 h-5 text-gray-500"
+                                size: 16
                             }, void 0, false, {
                                 fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                lineNumber: 92,
+                                lineNumber: 126,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 88,
+                            lineNumber: 108,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                    lineNumber: 84,
+                    lineNumber: 93,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit,
-                    className: "p-6 space-y-6",
+                    style: {
+                        padding: '20px',
+                        display: 'grid',
+                        gap: '20px'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Strategy Name *"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 100,
+                                    lineNumber: 134,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4492,28 +5257,50 @@ function CreateStrategyModal({ onClose, onSuccess }) {
                                                 ...prev,
                                                 name: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white",
+                                    style: {
+                                        width: '100%',
+                                        padding: '8px 12px',
+                                        borderRadius: '6px',
+                                        border: '1px solid var(--card-border)',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s ease'
+                                    },
+                                    onFocus: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--purple-base)';
+                                    },
+                                    onBlur: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                                    },
                                     placeholder: "e.g., London Breakout Strategy",
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 103,
+                                    lineNumber: 143,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 99,
+                            lineNumber: 133,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Description"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 171,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -4522,34 +5309,64 @@ function CreateStrategyModal({ onClose, onSuccess }) {
                                                 ...prev,
                                                 description: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '8px 12px',
+                                        borderRadius: '6px',
+                                        border: '1px solid var(--card-border)',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        resize: 'none',
+                                        transition: 'border-color 0.2s ease'
+                                    },
+                                    onFocus: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--purple-base)';
+                                    },
+                                    onBlur: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                                    },
                                     rows: 3,
                                     placeholder: "Describe your strategy approach and methodology..."
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 180,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 114,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Market Type"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 208,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
+                                    style: {
+                                        display: 'flex',
+                                        gap: '12px'
+                                    },
                                     children: MARKET_TYPES.map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                cursor: 'pointer'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -4560,95 +5377,146 @@ function CreateStrategyModal({ onClose, onSuccess }) {
                                                                 ...prev,
                                                                 marketType: e.target.value
                                                             })),
-                                                    className: "sr-only"
+                                                    style: {
+                                                        position: 'absolute',
+                                                        opacity: 0,
+                                                        pointerEvents: 'none'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 220,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `px-4 py-2 rounded-lg border cursor-pointer transition-all ${formData.marketType === type ? 'bg-purple-600 text-white border-purple-600' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-purple-400'}`,
-                                                    children: type.charAt(0).toUpperCase() + type.slice(1)
+                                                    style: {
+                                                        padding: '8px 16px',
+                                                        borderRadius: '6px',
+                                                        border: `1px solid ${formData.marketType === type ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                                                        backgroundColor: formData.marketType === type ? 'var(--purple-base)' : 'var(--panel-muted)',
+                                                        color: formData.marketType === type ? 'white' : 'var(--text-primary)',
+                                                        cursor: 'pointer',
+                                                        fontSize: '14px',
+                                                        fontWeight: '500',
+                                                        transition: 'all 0.2s ease',
+                                                        textTransform: 'capitalize'
+                                                    },
+                                                    children: type
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                                    lineNumber: 143,
+                                                    lineNumber: 228,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, type, true, {
                                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                            lineNumber: 134,
+                                            lineNumber: 219,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 217,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 128,
+                            lineNumber: 207,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Preferred Trading Sessions"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 157,
+                                    lineNumber: 249,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 md:grid-cols-3 gap-2",
+                                    style: {
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+                                        gap: '8px'
+                                    },
                                     children: SESSIONS.map((session)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-center space-x-2 cursor-pointer",
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '8px',
+                                                cursor: 'pointer',
+                                                padding: '8px 12px',
+                                                borderRadius: '6px',
+                                                border: `1px solid ${formData.preferredSessions.includes(session) ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                                                backgroundColor: formData.preferredSessions.includes(session) ? 'var(--panel-muted)' : 'transparent',
+                                                transition: 'all 0.2s ease'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "checkbox",
                                                     checked: formData.preferredSessions.includes(session),
                                                     onChange: ()=>toggleSession(session),
-                                                    className: "rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500"
+                                                    style: {
+                                                        width: '16px',
+                                                        height: '16px',
+                                                        borderRadius: '3px',
+                                                        border: '1px solid var(--card-border)',
+                                                        backgroundColor: formData.preferredSessions.includes(session) ? 'var(--purple-base)' : 'transparent',
+                                                        cursor: 'pointer'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                                    lineNumber: 163,
+                                                    lineNumber: 275,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "text-sm text-gray-700 dark:text-gray-300",
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        color: 'var(--text-primary)'
+                                                    },
                                                     children: session
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                                    lineNumber: 169,
+                                                    lineNumber: 288,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, session, true, {
                                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                            lineNumber: 162,
+                                            lineNumber: 264,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 160,
+                                    lineNumber: 258,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 156,
+                            lineNumber: 248,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Risk Philosophy"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 177,
+                                    lineNumber: 301,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -4657,69 +5525,126 @@ function CreateStrategyModal({ onClose, onSuccess }) {
                                                 ...prev,
                                                 riskPhilosophy: e.target.value
                                             })),
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none",
+                                    style: {
+                                        width: '100%',
+                                        padding: '8px 12px',
+                                        borderRadius: '6px',
+                                        border: '1px solid var(--card-border)',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        resize: 'none',
+                                        transition: 'border-color 0.2s ease'
+                                    },
+                                    onFocus: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--purple-base)';
+                                    },
+                                    onBlur: (e)=>{
+                                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                                    },
                                     rows: 3,
                                     placeholder: "Describe your risk management approach..."
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 310,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 176,
+                            lineNumber: 300,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700",
+                            style: {
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                gap: '12px',
+                                paddingTop: '16px',
+                                borderTop: '1px solid var(--card-border)'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: onClose,
-                                    className: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                                    style: {
+                                        padding: '8px 16px',
+                                        borderRadius: '6px',
+                                        border: 'none',
+                                        backgroundColor: 'transparent',
+                                        color: 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'all 0.2s ease'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        e.currentTarget.style.backgroundColor = 'transparent';
+                                    },
                                     disabled: isSubmitting,
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 191,
+                                    lineNumber: 344,
                                     columnNumber: 13
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isSubmitting,
-                                    whileHover: {
-                                        scale: 1.02
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '8px 16px',
+                                        borderRadius: '6px',
+                                        border: 'none',
+                                        background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                        color: 'white',
+                                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '600',
+                                        transition: 'all 0.3s ease',
+                                        opacity: isSubmitting ? 0.6 : 1
                                     },
-                                    whileTap: {
-                                        scale: 0.98
+                                    onMouseEnter: (e)=>{
+                                        if (!isSubmitting) {
+                                            e.currentTarget.style.transform = 'translateY(-1px)';
+                                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+                                        }
                                     },
-                                    className: "flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg",
+                                    onMouseLeave: (e)=>{
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSave"], {
-                                            className: "w-4 h-4"
+                                            size: 16
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                            lineNumber: 206,
+                                            lineNumber: 397,
                                             columnNumber: 15
                                         }, this),
                                         isSubmitting ? 'Creating...' : 'Create Strategy'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 368,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                            lineNumber: 190,
+                            lineNumber: 337,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/CreateStrategyModal.tsx",
-                    lineNumber: 97,
+                    lineNumber: 131,
                     columnNumber: 9
                 }, this)
             ]
@@ -4751,7 +5676,6 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-icons/fi/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$StrategyCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/StrategyCard.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$CreateStrategyModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/CreateStrategyModal.tsx [app-client] (ecmascript)");
@@ -4759,7 +5683,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
-;
 ;
 ;
 ;
@@ -4839,444 +5762,480 @@ function StrategiesPage() {
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "p-6 space-y-6",
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex items-center justify-between",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-3xl font-bold text-gray-900 dark:text-white",
-                                children: "Trading Strategies"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/strategies/page.tsx",
-                                lineNumber: 78,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-gray-600 dark:text-gray-400 mt-1",
-                                children: "Manage your trading strategies, entry models, and rules"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/strategies/page.tsx",
-                                lineNumber: 81,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 77,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
-                        whileHover: {
-                            scale: 1.05
-                        },
-                        whileTap: {
-                            scale: 0.95
-                        },
-                        onClick: ()=>setShowCreateModal(true),
-                        className: "flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiPlus"], {
-                                className: "w-4 h-4"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/strategies/page.tsx",
-                                lineNumber: 91,
-                                columnNumber: 11
-                            }, this),
-                            "New Strategy"
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 85,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/strategies/page.tsx",
-                lineNumber: 76,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "grid grid-cols-1 md:grid-cols-4 gap-4",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                        initial: {
-                            opacity: 0,
-                            y: 20
-                        },
-                        animate: {
-                            opacity: 1,
-                            y: 0
-                        },
-                        transition: {
-                            delay: 0.1
-                        },
-                        className: "bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+        style: {
+            minHeight: '100vh',
+            backgroundColor: 'var(--background)'
+        },
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+            style: {
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '32px 16px'
+            },
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        marginBottom: '32px'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                            style: {
+                                fontSize: '28px',
+                                fontWeight: '700',
+                                color: 'var(--text-primary)',
+                                marginBottom: '8px',
+                                margin: 0
+                            },
+                            children: "Trading Strategies"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 77,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            style: {
+                                fontSize: '14px',
+                                color: 'var(--text-secondary)',
+                                margin: 0
+                            },
+                            children: "Manage your trading strategies, entry models, and rules"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 80,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 76,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gap: '16px',
+                        marginBottom: '24px'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                backgroundColor: 'var(--card-bg)',
+                                border: '1px solid var(--card-border)',
+                                borderRadius: '12px',
+                                padding: '20px',
+                                textAlign: 'center'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTarget"], {
-                                        className: "w-5 h-5 text-blue-600 dark:text-blue-400"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/strategies/page.tsx",
-                                        lineNumber: 106,
-                                        columnNumber: 15
-                                    }, this)
+                                    style: {
+                                        fontSize: '24px',
+                                        fontWeight: '700',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '4px'
+                                    },
+                                    children: strategies.length
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 88,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 dark:text-gray-400",
-                                            children: "Total Strategies"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 109,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-2xl font-bold text-gray-900 dark:text-white",
-                                            children: strategies.length
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 110,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)'
+                                    },
+                                    children: "Total Strategies"
+                                }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 108,
+                                    lineNumber: 91,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 104,
+                            lineNumber: 87,
                             columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 98,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                        initial: {
-                            opacity: 0,
-                            y: 20
-                        },
-                        animate: {
-                            opacity: 1,
-                            y: 0
-                        },
-                        transition: {
-                            delay: 0.2
-                        },
-                        className: "bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                backgroundColor: 'var(--card-bg)',
+                                border: '1px solid var(--card-border)',
+                                borderRadius: '12px',
+                                padding: '20px',
+                                textAlign: 'center'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-2 bg-green-100 dark:bg-green-900/30 rounded-lg",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTrendingUp"], {
-                                        className: "w-5 h-5 text-green-600 dark:text-green-400"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/strategies/page.tsx",
-                                        lineNumber: 123,
-                                        columnNumber: 15
-                                    }, this)
+                                    style: {
+                                        fontSize: '24px',
+                                        fontWeight: '700',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '4px'
+                                    },
+                                    children: strategies.filter((s)=>s.marketType === 'forex').length
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 94,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 dark:text-gray-400",
-                                            children: "Active Models"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 126,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-2xl font-bold text-gray-900 dark:text-white",
-                                            children: strategies.reduce((sum, s)=>sum + s.entryModels.length, 0)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 127,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)'
+                                    },
+                                    children: "Forex Strategies"
+                                }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 125,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 121,
+                            lineNumber: 93,
                             columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 115,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                        initial: {
-                            opacity: 0,
-                            y: 20
-                        },
-                        animate: {
-                            opacity: 1,
-                            y: 0
-                        },
-                        transition: {
-                            delay: 0.3
-                        },
-                        className: "bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                backgroundColor: 'var(--card-bg)',
+                                border: '1px solid var(--card-border)',
+                                borderRadius: '12px',
+                                padding: '20px',
+                                textAlign: 'center'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSettings"], {
-                                        className: "w-5 h-5 text-orange-600 dark:text-orange-400"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/strategies/page.tsx",
-                                        lineNumber: 142,
-                                        columnNumber: 15
-                                    }, this)
+                                    style: {
+                                        fontSize: '24px',
+                                        fontWeight: '700',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '4px'
+                                    },
+                                    children: strategies.filter((s)=>s.marketType === 'crypto').length
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 141,
+                                    lineNumber: 100,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 dark:text-gray-400",
-                                            children: "Sequences"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 145,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-2xl font-bold text-gray-900 dark:text-white",
-                                            children: strategies.reduce((sum, s)=>sum + s.timeframeSequences.length, 0)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 146,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)'
+                                    },
+                                    children: "Crypto Strategies"
+                                }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 144,
+                                    lineNumber: 103,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 140,
+                            lineNumber: 99,
                             columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 134,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                        initial: {
-                            opacity: 0,
-                            y: 20
-                        },
-                        animate: {
-                            opacity: 1,
-                            y: 0
-                        },
-                        transition: {
-                            delay: 0.4
-                        },
-                        className: "bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center gap-3",
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                backgroundColor: 'var(--card-bg)',
+                                border: '1px solid var(--card-border)',
+                                borderRadius: '12px',
+                                padding: '20px',
+                                textAlign: 'center'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-2 bg-red-100 dark:bg-red-900/30 rounded-lg",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBookOpen"], {
-                                        className: "w-5 h-5 text-red-600 dark:text-red-400"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/strategies/page.tsx",
-                                        lineNumber: 161,
-                                        columnNumber: 15
-                                    }, this)
+                                    style: {
+                                        fontSize: '24px',
+                                        fontWeight: '700',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '4px'
+                                    },
+                                    children: strategies.reduce((sum, s)=>sum + (s.entryModels?.length || 0), 0)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 106,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        fontSize: '12px',
+                                        color: 'var(--text-secondary)'
+                                    },
+                                    children: "Entry Models"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 109,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 105,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 86,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginBottom: '24px'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    style: {
+                                        fontSize: '20px',
+                                        fontWeight: '600',
+                                        color: 'var(--text-primary)',
+                                        margin: 0
+                                    },
+                                    children: "Your Strategies"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 116,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    style: {
+                                        fontSize: '14px',
+                                        color: 'var(--text-secondary)',
+                                        margin: '4px 0 0 0'
+                                    },
+                                    children: "Create and manage your trading strategies"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 119,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 115,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: ()=>setShowCreateModal(true),
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                padding: '12px 20px',
+                                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600',
+                                fontSize: '14px',
+                                transition: 'all 0.3s ease'
+                            },
+                            onMouseEnter: (e)=>{
+                                e.currentTarget.style.transform = 'translateY(-1px)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+                            },
+                            onMouseLeave: (e)=>{
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiPlus"], {
+                                    size: 16
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 148,
+                                    columnNumber: 13
+                                }, this),
+                                "New Strategy"
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 123,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 114,
+                    columnNumber: 9
+                }, this),
+                isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                        gap: '20px'
+                    },
+                    children: [
+                        ...Array(6)
+                    ].map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                backgroundColor: 'var(--card-bg)',
+                                border: '1px solid var(--card-border)',
+                                borderRadius: '12px',
+                                padding: '20px',
+                                height: '200px'
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        height: '20px',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        borderRadius: '4px',
+                                        marginBottom: '12px',
+                                        animation: 'pulse 2s infinite'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 158,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        height: '16px',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        borderRadius: '4px',
+                                        width: '80%',
+                                        marginBottom: '8px',
+                                        animation: 'pulse 2s infinite'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/strategies/page.tsx",
+                                    lineNumber: 159,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        height: '16px',
+                                        backgroundColor: 'var(--panel-muted)',
+                                        borderRadius: '4px',
+                                        width: '60%',
+                                        animation: 'pulse 2s infinite'
+                                    }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/strategies/page.tsx",
                                     lineNumber: 160,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 dark:text-gray-400",
-                                            children: "Rules"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 164,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-2xl font-bold text-gray-900 dark:text-white",
-                                            children: strategies.reduce((sum, s)=>sum + s.rules.length, 0)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/strategies/page.tsx",
-                                            lineNumber: 165,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/strategies/page.tsx",
-                                    lineNumber: 163,
-                                    columnNumber: 13
+                                    columnNumber: 17
                                 }, this)
                             ]
-                        }, void 0, true, {
+                        }, i, true, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 159,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 153,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/strategies/page.tsx",
-                lineNumber: 97,
-                columnNumber: 7
-            }, this),
-            strategies.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                initial: {
-                    opacity: 0,
-                    y: 20
-                },
-                animate: {
-                    opacity: 1,
-                    y: 0
-                },
-                className: "text-center py-12",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiTarget"], {
-                            className: "w-8 h-8 text-gray-400"
+                            lineNumber: 157,
+                            columnNumber: 15
+                        }, this))
+                }, void 0, false, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 155,
+                    columnNumber: 11
+                }, this) : strategies.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        backgroundColor: 'var(--card-bg)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: '12px',
+                        padding: '48px',
+                        textAlign: 'center'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                fontSize: '48px',
+                                marginBottom: '16px'
+                            },
+                            children: "📊"
                         }, void 0, false, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 181,
+                            lineNumber: 166,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                            style: {
+                                fontSize: '18px',
+                                fontWeight: '600',
+                                color: 'var(--text-primary)',
+                                marginBottom: '8px'
+                            },
+                            children: "No Strategies Yet"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 167,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            style: {
+                                fontSize: '14px',
+                                color: 'var(--text-secondary)',
+                                marginBottom: '20px'
+                            },
+                            children: "Create your first trading strategy to get started"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 170,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: ()=>setShowCreateModal(true),
+                            style: {
+                                padding: '12px 24px',
+                                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600',
+                                fontSize: '14px'
+                            },
+                            children: "Create Your First Strategy"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/strategies/page.tsx",
+                            lineNumber: 173,
                             columnNumber: 13
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 180,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                        className: "text-lg font-medium text-gray-900 dark:text-white mb-2",
-                        children: "No strategies yet"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 183,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-gray-600 dark:text-gray-400 mb-6",
-                        children: "Create your first trading strategy to get started with structured trading."
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 186,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
-                        whileHover: {
-                            scale: 1.05
-                        },
-                        whileTap: {
-                            scale: 0.95
-                        },
-                        onClick: ()=>setShowCreateModal(true),
-                        className: "px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg",
-                        children: "Create Your First Strategy"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 189,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/strategies/page.tsx",
-                lineNumber: 175,
-                columnNumber: 9
-            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                initial: {
-                    opacity: 0
-                },
-                animate: {
-                    opacity: 1
-                },
-                className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
-                children: strategies.map((strategy, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                        initial: {
-                            opacity: 0,
-                            y: 20
-                        },
-                        animate: {
-                            opacity: 1,
-                            y: 0
-                        },
-                        transition: {
-                            delay: index * 0.1
-                        },
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$StrategyCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 165,
+                    columnNumber: 11
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+                        gap: '20px'
+                    },
+                    children: strategies.map((strategy)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$StrategyCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             strategy: strategy,
                             onDelete: handleStrategyDeleted,
                             onUpdate: fetchStrategies
-                        }, void 0, false, {
+                        }, strategy.id, false, {
                             fileName: "[project]/src/app/strategies/page.tsx",
-                            lineNumber: 211,
+                            lineNumber: 192,
                             columnNumber: 15
-                        }, this)
-                    }, strategy.id, false, {
-                        fileName: "[project]/src/app/strategies/page.tsx",
-                        lineNumber: 205,
-                        columnNumber: 13
-                    }, this))
-            }, void 0, false, {
-                fileName: "[project]/src/app/strategies/page.tsx",
-                lineNumber: 199,
-                columnNumber: 9
-            }, this),
-            showCreateModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$CreateStrategyModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                onClose: ()=>setShowCreateModal(false),
-                onSuccess: handleStrategyCreated
-            }, void 0, false, {
-                fileName: "[project]/src/app/strategies/page.tsx",
-                lineNumber: 223,
-                columnNumber: 9
-            }, this)
-        ]
-    }, void 0, true, {
+                        }, this))
+                }, void 0, false, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 190,
+                    columnNumber: 11
+                }, this),
+                showCreateModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$CreateStrategyModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    onClose: ()=>setShowCreateModal(false),
+                    onSuccess: handleStrategyCreated
+                }, void 0, false, {
+                    fileName: "[project]/src/app/strategies/page.tsx",
+                    lineNumber: 204,
+                    columnNumber: 11
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/app/strategies/page.tsx",
+            lineNumber: 75,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/app/strategies/page.tsx",
         lineNumber: 74,
         columnNumber: 5

@@ -1172,97 +1172,175 @@ function TradeUpdateModal({ isOpen, onClose, tradeId, onUpdateAdded, existingUpd
                 opacity: 0,
                 scale: 0.95
             },
-            className: "bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto",
+            style: {
+                background: 'var(--background)',
+                borderRadius: '12px',
+                boxShadow: 'var(--shadow-lg)',
+                maxWidth: '800px',
+                width: '100%',
+                margin: '0 16px',
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            },
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700",
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '24px',
+                        borderBottom: '1px solid var(--border)'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center space-x-3",
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center",
+                                    style: {
+                                        width: '40px',
+                                        height: '40px',
+                                        background: 'var(--accent-bg)',
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiClock"], {
-                                        className: "w-5 h-5 text-blue-600 dark:text-blue-400"
+                                        style: {
+                                            width: '20px',
+                                            height: '20px',
+                                            color: 'var(--accent-color)'
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 190,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 166,
+                                    lineNumber: 181,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                            style: {
+                                                fontSize: '20px',
+                                                fontWeight: '600',
+                                                color: 'var(--text-primary)',
+                                                margin: '0'
+                                            },
                                             children: "Add Trade Update"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 170,
+                                            lineNumber: 193,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 dark:text-gray-400",
+                                            style: {
+                                                fontSize: '14px',
+                                                color: 'var(--text-secondary)',
+                                                margin: '4px 0 0 0'
+                                            },
                                             children: "Record changes and observations during the trade"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 173,
+                                            lineNumber: 201,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 192,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 165,
+                            lineNumber: 180,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: handleClose,
-                            className: "p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                            style: {
+                                padding: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                color: 'var(--text-secondary)',
+                                transition: 'background 0.2s'
+                            },
+                            onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                            onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiX"], {
-                                className: "w-5 h-5"
+                                style: {
+                                    width: '20px',
+                                    height: '20px'
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                lineNumber: 182,
+                                lineNumber: 224,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 178,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                    lineNumber: 164,
+                    lineNumber: 173,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit,
-                    className: "p-6 space-y-6",
+                    style: {
+                        padding: '24px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '24px'
+                    },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "What action did you take?"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 190,
+                                    lineNumber: 232,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-1 gap-3",
+                                    style: {
+                                        display: 'grid',
+                                        gridTemplateColumns: '1fr',
+                                        gap: '12px'
+                                    },
                                     children: actionOptions.map((action)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: `flex items-start space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${update.action === action.value ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'}`,
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'flex-start',
+                                                gap: '12px',
+                                                padding: '16px',
+                                                borderRadius: '8px',
+                                                border: update.action === action.value ? '2px solid var(--accent-color)' : '2px solid var(--border)',
+                                                background: update.action === action.value ? 'var(--accent-bg)' : 'var(--card-bg)',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -1273,68 +1351,99 @@ function TradeUpdateModal({ isOpen, onClose, tradeId, onUpdateAdded, existingUpd
                                                                 ...prev,
                                                                 action: e.target.value
                                                             })),
-                                                    className: "mt-0.5"
+                                                    style: {
+                                                        marginTop: '2px'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 203,
+                                                    lineNumber: 257,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex-1",
+                                                    style: {
+                                                        flex: 1
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "font-medium text-gray-900 dark:text-white",
+                                                            style: {
+                                                                fontWeight: '500',
+                                                                color: 'var(--text-primary)',
+                                                                marginBottom: '4px'
+                                                            },
                                                             children: action.label
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                            lineNumber: 212,
+                                                            lineNumber: 266,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "text-sm text-gray-600 dark:text-gray-400",
+                                                            style: {
+                                                                fontSize: '14px',
+                                                                color: 'var(--text-secondary)'
+                                                            },
                                                             children: action.description
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                            lineNumber: 215,
+                                                            lineNumber: 273,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 211,
+                                                    lineNumber: 265,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, action.value, true, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 243,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 193,
+                                    lineNumber: 241,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 189,
+                            lineNumber: 231,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "Why did you take this action?"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 226,
+                                    lineNumber: 287,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-3",
+                                    style: {
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(2, 1fr)',
+                                        gap: '12px'
+                                    },
                                     children: reasonOptions.map((reason)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: `flex items-start space-x-2 p-3 rounded-lg border cursor-pointer transition-all ${update.reason === reason.value ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'}`,
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'flex-start',
+                                                gap: '8px',
+                                                padding: '16px',
+                                                borderRadius: '8px',
+                                                border: update.reason === reason.value ? '2px solid var(--accent-color)' : '2px solid var(--border)',
+                                                background: update.reason === reason.value ? 'var(--accent-bg)' : 'var(--card-bg)',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "radio",
@@ -1345,155 +1454,221 @@ function TradeUpdateModal({ isOpen, onClose, tradeId, onUpdateAdded, existingUpd
                                                                 ...prev,
                                                                 reason: e.target.value
                                                             })),
-                                                    className: "mt-0.5"
+                                                    style: {
+                                                        marginTop: '2px'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 239,
+                                                    lineNumber: 312,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "text-xs",
+                                                    style: {
+                                                        fontSize: '12px'
+                                                    },
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "font-medium text-gray-900 dark:text-white",
+                                                        style: {
+                                                            fontWeight: '500',
+                                                            color: 'var(--text-primary)'
+                                                        },
                                                         children: reason.label
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                        lineNumber: 248,
+                                                        lineNumber: 321,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 247,
+                                                    lineNumber: 320,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, reason.value, true, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 231,
+                                            lineNumber: 298,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 229,
+                                    lineNumber: 296,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 225,
+                            lineNumber: 286,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "How were you feeling?"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 259,
+                                    lineNumber: 335,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex flex-wrap gap-2",
+                                    style: {
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: '8px'
+                                    },
                                     children: emotionalStates.map((state)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: ()=>setUpdate((prev)=>({
                                                         ...prev,
                                                         emotionalState: prev.emotionalState === state.value ? '' : state.value
                                                     })),
-                                            className: `px-3 py-2 rounded-full text-sm font-medium transition-all ${update.emotionalState === state.value ? state.color + ' ring-2 ring-offset-2 ring-blue-500' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`,
+                                            style: {
+                                                padding: '8px 16px',
+                                                borderRadius: '20px',
+                                                fontSize: '14px',
+                                                fontWeight: '500',
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s',
+                                                background: update.emotionalState === state.value ? state.color : 'var(--card-bg)',
+                                                color: update.emotionalState === state.value ? 'white' : 'var(--text-primary)',
+                                                boxShadow: update.emotionalState === state.value ? '0 0 0 2px var(--accent-color)' : 'none'
+                                            },
                                             children: state.label
                                         }, state.value, false, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 264,
+                                            lineNumber: 346,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 262,
+                                    lineNumber: 344,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 258,
+                            lineNumber: 334,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '12px'
+                                    },
                                     children: "How did you behave during this update?"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 285,
+                                    lineNumber: 374,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-3",
+                                    style: {
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(2, 1fr)',
+                                        gap: '12px'
+                                    },
                                     children: behaviorOptions.map((behavior)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: `flex items-start space-x-2 p-3 rounded-lg border cursor-pointer transition-all ${update.behavior?.includes(behavior.value) ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'}`,
+                                            style: {
+                                                display: 'flex',
+                                                alignItems: 'flex-start',
+                                                gap: '8px',
+                                                padding: '16px',
+                                                borderRadius: '8px',
+                                                border: update.behavior?.includes(behavior.value) ? '2px solid var(--success-color)' : '2px solid var(--border)',
+                                                background: update.behavior?.includes(behavior.value) ? 'var(--success-bg)' : 'var(--card-bg)',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            },
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "checkbox",
                                                     checked: update.behavior?.includes(behavior.value) || false,
                                                     onChange: ()=>toggleBehavior(behavior.value),
-                                                    className: "mt-0.5"
+                                                    style: {
+                                                        marginTop: '2px'
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 298,
+                                                    lineNumber: 399,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "text-xs",
+                                                    style: {
+                                                        fontSize: '12px',
+                                                        flex: 1
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "font-medium text-gray-900 dark:text-white",
+                                                            style: {
+                                                                fontWeight: '500',
+                                                                color: 'var(--text-primary)',
+                                                                marginBottom: '4px'
+                                                            },
                                                             children: behavior.label
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                            lineNumber: 305,
+                                                            lineNumber: 406,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "text-gray-600 dark:text-gray-400",
+                                                            style: {
+                                                                color: 'var(--text-secondary)',
+                                                                lineHeight: '1.4'
+                                                            },
                                                             children: behavior.description
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                            lineNumber: 308,
+                                                            lineNumber: 413,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                    lineNumber: 304,
+                                                    lineNumber: 405,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, behavior.value, true, {
                                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                            lineNumber: 290,
+                                            lineNumber: 385,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 288,
+                                    lineNumber: 383,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 284,
+                            lineNumber: 373,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
+                                    style: {
+                                        display: 'block',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: 'var(--text-primary)',
+                                        marginBottom: '8px'
+                                    },
                                     children: "Additional Notes"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 319,
+                                    lineNumber: 427,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1504,85 +1679,144 @@ function TradeUpdateModal({ isOpen, onClose, tradeId, onUpdateAdded, existingUpd
                                             })),
                                     placeholder: "Any additional observations or thoughts...",
                                     rows: 3,
-                                    className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                    style: {
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        background: 'var(--card-bg)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '14px',
+                                        resize: 'vertical',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s'
+                                    },
+                                    onFocus: (e)=>e.currentTarget.style.borderColor = 'var(--accent-color)',
+                                    onBlur: (e)=>e.currentTarget.style.borderColor = 'var(--border)'
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 436,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 318,
+                            lineNumber: 426,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700",
+                            style: {
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                gap: '12px',
+                                paddingTop: '16px',
+                                borderTop: '1px solid var(--border)'
+                            },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: handleClose,
-                                    className: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors",
+                                    style: {
+                                        padding: '8px 16px',
+                                        background: 'transparent',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        transition: 'background 0.2s'
+                                    },
+                                    onMouseEnter: (e)=>e.currentTarget.style.background = 'var(--hover-bg)',
+                                    onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 333,
+                                    lineNumber: 466,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isSubmitting,
-                                    className: "flex items-center space-x-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors",
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '8px 24px',
+                                        background: isSubmitting ? 'var(--disabled-bg)' : 'var(--accent-color)',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        color: 'white',
+                                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'background 0.2s'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-hover)';
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-color)';
+                                    },
                                     children: isSubmitting ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "animate-spin rounded-full h-4 w-4 border-b-2 border-white"
+                                                style: {
+                                                    width: '16px',
+                                                    height: '16px',
+                                                    border: '2px solid transparent',
+                                                    borderTop: '2px solid white',
+                                                    borderRadius: '50%',
+                                                    animation: 'spin 1s linear infinite'
+                                                }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                lineNumber: 347,
+                                                lineNumber: 510,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "Saving..."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                lineNumber: 348,
+                                                lineNumber: 518,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiSave"], {
-                                                className: "w-4 h-4"
+                                                style: {
+                                                    width: '16px',
+                                                    height: '16px'
+                                                }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                lineNumber: 352,
+                                                lineNumber: 522,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "Add Update"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                                lineNumber: 353,
+                                                lineNumber: 523,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                                    lineNumber: 340,
+                                    lineNumber: 484,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                            lineNumber: 332,
+                            lineNumber: 459,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/TradeUpdateModal.tsx",
-                    lineNumber: 187,
+                    lineNumber: 229,
                     columnNumber: 9
                 }, this)
             ]
@@ -3531,7 +3765,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-icons/fi/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$DashboardHeader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/DashboardHeader.tsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/AnimatedCard.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$PreTradeChecklist$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/PreTradeChecklist.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TradeUpdatesList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/TradeUpdatesList.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$PostTradeReflection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/PostTradeReflection.tsx [app-client] (ecmascript)");
@@ -3542,7 +3775,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
-;
 ;
 ;
 ;
@@ -3625,7 +3857,10 @@ function TradeReviewPage() {
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen bg-gray-50 dark:bg-gray-900",
+        style: {
+            minHeight: '100vh',
+            backgroundColor: 'var(--background)'
+        },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$DashboardHeader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 onThemeToggle: toggleTheme,
@@ -3636,70 +3871,238 @@ function TradeReviewPage() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-                className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8",
+                style: {
+                    maxWidth: '1200px',
+                    margin: '0 auto',
+                    padding: '32px 16px'
+                },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mb-8",
+                        style: {
+                            marginBottom: '32px'
+                        },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-3xl font-bold text-gray-900 dark:text-white",
+                                style: {
+                                    fontSize: '32px',
+                                    fontWeight: '700',
+                                    color: 'var(--text-primary)',
+                                    marginBottom: '8px'
+                                },
                                 children: "Trade Lifecycle Review"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 87,
+                                lineNumber: 88,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "mt-2 text-gray-600 dark:text-gray-400",
+                                style: {
+                                    fontSize: '16px',
+                                    color: 'var(--text-secondary)',
+                                    margin: 0
+                                },
                                 children: "Complete pre-trade preparation, track in-trade decisions, and reflect on outcomes"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 90,
+                                lineNumber: 91,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/review/page.tsx",
-                        lineNumber: 86,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 lg:grid-cols-4 gap-8",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "lg:col-span-1",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    className: "p-6",
+                        style: {
+                            marginBottom: '24px'
+                        },
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                display: 'flex',
+                                gap: '8px',
+                                flexWrap: 'wrap'
+                            },
+                            children: tabs.map((tab)=>{
+                                const Icon = tab.icon;
+                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setActiveTab(tab.id),
+                                    style: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '12px 16px',
+                                        borderRadius: '8px',
+                                        border: 'none',
+                                        backgroundColor: activeTab === tab.id ? 'var(--purple-base)' : 'transparent',
+                                        color: activeTab === tab.id ? 'white' : 'var(--text-secondary)',
+                                        cursor: 'pointer',
+                                        fontWeight: '600',
+                                        fontSize: '14px',
+                                        transition: 'all 0.2s ease'
+                                    },
+                                    onMouseEnter: (e)=>{
+                                        if (activeTab !== tab.id) {
+                                            e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                                        }
+                                    },
+                                    onMouseLeave: (e)=>{
+                                        if (activeTab !== tab.id) {
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                        }
+                                    },
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "text-lg font-semibold text-gray-900 dark:text-white mb-4",
-                                            children: "Recent Trades"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
+                                            size: 16
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 99,
-                                            columnNumber: 15
+                                            lineNumber: 130,
+                                            columnNumber: 19
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "space-y-2 max-h-96 overflow-y-auto",
-                                            children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex items-center justify-center py-8",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 106,
-                                                    columnNumber: 21
-                                                }, this)
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: tab.label
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/review/page.tsx",
+                                            lineNumber: 131,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, tab.id, true, {
+                                    fileName: "[project]/src/app/review/page.tsx",
+                                    lineNumber: 102,
+                                    columnNumber: 17
+                                }, this);
+                            })
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/review/page.tsx",
+                            lineNumber: 98,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/review/page.tsx",
+                        lineNumber: 97,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                            gap: '24px'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    backgroundColor: 'var(--card-bg)',
+                                    border: '1px solid var(--card-border)',
+                                    borderRadius: '12px',
+                                    padding: '20px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            marginBottom: '16px'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                style: {
+                                                    fontSize: '16px',
+                                                    fontWeight: '600',
+                                                    color: 'var(--text-primary)',
+                                                    margin: 0
+                                                },
+                                                children: "Recent Trades"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 105,
+                                                lineNumber: 143,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    fontSize: '12px',
+                                                    color: 'var(--text-secondary)'
+                                                },
+                                                children: [
+                                                    trades.length,
+                                                    " total"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/review/page.tsx",
+                                                lineNumber: 146,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/review/page.tsx",
+                                        lineNumber: 142,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            maxHeight: '400px',
+                                            overflowY: 'auto'
+                                        },
+                                        children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                padding: '32px'
+                                            },
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    border: '2px solid var(--card-border)',
+                                                    borderTop: '2px solid var(--purple-base)',
+                                                    borderRadius: '50%',
+                                                    animation: 'spin 1s linear infinite'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/review/page.tsx",
+                                                lineNumber: 154,
                                                 columnNumber: 19
-                                            }, this) : trades.length > 0 ? trades.map((trade)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/review/page.tsx",
+                                            lineNumber: 153,
+                                            columnNumber: 17
+                                        }, this) : trades.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                display: 'grid',
+                                                gap: '8px'
+                                            },
+                                            children: trades.map((trade)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: ()=>setSelectedTradeId(trade.id),
-                                                    className: `w-full text-left p-3 rounded-lg transition-all ${selectedTradeId === trade.id ? 'bg-blue-100 dark:bg-blue-900 border-blue-500' : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'} border`,
+                                                    style: {
+                                                        width: '100%',
+                                                        textAlign: 'left',
+                                                        padding: '12px',
+                                                        borderRadius: '8px',
+                                                        border: selectedTradeId === trade.id ? '2px solid var(--purple-base)' : '1px solid var(--card-border)',
+                                                        backgroundColor: selectedTradeId === trade.id ? 'var(--panel-muted)' : 'var(--card-bg)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s ease'
+                                                    },
+                                                    onMouseEnter: (e)=>{
+                                                        if (selectedTradeId !== trade.id) {
+                                                            e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                                                        }
+                                                    },
+                                                    onMouseLeave: (e)=>{
+                                                        if (selectedTradeId !== trade.id) {
+                                                            e.currentTarget.style.backgroundColor = selectedTradeId === trade.id ? 'var(--panel-muted)' : 'var(--card-bg)';
+                                                        }
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "font-medium text-gray-900 dark:text-white",
+                                                            style: {
+                                                                fontSize: '14px',
+                                                                fontWeight: '600',
+                                                                color: 'var(--text-primary)',
+                                                                marginBottom: '4px'
+                                                            },
                                                             children: [
                                                                 trade.pair,
                                                                 " ",
@@ -3707,67 +4110,131 @@ function TradeReviewPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 119,
+                                                            lineNumber: 190,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "text-sm text-gray-600 dark:text-gray-400",
+                                                            style: {
+                                                                fontSize: '12px',
+                                                                color: 'var(--text-secondary)',
+                                                                marginBottom: '4px'
+                                                            },
                                                             children: new Date(trade.entryTime).toLocaleDateString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 122,
+                                                            lineNumber: 193,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: `text-sm font-medium ${trade.outcome === 'WIN' ? 'text-green-600' : trade.outcome === 'LOSS' ? 'text-red-600' : 'text-gray-600'}`,
+                                                            style: {
+                                                                fontSize: '12px',
+                                                                fontWeight: '600',
+                                                                color: trade.outcome === 'WIN' ? '#10b981' : trade.outcome === 'LOSS' ? '#ef4444' : 'var(--text-secondary)'
+                                                            },
                                                             children: trade.outcome || 'Open'
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 125,
+                                                            lineNumber: 196,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, trade.id, true, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 110,
+                                                    lineNumber: 166,
                                                     columnNumber: 21
-                                                }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-gray-500 dark:text-gray-400 text-center py-4",
-                                                children: "No trades yet"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 135,
-                                                columnNumber: 19
-                                            }, this)
+                                                }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 103,
-                                            columnNumber: 15
+                                            lineNumber: 164,
+                                            columnNumber: 17
+                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                textAlign: 'center',
+                                                padding: '32px'
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        fontSize: '48px',
+                                                        marginBottom: '16px'
+                                                    },
+                                                    children: "📊"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/review/page.tsx",
+                                                    lineNumber: 208,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                    style: {
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        color: 'var(--text-primary)',
+                                                        marginBottom: '8px'
+                                                    },
+                                                    children: "No Trades Yet"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/review/page.tsx",
+                                                    lineNumber: 209,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    style: {
+                                                        fontSize: '14px',
+                                                        color: 'var(--text-secondary)'
+                                                    },
+                                                    children: "Start trading to begin reviewing your performance"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/review/page.tsx",
+                                                    lineNumber: 212,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/review/page.tsx",
+                                            lineNumber: 207,
+                                            columnNumber: 17
                                         }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 98,
-                                    columnNumber: 13
-                                }, this)
-                            }, void 0, false, {
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/review/page.tsx",
+                                        lineNumber: 151,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 97,
+                                lineNumber: 141,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "lg:col-span-3",
+                                style: {
+                                    backgroundColor: 'var(--card-bg)',
+                                    border: '1px solid var(--card-border)',
+                                    borderRadius: '12px',
+                                    padding: '20px'
+                                },
                                 children: selectedTrade ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-6",
+                                    style: {
+                                        display: 'grid',
+                                        gap: '20px'
+                                    },
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                            className: "p-6",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center justify-between mb-4",
+                                                    style: {
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'space-between',
+                                                        marginBottom: '16px'
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                            className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                                            style: {
+                                                                fontSize: '18px',
+                                                                fontWeight: '600',
+                                                                color: 'var(--text-primary)',
+                                                                margin: 0
+                                                            },
                                                             children: [
                                                                 selectedTrade.pair,
                                                                 " - ",
@@ -3775,177 +4242,201 @@ function TradeReviewPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 150,
+                                                            lineNumber: 227,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: `px-3 py-1 rounded-full text-sm font-medium ${selectedTrade.status === 'closed' ? 'bg-green-100 text-green-800' : selectedTrade.status === 'open' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}`,
+                                                            style: {
+                                                                padding: '4px 12px',
+                                                                borderRadius: '20px',
+                                                                fontSize: '12px',
+                                                                fontWeight: '600',
+                                                                backgroundColor: selectedTrade.status === 'closed' ? '#dcfce7' : selectedTrade.status === 'open' ? '#dbeafe' : 'var(--panel-muted)',
+                                                                color: selectedTrade.status === 'closed' ? '#166534' : selectedTrade.status === 'open' ? '#1e40af' : 'var(--text-secondary)'
+                                                            },
                                                             children: selectedTrade.status
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 153,
+                                                            lineNumber: 230,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 149,
+                                                    lineNumber: 226,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "grid grid-cols-2 md:grid-cols-4 gap-4 text-sm",
+                                                    style: {
+                                                        display: 'grid',
+                                                        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+                                                        gap: '16px'
+                                                    },
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                padding: '12px',
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '6px'
+                                                            },
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "text-gray-600 dark:text-gray-400",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '12px',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "Entry Price"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 164,
+                                                                    lineNumber: 244,
                                                                     columnNumber: 23
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "font-semibold text-gray-900 dark:text-white",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '14px',
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--text-primary)'
+                                                                    },
                                                                     children: selectedTrade.entryPrice.toFixed(5)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 165,
+                                                                    lineNumber: 245,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 163,
+                                                            lineNumber: 243,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                padding: '12px',
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '6px'
+                                                            },
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "text-gray-600 dark:text-gray-400",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '12px',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "Exit Price"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 170,
+                                                                    lineNumber: 250,
                                                                     columnNumber: 23
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "font-semibold text-gray-900 dark:text-white",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '14px',
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--text-primary)'
+                                                                    },
                                                                     children: selectedTrade.exitPrice?.toFixed(5) || 'Open'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 171,
+                                                                    lineNumber: 251,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 169,
+                                                            lineNumber: 249,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                padding: '12px',
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '6px'
+                                                            },
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "text-gray-600 dark:text-gray-400",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '12px',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "P&L"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 176,
+                                                                    lineNumber: 256,
                                                                     columnNumber: 23
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: `font-semibold ${(selectedTrade.profitLoss || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`,
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '14px',
+                                                                        fontWeight: '600',
+                                                                        color: (selectedTrade.profitLoss || 0) >= 0 ? '#10b981' : '#ef4444'
+                                                                    },
                                                                     children: selectedTrade.profitLoss?.toFixed(2) || 'N/A'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 177,
+                                                                    lineNumber: 257,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 175,
+                                                            lineNumber: 255,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                padding: '12px',
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '6px'
+                                                            },
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "text-gray-600 dark:text-gray-400",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '12px',
+                                                                        color: 'var(--text-secondary)',
+                                                                        marginBottom: '4px'
+                                                                    },
                                                                     children: "Outcome"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 184,
+                                                                    lineNumber: 266,
                                                                     columnNumber: 23
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "font-semibold text-gray-900 dark:text-white",
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    style: {
+                                                                        fontSize: '14px',
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--text-primary)'
+                                                                    },
                                                                     children: selectedTrade.outcome || 'Open'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 185,
+                                                                    lineNumber: 267,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 183,
+                                                            lineNumber: 265,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 162,
+                                                    lineNumber: 242,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 148,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                            className: "p-1",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex space-x-1",
-                                                children: tabs.map((tab)=>{
-                                                    const Icon = tab.icon;
-                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                        onClick: ()=>setActiveTab(tab.id),
-                                                        className: `flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'}`,
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
-                                                                className: "w-4 h-4"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 207,
-                                                                columnNumber: 27
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                children: tab.label
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/review/page.tsx",
-                                                                lineNumber: 208,
-                                                                columnNumber: 27
-                                                            }, this)
-                                                        ]
-                                                    }, tab.id, true, {
-                                                        fileName: "[project]/src/app/review/page.tsx",
-                                                        lineNumber: 198,
-                                                        columnNumber: 25
-                                                    }, this);
-                                                })
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/review/page.tsx",
-                                                lineNumber: 194,
-                                                columnNumber: 19
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 193,
+                                            lineNumber: 225,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "min-h-96",
+                                            style: {
+                                                minHeight: '400px'
+                                            },
                                             children: [
                                                 activeTab === 'checklist' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$PreTradeChecklist$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                     tradeId: selectedTrade.id,
@@ -3954,14 +4445,14 @@ function TradeReviewPage() {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 218,
+                                                    lineNumber: 277,
                                                     columnNumber: 21
                                                 }, this),
                                                 activeTab === 'updates' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TradeUpdatesList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                     tradeId: selectedTrade.id
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 227,
+                                                    lineNumber: 286,
                                                     columnNumber: 21
                                                 }, this),
                                                 activeTab === 'reflection' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$PostTradeReflection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3971,114 +4462,172 @@ function TradeReviewPage() {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 231,
+                                                    lineNumber: 290,
                                                     columnNumber: 21
                                                 }, this),
                                                 activeTab === 'media' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "grid grid-cols-1 md:grid-cols-2 gap-6",
+                                                    style: {
+                                                        display: 'grid',
+                                                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                                                        gap: '16px'
+                                                    },
                                                     children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                            className: "p-6",
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '8px',
+                                                                padding: '16px'
+                                                            },
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                                    className: "text-lg font-semibold text-gray-900 dark:text-white mb-4",
+                                                                    style: {
+                                                                        fontSize: '16px',
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--text-primary)',
+                                                                        marginBottom: '12px'
+                                                                    },
                                                                     children: "Voice Notes"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 242,
+                                                                    lineNumber: 301,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$VoiceRecorder$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 245,
+                                                                    lineNumber: 304,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 241,
+                                                            lineNumber: 300,
                                                             columnNumber: 23
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                            className: "p-6",
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            style: {
+                                                                backgroundColor: 'var(--panel-muted)',
+                                                                borderRadius: '8px',
+                                                                padding: '16px'
+                                                            },
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                                    className: "text-lg font-semibold text-gray-900 dark:text-white mb-4",
+                                                                    style: {
+                                                                        fontSize: '16px',
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--text-primary)',
+                                                                        marginBottom: '12px'
+                                                                    },
                                                                     children: "Screenshots"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 249,
+                                                                    lineNumber: 308,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ScreenshotUploader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                                    lineNumber: 252,
+                                                                    lineNumber: 311,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/review/page.tsx",
-                                                            lineNumber: 248,
+                                                            lineNumber: 307,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/review/page.tsx",
-                                                    lineNumber: 240,
+                                                    lineNumber: 299,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 216,
+                                            lineNumber: 275,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 146,
+                                    lineNumber: 223,
                                     columnNumber: 15
-                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AnimatedCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    className: "p-12 text-center",
+                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        textAlign: 'center',
+                                        padding: '64px 32px'
+                                    },
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiBookOpen"], {
-                                            className: "w-16 h-16 text-gray-400 mx-auto mb-4"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                fontSize: '64px',
+                                                marginBottom: '24px'
+                                            },
+                                            children: "📈"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 260,
+                                            lineNumber: 319,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                            className: "text-xl font-semibold text-gray-900 dark:text-white mb-2",
+                                            style: {
+                                                fontSize: '20px',
+                                                fontWeight: '600',
+                                                color: 'var(--text-primary)',
+                                                marginBottom: '12px'
+                                            },
                                             children: "Select a Trade to Review"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 261,
+                                            lineNumber: 320,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-gray-600 dark:text-gray-400",
+                                            style: {
+                                                fontSize: '16px',
+                                                color: 'var(--text-secondary)',
+                                                marginBottom: '24px'
+                                            },
                                             children: "Choose a trade from the sidebar to access the complete lifecycle review"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/review/page.tsx",
-                                            lineNumber: 264,
+                                            lineNumber: 323,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            onClick: ()=>setSelectedTradeId(trades[0]?.id || null),
+                                            disabled: trades.length === 0,
+                                            style: {
+                                                padding: '12px 24px',
+                                                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                cursor: trades.length > 0 ? 'pointer' : 'not-allowed',
+                                                fontWeight: '600',
+                                                fontSize: '14px',
+                                                opacity: trades.length > 0 ? 1 : 0.5
+                                            },
+                                            children: "Select First Trade"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/review/page.tsx",
+                                            lineNumber: 326,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/review/page.tsx",
-                                    lineNumber: 259,
+                                    lineNumber: 318,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/review/page.tsx",
-                                lineNumber: 144,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/review/page.tsx",
-                        lineNumber: 95,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this)
                 ]
@@ -4091,7 +4640,7 @@ function TradeReviewPage() {
                 position: "bottom-right"
             }, void 0, false, {
                 fileName: "[project]/src/app/review/page.tsx",
-                lineNumber: 273,
+                lineNumber: 349,
                 columnNumber: 7
             }, this)
         ]

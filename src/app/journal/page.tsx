@@ -127,131 +127,158 @@ export default function JournalPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
       <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
             Trading Journal
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Track your mental state, trading phases, and personal growth journey
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+            Track your mental state, focus levels, and trading psychology
           </p>
         </div>
 
         {/* Tab Navigation */}
-        <AnimatedCard className="p-1 mb-6">
-          <div className="flex space-x-1">
+        <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    backgroundColor: activeTab === tab.id ? 'var(--purple-base)' : 'transparent',
+                    color: activeTab === tab.id ? 'white' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    fontSize: '14px',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon size={16} />
                   <span>{tab.label}</span>
                 </button>
               );
             })}
           </div>
-        </AnimatedCard>
+        </div>
 
         {activeTab === 'entries' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             {/* Calendar/Date Selector */}
-            <div className="lg:col-span-1">
-              <AnimatedCard className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Select Date
-                  </h2>
-                  <button
-                    onClick={() => {
-                      setSelectedDate(new Date().toISOString().split('T')[0]);
-                      setEditingEntry(null);
-                      setShowEntryForm(false);
-                    }}
-                    className="text-sm text-blue-600 hover:text-blue-700"
-                  >
-                    Today
-                  </button>
-                </div>
-
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => {
-                    setSelectedDate(e.target.value);
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
+                  Select Date
+                </h2>
+                <button
+                  onClick={() => {
+                    setSelectedDate(new Date().toISOString().split('T')[0]);
                     setEditingEntry(null);
                     setShowEntryForm(false);
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                />
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--purple-base)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                  }}
+                >
+                  Today
+                </button>
+              </div>
 
-                {/* Quick Stats */}
-                <div className="mt-6 space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Total Entries</span>
-                    <span className="font-semibold text-gray-900 dark:text-white">{entries.length}</span>
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={(e) => {
+                  setSelectedDate(e.target.value);
+                  setEditingEntry(null);
+                  setShowEntryForm(false);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--card-border)',
+                  backgroundColor: 'var(--panel-muted)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                }}
+              />
+
+              {/* Quick Stats */}
+              <div style={{ marginTop: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div style={{ textAlign: 'center', padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                  <div style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    {entries.length}
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">This Month</span>
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {entries.filter(e => new Date(e.date).getMonth() === new Date().getMonth()).length}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Streak</span>
-                    <span className="font-semibold text-green-600">7 days</span>
-                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Total Entries</div>
                 </div>
-              </AnimatedCard>
+                <div style={{ textAlign: 'center', padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                  <div style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    {entries.filter(e => new Date(e.date).getMonth() === new Date().getMonth()).length}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>This Month</div>
+                </div>
+              </div>
 
-              {/* Mental State Overview */}
-              <MentalStateTracker entries={entries} className="mt-6" />
+              {/* Add Entry Button */}
+              <button
+                onClick={() => setShowEntryForm(true)}
+                style={{
+                  width: '100%',
+                  marginTop: '16px',
+                  padding: '12px',
+                  background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '14px',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Add Journal Entry
+              </button>
             </div>
 
-            {/* Main Content Area */}
-            <div className="lg:col-span-2">
-              {/* Search and Filters */}
-              <AnimatedCard className="p-4 mb-6">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex-1 relative">
-                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="text"
-                      placeholder="Search entries..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    />
-                  </div>
-                  <select
-                    value={filterPhase}
-                    onChange={(e) => setFilterPhase(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  >
-                    <option value="">All Phases</option>
-                    <option value="learning">Learning</option>
-                    <option value="discipline">Discipline</option>
-                    <option value="consistency">Consistency</option>
-                    <option value="optimization">Optimization</option>
-                  </select>
-                </div>
-              </AnimatedCard>
-
-              {/* Entry Content */}
-              {selectedDateEntry || showEntryForm ? (
+            {/* Entry Form or Display */}
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              {showEntryForm ? (
                 <JournalEntryForm
                   date={selectedDate}
-                  existingEntry={editingEntry || selectedDateEntry}
+                  existingEntry={editingEntry}
                   onSave={handleEntrySaved}
                   onCancel={() => {
                     setShowEntryForm(false);
@@ -259,82 +286,105 @@ export default function JournalPage() {
                   }}
                 />
               ) : (
-                <AnimatedCard className="p-8 text-center">
-                  <FiBookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    No Entry for {new Date(selectedDate).toLocaleDateString()}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Start your daily reflection to track your trading journey
-                  </p>
-                  <button
-                    onClick={() => setShowEntryForm(true)}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-                  >
-                    <FiPlus className="w-5 h-5" />
-                    <span>Create Entry</span>
-                  </button>
-                </AnimatedCard>
-              )}
-
-              {/* Recent Entries List */}
-              <AnimatedCard className="p-6 mt-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Recent Entries ({filteredEntries.length})
-                </h3>
-
-                <div className="space-y-3 max-h-96 overflow-y-auto">
-                  {isLoading ? (
-                    <div className="flex items-center justify-center py-8">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                    </div>
-                  ) : filteredEntries.length > 0 ? (
-                    filteredEntries.slice(0, 10).map((entry) => (
-                      <div
-                        key={entry.id}
-                        className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
-                        onClick={() => handleEditEntry(entry)}
-                      >
-                        <div className="flex-1">
-                          <div className="font-medium text-gray-900 dark:text-white">
-                            {new Date(entry.date).toLocaleDateString()}
+                <div>
+                  <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '16px' }}>
+                    Journal Entry - {new Date(selectedDate).toLocaleDateString()}
+                  </h2>
+                  {(() => {
+                    const entry = entries.find(e => e.date === selectedDate);
+                    return entry ? (
+                      <div style={{ display: 'grid', gap: '16px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
+                          <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Mental State</div>
+                            <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>{entry.mentalState || 'Not recorded'}</div>
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">
-                            {entry.phase && `${entry.phase} • `}
-                            {entry.mentalState && `Feeling: ${entry.mentalState}`}
+                          <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Focus Level</div>
+                            <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>{entry.focus || 'Not recorded'}</div>
+                          </div>
+                          <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Confidence</div>
+                            <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>{entry.confidence ? `${entry.confidence}/10` : 'Not recorded'}</div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          {entry.confidence && (
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
-                              {entry.confidence}/10
-                            </div>
-                          )}
+                        {entry.phase && (
+                          <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Trading Phase</div>
+                            <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>{entry.phase}</div>
+                            {entry.phaseNotes && <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>{entry.phaseNotes}</div>}
+                          </div>
+                        )}
+                        <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
                           <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteEntry(entry.id);
+                            onClick={() => handleEditEntry(entry)}
+                            style={{
+                              padding: '8px 16px',
+                              backgroundColor: 'var(--purple-base)',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '6px',
+                              cursor: 'pointer',
+                              fontSize: '12px',
+                              fontWeight: '600',
                             }}
-                            className="text-red-500 hover:text-red-700 p-1"
                           >
-                            ×
+                            Edit Entry
+                          </button>
+                          <button
+                            onClick={() => handleDeleteEntry(entry.id)}
+                            style={{
+                              padding: '8px 16px',
+                              backgroundColor: 'transparent',
+                              color: '#ef4444',
+                              border: '1px solid #ef4444',
+                              borderRadius: '6px',
+                              cursor: 'pointer',
+                              fontSize: '12px',
+                              fontWeight: '600',
+                            }}
+                          >
+                            Delete
                           </button>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-500 dark:text-gray-400 text-center py-4">
-                      No entries found
-                    </p>
-                  )}
+                    ) : (
+                      <div style={{ textAlign: 'center', padding: '32px' }}>
+                        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
+                        <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
+                          No Journal Entry
+                        </h3>
+                        <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+                          Create your first journal entry for {new Date(selectedDate).toLocaleDateString()}
+                        </p>
+                        <button
+                          onClick={() => setShowEntryForm(true)}
+                          style={{
+                            padding: '10px 20px',
+                            background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '6px',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                          }}
+                        >
+                          Create Entry
+                        </button>
+                      </div>
+                    );
+                  })()}
                 </div>
-              </AnimatedCard>
+              )}
             </div>
           </div>
         )}
 
         {activeTab === 'analytics' && (
-          <JournalAnalytics entries={entries} />
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+            <JournalAnalytics entries={entries} />
+          </div>
         )}
       </main>
 

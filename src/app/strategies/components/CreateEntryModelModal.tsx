@@ -70,38 +70,94 @@ export default function CreateEntryModelModal({ strategyId, onClose, onSuccess }
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+        style={{
+          background: 'var(--background)',
+          borderRadius: '12px',
+          boxShadow: 'var(--shadow-lg)',
+          maxWidth: '800px',
+          width: '100%',
+          margin: '0 16px',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-              <FiTarget className="w-5 h-5 text-white" />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '24px',
+          borderBottom: '1px solid var(--border)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: 'var(--accent-bg)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <FiTarget style={{ width: '20px', height: '20px', color: 'var(--accent-color)' }} />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 style={{
+              fontSize: '20px',
+              fontWeight: '600',
+              color: 'var(--text-primary)',
+              margin: '0'
+            }}>
               Create Entry Model
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            style={{
+              padding: '8px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
           >
-            <FiX className="w-5 h-5 text-gray-500" />
+            <FiX style={{ width: '20px', height: '20px' }} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Model Name *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'var(--accent-color)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               placeholder="e.g., Breakout Entry with Volume Confirmation"
               required
             />
@@ -109,49 +165,90 @@ export default function CreateEntryModelModal({ strategyId, onClose, onSuccess }
 
           {/* Entry Logic */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Entry Logic *
             </label>
             <textarea
               value={formData.entryLogic}
               onChange={(e) => setFormData(prev => ({ ...prev, entryLogic: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                resize: 'none',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'var(--accent-color)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               rows={4}
               placeholder="Describe the specific conditions and logic for entering trades..."
               required
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '4px'
+            }}>
               Be specific about price action, indicators, volume requirements, etc.
             </p>
           </div>
 
           {/* Confirmation Style */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               Confirmation Style
             </label>
-            <div className="flex gap-3">
+            <div style={{ display: 'flex', gap: '12px' }}>
               {CONFIRMATION_STYLES.map((style) => (
-                <label key={style} className="flex items-center">
+                <label key={style} style={{ display: 'flex', alignItems: 'center' }}>
                   <input
                     type="radio"
                     name="confirmationStyle"
                     value={style}
                     checked={formData.confirmationStyle === style}
                     onChange={(e) => setFormData(prev => ({ ...prev, confirmationStyle: e.target.value }))}
-                    className="sr-only"
+                    style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
                   />
-                  <span className={`px-4 py-2 rounded-lg border cursor-pointer transition-all capitalize ${
-                    formData.confirmationStyle === style
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'
-                  }`}>
+                  <span style={{
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textTransform: 'capitalize',
+                    background: formData.confirmationStyle === style ? 'var(--accent-color)' : 'var(--card-bg)',
+                    color: formData.confirmationStyle === style ? 'white' : 'var(--text-primary)',
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}>
                     {style}
                   </span>
                 </label>
               ))}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '4px',
+              lineHeight: '1.4'
+            }}>
               Conservative: Multiple confirmations required<br />
               Moderate: Standard confirmation signals<br />
               Aggressive: Quick entries with minimal confirmation
@@ -160,31 +257,49 @@ export default function CreateEntryModelModal({ strategyId, onClose, onSuccess }
 
           {/* Risk Style */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               Risk Style
             </label>
-            <div className="flex gap-3">
+            <div style={{ display: 'flex', gap: '12px' }}>
               {RISK_STYLES.map((style) => (
-                <label key={style} className="flex items-center">
+                <label key={style} style={{ display: 'flex', alignItems: 'center' }}>
                   <input
                     type="radio"
                     name="riskStyle"
                     value={style}
                     checked={formData.riskStyle === style}
                     onChange={(e) => setFormData(prev => ({ ...prev, riskStyle: e.target.value }))}
-                    className="sr-only"
+                    style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
                   />
-                  <span className={`px-4 py-2 rounded-lg border cursor-pointer transition-all capitalize ${
-                    formData.riskStyle === style
-                      ? 'bg-orange-600 text-white border-orange-600'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-orange-400'
-                  }`}>
+                  <span style={{
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textTransform: 'capitalize',
+                    background: formData.riskStyle === style ? '#ea580c' : 'var(--card-bg)',
+                    color: formData.riskStyle === style ? 'white' : 'var(--text-primary)',
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}>
                     {style}
                   </span>
                 </label>
               ))}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '4px',
+              lineHeight: '1.4'
+            }}>
               Low: Conservative position sizing<br />
               Medium: Balanced risk-reward approach<br />
               High: Aggressive position sizing for higher potential returns
@@ -193,24 +308,60 @@ export default function CreateEntryModelModal({ strategyId, onClose, onSuccess }
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Additional Notes
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                resize: 'none',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'var(--accent-color)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               rows={3}
               placeholder="Any additional notes or considerations..."
             />
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--border)'
+          }}>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontSize: '14px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
               disabled={isSubmitting}
             >
               Cancel
@@ -220,9 +371,29 @@ export default function CreateEntryModelModal({ strategyId, onClose, onSuccess }
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 24px',
+                background: isSubmitting ? 'var(--disabled-bg)' : 'var(--accent-color)',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'white',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'background 0.2s',
+                boxShadow: 'var(--shadow-md)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-hover)';
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = 'var(--accent-color)';
+              }}
             >
-              <FiSave className="w-4 h-4" />
+              <FiSave style={{ width: '16px', height: '16px' }} />
               {isSubmitting ? 'Creating...' : 'Create Model'}
             </motion.button>
           </div>

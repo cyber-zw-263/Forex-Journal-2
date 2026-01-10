@@ -79,141 +79,200 @@ export default function TradeReviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
       <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        {/* Header Section */}
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>
             Trade Lifecycle Review
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
+          <p style={{ fontSize: '16px', color: 'var(--text-secondary)', margin: 0 }}>
             Complete pre-trade preparation, track in-trade decisions, and reflect on outcomes
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Tab Navigation */}
+        <div style={{ marginBottom: '24px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    backgroundColor: activeTab === tab.id ? 'var(--purple-base)' : 'transparent',
+                    color: activeTab === tab.id ? 'white' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    fontSize: '14px',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
+                >
+                  <Icon size={16} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           {/* Trades List Sidebar */}
-          <div className="lg:col-span-1">
-            <AnimatedCard className="p-6">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                 Recent Trades
               </h2>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                {trades.length} total
+              </div>
+            </div>
 
-              <div className="space-y-2 max-h-96 overflow-y-auto">
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                  </div>
-                ) : trades.length > 0 ? (
-                  trades.map((trade) => (
+            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              {isLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '32px' }}>
+                  <div style={{
+                    width: '24px',
+                    height: '24px',
+                    border: '2px solid var(--card-border)',
+                    borderTop: '2px solid var(--purple-base)',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                  }}></div>
+                </div>
+              ) : trades.length > 0 ? (
+                <div style={{ display: 'grid', gap: '8px' }}>
+                  {trades.map((trade) => (
                     <button
                       key={trade.id}
                       onClick={() => setSelectedTradeId(trade.id)}
-                      className={`w-full text-left p-3 rounded-lg transition-all ${
-                        selectedTradeId === trade.id
-                          ? 'bg-blue-100 dark:bg-blue-900 border-blue-500'
-                          : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-                      } border`}
+                      style={{
+                        width: '100%',
+                        textAlign: 'left',
+                        padding: '12px',
+                        borderRadius: '8px',
+                        border: selectedTradeId === trade.id ? '2px solid var(--purple-base)' : '1px solid var(--card-border)',
+                        backgroundColor: selectedTradeId === trade.id ? 'var(--panel-muted)' : 'var(--card-bg)',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (selectedTradeId !== trade.id) {
+                          e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (selectedTradeId !== trade.id) {
+                          e.currentTarget.style.backgroundColor = selectedTradeId === trade.id ? 'var(--panel-muted)' : 'var(--card-bg)';
+                        }
+                      }}
                     >
-                      <div className="font-medium text-gray-900 dark:text-white">
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '4px' }}>
                         {trade.pair} {trade.direction}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
                         {new Date(trade.entryTime).toLocaleDateString()}
                       </div>
-                      <div className={`text-sm font-medium ${
-                        trade.outcome === 'WIN' ? 'text-green-600' :
-                        trade.outcome === 'LOSS' ? 'text-red-600' :
-                        'text-gray-600'
-                      }`}>
+                      <div style={{
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        color: trade.outcome === 'WIN' ? '#10b981' : trade.outcome === 'LOSS' ? '#ef4444' : 'var(--text-secondary)'
+                      }}>
                         {trade.outcome || 'Open'}
                       </div>
                     </button>
-                  ))
-                ) : (
-                  <p className="text-gray-500 dark:text-gray-400 text-center py-4">
-                    No trades yet
+                  ))}
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', padding: '32px' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>📊</div>
+                  <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '8px' }}>
+                    No Trades Yet
+                  </h3>
+                  <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+                    Start trading to begin reviewing your performance
                   </p>
-                )}
-              </div>
-            </AnimatedCard>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Main Content Area */}
-          <div className="lg:col-span-3">
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
             {selectedTrade ? (
-              <div className="space-y-6">
-                {/* Trade Summary Card */}
-                <AnimatedCard className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <div style={{ display: 'grid', gap: '20px' }}>
+                {/* Trade Summary */}
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                    <h2 style={{ fontSize: '18px', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
                       {selectedTrade.pair} - {selectedTrade.direction}
                     </h2>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      selectedTrade.status === 'closed' ? 'bg-green-100 text-green-800' :
-                      selectedTrade.status === 'open' ? 'bg-blue-100 text-blue-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
+                    <span style={{
+                      padding: '4px 12px',
+                      borderRadius: '20px',
+                      fontSize: '12px',
+                      fontWeight: '600',
+                      backgroundColor: selectedTrade.status === 'closed' ? '#dcfce7' : selectedTrade.status === 'open' ? '#dbeafe' : 'var(--panel-muted)',
+                      color: selectedTrade.status === 'closed' ? '#166534' : selectedTrade.status === 'open' ? '#1e40af' : 'var(--text-secondary)',
+                    }}>
                       {selectedTrade.status}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                    <div>
-                      <p className="text-gray-600 dark:text-gray-400">Entry Price</p>
-                      <p className="font-semibold text-gray-900 dark:text-white">
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '16px' }}>
+                    <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Entry Price</div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>
                         {selectedTrade.entryPrice.toFixed(5)}
-                      </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-gray-600 dark:text-gray-400">Exit Price</p>
-                      <p className="font-semibold text-gray-900 dark:text-white">
+                    <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Exit Price</div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>
                         {selectedTrade.exitPrice?.toFixed(5) || 'Open'}
-                      </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-gray-600 dark:text-gray-400">P&L</p>
-                      <p className={`font-semibold ${
-                        (selectedTrade.profitLoss || 0) >= 0 ? 'text-green-600' : 'text-red-600'
-                      }`}>
+                    <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>P&L</div>
+                      <div style={{
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        color: (selectedTrade.profitLoss || 0) >= 0 ? '#10b981' : '#ef4444'
+                      }}>
                         {selectedTrade.profitLoss?.toFixed(2) || 'N/A'}
-                      </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-gray-600 dark:text-gray-400">Outcome</p>
-                      <p className="font-semibold text-gray-900 dark:text-white">
+                    <div style={{ padding: '12px', backgroundColor: 'var(--panel-muted)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Outcome</div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>
                         {selectedTrade.outcome || 'Open'}
-                      </p>
+                      </div>
                     </div>
                   </div>
-                </AnimatedCard>
-
-                {/* Tab Navigation */}
-                <AnimatedCard className="p-1">
-                  <div className="flex space-x-1">
-                    {tabs.map((tab) => {
-                      const Icon = tab.icon;
-                      return (
-                        <button
-                          key={tab.id}
-                          onClick={() => setActiveTab(tab.id)}
-                          className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            activeTab === tab.id
-                              ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                          }`}
-                        >
-                          <Icon className="w-4 h-4" />
-                          <span>{tab.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </AnimatedCard>
+                </div>
 
                 {/* Tab Content */}
-                <div className="min-h-96">
+                <div style={{ minHeight: '400px' }}>
                   {activeTab === 'checklist' && (
                     <PreTradeChecklist
                       tradeId={selectedTrade.id}
@@ -237,34 +296,51 @@ export default function TradeReviewPage() {
                   )}
 
                   {activeTab === 'media' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <AnimatedCard className="p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+                      <div style={{ backgroundColor: 'var(--panel-muted)', borderRadius: '8px', padding: '16px' }}>
+                        <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px' }}>
                           Voice Notes
                         </h3>
                         <VoiceRecorder />
-                      </AnimatedCard>
+                      </div>
 
-                      <AnimatedCard className="p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                      <div style={{ backgroundColor: 'var(--panel-muted)', borderRadius: '8px', padding: '16px' }}>
+                        <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px' }}>
                           Screenshots
                         </h3>
                         <ScreenshotUploader />
-                      </AnimatedCard>
+                      </div>
                     </div>
                   )}
                 </div>
               </div>
             ) : (
-              <AnimatedCard className="p-12 text-center">
-                <FiBookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <div style={{ textAlign: 'center', padding: '64px 32px' }}>
+                <div style={{ fontSize: '64px', marginBottom: '24px' }}>📈</div>
+                <h3 style={{ fontSize: '20px', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px' }}>
                   Select a Trade to Review
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p style={{ fontSize: '16px', color: 'var(--text-secondary)', marginBottom: '24px' }}>
                   Choose a trade from the sidebar to access the complete lifecycle review
                 </p>
-              </AnimatedCard>
+                <button
+                  onClick={() => setSelectedTradeId(trades[0]?.id || null)}
+                  disabled={trades.length === 0}
+                  style={{
+                    padding: '12px 24px',
+                    background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: trades.length > 0 ? 'pointer' : 'not-allowed',
+                    fontWeight: '600',
+                    fontSize: '14px',
+                    opacity: trades.length > 0 ? 1 : 0.5,
+                  }}
+                >
+                  Select First Trade
+                </button>
+              </div>
             )}
           </div>
         </div>

@@ -113,38 +113,94 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+        style={{
+          background: 'var(--background)',
+          borderRadius: '12px',
+          boxShadow: 'var(--shadow-lg)',
+          maxWidth: '1000px',
+          width: '100%',
+          margin: '0 16px',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg flex items-center justify-center">
-              <FiSettings className="w-5 h-5 text-white" />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '24px',
+          borderBottom: '1px solid var(--border)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: '#ea580c',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <FiSettings style={{ width: '20px', height: '20px', color: 'white' }} />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 style={{
+              fontSize: '20px',
+              fontWeight: '600',
+              color: 'var(--text-primary)',
+              margin: '0'
+            }}>
               Create Timeframe Sequence
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            style={{
+              padding: '8px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
           >
-            <FiX className="w-5 h-5 text-gray-500" />
+            <FiX style={{ width: '20px', height: '20px' }} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Sequence Name *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = '#ea580c'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               placeholder="e.g., London Breakout Analysis Sequence"
               required
             />
@@ -152,13 +208,32 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                resize: 'none',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = '#ea580c'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               rows={3}
               placeholder="Describe the purpose and methodology of this sequence..."
             />
@@ -166,44 +241,109 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
 
           {/* Timeframe Steps */}
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '16px'
+            }}>
+              <label style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: 'var(--text-primary)'
+              }}>
                 Analysis Steps *
               </label>
               <button
                 type="button"
                 onClick={addStep}
-                className="flex items-center gap-2 px-3 py-1.5 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-lg hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-colors text-sm"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '6px 12px',
+                  background: '#fed7aa',
+                  border: 'none',
+                  borderRadius: '6px',
+                  color: '#9a3412',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#fdba74'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#fed7aa'}
               >
-                <FiPlus className="w-3 h-3" />
+                <FiPlus style={{ width: '12px', height: '12px' }} />
                 Add Step
               </button>
             </div>
 
-            <div className="space-y-3">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {steps.map((step, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
-                  className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '16px',
+                    background: 'var(--card-bg)',
+                    borderRadius: '8px'
+                  }}
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="flex items-center justify-center w-8 h-8 bg-orange-600 text-white text-sm font-bold rounded-full">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '32px',
+                      height: '32px',
+                      background: '#ea580c',
+                      color: 'white',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                      borderRadius: '50%'
+                    }}>
                       {index + 1}
                     </span>
                   </div>
 
-                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div style={{
+                    flex: 1,
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '12px'
+                  }}>
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                      <label style={{
+                        display: 'block',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        color: 'var(--text-secondary)',
+                        marginBottom: '4px'
+                      }}>
                         Timeframe
                       </label>
                       <select
                         value={step.timeframe}
                         onChange={(e) => updateStep(index, 'timeframe', e.target.value)}
-                        className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-1 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white"
+                        style={{
+                          width: '100%',
+                          padding: '6px 8px',
+                          border: '1px solid var(--border)',
+                          borderRadius: '4px',
+                          background: 'var(--card-bg)',
+                          color: 'var(--text-primary)',
+                          fontSize: '14px',
+                          outline: 'none',
+                          transition: 'border-color 0.2s'
+                        }}
+                        onFocus={(e) => e.currentTarget.style.borderColor = '#ea580c'}
+                        onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
                       >
                         {COMMON_TIMEFRAMES.map((tf) => (
                           <option key={tf} value={tf}>{tf}</option>
@@ -212,25 +352,56 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                      <label style={{
+                        display: 'block',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        color: 'var(--text-secondary)',
+                        marginBottom: '4px'
+                      }}>
                         Description
                       </label>
                       <input
                         type="text"
                         value={step.description}
                         onChange={(e) => updateStep(index, 'description', e.target.value)}
-                        className="w-full px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-1 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white"
+                        style={{
+                          width: '100%',
+                          padding: '6px 8px',
+                          border: '1px solid var(--border)',
+                          borderRadius: '4px',
+                          background: 'var(--card-bg)',
+                          color: 'var(--text-primary)',
+                          fontSize: '14px',
+                          outline: 'none',
+                          transition: 'border-color 0.2s'
+                        }}
+                        onFocus={(e) => e.currentTarget.style.borderColor = '#ea580c'}
+                        onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
                         placeholder="What to analyze at this timeframe"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <button
                       type="button"
                       onClick={() => moveStep(index, 'up')}
                       disabled={index === 0}
-                      className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        padding: '4px',
+                        background: 'transparent',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: index === 0 ? 'not-allowed' : 'pointer',
+                        color: 'var(--text-secondary)',
+                        opacity: index === 0 ? 0.5 : 1,
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (index !== 0) e.currentTarget.style.background = 'var(--hover-bg)';
+                      }}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       title="Move up"
                     >
                       ↑
@@ -239,7 +410,20 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
                       type="button"
                       onClick={() => moveStep(index, 'down')}
                       disabled={index === steps.length - 1}
-                      className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        padding: '4px',
+                        background: 'transparent',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: index === steps.length - 1 ? 'not-allowed' : 'pointer',
+                        color: 'var(--text-secondary)',
+                        opacity: index === steps.length - 1 ? 0.5 : 1,
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (index !== steps.length - 1) e.currentTarget.style.background = 'var(--hover-bg)';
+                      }}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       title="Move down"
                     >
                       ↓
@@ -248,28 +432,62 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
                       type="button"
                       onClick={() => removeStep(index)}
                       disabled={steps.length === 1}
-                      className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-600 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        padding: '4px',
+                        background: 'transparent',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: steps.length === 1 ? 'not-allowed' : 'pointer',
+                        color: '#dc2626',
+                        opacity: steps.length === 1 ? 0.5 : 1,
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (steps.length !== 1) e.currentTarget.style.background = '#fef2f2';
+                      }}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       title="Remove step"
                     >
-                      <FiTrash2 className="w-3 h-3" />
+                      <FiTrash2 style={{ width: '12px', height: '12px' }} />
                     </button>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '8px'
+            }}>
               Define the order of timeframes you analyze, from highest to lowest timeframe.
               Start with broader context and move to precise entry timing.
             </p>
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--border)'
+          }}>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontSize: '14px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
               disabled={isSubmitting}
             >
               Cancel
@@ -279,9 +497,29 @@ export default function CreateSequenceModal({ strategyId, onClose, onSuccess }: 
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 24px',
+                background: isSubmitting ? 'var(--disabled-bg)' : '#ea580c',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'white',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'background 0.2s',
+                boxShadow: 'var(--shadow-md)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = '#c2410c';
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = '#ea580c';
+              }}
             >
-              <FiSave className="w-4 h-4" />
+              <FiSave style={{ width: '16px', height: '16px' }} />
               {isSubmitting ? 'Creating...' : 'Create Sequence'}
             </motion.button>
           </div>

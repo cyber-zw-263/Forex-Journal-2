@@ -158,182 +158,229 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--background)' }}>
       <DashboardHeader onThemeToggle={toggleTheme} currentTheme={theme} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                Analytics Dashboard
-              </h1>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">
-                Comprehensive trading performance, strategy analysis, and behavioral insights
-              </p>
-            </div>
-            <button
-              onClick={exportData}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-            >
-              <FiDownload className="w-4 h-4" />
-              <span>Export Data</span>
-            </button>
-          </div>
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px', margin: 0 }}>
+            Analytics Dashboard
+          </h1>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+            Comprehensive trading performance, strategy analysis, and behavioral insights
+          </p>
+        </div>
+
+        {/* Export Button */}
+        <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            onClick={exportData}
+            style={{
+              background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '14px',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <FiDownload size={16} />
+            Export Data
+          </button>
         </div>
 
         {/* Tab Navigation */}
-        <AnimatedCard className="p-1 mb-6">
-          <div className="flex space-x-1">
+        <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    backgroundColor: activeTab === tab.id ? 'var(--purple-base)' : 'transparent',
+                    color: activeTab === tab.id ? 'white' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    fontSize: '14px',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span>{tab.label}</span>
+                  <Icon size={16} />
+                  {tab.label}
                 </button>
               );
             })}
           </div>
-        </AnimatedCard>
+        </div>
 
         {/* Filters */}
-        <AnimatedCard className="p-4 mb-6">
-          <div className="flex items-center space-x-4">
-            <FiFilter className="w-5 h-5 text-gray-500" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Filters:</span>
-
-            <select
-              value={filters.strategyId}
-              onChange={(e) => setFilters(prev => ({ ...prev, strategyId: e.target.value }))}
-              className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-            >
-              <option value="">All Strategies</option>
-              {strategies.map(strategy => (
-                <option key={strategy.id} value={strategy.id}>{strategy.name}</option>
-              ))}
-            </select>
-
-            <select
-              value={filters.pair}
-              onChange={(e) => setFilters(prev => ({ ...prev, pair: e.target.value }))}
-              className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-            >
-              <option value="">All Pairs</option>
-              {[...new Set(trades.map(t => t.pair))].map(pair => (
-                <option key={pair} value={pair}>{pair}</option>
-              ))}
-            </select>
-
-            <select
-              value={filters.session}
-              onChange={(e) => setFilters(prev => ({ ...prev, session: e.target.value }))}
-              className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-            >
-              <option value="">All Sessions</option>
-              {[...new Set(trades.map(t => t.session).filter(Boolean))].map(session => (
-                <option key={session} value={session}>{session}</option>
-              ))}
-            </select>
-
-            <select
-              value={filters.emotionalState}
-              onChange={(e) => setFilters(prev => ({ ...prev, emotionalState: e.target.value }))}
-              className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-            >
-              <option value="">All Emotions</option>
-              {[...new Set(trades.map(t => t.emotionalState).filter(Boolean))].map(state => (
-                <option key={state} value={state}>{state}</option>
-              ))}
-            </select>
+        <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <FiFilter size={16} style={{ color: 'var(--text-secondary)' }} />
+            <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>Filters</span>
           </div>
-        </AnimatedCard>
-
-        {/* Error State */}
-        {error && (
-          <AnimatedCard className="p-4 mb-6 border-red-200 dark:border-red-800">
-            <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
-              <FiTrendingDown className="w-5 h-5" />
-              <span>{error}</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                Strategy
+              </label>
+              <select
+                value={filters.strategyId}
+                onChange={(e) => setFilters(prev => ({ ...prev, strategyId: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--card-border)',
+                  backgroundColor: 'var(--panel-muted)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                }}
+              >
+                <option value="">All Strategies</option>
+                {strategies.map(strategy => (
+                  <option key={strategy.id} value={strategy.id}>{strategy.name}</option>
+                ))}
+              </select>
             </div>
-          </AnimatedCard>
-        )}
-
-        {/* Loading State */}
-        {isLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-            <span className="ml-3 text-gray-600 dark:text-gray-400">Loading analytics...</span>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                Currency Pair
+              </label>
+              <select
+                value={filters.pair}
+                onChange={(e) => setFilters(prev => ({ ...prev, pair: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--card-border)',
+                  backgroundColor: 'var(--panel-muted)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                }}
+              >
+                <option value="">All Pairs</option>
+                {Array.from(new Set(trades.map(t => t.pair))).map(pair => (
+                  <option key={pair} value={pair}>{pair}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                Session
+              </label>
+              <select
+                value={filters.session}
+                onChange={(e) => setFilters(prev => ({ ...prev, session: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--card-border)',
+                  backgroundColor: 'var(--panel-muted)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                }}
+              >
+                <option value="">All Sessions</option>
+                {Array.from(new Set(trades.map(t => t.session).filter(Boolean))).map(session => (
+                  <option key={session} value={session}>{session}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                Emotional State
+              </label>
+              <select
+                value={filters.emotionalState}
+                onChange={(e) => setFilters(prev => ({ ...prev, emotionalState: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--card-border)',
+                  backgroundColor: 'var(--panel-muted)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                }}
+              >
+                <option value="">All States</option>
+                {Array.from(new Set(trades.map(t => t.emotionalState).filter(Boolean))).map(state => (
+                  <option key={state} value={state}>{state}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        ) : (
-          <>
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <PerformanceMetrics trades={filteredTrades} />
+        </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <AnimatedCard className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                      Performance Charts
-                    </h3>
-                    <AnalyticsCharts
-                      trades={filteredTrades}
-                      startDate={dateRange.start}
-                      endDate={dateRange.end}
-                    />
-                  </AnimatedCard>
-
-                  <AnimatedCard className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                      Trading Heatmap
-                    </h3>
-                    <YearlyHeatmap
-                      trades={filteredTrades}
-                      onSelectRange={(r) => setDateRange(r)}
-                    />
-                  </AnimatedCard>
-                </div>
-
-                <AnimatedCard className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    Monthly Performance
-                  </h3>
-                  <MonthlyPerformanceTable trades={filteredTrades} />
-                </AnimatedCard>
+        {/* Content */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
+          {activeTab === 'overview' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+                <AnalyticsCharts trades={filteredTrades} />
               </div>
-            )}
+              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+                <YearlyHeatmap trades={filteredTrades} />
+              </div>
+              <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+                <MonthlyPerformanceTable trades={filteredTrades} />
+              </div>
+            </div>
+          )}
 
-            {/* Performance Tab */}
-            {activeTab === 'performance' && (
-              <PerformanceMetrics trades={filteredTrades} detailed />
-            )}
+          {activeTab === 'performance' && (
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <PerformanceMetrics trades={filteredTrades} />
+            </div>
+          )}
 
-            {/* Strategies Tab */}
-            {activeTab === 'strategies' && (
-              <StrategyComparison
-                trades={filteredTrades}
-                strategies={strategies}
-              />
-            )}
+          {activeTab === 'strategies' && (
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <StrategyComparison trades={filteredTrades} strategies={strategies} />
+            </div>
+          )}
 
-            {/* Behavioral Tab */}
-            {activeTab === 'behavioral' && (
-              <BehavioralAnalysis
-                trades={filteredTrades}
-                journalEntries={journalEntries}
-              />
-            )}
-          </>
-        )}
+          {activeTab === 'behavioral' && (
+            <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '20px' }}>
+              <BehavioralAnalysis trades={filteredTrades} journalEntries={journalEntries} />
+            </div>
+          )}
+        </div>
       </main>
 
       <Toaster position="bottom-right" />

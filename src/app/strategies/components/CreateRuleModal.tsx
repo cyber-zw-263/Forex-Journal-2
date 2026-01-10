@@ -90,38 +90,94 @@ export default function CreateRuleModal({ strategyId, onClose, onSuccess }: Crea
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+        style={{
+          background: 'var(--background)',
+          borderRadius: '12px',
+          boxShadow: 'var(--shadow-lg)',
+          maxWidth: '800px',
+          width: '100%',
+          margin: '0 16px',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-lg flex items-center justify-center">
-              <FiBookOpen className="w-5 h-5 text-white" />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '24px',
+          borderBottom: '1px solid var(--border)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: '#dc2626',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <FiBookOpen style={{ width: '20px', height: '20px', color: 'white' }} />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 style={{
+              fontSize: '20px',
+              fontWeight: '600',
+              color: 'var(--text-primary)',
+              margin: '0'
+            }}>
               Create Strategy Rule
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            style={{
+              padding: '8px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
           >
-            <FiX className="w-5 h-5 text-gray-500" />
+            <FiX style={{ width: '20px', height: '20px' }} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Rule Name *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = '#dc2626'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               placeholder="e.g., Never risk more than 2% per trade"
               required
             />
@@ -129,45 +185,88 @@ export default function CreateRuleModal({ strategyId, onClose, onSuccess }: Crea
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px'
+            }}>
               Rule Description *
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                resize: 'none',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = '#dc2626'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
               rows={4}
               placeholder="Describe the rule in detail and explain why it's important..."
               required
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '4px'
+            }}>
               Be specific about what the rule requires and the consequences of breaking it.
             </p>
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               Category
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
               {CATEGORIES.map((category) => (
-                <label key={category} className="flex items-center">
+                <label key={category} style={{ display: 'flex', alignItems: 'center' }}>
                   <input
                     type="radio"
                     name="category"
                     value={category}
                     checked={formData.category === category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    className="sr-only"
+                    style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
                   />
-                  <span className={`flex-1 px-4 py-3 rounded-lg border cursor-pointer transition-all ${
-                    formData.category === category
-                      ? 'bg-red-600 text-white border-red-600'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-red-400'
-                  }`}>
-                    <div className="font-medium capitalize">{category}</div>
-                    <div className="text-xs opacity-80 mt-1">
+                  <span style={{
+                    flex: 1,
+                    padding: '16px',
+                    borderRadius: '8px',
+                    border: formData.category === category ? '2px solid #dc2626' : '2px solid var(--border)',
+                    background: formData.category === category ? '#dc2626' : 'var(--card-bg)',
+                    color: formData.category === category ? 'white' : 'var(--text-primary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}>
+                    <div style={{
+                      fontWeight: '500',
+                      textTransform: 'capitalize',
+                      marginBottom: '4px'
+                    }}>
+                      {category}
+                    </div>
+                    <div style={{
+                      fontSize: '12px',
+                      opacity: formData.category === category ? 0.9 : 0.7
+                    }}>
                       {getCategoryDescription(category)}
                     </div>
                   </span>
@@ -178,38 +277,62 @@ export default function CreateRuleModal({ strategyId, onClose, onSuccess }: Crea
 
           {/* Severity */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px'
+            }}>
               Severity Level
             </label>
-            <div className="space-y-2">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {SEVERITIES.map((severity) => (
-                <label key={severity} className="flex items-center">
+                <label key={severity} style={{ display: 'flex', alignItems: 'center' }}>
                   <input
                     type="radio"
                     name="severity"
                     value={severity}
                     checked={formData.severity === severity}
                     onChange={(e) => setFormData(prev => ({ ...prev, severity: e.target.value }))}
-                    className="sr-only"
+                    style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
                   />
-                  <span className={`flex-1 px-4 py-3 rounded-lg border cursor-pointer transition-all ${
-                    formData.severity === severity
-                      ? 'bg-red-600 text-white border-red-600'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-red-400'
-                  }`}>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium capitalize">{severity}</div>
-                        <div className="text-xs opacity-80 mt-1">
+                  <span style={{
+                    flex: 1,
+                    padding: '16px',
+                    borderRadius: '8px',
+                    border: formData.severity === severity ? '2px solid #dc2626' : '2px solid var(--border)',
+                    background: formData.severity === severity ? '#dc2626' : 'var(--card-bg)',
+                    color: formData.severity === severity ? 'white' : 'var(--text-primary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'space-between', width: '100%' }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{
+                          fontWeight: '500',
+                          textTransform: 'capitalize',
+                          marginBottom: '4px'
+                        }}>
+                          {severity}
+                        </div>
+                        <div style={{
+                          fontSize: '12px',
+                          opacity: formData.severity === severity ? 0.9 : 0.7
+                        }}>
                           {getSeverityDescription(severity)}
                         </div>
                       </div>
-                      <div className={`w-3 h-3 rounded-full ${
-                        severity === 'critical' ? 'bg-red-400' :
-                        severity === 'high' ? 'bg-orange-400' :
-                        severity === 'medium' ? 'bg-yellow-400' :
-                        'bg-green-400'
-                      }`} />
+                      <div style={{
+                        width: '12px',
+                        height: '12px',
+                        borderRadius: '50%',
+                        background: severity === 'critical' ? '#f87171' :
+                                   severity === 'high' ? '#fb923c' :
+                                   severity === 'medium' ? '#fbbf24' :
+                                   '#4ade80',
+                        marginLeft: '12px'
+                      }} />
                     </div>
                   </span>
                 </label>
@@ -219,28 +342,56 @@ export default function CreateRuleModal({ strategyId, onClose, onSuccess }: Crea
 
           {/* Active Status */}
           <div>
-            <label className="flex items-center">
+            <label style={{ display: 'flex', alignItems: 'center' }}>
               <input
                 type="checkbox"
                 checked={formData.isActive}
                 onChange={(e) => setFormData(prev => ({ ...prev, isActive: e.target.checked }))}
-                className="rounded border-gray-300 dark:border-gray-600 text-red-600 focus:ring-red-500"
+                style={{
+                  marginRight: '8px',
+                  accentColor: '#dc2626'
+                }}
               />
-              <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+              <span style={{
+                fontSize: '14px',
+                color: 'var(--text-primary)'
+              }}>
                 Rule is active and should be enforced
               </span>
             </label>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 ml-6">
+            <p style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '4px',
+              marginLeft: '24px'
+            }}>
               Inactive rules are kept for reference but won't trigger violations.
             </p>
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--border)'
+          }}>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontSize: '14px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--hover-bg)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
               disabled={isSubmitting}
             >
               Cancel
@@ -250,9 +401,29 @@ export default function CreateRuleModal({ strategyId, onClose, onSuccess }: Crea
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 24px',
+                background: isSubmitting ? 'var(--disabled-bg)' : '#dc2626',
+                border: 'none',
+                borderRadius: '6px',
+                color: 'white',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'background 0.2s',
+                boxShadow: 'var(--shadow-md)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = '#b91c1c';
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) e.currentTarget.style.background = '#dc2626';
+              }}
             >
-              <FiSave className="w-4 h-4" />
+              <FiSave style={{ width: '16px', height: '16px' }} />
               {isSubmitting ? 'Creating...' : 'Create Rule'}
             </motion.button>
           </div>

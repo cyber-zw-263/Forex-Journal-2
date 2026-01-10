@@ -78,33 +78,89 @@ export default function CreateStrategyModal({ onClose, onSuccess }: CreateStrate
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+        style={{
+          backgroundColor: 'var(--card-bg)',
+          borderRadius: '12px',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          maxWidth: '512px',
+          width: '100%',
+          margin: '0 16px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '20px',
+          borderBottom: '1px solid var(--card-border)',
+        }}>
+          <h2 style={{
+            fontSize: '18px',
+            fontWeight: '600',
+            color: 'var(--text-primary)',
+            margin: 0,
+          }}>
             Create New Strategy
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            style={{
+              padding: '8px',
+              borderRadius: '6px',
+              border: 'none',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
-            <FiX className="w-5 h-5 text-gray-500" />
+            <FiX size={16} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '20px', display: 'grid', gap: '20px' }}>
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px',
+            }}>
               Strategy Name *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                borderRadius: '6px',
+                border: '1px solid var(--card-border)',
+                backgroundColor: 'var(--panel-muted)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                transition: 'border-color 0.2s ease',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = 'var(--purple-base)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = 'var(--card-border)';
+              }}
               placeholder="e.g., London Breakout Strategy"
               required
             />
@@ -112,13 +168,36 @@ export default function CreateStrategyModal({ onClose, onSuccess }: CreateStrate
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px',
+            }}>
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                borderRadius: '6px',
+                border: '1px solid var(--card-border)',
+                backgroundColor: 'var(--panel-muted)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                resize: 'none',
+                transition: 'border-color 0.2s ease',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = 'var(--purple-base)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = 'var(--card-border)';
+              }}
               rows={3}
               placeholder="Describe your strategy approach and methodology..."
             />
@@ -126,26 +205,39 @@ export default function CreateStrategyModal({ onClose, onSuccess }: CreateStrate
 
           {/* Market Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px',
+            }}>
               Market Type
             </label>
-            <div className="flex gap-3">
+            <div style={{ display: 'flex', gap: '12px' }}>
               {MARKET_TYPES.map((type) => (
-                <label key={type} className="flex items-center">
+                <label key={type} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                   <input
                     type="radio"
                     name="marketType"
                     value={type}
                     checked={formData.marketType === type}
                     onChange={(e) => setFormData(prev => ({ ...prev, marketType: e.target.value }))}
-                    className="sr-only"
+                    style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
                   />
-                  <span className={`px-4 py-2 rounded-lg border cursor-pointer transition-all ${
-                    formData.marketType === type
-                      ? 'bg-purple-600 text-white border-purple-600'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-purple-400'
-                  }`}>
-                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                  <span style={{
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    border: `1px solid ${formData.marketType === type ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                    backgroundColor: formData.marketType === type ? 'var(--purple-base)' : 'var(--panel-muted)',
+                    color: formData.marketType === type ? 'white' : 'var(--text-primary)',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    transition: 'all 0.2s ease',
+                    textTransform: 'capitalize',
+                  }}>
+                    {type}
                   </span>
                 </label>
               ))}
@@ -154,19 +246,51 @@ export default function CreateStrategyModal({ onClose, onSuccess }: CreateStrate
 
           {/* Preferred Sessions */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '12px',
+            }}>
               Preferred Trading Sessions
             </label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+              gap: '8px',
+            }}>
               {SESSIONS.map((session) => (
-                <label key={session} className="flex items-center space-x-2 cursor-pointer">
+                <label key={session} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  cursor: 'pointer',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  border: `1px solid ${formData.preferredSessions.includes(session) ? 'var(--purple-base)' : 'var(--card-border)'}`,
+                  backgroundColor: formData.preferredSessions.includes(session) ? 'var(--panel-muted)' : 'transparent',
+                  transition: 'all 0.2s ease',
+                }}>
                   <input
                     type="checkbox"
                     checked={formData.preferredSessions.includes(session)}
                     onChange={() => toggleSession(session)}
-                    className="rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500"
+                    style={{
+                      width: '16px',
+                      height: '16px',
+                      borderRadius: '3px',
+                      border: '1px solid var(--card-border)',
+                      backgroundColor: formData.preferredSessions.includes(session) ? 'var(--purple-base)' : 'transparent',
+                      cursor: 'pointer',
+                    }}
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{session}</span>
+                  <span style={{
+                    fontSize: '14px',
+                    color: 'var(--text-primary)',
+                  }}>
+                    {session}
+                  </span>
                 </label>
               ))}
             </div>
@@ -174,38 +298,105 @@ export default function CreateStrategyModal({ onClose, onSuccess }: CreateStrate
 
           {/* Risk Philosophy */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'var(--text-primary)',
+              marginBottom: '8px',
+            }}>
               Risk Philosophy
             </label>
             <textarea
               value={formData.riskPhilosophy}
               onChange={(e) => setFormData(prev => ({ ...prev, riskPhilosophy: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                borderRadius: '6px',
+                border: '1px solid var(--card-border)',
+                backgroundColor: 'var(--panel-muted)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                outline: 'none',
+                resize: 'none',
+                transition: 'border-color 0.2s ease',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = 'var(--purple-base)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = 'var(--card-border)';
+              }}
               rows={3}
               placeholder="Describe your risk management approach..."
             />
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--card-border)',
+          }}>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              style={{
+                padding: '8px 16px',
+                borderRadius: '6px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--panel-muted)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
               disabled={isSubmitting}
             >
               Cancel
             </button>
-            <motion.button
+            <button
               type="submit"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                border: 'none',
+                background: 'linear-gradient(135deg, var(--purple-base) 0%, var(--purple-dark) 100%)',
+                color: 'white',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                opacity: isSubmitting ? 0.6 : 1,
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
-              <FiSave className="w-4 h-4" />
+              <FiSave size={16} />
               {isSubmitting ? 'Creating...' : 'Create Strategy'}
-            </motion.button>
+            </button>
           </div>
         </form>
       </motion.div>
