@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FiHome, FiBarChart2, FiCalendar, FiCheckSquare, FiZap, FiBookOpen, FiTarget, FiMenu, FiX, FiEdit } from 'react-icons/fi';
+import { FiHome, FiBarChart2, FiCalendar, FiCheckSquare, FiZap, FiBookOpen, FiTarget, FiMenu, FiX, FiEdit, FiTrendingUp } from 'react-icons/fi';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -9,6 +9,7 @@ const items = [
   { href: '/', label: 'Dashboard', icon: FiHome },
   { href: '/strategies', label: 'Strategies', icon: FiTarget },
   { href: '/analytics', label: 'Analytics', icon: FiBarChart2 },
+  { href: '/advanced-analytics', label: 'Advanced Analytics', icon: FiTrendingUp },
   { href: '/calendar', label: 'Calendar', icon: FiCalendar },
   { href: '/planning', label: 'Planning', icon: FiCheckSquare },
   { href: '/insights', label: 'Insights', icon: FiZap },

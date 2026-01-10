@@ -1,0 +1,194 @@
+[
+  {
+    "id": "calm-focused-state",
+    "timestamp": "2026-01-05T10:30:00.000Z",
+    "emotionalState": "calm",
+    "focusLevel": 9,
+    "confidenceLevel": 8,
+    "stressLevel": 2,
+    "energyLevel": 8,
+    "mood": "focused",
+    "externalFactors": {
+      "sleepHours": 8,
+      "caffeineIntake": 2,
+      "recentMeals": "balanced",
+      "personalLife": "stable",
+      "marketNews": "neutral"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 68,
+      "breathingRate": 12,
+      "skinConductance": 0.3
+    },
+    "cognitiveState": {
+      "decisionSpeed": "optimal",
+      "riskAssessment": "accurate",
+      "patternRecognition": "sharp"
+    },
+    "tradingMindset": {
+      "discipline": 9,
+      "patience": 8,
+      "objectivity": 9
+    }
+  },
+  {
+    "id": "excited-overconfident-state",
+    "timestamp": "2026-01-05T14:15:00.000Z",
+    "emotionalState": "excited",
+    "focusLevel": 7,
+    "confidenceLevel": 10,
+    "stressLevel": 1,
+    "energyLevel": 9,
+    "mood": "euphoric",
+    "externalFactors": {
+      "sleepHours": 7,
+      "caffeineIntake": 4,
+      "recentMeals": "light",
+      "personalLife": "positive",
+      "marketNews": "bullish"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 78,
+      "breathingRate": 14,
+      "skinConductance": 0.5
+    },
+    "cognitiveState": {
+      "decisionSpeed": "fast",
+      "riskAssessment": "underestimated",
+      "patternRecognition": "biased_positive"
+    },
+    "tradingMindset": {
+      "discipline": 6,
+      "patience": 4,
+      "objectivity": 5
+    }
+  },
+  {
+    "id": "stressed-anxious-state",
+    "timestamp": "2026-01-06T13:30:00.000Z",
+    "emotionalState": "stressed",
+    "focusLevel": 4,
+    "confidenceLevel": 3,
+    "stressLevel": 9,
+    "energyLevel": 6,
+    "mood": "anxious",
+    "externalFactors": {
+      "sleepHours": 5,
+      "caffeineIntake": 6,
+      "recentMeals": "skipped",
+      "personalLife": "stressful",
+      "marketNews": "volatile"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 95,
+      "breathingRate": 18,
+      "skinConductance": 0.8
+    },
+    "cognitiveState": {
+      "decisionSpeed": "rushed",
+      "riskAssessment": "overestimated",
+      "patternRecognition": "paranoid"
+    },
+    "tradingMindset": {
+      "discipline": 3,
+      "patience": 2,
+      "objectivity": 2
+    }
+  },
+  {
+    "id": "frustrated-angry-state",
+    "timestamp": "2026-01-07T16:45:00.000Z",
+    "emotionalState": "frustrated",
+    "focusLevel": 3,
+    "confidenceLevel": 2,
+    "stressLevel": 8,
+    "energyLevel": 4,
+    "mood": "angry",
+    "externalFactors": {
+      "sleepHours": 6,
+      "caffeineIntake": 3,
+      "recentMeals": "unhealthy",
+      "personalLife": "conflicts",
+      "marketNews": "bearish"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 88,
+      "breathingRate": 16,
+      "skinConductance": 0.7
+    },
+    "cognitiveState": {
+      "decisionSpeed": "impulsive",
+      "riskAssessment": "reckless",
+      "patternRecognition": "revenge_bias"
+    },
+    "tradingMindset": {
+      "discipline": 1,
+      "patience": 1,
+      "objectivity": 1
+    }
+  },
+  {
+    "id": "tired-unfocused-state",
+    "timestamp": "2026-01-08T09:00:00.000Z",
+    "emotionalState": "tired",
+    "focusLevel": 2,
+    "confidenceLevel": 4,
+    "stressLevel": 5,
+    "energyLevel": 3,
+    "mood": "lethargic",
+    "externalFactors": {
+      "sleepHours": 4,
+      "caffeineIntake": 5,
+      "recentMeals": "irregular",
+      "personalLife": "overwhelmed",
+      "marketNews": "mixed"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 72,
+      "breathingRate": 10,
+      "skinConductance": 0.4
+    },
+    "cognitiveState": {
+      "decisionSpeed": "slow",
+      "riskAssessment": "inconsistent",
+      "patternRecognition": "missed_signals"
+    },
+    "tradingMindset": {
+      "discipline": 4,
+      "patience": 5,
+      "objectivity": 6
+    }
+  },
+  {
+    "id": "confident-patient-state",
+    "timestamp": "2026-01-09T00:00:00.000Z",
+    "emotionalState": "confident",
+    "focusLevel": 8,
+    "confidenceLevel": 9,
+    "stressLevel": 3,
+    "energyLevel": 7,
+    "mood": "optimistic",
+    "externalFactors": {
+      "sleepHours": 9,
+      "caffeineIntake": 1,
+      "recentMeals": "nutritious",
+      "personalLife": "balanced",
+      "marketNews": "favorable"
+    },
+    "physiologicalMetrics": {
+      "heartRate": 65,
+      "breathingRate": 11,
+      "skinConductance": 0.2
+    },
+    "cognitiveState": {
+      "decisionSpeed": "measured",
+      "riskAssessment": "balanced",
+      "patternRecognition": "accurate"
+    },
+    "tradingMindset": {
+      "discipline": 8,
+      "patience": 9,
+      "objectivity": 8
+    }
+  }
+]

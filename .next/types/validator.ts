@@ -47,6 +47,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../src/app/advanced-analytics/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/advanced-analytics">> = Specific
+  const handler = {} as typeof import("../../src/app/advanced-analytics/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/analytics/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/analytics">> = Specific
@@ -150,6 +159,33 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/daily-goals">> = Specific
   const handler = {} as typeof import("../../src/app/api/daily-goals/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/decision-score/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/decision-score">> = Specific
+  const handler = {} as typeof import("../../src/app/api/decision-score/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/edge-confidence/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/edge-confidence">> = Specific
+  const handler = {} as typeof import("../../src/app/api/edge-confidence/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/emotional-cost/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/emotional-cost">> = Specific
+  const handler = {} as typeof import("../../src/app/api/emotional-cost/route.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

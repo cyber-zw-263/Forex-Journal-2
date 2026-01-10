@@ -82,7 +82,18 @@ export default function AnalyticsPage() {
         throw new Error('Failed to load trades');
       }
 
-      const tradesData = await tradesResponse.json();
+      const tradesResponseData = await tradesResponse.json();
+
+      // Handle API response format
+      let tradesData;
+      if (tradesResponseData && typeof tradesResponseData === 'object' && 'data' in tradesResponseData) {
+        // API response format: { success: true, data: [...], pagination: {...} }
+        tradesData = tradesResponseData.data;
+      } else {
+        // Fallback for direct array response
+        tradesData = tradesResponseData;
+      }
+
       setTrades(Array.isArray(tradesData) ? tradesData : []);
 
       // Load strategies
@@ -91,7 +102,16 @@ export default function AnalyticsPage() {
       });
 
       if (strategiesResponse.ok) {
-        const strategiesData = await strategiesResponse.json();
+        const strategiesResponseData = await strategiesResponse.json();
+
+        // Handle API response format for strategies
+        let strategiesData;
+        if (strategiesResponseData && typeof strategiesResponseData === 'object' && 'data' in strategiesResponseData) {
+          strategiesData = strategiesResponseData.data;
+        } else {
+          strategiesData = strategiesResponseData;
+        }
+
         setStrategies(Array.isArray(strategiesData) ? strategiesData : []);
       }
 

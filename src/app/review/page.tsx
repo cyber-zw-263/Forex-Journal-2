@@ -55,7 +55,18 @@ export default function TradeReviewPage() {
         throw new Error('Failed to load trades');
       }
 
-      const data = await response.json();
+      const responseData = await response.json();
+
+      // Handle API response format
+      let data;
+      if (responseData && typeof responseData === 'object' && 'data' in responseData) {
+        // API response format: { success: true, data: [...], pagination: {...} }
+        data = responseData.data;
+      } else {
+        // Fallback for direct array response
+        data = responseData;
+      }
+
       setTrades(data);
     } catch (error) {
       console.error('Error loading trades:', error);

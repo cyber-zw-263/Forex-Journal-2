@@ -1,0 +1,182 @@
+[
+  {
+    "id": "trend-following-strategy",
+    "userId": "demo-user",
+    "name": "Trend Following Master",
+    "description": "Follow major trends with momentum confirmation",
+    "rules": [
+      "Enter on pullbacks in strong trends",
+      "Use ADX > 25 for trend strength",
+      "Wait for momentum divergence confirmation",
+      "Risk 1% per trade, target 3:1 reward"
+    ],
+    "entryModelId": "trend-entry-model",
+    "timeframeSequenceId": "swing-sequence",
+    "version": 3,
+    "parentVersionId": "trend-following-v2",
+    "abTestGroup": "A",
+    "edgeConfidenceScore": 85,
+    "perfectExecutionCount": 12,
+    "cooldownRules": {
+      "maxTradesPerDay": 3,
+      "minTimeBetweenTrades": 120,
+      "pauseAfterLoss": 60,
+      "pauseAfterWin": 30
+    },
+    "pauseUntil": null,
+    "performanceMetrics": {
+      "totalTrades": 45,
+      "winRate": 68,
+      "avgProfitLoss": 15.50,
+      "maxDrawdown": 120.00,
+      "consistencyScore": 82
+    },
+    "marketConditions": ["trending", "high_momentum"],
+    "sessions": ["london_open", "ny_open"],
+    "tags": ["trending", "momentum", "high_probability"]
+  },
+  {
+    "id": "breakout-strategy",
+    "userId": "demo-user",
+    "name": "Breakout Hunter",
+    "description": "Trade breakouts of key levels with volume confirmation",
+    "rules": [
+      "Identify key support/resistance levels",
+      "Wait for consolidation period (3-5 candles)",
+      "Enter on breakout with volume spike",
+      "Place stop below/above consolidation"
+    ],
+    "entryModelId": "breakout-entry-model",
+    "timeframeSequenceId": "intraday-sequence",
+    "version": 2,
+    "parentVersionId": "breakout-v1",
+    "abTestGroup": "B",
+    "edgeConfidenceScore": 45,
+    "perfectExecutionCount": 3,
+    "cooldownRules": {
+      "maxTradesPerDay": 2,
+      "minTimeBetweenTrades": 180,
+      "pauseAfterLoss": 90,
+      "pauseAfterWin": 15
+    },
+    "pauseUntil": null,
+    "performanceMetrics": {
+      "totalTrades": 28,
+      "winRate": 43,
+      "avgProfitLoss": -2.30,
+      "maxDrawdown": 85.00,
+      "consistencyScore": 35
+    },
+    "marketConditions": ["ranging", "consolidation"],
+    "sessions": ["london_ny_overlap", "ny_close"],
+    "tags": ["breakout", "levels", "false_breakouts"]
+  },
+  {
+    "id": "news-trading-strategy",
+    "userId": "demo-user",
+    "name": "News Catalyst Trader",
+    "description": "Trade major news events with predefined levels",
+    "rules": [
+      "Pre-define support/resistance levels",
+      "Monitor economic calendar for high-impact news",
+      "Enter 2 minutes before news on limit orders",
+      "Use wider stops for news volatility"
+    ],
+    "entryModelId": "news-entry-model",
+    "timeframeSequenceId": "scalping-sequence",
+    "version": 4,
+    "parentVersionId": "news-trading-v3",
+    "abTestGroup": "A",
+    "edgeConfidenceScore": 78,
+    "perfectExecutionCount": 8,
+    "cooldownRules": {
+      "maxTradesPerDay": 1,
+      "minTimeBetweenTrades": 1440,
+      "pauseAfterLoss": 120,
+      "pauseAfterWin": 60
+    },
+    "pauseUntil": null,
+    "performanceMetrics": {
+      "totalTrades": 22,
+      "winRate": 73,
+      "avgProfitLoss": 18.20,
+      "maxDrawdown": 45.00,
+      "consistencyScore": 88
+    },
+    "marketConditions": ["high_volatility", "news_driven"],
+    "sessions": ["news_events"],
+    "tags": ["news", "high_impact", "volatility"]
+  },
+  {
+    "id": "scalping-strategy",
+    "userId": "demo-user",
+    "name": "Precision Scalping",
+    "description": "Quick entries and exits for small profits",
+    "rules": [
+      "Use 1-5 minute charts only",
+      "Target 5-10 pip profits",
+      "Enter on micro-trends with RSI confirmation",
+      "Exit quickly - no holding overnight"
+    ],
+    "entryModelId": "scalping-entry-model",
+    "timeframeSequenceId": "micro-sequence",
+    "version": 1,
+    "parentVersionId": null,
+    "abTestGroup": "B",
+    "edgeConfidenceScore": 25,
+    "perfectExecutionCount": 1,
+    "cooldownRules": {
+      "maxTradesPerDay": 10,
+      "minTimeBetweenTrades": 15,
+      "pauseAfterLoss": 30,
+      "pauseAfterWin": 5
+    },
+    "pauseUntil": "2026-01-11T00:00:00.000Z",
+    "performanceMetrics": {
+      "totalTrades": 67,
+      "winRate": 52,
+      "avgProfitLoss": 1.80,
+      "maxDrawdown": 95.00,
+      "consistencyScore": 28
+    },
+    "marketConditions": ["ranging", "low_trend"],
+    "sessions": ["london_ny_overlap", "ny_open"],
+    "tags": ["scalping", "quick_trades", "overtrading_risk"]
+  },
+  {
+    "id": "reversal-strategy",
+    "userId": "demo-user",
+    "name": "Reversal Specialist",
+    "description": "Trade reversals at key levels with divergence",
+    "rules": [
+      "Identify major support/resistance levels",
+      "Look for RSI divergence signals",
+      "Wait for price rejection candle",
+      "Enter on retest of broken level"
+    ],
+    "entryModelId": "reversal-entry-model",
+    "timeframeSequenceId": "swing-sequence",
+    "version": 2,
+    "parentVersionId": "reversal-v1",
+    "abTestGroup": "A",
+    "edgeConfidenceScore": 62,
+    "perfectExecutionCount": 5,
+    "cooldownRules": {
+      "maxTradesPerDay": 2,
+      "minTimeBetweenTrades": 240,
+      "pauseAfterLoss": 60,
+      "pauseAfterWin": 30
+    },
+    "pauseUntil": null,
+    "performanceMetrics": {
+      "totalTrades": 31,
+      "winRate": 58,
+      "avgProfitLoss": 8.90,
+      "maxDrawdown": 65.00,
+      "consistencyScore": 65
+    },
+    "marketConditions": ["trending", "reversal_signals"],
+    "sessions": ["london_open", "ny_open"],
+    "tags": ["reversal", "divergence", "key_levels"]
+  }
+]

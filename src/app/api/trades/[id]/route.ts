@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { apiResponse } from '@/lib/api-response';
 import { TradeUpdateSchema } from '@/lib/validation';
+import { updateTradeAnalytics } from '@/lib/advanced-analytics-calculations';
 
 export async function GET(
   request: NextRequest,
@@ -93,6 +94,14 @@ export async function PUT(
         voiceNotes: true,
       },
     });
+
+    // Calculate and update advanced analytics
+    try {
+      await updateTradeAnalytics(prisma, id);
+    } catch (analyticsError) {
+      console.warn('Failed to calculate trade analytics:', analyticsError);
+      // Don't fail the trade update if analytics calculation fails
+    }
 
     return apiResponse.success(updatedTrade);
   } catch (_error) {

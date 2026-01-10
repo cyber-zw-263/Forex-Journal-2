@@ -1,0 +1,218 @@
+[
+  {
+    "id": "low-emotional-cost-trade-1",
+    "tradeId": "trend-following-trade-1",
+    "timestamp": "2026-01-05T10:30:00.000Z",
+    "emotionalCostScore": 15,
+    "stressAccumulation": 12,
+    "decisionQualityImpact": 8,
+    "futurePerformanceImpact": 5,
+    "recoveryTimeMinutes": 15,
+    "emotionalDrift": {
+      "confidenceChange": 5,
+      "stressChange": -2,
+      "focusChange": 2,
+      "energyChange": -1
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": 0,
+      "decisionSpeedChange": 0,
+      "patternRecognitionChange": 0
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": 8,
+      "cortisolSpike": false,
+      "sleepQualityImpact": 0
+    },
+    "opportunityCosts": {
+      "missedTrades": 0,
+      "delayedEntries": 0,
+      "reducedFocusTime": 10
+    },
+    "longTermEffects": {
+      "confidenceBuilding": 3,
+      "strategyTrustIncrease": 2,
+      "emotionalResilience": 1
+    }
+  },
+  {
+    "id": "high-emotional-cost-trade-2",
+    "tradeId": "breakout-trade-2",
+    "timestamp": "2026-01-05T14:15:00.000Z",
+    "emotionalCostScore": 78,
+    "stressAccumulation": 85,
+    "decisionQualityImpact": 35,
+    "futurePerformanceImpact": 25,
+    "recoveryTimeMinutes": 180,
+    "emotionalDrift": {
+      "confidenceChange": -15,
+      "stressChange": 20,
+      "focusChange": -8,
+      "energyChange": -12
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": -10,
+      "decisionSpeedChange": 15,
+      "patternRecognitionChange": -5
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": 25,
+      "cortisolSpike": true,
+      "sleepQualityImpact": 2
+    },
+    "opportunityCosts": {
+      "missedTrades": 2,
+      "delayedEntries": 3,
+      "reducedFocusTime": 120
+    },
+    "longTermEffects": {
+      "confidenceBuilding": -8,
+      "strategyTrustIncrease": -12,
+      "emotionalResilience": -3
+    }
+  },
+  {
+    "id": "moderate-emotional-cost-trade-3",
+    "tradeId": "news-trade-3",
+    "timestamp": "2026-01-06T13:30:00.000Z",
+    "emotionalCostScore": 45,
+    "stressAccumulation": 52,
+    "decisionQualityImpact": 18,
+    "futurePerformanceImpact": 12,
+    "recoveryTimeMinutes": 90,
+    "emotionalDrift": {
+      "confidenceChange": -8,
+      "stressChange": 12,
+      "focusChange": -5,
+      "energyChange": -6
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": -5,
+      "decisionSpeedChange": 8,
+      "patternRecognitionChange": -3
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": 18,
+      "cortisolSpike": false,
+      "sleepQualityImpact": 1
+    },
+    "opportunityCosts": {
+      "missedTrades": 1,
+      "delayedEntries": 1,
+      "reducedFocusTime": 60
+    },
+    "longTermEffects": {
+      "confidenceBuilding": -4,
+      "strategyTrustIncrease": -6,
+      "emotionalResilience": 0
+    }
+  },
+  {
+    "id": "extreme-emotional-cost-trade-4",
+    "tradeId": "reversal-trade-4",
+    "timestamp": "2026-01-07T16:45:00.000Z",
+    "emotionalCostScore": 95,
+    "stressAccumulation": 98,
+    "decisionQualityImpact": 75,
+    "futurePerformanceImpact": 60,
+    "recoveryTimeMinutes": 480,
+    "emotionalDrift": {
+      "confidenceChange": -35,
+      "stressChange": 45,
+      "focusChange": -20,
+      "energyChange": -25
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": -25,
+      "decisionSpeedChange": 30,
+      "patternRecognitionChange": -15
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": 35,
+      "cortisolSpike": true,
+      "sleepQualityImpact": 4
+    },
+    "opportunityCosts": {
+      "missedTrades": 5,
+      "delayedEntries": 8,
+      "reducedFocusTime": 360
+    },
+    "longTermEffects": {
+      "confidenceBuilding": -20,
+      "strategyTrustIncrease": -30,
+      "emotionalResilience": -10
+    }
+  },
+  {
+    "id": "minimal-emotional-cost-trade-5",
+    "tradeId": "scalping-trade-5",
+    "timestamp": "2026-01-08T09:00:00.000Z",
+    "emotionalCostScore": 22,
+    "stressAccumulation": 25,
+    "decisionQualityImpact": 5,
+    "futurePerformanceImpact": 3,
+    "recoveryTimeMinutes": 30,
+    "emotionalDrift": {
+      "confidenceChange": -2,
+      "stressChange": 3,
+      "focusChange": -1,
+      "energyChange": -2
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": 0,
+      "decisionSpeedChange": 2,
+      "patternRecognitionChange": 0
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": 5,
+      "cortisolSpike": false,
+      "sleepQualityImpact": 0
+    },
+    "opportunityCosts": {
+      "missedTrades": 0,
+      "delayedEntries": 1,
+      "reducedFocusTime": 20
+    },
+    "longTermEffects": {
+      "confidenceBuilding": 0,
+      "strategyTrustIncrease": -1,
+      "emotionalResilience": 1
+    }
+  },
+  {
+    "id": "positive-emotional-benefit-trade-6",
+    "tradeId": "gap-fill-trade-6",
+    "timestamp": "2026-01-09T00:00:00.000Z",
+    "emotionalCostScore": -10,
+    "stressAccumulation": -5,
+    "decisionQualityImpact": -8,
+    "futurePerformanceImpact": -12,
+    "recoveryTimeMinutes": 0,
+    "emotionalDrift": {
+      "confidenceChange": 12,
+      "stressChange": -8,
+      "focusChange": 5,
+      "energyChange": 3
+    },
+    "behavioralImpacts": {
+      "riskToleranceChange": 3,
+      "decisionSpeedChange": -2,
+      "patternRecognitionChange": 2
+    },
+    "physiologicalCosts": {
+      "heartRateIncrease": -5,
+      "cortisolSpike": false,
+      "sleepQualityImpact": 0
+    },
+    "opportunityCosts": {
+      "missedTrades": 0,
+      "delayedEntries": 0,
+      "reducedFocusTime": 0
+    },
+    "longTermEffects": {
+      "confidenceBuilding": 8,
+      "strategyTrustIncrease": 15,
+      "emotionalResilience": 5
+    }
+  }
+]

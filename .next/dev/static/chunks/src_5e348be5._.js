@@ -4763,7 +4763,16 @@ function AnalyticsPage() {
             if (!tradesResponse.ok) {
                 throw new Error('Failed to load trades');
             }
-            const tradesData = await tradesResponse.json();
+            const tradesResponseData = await tradesResponse.json();
+            // Handle API response format
+            let tradesData;
+            if (tradesResponseData && typeof tradesResponseData === 'object' && 'data' in tradesResponseData) {
+                // API response format: { success: true, data: [...], pagination: {...} }
+                tradesData = tradesResponseData.data;
+            } else {
+                // Fallback for direct array response
+                tradesData = tradesResponseData;
+            }
             setTrades(Array.isArray(tradesData) ? tradesData : []);
             // Load strategies
             const strategiesResponse = await fetch('/api/strategies', {
@@ -4772,7 +4781,14 @@ function AnalyticsPage() {
                 }
             });
             if (strategiesResponse.ok) {
-                const strategiesData = await strategiesResponse.json();
+                const strategiesResponseData = await strategiesResponse.json();
+                // Handle API response format for strategies
+                let strategiesData;
+                if (strategiesResponseData && typeof strategiesResponseData === 'object' && 'data' in strategiesResponseData) {
+                    strategiesData = strategiesResponseData.data;
+                } else {
+                    strategiesData = strategiesResponseData;
+                }
                 setStrategies(Array.isArray(strategiesData) ? strategiesData : []);
             }
             // Load journal entries
@@ -4850,7 +4866,7 @@ function AnalyticsPage() {
             className: "min-h-screen bg-gray-50 dark:bg-gray-900"
         }, void 0, false, {
             fileName: "[project]/src/app/analytics/page.tsx",
-            lineNumber: 157,
+            lineNumber: 177,
             columnNumber: 12
         }, this);
     }
@@ -4865,7 +4881,7 @@ function AnalyticsPage() {
                 currentTheme: theme
             }, void 0, false, {
                 fileName: "[project]/src/app/analytics/page.tsx",
-                lineNumber: 162,
+                lineNumber: 182,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -4891,7 +4907,7 @@ function AnalyticsPage() {
                                 children: "Analytics Dashboard"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 166,
+                                lineNumber: 186,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4903,13 +4919,13 @@ function AnalyticsPage() {
                                 children: "Comprehensive trading performance, strategy analysis, and behavioral insights"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 169,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/analytics/page.tsx",
-                        lineNumber: 165,
+                        lineNumber: 185,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4947,19 +4963,19 @@ function AnalyticsPage() {
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/page.tsx",
-                                    lineNumber: 201,
+                                    lineNumber: 221,
                                     columnNumber: 13
                                 }, this),
                                 "Export Data"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/analytics/page.tsx",
-                            lineNumber: 176,
+                            lineNumber: 196,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/analytics/page.tsx",
-                        lineNumber: 175,
+                        lineNumber: 195,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5009,25 +5025,25 @@ function AnalyticsPage() {
                                             size: 16
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                            lineNumber: 240,
+                                            lineNumber: 260,
                                             columnNumber: 19
                                         }, this),
                                         tab.label
                                     ]
                                 }, tab.id, true, {
                                     fileName: "[project]/src/app/analytics/page.tsx",
-                                    lineNumber: 212,
+                                    lineNumber: 232,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/src/app/analytics/page.tsx",
-                            lineNumber: 208,
+                            lineNumber: 228,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/analytics/page.tsx",
-                        lineNumber: 207,
+                        lineNumber: 227,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5054,7 +5070,7 @@ function AnalyticsPage() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 251,
+                                        lineNumber: 271,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5066,13 +5082,13 @@ function AnalyticsPage() {
                                         children: "Filters"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 252,
+                                        lineNumber: 272,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 250,
+                                lineNumber: 270,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5095,7 +5111,7 @@ function AnalyticsPage() {
                                                 children: "Strategy"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 256,
+                                                lineNumber: 276,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -5119,7 +5135,7 @@ function AnalyticsPage() {
                                                         children: "All Strategies"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                                        lineNumber: 272,
+                                                        lineNumber: 292,
                                                         columnNumber: 17
                                                     }, this),
                                                     strategies.map((strategy)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -5127,19 +5143,19 @@ function AnalyticsPage() {
                                                             children: strategy.name
                                                         }, strategy.id, false, {
                                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                                            lineNumber: 274,
+                                                            lineNumber: 294,
                                                             columnNumber: 19
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 259,
+                                                lineNumber: 279,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 255,
+                                        lineNumber: 275,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5155,7 +5171,7 @@ function AnalyticsPage() {
                                                 children: "Currency Pair"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 279,
+                                                lineNumber: 299,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -5179,7 +5195,7 @@ function AnalyticsPage() {
                                                         children: "All Pairs"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                                        lineNumber: 295,
+                                                        lineNumber: 315,
                                                         columnNumber: 17
                                                     }, this),
                                                     Array.from(new Set(trades.map((t)=>t.pair))).map((pair)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -5187,19 +5203,19 @@ function AnalyticsPage() {
                                                             children: pair
                                                         }, pair, false, {
                                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                                            lineNumber: 297,
+                                                            lineNumber: 317,
                                                             columnNumber: 19
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 282,
+                                                lineNumber: 302,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 278,
+                                        lineNumber: 298,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5215,7 +5231,7 @@ function AnalyticsPage() {
                                                 children: "Session"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 302,
+                                                lineNumber: 322,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -5239,7 +5255,7 @@ function AnalyticsPage() {
                                                         children: "All Sessions"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                                        lineNumber: 318,
+                                                        lineNumber: 338,
                                                         columnNumber: 17
                                                     }, this),
                                                     Array.from(new Set(trades.map((t)=>t.session).filter(Boolean))).map((session)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -5247,19 +5263,19 @@ function AnalyticsPage() {
                                                             children: session
                                                         }, session, false, {
                                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                                            lineNumber: 320,
+                                                            lineNumber: 340,
                                                             columnNumber: 19
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 305,
+                                                lineNumber: 325,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 301,
+                                        lineNumber: 321,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5275,7 +5291,7 @@ function AnalyticsPage() {
                                                 children: "Emotional State"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 325,
+                                                lineNumber: 345,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -5299,7 +5315,7 @@ function AnalyticsPage() {
                                                         children: "All States"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                                        lineNumber: 341,
+                                                        lineNumber: 361,
                                                         columnNumber: 17
                                                     }, this),
                                                     Array.from(new Set(trades.map((t)=>t.emotionalState).filter(Boolean))).map((state)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -5307,31 +5323,31 @@ function AnalyticsPage() {
                                                             children: state
                                                         }, state, false, {
                                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                                            lineNumber: 343,
+                                                            lineNumber: 363,
                                                             columnNumber: 19
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                                lineNumber: 328,
+                                                lineNumber: 348,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 324,
+                                        lineNumber: 344,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 254,
+                                lineNumber: 274,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/analytics/page.tsx",
-                        lineNumber: 249,
+                        lineNumber: 269,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5359,12 +5375,12 @@ function AnalyticsPage() {
                                             trades: filteredTrades
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                            lineNumber: 355,
+                                            lineNumber: 375,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 354,
+                                        lineNumber: 374,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5378,12 +5394,12 @@ function AnalyticsPage() {
                                             trades: filteredTrades
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                            lineNumber: 358,
+                                            lineNumber: 378,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 357,
+                                        lineNumber: 377,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5397,18 +5413,18 @@ function AnalyticsPage() {
                                             trades: filteredTrades
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/analytics/page.tsx",
-                                            lineNumber: 361,
+                                            lineNumber: 381,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/analytics/page.tsx",
-                                        lineNumber: 360,
+                                        lineNumber: 380,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 353,
+                                lineNumber: 373,
                                 columnNumber: 13
                             }, this),
                             activeTab === 'performance' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5422,12 +5438,12 @@ function AnalyticsPage() {
                                     trades: filteredTrades
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/page.tsx",
-                                    lineNumber: 368,
+                                    lineNumber: 388,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 367,
+                                lineNumber: 387,
                                 columnNumber: 13
                             }, this),
                             activeTab === 'strategies' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5442,12 +5458,12 @@ function AnalyticsPage() {
                                     strategies: strategies
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/page.tsx",
-                                    lineNumber: 374,
+                                    lineNumber: 394,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 373,
+                                lineNumber: 393,
                                 columnNumber: 13
                             }, this),
                             activeTab === 'behavioral' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5462,37 +5478,37 @@ function AnalyticsPage() {
                                     journalEntries: journalEntries
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/analytics/page.tsx",
-                                    lineNumber: 380,
+                                    lineNumber: 400,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/analytics/page.tsx",
-                                lineNumber: 379,
+                                lineNumber: 399,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/analytics/page.tsx",
-                        lineNumber: 351,
+                        lineNumber: 371,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/analytics/page.tsx",
-                lineNumber: 164,
+                lineNumber: 184,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {
                 position: "bottom-right"
             }, void 0, false, {
                 fileName: "[project]/src/app/analytics/page.tsx",
-                lineNumber: 386,
+                lineNumber: 406,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/analytics/page.tsx",
-        lineNumber: 161,
+        lineNumber: 181,
         columnNumber: 5
     }, this);
 }

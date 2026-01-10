@@ -1,0 +1,217 @@
+[
+  {
+    "id": "trend-following-edge-high",
+    "strategyId": "trend-following-strategy",
+    "timestamp": "2026-01-05T10:30:00.000Z",
+    "edgeConfidenceScore": 85,
+    "edgeStrength": "strong",
+    "consistencyRating": "high",
+    "sampleSize": 45,
+    "winRate": 68.0,
+    "avgWinLossRatio": 2.8,
+    "profitFactor": 2.1,
+    "maxDrawdown": 12.5,
+    "sharpeRatio": 1.8,
+    "edgeComponents": {
+      "setupQuality": 88,
+      "timingAccuracy": 82,
+      "riskManagement": 90,
+      "exitEfficiency": 85,
+      "marketConditionMatch": 87
+    },
+    "confidenceIntervals": {
+      "winRate": {
+        "lower": 0.62,
+        "upper": 0.74,
+        "confidence": 0.95
+      },
+      "profitFactor": {
+        "lower": 1.8,
+        "upper": 2.4,
+        "confidence": 0.95
+      }
+    },
+    "edgeStability": {
+      "recentPerformance": "stable",
+      "marketConditionVariance": "low",
+      "strategyDrift": "minimal"
+    },
+    "recommendations": {
+      "positionSize": "maintain",
+      "frequency": "increase",
+      "refinement": "minor_tweaks"
+    }
+  },
+  {
+    "id": "breakout-edge-low",
+    "strategyId": "breakout-strategy",
+    "timestamp": "2026-01-05T14:15:00.000Z",
+    "edgeConfidenceScore": 45,
+    "edgeStrength": "weak",
+    "consistencyRating": "low",
+    "sampleSize": 28,
+    "winRate": 43.0,
+    "avgWinLossRatio": 1.2,
+    "profitFactor": 1.1,
+    "maxDrawdown": 18.5,
+    "sharpeRatio": 0.3,
+    "edgeComponents": {
+      "setupQuality": 52,
+      "timingAccuracy": 38,
+      "riskManagement": 45,
+      "exitEfficiency": 48,
+      "marketConditionMatch": 41
+    },
+    "confidenceIntervals": {
+      "winRate": {
+        "lower": 0.35,
+        "upper": 0.51,
+        "confidence": 0.90
+      },
+      "profitFactor": {
+        "lower": 0.9,
+        "upper": 1.3,
+        "confidence": 0.90
+      }
+    },
+    "edgeStability": {
+      "recentPerformance": "declining",
+      "marketConditionVariance": "high",
+      "strategyDrift": "significant"
+    },
+    "recommendations": {
+      "positionSize": "reduce",
+      "frequency": "decrease",
+      "refinement": "major_rework"
+    }
+  },
+  {
+    "id": "news-trading-edge-strong",
+    "strategyId": "news-trading-strategy",
+    "timestamp": "2026-01-06T13:30:00.000Z",
+    "edgeConfidenceScore": 78,
+    "edgeStrength": "strong",
+    "consistencyRating": "high",
+    "sampleSize": 22,
+    "winRate": 73.0,
+    "avgWinLossRatio": 3.2,
+    "profitFactor": 2.8,
+    "maxDrawdown": 8.2,
+    "sharpeRatio": 2.1,
+    "edgeComponents": {
+      "setupQuality": 85,
+      "timingAccuracy": 75,
+      "riskManagement": 82,
+      "exitEfficiency": 78,
+      "marketConditionMatch": 90
+    },
+    "confidenceIntervals": {
+      "winRate": {
+        "lower": 0.65,
+        "upper": 0.81,
+        "confidence": 0.95
+      },
+      "profitFactor": {
+        "lower": 2.3,
+        "upper": 3.3,
+        "confidence": 0.95
+      }
+    },
+    "edgeStability": {
+      "recentPerformance": "improving",
+      "marketConditionVariance": "moderate",
+      "strategyDrift": "minimal"
+    },
+    "recommendations": {
+      "positionSize": "increase",
+      "frequency": "maintain",
+      "refinement": "optimize_entries"
+    }
+  },
+  {
+    "id": "scalping-edge-weak",
+    "strategyId": "scalping-strategy",
+    "timestamp": "2026-01-08T09:00:00.000Z",
+    "edgeConfidenceScore": 25,
+    "edgeStrength": "very_weak",
+    "consistencyRating": "very_low",
+    "sampleSize": 67,
+    "winRate": 52.0,
+    "avgWinLossRatio": 0.8,
+    "profitFactor": 0.9,
+    "maxDrawdown": 22.1,
+    "sharpeRatio": -0.2,
+    "edgeComponents": {
+      "setupQuality": 28,
+      "timingAccuracy": 22,
+      "riskManagement": 35,
+      "exitEfficiency": 25,
+      "marketConditionMatch": 20
+    },
+    "confidenceIntervals": {
+      "winRate": {
+        "lower": 0.48,
+        "upper": 0.56,
+        "confidence": 0.95
+      },
+      "profitFactor": {
+        "lower": 0.8,
+        "upper": 1.0,
+        "confidence": 0.95
+      }
+    },
+    "edgeStability": {
+      "recentPerformance": "poor",
+      "marketConditionVariance": "high",
+      "strategyDrift": "severe"
+    },
+    "recommendations": {
+      "positionSize": "stop",
+      "frequency": "pause",
+      "refinement": "complete_overhaul"
+    }
+  },
+  {
+    "id": "reversal-edge-moderate",
+    "strategyId": "reversal-strategy",
+    "timestamp": "2026-01-07T16:45:00.000Z",
+    "edgeConfidenceScore": 62,
+    "edgeStrength": "moderate",
+    "consistencyRating": "moderate",
+    "sampleSize": 31,
+    "winRate": 58.0,
+    "avgWinLossRatio": 1.8,
+    "profitFactor": 1.6,
+    "maxDrawdown": 15.8,
+    "sharpeRatio": 1.1,
+    "edgeComponents": {
+      "setupQuality": 65,
+      "timingAccuracy": 58,
+      "riskManagement": 68,
+      "exitEfficiency": 62,
+      "marketConditionMatch": 60
+    },
+    "confidenceIntervals": {
+      "winRate": {
+        "lower": 0.50,
+        "upper": 0.66,
+        "confidence": 0.90
+      },
+      "profitFactor": {
+        "lower": 1.3,
+        "upper": 1.9,
+        "confidence": 0.90
+      }
+    },
+    "edgeStability": {
+      "recentPerformance": "stable",
+      "marketConditionVariance": "moderate",
+      "strategyDrift": "moderate"
+    },
+    "recommendations": {
+      "positionSize": "maintain",
+      "frequency": "slight_increase",
+      "refinement": "timing_improvements"
+    }
+  }
+]

@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import { apiResponse } from '@/lib/api-response';
 import { TradeInputSchema, TradeUpdateSchema, PaginationSchema } from '@/lib/validation';
+import { updateTradeAnalytics } from '@/lib/advanced-analytics-calculations';
 
 let prisma: PrismaClient | null = null;
 try {
@@ -166,6 +167,14 @@ export async function POST(request: NextRequest) {
         voiceNotes: true,
       },
     });
+
+    // Calculate and update advanced analytics
+    try {
+      await updateTradeAnalytics(prisma, trade.id);
+    } catch (analyticsError) {
+      console.warn('Failed to calculate trade analytics:', analyticsError);
+      // Don't fail the trade creation if analytics calculation fails
+    }
 
     return apiResponse.success(trade, undefined, 201);
   } catch (error) {

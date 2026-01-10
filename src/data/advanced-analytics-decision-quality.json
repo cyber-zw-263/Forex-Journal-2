@@ -1,0 +1,237 @@
+[
+  {
+    "id": "perfect-execution-trade-1",
+    "tradeId": "trend-following-trade-1",
+    "timestamp": "2026-01-05T10:30:00.000Z",
+    "decisionQualityScore": 95,
+    "executionQualityScore": 98,
+    "overallScore": 96,
+    "decisionFactors": {
+      "setupQuality": 9,
+      "timingQuality": 10,
+      "riskManagement": 9,
+      "strategyAlignment": 10,
+      "marketConditionMatch": 9
+    },
+    "executionFactors": {
+      "entryPrecision": 10,
+      "stopPlacement": 9,
+      "positionSizing": 10,
+      "exitDiscipline": 9,
+      "emotionalControl": 10
+    },
+    "mistakes": [],
+    "strengths": [
+      "Perfect timing on trend continuation",
+      "Excellent risk-reward ratio",
+      "Followed strategy rules precisely",
+      "Maintained emotional discipline"
+    ],
+    "learningPoints": [],
+    "recommendations": [
+      "Continue this level of execution",
+      "Use as benchmark for other trades"
+    ]
+  },
+  {
+    "id": "good-decision-poor-execution-trade-2",
+    "tradeId": "breakout-trade-2",
+    "timestamp": "2026-01-05T14:15:00.000Z",
+    "decisionQualityScore": 78,
+    "executionQualityScore": 45,
+    "overallScore": 62,
+    "decisionFactors": {
+      "setupQuality": 8,
+      "timingQuality": 7,
+      "riskManagement": 8,
+      "strategyAlignment": 8,
+      "marketConditionMatch": 7
+    },
+    "executionFactors": {
+      "entryPrecision": 6,
+      "stopPlacement": 4,
+      "positionSizing": 3,
+      "exitDiscipline": 5,
+      "emotionalControl": 4
+    },
+    "mistakes": [
+      "Moved stop loss prematurely",
+      "Added to losing position",
+      "Exited too early on first profit target"
+    ],
+    "strengths": [
+      "Identified valid breakout setup",
+      "Initial position sizing was appropriate"
+    ],
+    "learningPoints": [
+      "Stick to predetermined stop levels",
+      "Avoid revenge trading after small losses",
+      "Let profits run according to plan"
+    ],
+    "recommendations": [
+      "Practice holding positions longer",
+      "Review stop management rules",
+      "Focus on emotional control during drawdowns"
+    ]
+  },
+  {
+    "id": "poor-decision-good-execution-trade-3",
+    "tradeId": "news-trade-3",
+    "timestamp": "2026-01-06T13:30:00.000Z",
+    "decisionQualityScore": 35,
+    "executionQualityScore": 82,
+    "overallScore": 58,
+    "decisionFactors": {
+      "setupQuality": 2,
+      "timingQuality": 4,
+      "riskManagement": 6,
+      "strategyAlignment": 3,
+      "marketConditionMatch": 4
+    },
+    "executionFactors": {
+      "entryPrecision": 8,
+      "stopPlacement": 9,
+      "positionSizing": 7,
+      "exitDiscipline": 8,
+      "emotionalControl": 8
+    },
+    "mistakes": [
+      "Entered against major trend",
+      "Ignored risk management rules",
+      "Poor market timing"
+    ],
+    "strengths": [
+      "Maintained discipline in execution",
+      "Respected stop loss levels",
+      "Good position sizing"
+    ],
+    "learningPoints": [
+      "Better analysis before entry",
+      "Respect trend direction",
+      "Improve setup identification"
+    ],
+    "recommendations": [
+      "Focus on higher quality setups",
+      "Study market structure more carefully",
+      "Wait for better risk-reward opportunities"
+    ]
+  },
+  {
+    "id": "emotional-decision-trade-4",
+    "tradeId": "reversal-trade-4",
+    "timestamp": "2026-01-07T16:45:00.000Z",
+    "decisionQualityScore": 22,
+    "executionQualityScore": 28,
+    "overallScore": 25,
+    "decisionFactors": {
+      "setupQuality": 3,
+      "timingQuality": 2,
+      "riskManagement": 1,
+      "strategyAlignment": 4,
+      "marketConditionMatch": 3
+    },
+    "executionFactors": {
+      "entryPrecision": 3,
+      "stopPlacement": 2,
+      "positionSizing": 4,
+      "exitDiscipline": 3,
+      "emotionalControl": 2
+    },
+    "mistakes": [
+      "Entered out of frustration",
+      "No stop loss placed",
+      "Position size too large",
+      "Held through multiple profit targets"
+    ],
+    "strengths": [
+      "Identified potential reversal level"
+    ],
+    "learningPoints": [
+      "Never trade when emotionally compromised",
+      "Always use stop losses",
+      "Respect position sizing rules",
+      "Have clear exit plan"
+    ],
+    "recommendations": [
+      "Take break after losing streak",
+      "Review emotional trading triggers",
+      "Implement mandatory cool-down periods",
+      "Consider reducing position sizes during stress"
+    ]
+  },
+  {
+    "id": "mediocre-execution-trade-5",
+    "tradeId": "scalping-trade-5",
+    "timestamp": "2026-01-08T09:00:00.000Z",
+    "decisionQualityScore": 55,
+    "executionQualityScore": 52,
+    "overallScore": 54,
+    "decisionFactors": {
+      "setupQuality": 6,
+      "timingQuality": 5,
+      "riskManagement": 5,
+      "strategyAlignment": 6,
+      "marketConditionMatch": 5
+    },
+    "executionFactors": {
+      "entryPrecision": 5,
+      "stopPlacement": 6,
+    "positionSizing": 5,
+      "exitDiscipline": 5,
+      "emotionalControl": 5
+    },
+    "mistakes": [
+      "Slightly early entry",
+      "Stop placed too wide",
+      "Exited on noise rather than signal"
+    ],
+    "strengths": [
+      "Followed basic strategy rules",
+      "Maintained consistent position sizing"
+    ],
+    "learningPoints": [
+      "Improve entry timing precision",
+      "Tighten stop loss placement",
+      "Wait for clearer exit signals"
+    ],
+    "recommendations": [
+      "Practice better timing",
+      "Review stop placement guidelines",
+      "Focus on signal quality over quantity"
+    ]
+  },
+  {
+    "id": "excellent-decision-execution-trade-6",
+    "tradeId": "gap-fill-trade-6",
+    "timestamp": "2026-01-09T00:00:00.000Z",
+    "decisionQualityScore": 88,
+    "executionQualityScore": 92,
+    "overallScore": 90,
+    "decisionFactors": {
+      "setupQuality": 9,
+      "timingQuality": 9,
+      "riskManagement": 8,
+      "strategyAlignment": 9,
+      "marketConditionMatch": 9
+    },
+    "executionFactors": {
+      "entryPrecision": 9,
+      "stopPlacement": 9,
+      "positionSizing": 9,
+      "exitDiscipline": 9,
+      "emotionalControl": 9
+    },
+    "mistakes": [],
+    "strengths": [
+      "Perfect gap fill identification",
+      "Excellent risk management",
+      "Flawless execution",
+      "Maintained composure throughout"
+    ],
+    "learningPoints": [],
+    "recommendations": [
+      "Continue this level of analysis and execution",
+      "Use as model for future trades"
+    ]
+  }
+]

@@ -84,7 +84,18 @@ export default function DashboardPage() {
         return;
       }
 
-      const data: unknown = await response.json();
+      const responseData = await response.json();
+
+      // Handle API response format
+      let data: unknown;
+      if (responseData && typeof responseData === 'object' && 'data' in responseData) {
+        // API response format: { success: true, data: [...], pagination: {...} }
+        data = responseData.data;
+      } else {
+        // Fallback for direct array response
+        data = responseData;
+      }
+
       if (!Array.isArray(data)) {
         console.warn('Unexpected trades payload, expected array but got:', data);
         setError('Unexpected data format received');

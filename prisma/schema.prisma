@@ -26,6 +26,15 @@ model User {
   
   strategies    Strategy[]    @relation("UserStrategies")
   journalEntries JournalEntry[] @relation("UserJournal")
+  
+  // Advanced Analytics Relations
+  skillProgress     SkillProgress?     @relation("UserSkillProgress")
+  achievements      Achievement[]      @relation("UserAchievements")
+  marketConditionAnalysis MarketConditionAnalysis[] @relation("UserMarketAnalysis")
+  sessionPerformance SessionPerformance[] @relation("UserSessionPerformance")
+  tradeDurationAnalysis TradeDurationAnalysis[] @relation("UserTradeDurationAnalysis")
+  tradingPlaybook   TradingPlaybook?   @relation("UserTradingPlaybook")
+  dataExports       DataExport[]       @relation("UserDataExports")
 }
 
 model Trade {
@@ -73,6 +82,28 @@ model Trade {
   session             String?    // Trading session (asia, london, ny, etc.)
   marketCondition     String?    // Trend/range/choppy/etc.
   
+  // Advanced Context Analysis
+  marketConditionTags String?    // JSON array: ["trending", "high_volatility", "news_influenced"]
+  sessionOverlap      String?    // "london_open", "ny_open", "london_ny_overlap"
+  durationMinutes     Int?       // Calculated trade duration in minutes
+  
+  // Decision Quality & Edge Detection
+  decisionScore       Int?       // 0-100 score based on rule adherence, timing, emotions
+  decisionQuality     String?    // "good_win", "good_loss", "bad_win", "bad_loss"
+  
+  // Psychological Depth
+  emotionalDrift      String?    // JSON: {before: "calm", during: "anxious", after: "frustrated"}
+  triggers            String?    // JSON array: ["after_loss", "fomo", "boredom"]
+  emotionalCost       Float?     // Estimated RR lost due to emotional interference
+  
+  // What-If Analysis
+  counterfactualScenarios String? // JSON: alternative outcomes and simulations
+  passiveOutcome      Float?     // What if SL/TP were never touched
+  alternativeEntries  String?    // JSON: "if_entered_at_poi_instead"
+  
+  // Advanced Tagging
+  tags                String?    // JSON array: ["fomo", "late_entry", "perfect_execution"]
+  
   // Reflective Fields
   notes               String?    // Trade notes/observations
   emotionalState      String?    // calm, rushed, frustrated, confident, focused, etc.
@@ -102,6 +133,8 @@ model Trade {
   @@index([outcome])
   @@index([status])
   @@index([account])
+  @@index([decisionQuality])
+  @@index([sessionOverlap])
 }
 
 model Screenshot {
@@ -152,22 +185,6 @@ model DailyGoal {
   @@index([userId])
 }
 
-model WeeklyFocus {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  weekStart DateTime
-  focusArea String   // e.g., "patience", "discipline", "risk management"
-  notes     String?
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([userId, weekStart])
-  @@index([userId])
-}
-
 model AIInsight {
   id        String   @id @default(cuid())
   userId    String?
@@ -188,24 +205,44 @@ model Strategy {
   id                String     @id @default(cuid())
   userId            String
   user              User       @relation("UserStrategies", fields: [userId], references: [id], onDelete: Cascade)
-  
+
   name              String
   description       String?
   marketType        String     // "trend" | "range" | "mixed"
   preferredSessions String?    // JSON array: ["asian", "london", "ny"]
   riskPhilosophy    String?    // Risk philosophy description
   status            String     @default("active") // "active" | "paused" | "archived"
-  
+
+  // Strategy Versioning & Experimentation
+  version           String     @default("1.0")
+  parentVersionId   String?    // For tracking strategy evolution
+  parentVersion     Strategy?  @relation("StrategyVersions", fields: [parentVersionId], references: [id])
+  childVersions     Strategy[] @relation("StrategyVersions")
+
+  abTestGroup       String?    // "A", "B", or null for no testing
+  abTestName        String?    // Name of the A/B test
+
+  // Edge Detection & Performance
+  edgeConfidenceScore Float?   // 0-100 based on execution quality vs outcomes
+  perfectExecutionCount Int    @default(0)
+  mistakeCount       Int       @default(0)
+  successDespiteMistakeCount Int @default(0)
+
+  // Strategy Cooldown & Pause Rules
+  cooldownRules      String?    // JSON: {afterLosses: 3, pauseHours: 24}
+  pauseUntil         DateTime?  // When strategy can be used again
+
   entryModels       EntryModel[]
   timeframeSequences TimeframeSequence[]
   trades            Trade[]    @relation("StrategyTrades")
   rules             StrategyRule[]
-  
+
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
-  
+
   @@index([userId])
   @@index([status])
+  @@index([abTestGroup])
 }
 
 // ============ ENTRY MODELS ============
@@ -404,33 +441,221 @@ model JournalEntry {
 model PeriodSummary {
   id                String     @id @default(cuid())
   userId            String
-  
+
   period            String     // "daily" | "weekly" | "monthly" | "quarterly" | "half_year" | "yearly"
   startDate         DateTime
   endDate           DateTime
-  
+
   // Summary metrics
   totalTrades       Int
   winCount          Int
   lossCount         Int
   winRate           Float
   expectancy        Float
-  
+
   // Strategy performance
   bestStrategy      String?
   worstStrategy     String?
   bestEntryModel    String?
-  
+
   // Behavioral insights
   emotionalPatterns String? // JSON
   behavioralTrends  String? // JSON
   improvementsNeeded String? // JSON array
-  
+
   content           String? // Full summary (for AI or template-based)
-  
+
   createdAt         DateTime   @default(now())
-  
+
   @@unique([userId, period, startDate])
   @@index([userId])
   @@index([startDate])
+}
+
+// ============ SKILL PROGRESS & MOTIVATION SYSTEM ============
+model SkillProgress {
+  id                String     @id @default(cuid())
+  userId            String     @unique
+  user              User       @relation("UserSkillProgress", fields: [userId], references: [id], onDelete: Cascade)
+
+  // Core Trading Skills (0-100 scores)
+  ruleAdherence     Float      @default(0)
+  emotionalStability Float     @default(0)
+  consistency       Float      @default(0)
+  patience          Float      @default(0)
+  riskDiscipline    Float      @default(0)
+  decisionQuality   Float      @default(0)
+
+  // Skill History (JSON array of {date, skill, score} for trend tracking)
+  skillHistory      String?
+
+  // Current Focus Areas
+  focusAreas        String?    // JSON array of current improvement targets
+
+  updatedAt         DateTime   @updatedAt
+}
+
+model Achievement {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserAchievements", fields: [userId], references: [id], onDelete: Cascade)
+
+  type              String     // "streak", "milestone", "improvement", "consistency"
+  title             String
+  description       String
+  icon              String?    // Icon identifier
+  unlockedAt        DateTime   @default(now())
+
+  // Achievement Criteria
+  criteria          String?    // JSON: what was required to unlock
+  value             Int?       // Numeric value (e.g., 50 for 50 disciplined trades)
+
+  @@index([userId])
+  @@index([type])
+}
+
+model WeeklyFocus {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weekStart         DateTime
+  focusArea         String     // e.g., "patience", "discipline", "risk management"
+  specificGoal      String?    // More detailed goal
+  progressNotes     String?    // Weekly progress notes
+  completed         Boolean    @default(false)
+
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  @@unique([userId, weekStart])
+  @@index([userId])
+}
+
+// ============ ADVANCED ANALYTICS & INSIGHTS ============
+model MarketConditionAnalysis {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserMarketAnalysis", fields: [userId], references: [id], onDelete: Cascade)
+
+  condition         String     // "trending", "ranging", "high_volatility", etc.
+  period            String     // "week", "month", "quarter"
+
+  // Performance metrics
+  totalTrades       Int
+  winRate           Float
+  avgProfitLoss     Float
+  bestStrategy      String?
+
+  // Behavioral patterns
+  emotionalPatterns String?    // JSON
+  commonTriggers    String?    // JSON array
+
+  startDate         DateTime
+  endDate           DateTime
+
+  @@unique([userId, condition, period, startDate])
+  @@index([userId])
+}
+
+model SessionPerformance {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserSessionPerformance", fields: [userId], references: [id], onDelete: Cascade)
+
+  session           String     // "london_open", "ny_open", "london_ny_overlap"
+  period            String     // "week", "month", "quarter"
+
+  // Performance metrics
+  totalTrades       Int
+  winRate           Float
+  avgProfitLoss     Float
+  overtradingIncidents Int     @default(0)
+
+  // Behavioral insights
+  emotionalStability Float?    // 0-100 score
+  disciplineScore    Float?    // 0-100 score
+
+  startDate         DateTime
+  endDate           DateTime
+
+  @@unique([userId, session, period, startDate])
+  @@index([userId])
+}
+
+model TradeDurationAnalysis {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserTradeDurationAnalysis", fields: [userId], references: [id], onDelete: Cascade)
+
+  durationRange     String     // "0-15min", "15-60min", "1-4h", "4h+"
+  outcome           String     // "win", "loss", "breakeven"
+
+  // Statistics
+  count             Int
+  avgProfitLoss     Float
+  winRate           Float?
+
+  // Strategy performance by duration
+  bestStrategy      String?
+  commonMistakes    String?    // JSON array
+
+  period            String     // "month", "quarter", "year"
+  startDate         DateTime
+  endDate           DateTime
+
+  @@unique([userId, durationRange, outcome, period, startDate])
+  @@index([userId])
+}
+
+// ============ PERSONAL TRADING PLAYBOOK ============
+model TradingPlaybook {
+  id                String     @id @default(cuid())
+  userId            String     @unique
+  user              User       @relation("UserTradingPlaybook", fields: [userId], references: [id], onDelete: Cascade)
+
+  // Core Rules & Principles
+  goldenRules        String?    // JSON array of user's most important rules
+  redFlags          String?    // JSON array of warning signs
+  bestStrategies    String?    // JSON array of top performing strategies
+  optimalConditions String?    // JSON: best market conditions, sessions, etc.
+
+  // Behavioral Guidelines
+  emotionalTriggers String?    // JSON: personal triggers and coping strategies
+  decisionFramework String?    // JSON: step-by-step decision making process
+
+  // Performance Benchmarks
+  targetWinRate     Float?
+  targetExpectancy  Float?
+  maxDrawdownLimit  Float?
+
+  // Identity & Mindset
+  tradingIdentity   String?    // "Patient systematic trader", "High-probability specialist", etc.
+  growthTrajectory  String?    // Current phase and next milestones
+
+  lastUpdated       DateTime   @updatedAt
+  version           Int        @default(1)
+}
+
+// ============ EXPORT & BACKUP SYSTEM ============
+model DataExport {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation("UserDataExports", fields: [userId], references: [id], onDelete: Cascade)
+
+  type              String     // "trades", "strategies", "journal", "full_backup"
+  format            String     // "json", "csv", "pdf"
+
+  // Export content
+  data              String     // JSON string of exported data
+  filename          String
+
+  // Metadata
+  recordCount       Int
+  dateRange         String?    // JSON: {startDate, endDate}
+
+  createdAt         DateTime   @default(now())
+
+  @@index([userId])
+  @@index([type])
 }

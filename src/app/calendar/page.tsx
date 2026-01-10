@@ -40,7 +40,18 @@ export default function CalendarPage() {
           return;
         }
 
-        const data = await response.json();
+        const responseData = await response.json();
+
+        // Handle API response format
+        let data;
+        if (responseData && typeof responseData === 'object' && 'data' in responseData) {
+          // API response format: { success: true, data: [...], pagination: {...} }
+          data = responseData.data;
+        } else {
+          // Fallback for direct array response
+          data = responseData;
+        }
+
         if (!Array.isArray(data)) {
           console.warn('Unexpected trades payload in calendar page', data);
           setTrades([]);

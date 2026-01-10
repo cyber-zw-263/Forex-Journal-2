@@ -1,0 +1,160 @@
+[
+  {
+    "id": "trending-bull-strong",
+    "timestamp": "2026-01-05T10:30:00.000Z",
+    "marketState": "trending",
+    "direction": "bullish",
+    "strength": "strong",
+    "volatility": "moderate",
+    "liquidity": "high",
+    "session": "london_open",
+    "indicators": {
+      "adx": 32,
+      "rsi": 68,
+      "macd": {
+        "signal": "bullish",
+        "histogram": 0.0021
+      },
+      "volume": {
+        "current": 1250000,
+        "average": 980000,
+        "ratio": 1.28
+      }
+    },
+    "economicEvents": [],
+    "marketHours": "active"
+  },
+  {
+    "id": "ranging-consolidation",
+    "timestamp": "2026-01-05T14:15:00.000Z",
+    "marketState": "ranging",
+    "direction": "sideways",
+    "strength": "weak",
+    "volatility": "low",
+    "liquidity": "moderate",
+    "session": "london_ny_overlap",
+    "indicators": {
+      "adx": 18,
+      "rsi": 52,
+      "macd": {
+        "signal": "neutral",
+        "histogram": 0.0003
+      },
+      "volume": {
+        "current": 750000,
+        "average": 820000,
+        "ratio": 0.91
+      }
+    },
+    "economicEvents": [],
+    "marketHours": "active"
+  },
+  {
+    "id": "high-volatility-news",
+    "timestamp": "2026-01-06T13:30:00.000Z",
+    "marketState": "volatile",
+    "direction": "mixed",
+    "strength": "extreme",
+    "volatility": "high",
+    "liquidity": "high",
+    "session": "news_events",
+    "indicators": {
+      "adx": 45,
+      "rsi": 78,
+      "macd": {
+        "signal": "bullish",
+        "histogram": 0.0045
+      },
+      "volume": {
+        "current": 2850000,
+        "average": 950000,
+        "ratio": 3.00
+      }
+    },
+    "economicEvents": [
+      {
+        "event": "FOMC Interest Rate Decision",
+        "impact": "high",
+        "expected": 4.50,
+        "actual": 4.75,
+        "surprise": 0.25
+      }
+    ],
+    "marketHours": "active"
+  },
+  {
+    "id": "trending-bear-moderate",
+    "timestamp": "2026-01-07T16:45:00.000Z",
+    "marketState": "trending",
+    "direction": "bearish",
+    "strength": "moderate",
+    "volatility": "moderate",
+    "liquidity": "moderate",
+    "session": "ny_close",
+    "indicators": {
+      "adx": 28,
+      "rsi": 35,
+      "macd": {
+        "signal": "bearish",
+        "histogram": -0.0018
+      },
+      "volume": {
+        "current": 920000,
+        "average": 880000,
+        "ratio": 1.05
+      }
+    },
+    "economicEvents": [],
+    "marketHours": "winding_down"
+  },
+  {
+    "id": "breakout-setup",
+    "timestamp": "2026-01-08T09:00:00.000Z",
+    "marketState": "consolidation",
+    "direction": "sideways",
+    "strength": "weak",
+    "volatility": "low",
+    "liquidity": "low",
+    "session": "london_open",
+    "indicators": {
+      "adx": 15,
+      "rsi": 48,
+      "macd": {
+        "signal": "neutral",
+        "histogram": -0.0001
+      },
+      "volume": {
+        "current": 450000,
+        "average": 780000,
+        "ratio": 0.58
+      }
+    },
+    "economicEvents": [],
+    "marketHours": "opening"
+  },
+  {
+    "id": "gap-fill-scenario",
+    "timestamp": "2026-01-09T00:00:00.000Z",
+    "marketState": "gap",
+    "direction": "bullish",
+    "strength": "strong",
+    "volatility": "high",
+    "liquidity": "moderate",
+    "session": "weekend_gap",
+    "indicators": {
+      "adx": 38,
+      "rsi": 72,
+      "macd": {
+        "signal": "bullish",
+        "histogram": 0.0032
+      },
+      "volume": {
+        "current": 1650000,
+        "average": 650000,
+        "ratio": 2.54
+      }
+    },
+    "economicEvents": [],
+    "marketHours": "after_hours"
+  }
+]
